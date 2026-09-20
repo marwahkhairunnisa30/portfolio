@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BD Team Leadership — Marwah K</title>
+<meta name="description" content="How Marwah Khairunnisa built and led a BD team to 47 brand partnerships in 9 months — designing the acquisition funnel, setting KPIs, and driving 56% revenue growth at AHA Commerce." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b10;--surface:#111118;--surface2:#1a1a26;
+  --accent:#b92b2b;--accent-dim:#7a1710;
+  --text:#eceaf5;--muted:rgba(236,234,245,.45);--subtle:rgba(236,234,245,.1);
+  --radius-card:1.5rem;--radius-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Onest',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ── Shell ── */
+.shell{max-width:72rem;margin-inline:auto;padding-inline:1.5rem}
+@media(min-width:640px){.shell{padding-inline:2.5rem}}
+
+/* ── Back nav ── */
+.topbar{position:fixed;inset-inline:0;top:0;z-index:50;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--subtle)}
+.topbar__back{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:var(--muted);transition:color .25s}
+.topbar__back:hover{color:var(--text)}
+.topbar__back svg{transition:transform .25s}
+.topbar__back:hover svg{transform:translateX(-3px)}
+.topbar__brand{font-size:.875rem;font-weight:600;letter-spacing:-.01em}
+
+/* ── Hero ── */
+.hero{padding:9rem 0 5rem;border-bottom:1px solid var(--subtle)}
+.hero__eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:1.5rem}
+.hero__eyebrow .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent)}
+.hero__h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;letter-spacing:-.03em;line-height:1;max-width:14ch;margin-bottom:1.5rem}
+.hero__desc{font-size:1.125rem;color:var(--muted);max-width:52ch;line-height:1.7;margin-bottom:3rem}
+.hero__tags{display:flex;flex-wrap:wrap;gap:.625rem;margin-bottom:3rem}
+.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.375rem 1rem;font-size:.8125rem;font-weight:500;color:var(--muted)}
+.hero__metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;border-top:1px solid var(--subtle);padding-top:2.5rem}
+@media(max-width:640px){.hero__metrics{grid-template-columns:repeat(2,1fr)}}
+.metric__num{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.03em;color:var(--text);line-height:1}
+.metric__num span{color:var(--accent)}
+.metric__label{margin-top:.5rem;font-size:.8125rem;color:var(--muted);line-height:1.5}
+
+/* ── Section ── */
+.section{padding:5rem 0;border-bottom:1px solid var(--subtle)}
+.section:last-child{border-bottom:none}
+.section__label{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2.5rem}
+.section__label .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent)}
+.section__h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:600;letter-spacing:-.02em;max-width:22ch;margin-bottom:1.5rem}
+.section__body{font-size:1rem;color:var(--muted);line-height:1.8;max-width:60ch}
+
+/* ── Funnel flow ── */
+.funnel{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
+@media(min-width:768px){.funnel{grid-template-columns:repeat(4,1fr)}}
+.funnel__step{position:relative;background:var(--surface);border:1px solid var(--subtle);border-radius:1.25rem;padding:1.5rem 1.25rem;transition:border-color .25s,background .25s}
+.funnel__step:hover{border-color:rgba(185,43,43,.35);background:var(--surface2)}
+.funnel__num{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.75rem}
+.funnel__name{font-size:.9375rem;font-weight:600;line-height:1.3;margin-bottom:.5rem}
+.funnel__sub{font-size:.8125rem;color:var(--muted);line-height:1.5}
+
+/* ── Approach cards ── */
+.approach-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2.5rem}
+@media(min-width:640px){.approach-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.approach-grid{grid-template-columns:repeat(3,1fr)}}
+.approach-card{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius-card);padding:2rem;transition:border-color .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.approach-card:hover{border-color:rgba(185,43,43,.3);transform:translateY(-4px)}
+.approach-card__icon{font-size:1.75rem;margin-bottom:1.25rem}
+.approach-card__title{font-size:1rem;font-weight:600;margin-bottom:.625rem}
+.approach-card__body{font-size:.875rem;color:var(--muted);line-height:1.65}
+
+/* ── Brand Partners ── */
+.brands-stat{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;padding:1.25rem 1.5rem;background:var(--surface);border:1px solid rgba(185,43,43,.25);border-radius:1.25rem}
+.brands-stat__num{font-size:2.5rem;font-weight:700;color:var(--accent);letter-spacing:-.03em;flex-shrink:0}
+.brands-stat__text{font-size:.9375rem;color:var(--muted);line-height:1.5}
+.brands-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+@media(min-width:480px){.brands-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:768px){.brands-grid{grid-template-columns:repeat(6,1fr)}}
+.brand-logo{aspect-ratio:3/2;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--subtle);border-radius:1rem;padding:.75rem;transition:border-color .25s,background .25s,transform .25s;overflow:hidden}
+.brand-logo:hover{border-color:rgba(185,43,43,.4);background:rgba(255,255,255,.08);transform:translateY(-3px)}
+.brand-logo img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.6);transition:filter .3s}
+.brand-logo:hover img{filter:grayscale(0) brightness(1)}
+.brand-logo__text{font-size:.75rem;font-weight:600;text-align:center;color:rgba(236,234,245,.55);letter-spacing:.02em;line-height:1.3;transition:color .25s}
+.brand-logo:hover .brand-logo__text{color:var(--text)}
+.brands-more{grid-column:1/-1;text-align:center;padding:1.25rem;font-size:.875rem;color:var(--muted);border:1px dashed rgba(236,234,245,.08);border-radius:1rem;margin-top:.25rem}
+
+/* ── Brand Marquee (detail page) ── */
+.brand-marquee-wrap{position:relative;overflow:hidden;margin-top:2.5rem;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
+.brand-marquee-track{display:flex;align-items:center;gap:.875rem;width:max-content;animation:bmarquee 45s linear infinite}
+@keyframes bmarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.brand-marquee-wrap:hover .brand-marquee-track{animation-play-state:paused}
+.brand-logo-pill{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:7.5rem;height:4.75rem;border:1px solid rgba(236,234,245,.08);background:rgba(255,255,255,.04);border-radius:.875rem;padding:.625rem;overflow:hidden;transition:border-color .25s,background .25s,transform .2s}
+.brand-logo-pill:hover{border-color:rgba(185,43,43,.35);background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.brand-logo-pill img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.5);transition:filter .3s}
+.brand-logo-pill:hover img{filter:grayscale(0) brightness(1)}
+.brand-logo-pill__fallback{font-size:.6875rem;font-weight:700;color:rgba(236,234,245,.55);text-align:center}
+
+/* ── Results ── */
+.results-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2.5rem}
+@media(min-width:640px){.results-grid{grid-template-columns:repeat(2,1fr)}}
+.result-card{background:linear-gradient(135deg,var(--accent-dim),rgba(11,11,16,.8));border:1px solid rgba(185,43,43,.2);border-radius:var(--radius-card);padding:2rem}
+.result-card__num{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:.75rem}
+.result-card__num sup{font-size:1.5rem;vertical-align:super}
+.result-card__label{font-size:.9375rem;color:rgba(236,234,245,.7);line-height:1.5}
+
+/* ── Footer ── */
+.proj-footer{padding:4rem 0;text-align:center}
+.proj-footer__text{font-size:1rem;color:var(--muted);margin-bottom:2rem}
+.btn{display:inline-flex;align-items:center;gap:.625rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.875rem 2rem;font-size:.9375rem;font-weight:600;transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.btn:hover{background:#9b2424;transform:scale(1.04)}
+.btn svg{transition:transform .35s}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ── Reveal animation ── */
+[data-fade]{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+[data-fade].in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<nav class="topbar">
+  <a href="../index.html" class="topbar__back">
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    Back to portfolio
+  </a>
+  <span class="topbar__brand">✦ Marwah K</span>
+</nav>
+
+<main>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero__eyebrow"><span class="dot"></span>Strategy & Leadership · 2024</div>
+    <h1 class="hero__h1">BD Team Leadership</h1>
+    <p class="hero__desc">Built and led a BD team of 8 at AHA Commerce — designing the acquisition funnel, setting KPIs, running weekly 1-on-1s, and driving the team to 47 brand partnerships in 9 months.</p>
+    <div class="hero__tags">
+      <span class="tag">Team Leadership</span>
+      <span class="tag">BD Strategy</span>
+      <span class="tag">Funnel Design</span>
+      <span class="tag">KPI Management</span>
+      <span class="tag">AI & Automation</span>
+    </div>
+    <div class="hero__metrics" data-fade>
+      <div>
+        <div class="metric__num">47<span>+</span></div>
+        <p class="metric__label">Brand partnerships closed as a team in 9 months</p>
+      </div>
+      <div>
+        <div class="metric__num">56<span>%</span></div>
+        <p class="metric__label">Revenue growth driven by the team</p>
+      </div>
+      <div>
+        <div class="metric__num">30<span>%</span></div>
+        <p class="metric__label">Lead-to-conversion rate improvement</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Context -->
+<section class="section">
+  <div class="shell">
+    <div class="section__label" data-fade><span class="dot"></span>The Challenge</div>
+    <h2 class="section__h2" data-fade>Scaling a BD team from scratch</h2>
+    <p class="section__body" data-fade>When I stepped into the BD Lead role at AHA Commerce, the team had no structured acquisition process, no consistent KPIs, and no visibility into pipeline health. My mandate: build a repeatable system that a team of 8 could run at scale — and hit aggressive targets across Shopee, TikTok Shop, and Tokopedia.</p>
+  </div>
+</section>
+
+<!-- Funnel stages -->
+<section class="section">
+  <div class="shell">
+    <div class="section__label" data-fade><span class="dot"></span>The Process</div>
+    <h2 class="section__h2" data-fade>7-stage acquisition funnel, rebuilt end-to-end</h2>
+    <div class="funnel" data-fade>
+      <div class="funnel__step">
+        <div class="funnel__num">01</div>
+        <div class="funnel__name">Prospecting & Research</div>
+        <div class="funnel__sub">Systematic ICP definition and market scan across e-commerce verticals</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">02</div>
+        <div class="funnel__name">Outreach & Engagement</div>
+        <div class="funnel__sub">AI-powered outreach sequences cutting manual prospecting time by 150%</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">03</div>
+        <div class="funnel__name">Pipeline Management</div>
+        <div class="funnel__sub">CRM hygiene protocols and weekly pipeline reviews with data-driven scoring</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">04</div>
+        <div class="funnel__name">Meeting & Proposal</div>
+        <div class="funnel__sub">Standardized pitch decks and proposal templates per platform and vertical</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">05</div>
+        <div class="funnel__name">Negotiation & Closing</div>
+        <div class="funnel__sub">Structured negotiation playbooks and escalation paths reducing deal cycle time</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">06</div>
+        <div class="funnel__name">Onboarding & Handover</div>
+        <div class="funnel__sub">SLA-bound onboarding process with cross-functional coordination to Ops & Marketing</div>
+      </div>
+      <div class="funnel__step">
+        <div class="funnel__num">07</div>
+        <div class="funnel__name">Growth & Retention</div>
+        <div class="funnel__sub">Post-close relationship management and upsell tracking for long-term GMV growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Approach -->
+<section class="section">
+  <div class="shell">
+    <div class="section__label" data-fade><span class="dot"></span>The Approach</div>
+    <h2 class="section__h2" data-fade>Three levers that moved the needle</h2>
+    <div class="approach-grid">
+      <div class="approach-card" data-fade>
+        <div class="approach-card__icon">⚙️</div>
+        <div class="approach-card__title">Data-Driven Qualification</div>
+        <div class="approach-card__body">Introduced a structured scoring framework to qualify leads by GMV potential, platform fit, and partnership readiness — eliminating low-probability deals early and focusing effort on high-converting prospects.</div>
+      </div>
+      <div class="approach-card" data-fade>
+        <div class="approach-card__icon">🤖</div>
+        <div class="approach-card__title">AI & Workflow Automation</div>
+        <div class="approach-card__body">Deployed n8n and Zapier-powered outreach automation and built WebApp dashboards for pipeline visibility. Reduced manual admin time by 150%, allowing the team to focus on relationship-building and closing.</div>
+      </div>
+      <div class="approach-card" data-fade>
+        <div class="approach-card__icon">👥</div>
+        <div class="approach-card__title">Team & Culture Alignment</div>
+        <div class="approach-card__body">Led a BD team of 8 with individual KPIs, weekly 1-on-1s, and performance dashboards. Built a results-oriented culture that reduced churn and improved quota attainment consistently quarter-over-quarter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Results -->
+<section class="section">
+  <div class="shell">
+    <div class="section__label" data-fade><span class="dot"></span>Team Achievement</div>
+    <h2 class="section__h2" data-fade>47 brand partnerships in 9 months</h2>
+    <p class="section__body" data-fade>From zero structured process to a high-output acquisition machine — the team closed 47 brand partnerships in 9 months, spanning fashion, lifestyle, F&B, sports, and beauty across three e-commerce platforms.</p>
+    <div class="brands-stat" data-fade>
+      <div class="brands-stat__num">47</div>
+      <div class="brands-stat__text">Brand partnerships closed by the team in 9 months under my leadership —<br>driving 56% revenue growth across Shopee, TikTok Shop & Tokopedia.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="section">
+  <div class="shell">
+    <div class="section__label" data-fade><span class="dot"></span>Results</div>
+    <h2 class="section__h2" data-fade>Proof in the numbers</h2>
+    <div class="results-grid">
+      <div class="result-card" data-fade>
+        <div class="result-card__num">30<sup>%</sup></div>
+        <div class="result-card__label">Lead-to-conversion rate improvement through structured pipeline reviews and data-driven qualification</div>
+      </div>
+      <div class="result-card" data-fade>
+        <div class="result-card__num">56<sup>%</sup></div>
+        <div class="result-card__label">Revenue growth driven through strategic brand acquisition across platforms</div>
+      </div>
+      <div class="result-card" data-fade>
+        <div class="result-card__num">47<sup>+</sup></div>
+        <div class="result-card__label">Brand partnerships closed by the team in 9 months</div>
+      </div>
+      <div class="result-card" data-fade>
+        <div class="result-card__num">150<sup>%</sup></div>
+        <div class="result-card__label">Reduction in manual prospecting time via AI-powered outreach automation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer CTA -->
+<div class="proj-footer">
+  <p class="proj-footer__text">Want to know how I can do this for your team?</p>
+  <a href="https://wa.me/6285155343042" target="_blank" class="btn">
+    Let's talk
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+
+</main>
+
+<script>
+// Brand partners grid
+const brands = [
+  { name:'Teddie Clubs', img:'brand_01.png' },
+  { name:'in-lite',      img:'brand_02.png' },
+  { name:'CA',           img:'brand_03.png' },
+  { name:'Waldos',       img:'brand_04.png' },
+  { name:'SequeSoon',    img:'brand_05.png' },
+  { name:'Douquela',     img:'brand_06.png' },
+  { name:'Martin Versa', img:'brand_07.png' },
+  { name:'Gentle Hour',  img:'brand_08.png' },
+  { name:'LaRocking',    img:'brand_09.png' },
+  { name:'Fantasy',      img:'brand_10.png' },
+  { name:'HIA Storyware',img:'brand_11.png' },
+  { name:'Dragon',       img:'brand_12.png' },
+  { name:'9Jacket',      img:'brand_13.png' },
+  { name:'MAGE',         img:'brand_14.png' },
+  { name:'Chronox',      img:'brand_15.png' },
+  { name:'Kimbo',        img:'brand_16.png' },
+  { name:'FVC+K',        img:'brand_17.png' },
+  { name:'Dewdrop',      img:'brand_18.png' },
+  { name:'ELMER',        img:'brand_19.png' },
+  { name:'Vention',      img:'brand_20.png' },
+  { name:'Shopee',       img:'brand_21.png' },
+  { name:'Vengoz',       img:'brand_22.png' },
+  { name:'Zebra',        img:'brand_23.png' },
+  { name:'Cheerilee',    img:'brand_24.png' },
+  { name:'Hunt Toys',    img:'brand_25.png' },
+  { name:'Reneturos',    img:'brand_26.png' },
+  { name:'GoGo Books',   img:'brand_27.png' },
+  { name:'Cats & Cuddles',img:'brand_28.png'},
+  { name:'Hypospot',     img:'brand_29.png' },
+  { name:'OneShin',      img:'brand_30.png' },
+  { name:'Nayara',       img:'brand_31.png' },
+  { name:'Skinfood',     img:'brand_32.png' },
+  { name:'CUTA',         img:'brand_33.png' },
+  { name:'Scholl',       img:'brand_34.png' },
+  { name:'Sniff Sniff',  img:'brand_35.png' },
+  { name:'Dao Agrico',   img:'brand_36.png' },
+];
+
+function buildBrandsGrid() {
+  const grid = document.getElementById('brandsGrid');
+  brands.forEach(b => {
+    const div = document.createElement('div');
+    div.className = 'brand-logo';
+    div.title = b.name;
+    div.innerHTML = `<img src="../assets/brands/${b.img}" alt="${b.name}" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'brand-logo__text\\'>${b.name}</div>')">`;
+    grid.appendChild(div);
+  });
+  const more = document.createElement('div');
+  more.className = 'brands-more';
+  more.textContent = '+ and many more';
+  grid.appendChild(more);
+}
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-fade]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
