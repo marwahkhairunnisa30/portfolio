@@ -100,11 +100,12 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 .right__count{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;color:var(--accent)}
 
 /* ── Vertical marquee columns ── */
-.logo-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:.5rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
-.logo-col{display:flex;flex-direction:column;gap:.5rem}
+.logo-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:.375rem;padding:.5rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
+.logo-col{display:flex;flex-direction:column;gap:.375rem}
 .logo-col--a{animation:colUp   32s linear infinite}
 .logo-col--b{animation:colDown 28s linear infinite}
 .logo-col--c{animation:colUp   38s linear infinite}
+.logo-col--d{animation:colDown 24s linear infinite}
 @keyframes colUp  {0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
 @keyframes colDown{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
 .logo-tile{aspect-ratio:3/2;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(236,234,245,.07);border-radius:var(--radius-card);padding:.625rem;flex-shrink:0;transition:border-color .25s,background .25s}
@@ -221,6 +222,7 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
       <div class="logo-col logo-col--a" id="col1"></div>
       <div class="logo-col logo-col--b" id="col2"></div>
       <div class="logo-col logo-col--c" id="col3"></div>
+      <div class="logo-col logo-col--d" id="col4"></div>
     </div>
   </div>
 
@@ -276,9 +278,10 @@ function buildCol(id, list) {
   });
 }
 
-buildCol('col1', brands.slice(0, 12));
-buildCol('col2', brands.slice(12, 24));
-buildCol('col3', brands.slice(24, 36));
+buildCol('col1', brands.slice(0, 9));
+buildCol('col2', brands.slice(9, 18));
+buildCol('col3', brands.slice(18, 27));
+buildCol('col4', brands.slice(27, 36));
 </script>
 </body>
 </html>
