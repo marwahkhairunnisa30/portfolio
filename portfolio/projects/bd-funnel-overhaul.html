@@ -101,8 +101,21 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
 
 .shot-block{display:flex;flex-direction:column;gap:.375rem;flex:1;min-height:0}
 .shot-cap{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.25)}
-.shot-frame{flex:1;border-radius:.875rem;overflow:hidden;border:1px solid var(--subtle);position:relative;min-height:0}
-.shot-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left}
+
+/* Tilt card wrapper */
+.shot-tilt{flex:1;min-height:0;perspective:800px;cursor:default}
+.shot-frame{width:100%;height:100%;border-radius:.875rem;overflow:hidden;border:1px solid var(--subtle);position:relative;transform-style:preserve-3d;transition:transform .12s ease,box-shadow .12s ease;will-change:transform}
+.shot-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .4s ease}
+/* glare overlay */
+.shot-frame::after{content:'';position:absolute;inset:0;border-radius:.875rem;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.12) 0%,transparent 60%);opacity:0;transition:opacity .2s ease;pointer-events:none;z-index:2}
+.shot-frame:hover::after{opacity:1}
+
+/* Floating drift — staggered */
+@keyframes driftA{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes driftB{0%,100%{transform:translateY(-5px)}50%{transform:translateY(4px)}}
+.shot-block:first-child .shot-tilt{animation:driftA 5s ease-in-out infinite}
+.shot-block:last-child  .shot-tilt{animation:driftB 6.5s ease-in-out infinite}
+.shot-tilt.tilting{animation:none}
 </style>
 </head>
 <body>
@@ -206,19 +219,45 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
   <div class="right">
     <div class="shot-block">
       <div class="shot-cap">BD Wikipedia — Modul Overview</div>
-      <div class="shot-frame">
-        <img src="../assets/bd-wiki-home.png" alt="BD Wikipedia homepage" />
+      <div class="shot-tilt">
+        <div class="shot-frame">
+          <img src="../assets/bd-wiki-home.png" alt="BD Wikipedia homepage" />
+        </div>
       </div>
     </div>
     <div class="shot-block">
       <div class="shot-cap">Sales Strategy Module</div>
-      <div class="shot-frame">
-        <img src="../assets/bd-wiki-sales.png" alt="BD Wikipedia Sales Strategy" />
+      <div class="shot-tilt">
+        <div class="shot-frame">
+          <img src="../assets/bd-wiki-sales.png" alt="BD Wikipedia Sales Strategy" />
+        </div>
       </div>
     </div>
   </div>
 
 </div>
 
+<script>
+document.querySelectorAll('.shot-tilt').forEach(tilt => {
+  const frame = tilt.querySelector('.shot-frame');
+  const MAX = 10;
+
+  tilt.addEventListener('mouseenter', () => tilt.classList.add('tilting'));
+  tilt.addEventListener('mouseleave', () => {
+    tilt.classList.remove('tilting');
+    frame.style.transform = '';
+    frame.style.boxShadow = '';
+  });
+  tilt.addEventListener('mousemove', e => {
+    const r = tilt.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    const rx =  y * MAX * -1;
+    const ry =  x * MAX;
+    frame.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+    frame.style.boxShadow = `${-ry * 1.5}px ${rx * 1.5}px 32px rgba(0,0,0,.45)`;
+  });
+});
+</script>
 </body>
 </html>
