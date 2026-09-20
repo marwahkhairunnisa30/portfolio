@@ -1294,22 +1294,24 @@ function buildStats() {
 }
 
 function setupCountUp() {
-  let lastTick = 0;
-  function tickCountUp() {
-    const now = performance.now();
-    if (now - lastTick < 30) { requestAnimationFrame(tickCountUp); return; }
-    lastTick = now;
-    document.querySelectorAll('.stats__count').forEach(el => {
+  const duration = 1200;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
       const target = parseInt(el.dataset.target);
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const startY = vh, endY = vh / 2;
-      const progress = Math.max(0, Math.min(1, (startY - rect.top) / (startY - endY)));
-      el.textContent = Math.round(progress * target);
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(ease * target);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
     });
-    requestAnimationFrame(tickCountUp);
-  }
-  requestAnimationFrame(tickCountUp);
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stats__count').forEach(el => observer.observe(el));
 }
 
 // ── Nav Menu ──
