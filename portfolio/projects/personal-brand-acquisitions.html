@@ -3,109 +3,103 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Personal Brand Acquisitions — Marwah K</title>
-<meta name="description" content="36 brand partnerships personally sourced, pitched, and closed by Marwah Khairunnisa — across fashion, lifestyle, F&B, sports, and beauty on Shopee, TikTok Shop, and Tokopedia." />
+<title>Brand Acquisition — Personal</title>
+<meta name="description" content="55+ brand partnerships personally sourced, pitched, and closed by Marwah Khairunnisa across Shopee, TikTok Shop, and Tokopedia." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0b10;--surface:#111118;--surface2:#1a1a26;
-  --accent:#b92b2b;--accent-dim:#7a1710;
-  --text:#eceaf5;--muted:rgba(236,234,245,.45);--subtle:rgba(236,234,245,.1);
-  --radius-card:1.5rem;--radius-pill:9999px;
+  --bg:#0b0b10;--surface:#111118;
+  --accent:#b92b2b;
+  --text:#eceaf5;--muted:rgba(236,234,245,.45);--subtle:rgba(236,234,245,.08);
+  --radius-card:.875rem;--radius-pill:9999px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Onest',sans-serif;overflow-x:hidden}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'Onest',sans-serif;overflow:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:768px){body{overflow:auto}}
 
-.shell{max-width:72rem;margin-inline:auto;padding-inline:1.5rem}
-@media(min-width:640px){.shell{padding-inline:2.5rem}}
-
-/* ── Top bar ── */
-.topbar{position:fixed;inset-inline:0;top:0;z-index:50;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--subtle)}
+/* ── Topbar ── */
+.topbar{position:fixed;inset-inline:0;top:0;z-index:50;height:56px;display:flex;align-items:center;justify-content:space-between;padding-inline:1.5rem;background:rgba(11,11,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--subtle)}
 .topbar__back{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:var(--muted);transition:color .25s}
 .topbar__back:hover{color:var(--text)}
 .topbar__back svg{transition:transform .25s}
 .topbar__back:hover svg{transform:translateX(-3px)}
 .topbar__brand{font-size:.875rem;font-weight:600;letter-spacing:-.01em}
 
-/* ── Hero ── */
-.hero{padding:9rem 0 5rem;border-bottom:1px solid var(--subtle)}
-.hero__eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:1.5rem}
-.hero__eyebrow .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent)}
-.hero__h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;letter-spacing:-.03em;line-height:1;max-width:16ch;margin-bottom:1.5rem}
-.hero__desc{font-size:1.125rem;color:var(--muted);max-width:52ch;line-height:1.7;margin-bottom:3rem}
-.hero__tags{display:flex;flex-wrap:wrap;gap:.625rem;margin-bottom:3rem}
-.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.375rem 1rem;font-size:.8125rem;font-weight:500;color:var(--muted)}
-.hero__note{display:inline-flex;align-items:center;gap:.625rem;padding:.75rem 1.25rem;background:rgba(185,43,43,.08);border:1px solid rgba(185,43,43,.2);border-radius:.875rem;font-size:.875rem;color:rgba(236,234,245,.7);margin-bottom:3rem}
-.hero__note strong{color:#eceaf5}
-.hero__metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;border-top:1px solid var(--subtle);padding-top:2.5rem}
-@media(max-width:640px){.hero__metrics{grid-template-columns:repeat(2,1fr)}}
-.metric__num{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1}
+/* ── Page grid ── */
+.page{display:grid;grid-template-columns:52% 48%;height:calc(100vh - 56px);margin-top:56px}
+@media(max-width:768px){.page{grid-template-columns:1fr;height:auto}}
+
+/* ── LEFT panel ── */
+.left{display:flex;flex-direction:column;padding:2rem 2.5rem 1.75rem;border-right:1px solid var(--subtle);overflow:hidden}
+@media(max-width:768px){.left{overflow:visible;padding:1.75rem 1.25rem;border-right:none;border-bottom:1px solid var(--subtle)}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.875rem}
+.eyebrow .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin-bottom:.875rem}
+
+.desc{font-size:.9rem;color:var(--muted);line-height:1.65;max-width:46ch;margin-bottom:.875rem}
+
+.note{display:flex;align-items:flex-start;gap:.5rem;padding:.625rem .875rem;background:rgba(185,43,43,.07);border:1px solid rgba(185,43,43,.18);border-radius:.75rem;font-size:.8rem;color:rgba(236,234,245,.6);margin-bottom:1rem;flex-shrink:0}
+.note strong{color:var(--text)}
+.note svg{flex-shrink:0;margin-top:.1rem}
+
+/* Metrics */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem;margin-bottom:.875rem}
+.metric{background:rgba(255,255,255,.03);border:1px solid var(--subtle);border-radius:var(--radius-card);padding:.75rem .875rem}
+.metric__num{font-size:1.875rem;font-weight:700;letter-spacing:-.03em;line-height:1}
 .metric__num span{color:var(--accent)}
-.metric__label{margin-top:.5rem;font-size:.8125rem;color:var(--muted);line-height:1.5}
+.metric__label{margin-top:.3rem;font-size:.6875rem;color:var(--muted);line-height:1.4}
 
-/* ── Section ── */
-.section{padding:5rem 0;border-bottom:1px solid var(--subtle)}
-.section:last-of-type{border-bottom:none}
-.section__label{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2.5rem}
-.section__label .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent)}
-.section__h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:600;letter-spacing:-.02em;max-width:24ch;margin-bottom:1.25rem}
-.section__body{font-size:1rem;color:var(--muted);line-height:1.8;max-width:60ch}
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:.875rem}
+.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.3125rem .875rem;font-size:.75rem;font-weight:500;color:var(--muted)}
 
-/* ── Brand grid ── */
-.brands-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2.5rem}
-@media(min-width:480px){.brands-grid{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:768px){.brands-grid{grid-template-columns:repeat(6,1fr)}}
-.brand-logo{aspect-ratio:3/2;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--subtle);border-radius:1rem;padding:.75rem;overflow:hidden;transition:border-color .25s,background .25s,transform .25s}
-.brand-logo:hover{border-color:rgba(185,43,43,.4);background:rgba(255,255,255,.09);transform:translateY(-3px)}
-.brand-logo img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.6);transition:filter .3s}
-.brand-logo:hover img{filter:grayscale(0) brightness(1)}
-.brand-logo__text{font-size:.7rem;font-weight:600;text-align:center;color:rgba(236,234,245,.5)}
+/* Divider */
+.divider{height:1px;background:var(--subtle);margin-bottom:.875rem;flex-shrink:0}
 
-/* ── Marquee ── */
-.marquee-section{padding:3rem 0;overflow:hidden}
-.marquee-wrap{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
-.marquee-track{display:flex;align-items:center;gap:.875rem;width:max-content;animation:mq 45s linear infinite}
-@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.marquee-wrap:hover .marquee-track{animation-play-state:paused}
-.brand-pill{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:7.5rem;height:4.75rem;border:1px solid rgba(236,234,245,.08);background:rgba(255,255,255,.04);border-radius:.875rem;padding:.625rem;overflow:hidden;transition:border-color .25s,background .25s,transform .2s}
-.brand-pill:hover{border-color:rgba(185,43,43,.35);background:rgba(255,255,255,.1);transform:translateY(-2px)}
-.brand-pill img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.5);transition:filter .3s}
-.brand-pill:hover img{filter:grayscale(0) brightness(1)}
-.brand-pill__fallback{font-size:.6875rem;font-weight:700;color:rgba(236,234,245,.5);text-align:center}
+/* Process */
+.process-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-bottom:.5rem}
+.process-steps{display:flex;flex-wrap:wrap;gap:.375rem}
+.step{display:inline-flex;align-items:center;gap:.375rem;border:1px solid var(--subtle);border-radius:.625rem;padding:.3125rem .75rem;font-size:.75rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.02)}
+.step__num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.04em}
 
-/* ── Process ── */
-.process-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:1px;border:1px solid var(--subtle);border-radius:var(--radius-card);overflow:hidden}
-.process-item{display:flex;gap:2rem;align-items:flex-start;padding:1.5rem 2rem;background:var(--surface);transition:background .25s}
-.process-item:hover{background:var(--surface2)}
-@media(max-width:640px){.process-item{flex-direction:column;gap:.75rem;padding:1.25rem 1.5rem}}
-.process-item__num{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);min-width:2rem;padding-top:.2rem}
-.process-item__name{font-size:1rem;font-weight:600;margin-bottom:.375rem}
-.process-item__desc{font-size:.875rem;color:var(--muted);line-height:1.6}
+.spacer{flex:1;min-height:.5rem}
 
-/* ── Categories ── */
-.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:2rem}
-@media(min-width:640px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
-.cat-card{background:var(--surface);border:1px solid var(--subtle);border-radius:1.25rem;padding:1.25rem 1.5rem;transition:border-color .25s}
-.cat-card:hover{border-color:rgba(185,43,43,.3)}
-.cat-card__label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:.5rem}
-.cat-card__brands{font-size:.875rem;color:var(--muted);line-height:1.6}
-
-/* ── Footer ── */
-.proj-footer{padding:4rem 0;text-align:center}
-.proj-footer__text{font-size:1rem;color:var(--muted);margin-bottom:2rem}
-.btn{display:inline-flex;align-items:center;gap:.625rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.875rem 2rem;font-size:.9375rem;font-weight:600;transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+/* CTA */
+.cta-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding-top:.875rem;border-top:1px solid var(--subtle);flex-shrink:0;flex-wrap:wrap}
+.cta-label{font-size:.8125rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.5625rem 1.375rem;font-size:.875rem;font-weight:600;transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
 .btn:hover{background:#9b2424;transform:scale(1.04)}
 .btn svg{transition:transform .35s}
 .btn:hover svg{transform:translateX(3px)}
 
-[data-fade]{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-[data-fade].in{opacity:1;transform:translateY(0)}
+/* ── RIGHT panel ── */
+.right{display:flex;flex-direction:column;overflow:hidden;background:var(--surface)}
+@media(max-width:768px){.right{height:65vh;min-height:420px}}
+.right__header{padding:1rem 1.5rem;border-bottom:1px solid var(--subtle);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.right__title{font-size:.875rem;font-weight:600;letter-spacing:-.01em}
+.right__count{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;color:var(--accent)}
+
+/* ── Vertical marquee columns ── */
+.logo-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:.5rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
+.logo-col{display:flex;flex-direction:column;gap:.5rem}
+.logo-col--a{animation:colUp   32s linear infinite}
+.logo-col--b{animation:colDown 28s linear infinite}
+.logo-col--c{animation:colUp   38s linear infinite}
+@keyframes colUp  {0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+@keyframes colDown{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+.logo-tile{aspect-ratio:3/2;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(236,234,245,.07);border-radius:var(--radius-card);padding:.625rem;flex-shrink:0;transition:border-color .25s,background .25s}
+.logo-tile:hover{border-color:rgba(185,43,43,.3);background:rgba(255,255,255,.09)}
+.logo-tile img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.6);transition:filter .3s}
+.logo-tile:hover img{filter:grayscale(0) brightness(1)}
+.logo-tile__text{font-size:.6rem;font-weight:600;text-align:center;color:rgba(236,234,245,.35)}
 </style>
 </head>
 <body>
@@ -118,163 +112,82 @@ img{display:block}
   <span class="topbar__brand">✦ Marwah K</span>
 </nav>
 
-<main>
+<div class="page">
 
-<!-- Hero -->
-<section class="hero">
-  <div class="shell">
-    <div class="hero__eyebrow"><span class="dot"></span>Individual Contributor · 2023–2024</div>
-    <h1 class="hero__h1">Personal Brand Acquisitions</h1>
-    <p class="hero__desc">Every brand here was personally sourced, qualified, pitched, and closed by me — not the team. This is proof I can sell, not just lead people who sell.</p>
-    <div class="hero__tags">
+  <!-- LEFT: Content -->
+  <div class="left">
+    <div class="eyebrow"><span class="dot"></span>Individual Contributor · 2023–2024</div>
+
+    <h1>Personal Brand<br>Acquisitions</h1>
+
+    <p class="desc">Every brand here was personally sourced, qualified, pitched, and closed by me — not the team. Proof I can sell, not just lead people who sell.</p>
+
+    <div class="note">
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Separate from the <strong>47 brand partnerships</strong> my team closed under my leadership — that's a different story.
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric__num">55<span>+</span></div>
+        <div class="metric__label">Brands personally closed</div>
+      </div>
+      <div class="metric">
+        <div class="metric__num">3</div>
+        <div class="metric__label">Platforms — Shopee, TikTok Shop, Tokopedia</div>
+      </div>
+      <div class="metric">
+        <div class="metric__num">6</div>
+        <div class="metric__label">Categories — fashion, F&B, sports, beauty & more</div>
+      </div>
+    </div>
+
+    <div class="tags">
       <span class="tag">B2B Sales</span>
       <span class="tag">Lead Generation</span>
       <span class="tag">Outreach</span>
       <span class="tag">Negotiation</span>
       <span class="tag">Closing</span>
     </div>
-    <div class="hero__note" data-fade>
-      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      This is separate from the <strong>47 brand partnerships</strong> my team closed under my leadership — that's a different story.
-    </div>
-    <div class="hero__metrics" data-fade>
-      <div>
-        <div class="metric__num">36<span>+</span></div>
-        <p class="metric__label">Brands personally closed — start to finish</p>
-      </div>
-      <div>
-        <div class="metric__num">3</div>
-        <p class="metric__label">Platforms — Shopee, TikTok Shop, Tokopedia</p>
-      </div>
-      <div>
-        <div class="metric__num">6</div>
-        <p class="metric__label">Categories — fashion, lifestyle, F&B, sports, beauty & more</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- How I closed them -->
-<section class="section">
-  <div class="shell">
-    <div class="section__label" data-fade><span class="dot"></span>How I Did It</div>
-    <h2 class="section__h2" data-fade>End-to-end, hands-on, every deal</h2>
-    <p class="section__body" data-fade>Every partnership below went through the same 7-step process — and I handled each step myself.</p>
-    <div class="process-list" data-fade>
-      <div class="process-item">
-        <div class="process-item__num">01</div>
-        <div>
-          <div class="process-item__name">Prospecting & Research</div>
-          <div class="process-item__desc">Identified brand targets by ICP, platform presence, and GMV potential across Shopee, TikTok Shop, and Tokopedia.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">02</div>
-        <div>
-          <div class="process-item__name">Outreach & Engagement</div>
-          <div class="process-item__desc">Crafted and sent first-touch outreach — email, WhatsApp, or LinkedIn — with a tailored hook for each brand.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">03</div>
-        <div>
-          <div class="process-item__name">Discovery & Qualification</div>
-          <div class="process-item__desc">Ran discovery calls to qualify fit, understand brand goals, and gauge partnership appetite before investing further.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">04</div>
-        <div>
-          <div class="process-item__name">Meeting & Proposal</div>
-          <div class="process-item__desc">Presented AHA Commerce's value proposition, tailored to the brand's category and platform goals.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">05</div>
-        <div>
-          <div class="process-item__name">Negotiation & Closing</div>
-          <div class="process-item__desc">Handled commercial terms, objections, and timeline alignment — navigating to a signed agreement.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">06</div>
-        <div>
-          <div class="process-item__name">Onboarding & Handover</div>
-          <div class="process-item__desc">Coordinated smooth onboarding to Ops and Marketing — ensuring SLAs were met and the brand felt supported from day one.</div>
-        </div>
-      </div>
-      <div class="process-item">
-        <div class="process-item__num">07</div>
-        <div>
-          <div class="process-item__name">Relationship & Growth</div>
-          <div class="process-item__desc">Maintained post-close relationships, tracked GMV contribution, and identified upsell or renewal opportunities.</div>
-        </div>
-      </div>
+    <div class="divider"></div>
+
+    <div class="process-label">My Closing Process</div>
+    <div class="process-steps">
+      <span class="step"><span class="step__num">01</span>Prospect</span>
+      <span class="step"><span class="step__num">02</span>Outreach</span>
+      <span class="step"><span class="step__num">03</span>Qualify</span>
+      <span class="step"><span class="step__num">04</span>Propose</span>
+      <span class="step"><span class="step__num">05</span>Negotiate</span>
+      <span class="step"><span class="step__num">06</span>Onboard</span>
+      <span class="step"><span class="step__num">07</span>Retain</span>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="cta-row">
+      <span class="cta-label">Want to see what I can close for your team?</span>
+      <a href="https://wa.me/6285155343042" target="_blank" class="btn">
+        Let's talk
+        <svg width=".875em" height=".875em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
-</section>
 
-<!-- Brand portfolio -->
-<section class="section">
-  <div class="shell">
-    <div class="section__label" data-fade><span class="dot"></span>The Brands</div>
-    <h2 class="section__h2" data-fade>36 brands. Every single one, personal.</h2>
-    <p class="section__body" data-fade>Hover to see their colors. Every logo here represents a deal I personally saw from first contact to signed agreement.</p>
-    <div class="brands-grid" id="brandsGrid" data-fade></div>
-  </div>
-</section>
-
-<!-- By category -->
-<section class="section">
-  <div class="shell">
-    <div class="section__label" data-fade><span class="dot"></span>By Category</div>
-    <h2 class="section__h2" data-fade>Across 6 product categories</h2>
-    <div class="cat-grid" data-fade>
-      <div class="cat-card">
-        <div class="cat-card__label">Fashion & Apparel</div>
-        <div class="cat-card__brands">9Jacket, MAGE, LaRocking, Fantasy, CUTA, Vengoz, Martin Versa, OneShin</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__label">Lifestyle & Home</div>
-        <div class="cat-card__brands">Teddie Clubs, Gentle Hour, HIA Storyware, in-lite, Dewdrop, SequeSoon</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__label">Food & Beverage</div>
-        <div class="cat-card__brands">Kimbo, Dao Agrico, Douquela</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__label">Sports & Outdoor</div>
-        <div class="cat-card__brands">Waldos Sports, Dragon, Reneturos Group</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__label">Beauty & Health</div>
-        <div class="cat-card__brands">Nayara, Skinfood, Scholl, Hypospot, Cheerilee</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__label">Tech, Pets & Others</div>
-        <div class="cat-card__brands">Vention, Cats & Cuddles, Sniff Sniff, Hunt Toys, GoGo Books, Zebra, FVC+K</div>
-      </div>
+  <!-- RIGHT: Brand logo columns -->
+  <div class="right">
+    <div class="right__header">
+      <span class="right__title">Brands I personally closed</span>
+      <span class="right__count">55+</span>
+    </div>
+    <div class="logo-columns">
+      <div class="logo-col logo-col--a" id="col1"></div>
+      <div class="logo-col logo-col--b" id="col2"></div>
+      <div class="logo-col logo-col--c" id="col3"></div>
     </div>
   </div>
-</section>
 
-<!-- Scrolling marquee -->
-<div class="marquee-section" aria-hidden="true">
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
 </div>
-
-<!-- Footer CTA -->
-<div class="proj-footer">
-  <p class="proj-footer__text">Want to see what I can close for your team?</p>
-  <a href="https://wa.me/6285155343042" target="_blank" class="btn">
-    Let's talk
-    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-  </a>
-</div>
-
-</main>
 
 <script>
 const brands = [
@@ -316,37 +229,19 @@ const brands = [
   { name:'Dao Agrico',   img:'brand_36.png' },
 ];
 
-function buildBrandsGrid() {
-  const grid = document.getElementById('brandsGrid');
-  brands.forEach(b => {
-    const div = document.createElement('div');
-    div.className = 'brand-logo';
-    div.title = b.name;
-    div.innerHTML = `<img src="../assets/brands/${b.img}" alt="${b.name}" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'brand-logo__text\\'>${b.name}</div>')">`;
-    grid.appendChild(div);
+function buildCol(id, list) {
+  const col = document.getElementById(id);
+  [...list, ...list].forEach(b => {
+    const tile = document.createElement('div');
+    tile.className = 'logo-tile';
+    tile.innerHTML = `<img src="../assets/brands/${b.img}" alt="${b.name}" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'logo-tile__text\\'>${b.name}</div>')">`;
+    col.appendChild(tile);
   });
 }
 
-function buildMarquee() {
-  const track = document.getElementById('marqueeTrack');
-  const doubled = [...brands, ...brands];
-  doubled.forEach(b => {
-    const pill = document.createElement('div');
-    pill.className = 'brand-pill';
-    pill.innerHTML = `<img src="../assets/brands/${b.img}" alt="${b.name}" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=\\'brand-pill__fallback\\'>${b.name}</span>')">`;
-    track.appendChild(pill);
-  });
-}
-
-buildBrandsGrid();
-buildMarquee();
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('[data-fade]').forEach(el => observer.observe(el));
+buildCol('col1', brands.slice(0, 12));
+buildCol('col2', brands.slice(12, 24));
+buildCol('col3', brands.slice(24, 36));
 </script>
 </body>
 </html>

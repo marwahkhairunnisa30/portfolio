@@ -163,20 +163,6 @@ img{display:block}
 @media(min-width:640px){.hero__status-center{display:block}}
 .hero__status-right{display:inline-flex;align-items:center;gap:.5rem}
 
-/* ── Brand Marquee ── */
-.brands-section{padding:4rem 0;background:#0b0b10;overflow:hidden}
-.brands-section__header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
-.brands-section__sub{font-size:.875rem;color:rgba(236,234,245,.4);max-width:36ch;text-align:right}
-@media(max-width:640px){.brands-section__sub{text-align:left}}
-.marquee-wrap{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
-.marquee-track{display:flex;align-items:center;gap:.875rem;width:max-content;animation:marquee-scroll 50s linear infinite}
-@keyframes marquee-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.marquee-wrap:hover .marquee-track{animation-play-state:paused}
-.brand-chip{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:7rem;height:4.5rem;border:1px solid rgba(236,234,245,.08);background:rgba(255,255,255,.04);border-radius:.875rem;padding:.625rem;overflow:hidden;transition:border-color .25s,background .25s,transform .2s}
-.brand-chip:hover{border-color:rgba(185,43,43,.35);background:rgba(255,255,255,.08);transform:translateY(-2px)}
-.brand-chip img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.5);transition:filter .3s}
-.brand-chip:hover img{filter:grayscale(0) brightness(1)}
-.brand-chip__name{font-size:.6875rem;font-weight:700;letter-spacing:.02em;color:rgba(236,234,245,.7);text-align:center;line-height:1.2}
 
 /* ── About ── */
 .about{background:#0b0b10}
@@ -562,20 +548,6 @@ img{display:block}
   </div>
 </section>
 
-
-<!-- Brand Partners Marquee -->
-<section class="brands-section" aria-label="Brand partners">
-  <div class="brands-section__header shell" data-reveal>
-    <div class="eyebrow eyebrow--dark">
-      <span class="dot"></span>
-      Brand Partners
-    </div>
-    <p class="brands-section__sub">55+ brands across Shopee, TikTok Shop &amp; Tokopedia — and many more.</p>
-  </div>
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
-</section>
 
 <!-- Portfolio -->
 <section id="works" class="portfolio">
@@ -999,16 +971,16 @@ const megaCards = [
     desc: '4 projects across brand acquisition, team leadership, digital automation, and company events.',
     subs: [
       {
-        name: 'Pencapaian Brand — Tim',
+        name: 'Brand Acquisition — Team',
         category: 'Strategy & Leadership · 2024',
         desc: 'Built and led a BD team to 47 brand partnerships in 9 months — designing the acquisition funnel, setting KPIs, and running weekly 1-on-1s.',
         tags: ['Team Leadership','BD Strategy','Pipeline'],
         link: 'projects/bd-funnel-overhaul.html'
       },
       {
-        name: 'Pencapaian Brand — Personal',
+        name: 'Brand Acquisition — Personal',
         category: 'Individual Contributor · 2023–24',
-        desc: '36 brand partnerships personally sourced, pitched, and closed — fashion, lifestyle, F&B, sports, and beauty across 3 platforms.',
+        desc: '55+ brand partnerships personally sourced, pitched, and closed — fashion, lifestyle, F&B, sports, and beauty across 3 platforms.',
         tags: ['B2B Sales','Lead Gen','Closing'],
         link: 'projects/personal-brand-acquisitions.html'
       },
@@ -1532,61 +1504,8 @@ function initLiquidReveal() {
 }
 initLiquidReveal();
 
-// ── Brand Marquee ──
-// Brand logos in PDF grid order (row-by-row, left-to-right)
-const brandList = [
-  { name:'Teddie Clubs', img:'brand_01.png' },
-  { name:'in-lite',      img:'brand_02.png' },
-  { name:'CA',           img:'brand_03.png' },
-  { name:'Waldos',       img:'brand_04.png' },
-  { name:'SequeSoon',    img:'brand_05.png' },
-  { name:'Douquela',     img:'brand_06.png' },
-  { name:'Martin Versa', img:'brand_07.png' },
-  { name:'Gentle Hour',  img:'brand_08.png' },
-  { name:'LaRocking',    img:'brand_09.png' },
-  { name:'Fantasy',      img:'brand_10.png' },
-  { name:'HIA Storyware',img:'brand_11.png' },
-  { name:'Dragon',       img:'brand_12.png' },
-  { name:'9Jacket',      img:'brand_13.png' },
-  { name:'MAGE',         img:'brand_14.png' },
-  { name:'Chronox',      img:'brand_15.png' },
-  { name:'Kimbo',        img:'brand_16.png' },
-  { name:'FVC+K',        img:'brand_17.png' },
-  { name:'Dewdrop',      img:'brand_18.png' },
-  { name:'ELMER',        img:'brand_19.png' },
-  { name:'Vention',      img:'brand_20.png' },
-  { name:'Shopee',       img:'brand_21.png' },
-  { name:'Vengoz',       img:'brand_22.png' },
-  { name:'Zebra',        img:'brand_23.png' },
-  { name:'Cheerilee',    img:'brand_24.png' },
-  { name:'Hunt Toys',    img:'brand_25.png' },
-  { name:'Reneturos',    img:'brand_26.png' },
-  { name:'GoGo Books',   img:'brand_27.png' },
-  { name:'Cats & Cuddles',img:'brand_28.png'},
-  { name:'Hypospot',     img:'brand_29.png' },
-  { name:'OneShin',      img:'brand_30.png' },
-  { name:'Nayara',       img:'brand_31.png' },
-  { name:'Skinfood',     img:'brand_32.png' },
-  { name:'CUTA',         img:'brand_33.png' },
-  { name:'Scholl',       img:'brand_34.png' },
-  { name:'Sniff Sniff',  img:'brand_35.png' },
-  { name:'Dao Agrico',   img:'brand_36.png' },
-];
-function buildMarquee() {
-  const track = document.getElementById('marqueeTrack');
-  if (!track) return;
-  const doubled = [...brandList, ...brandList];
-  doubled.forEach(b => {
-    const chip = document.createElement('div');
-    chip.className = 'brand-chip';
-    chip.innerHTML = `<img src="assets/brands/${b.img}" alt="${b.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brand-chip__name" style="display:none">${b.name}</span>`;
-    track.appendChild(chip);
-  });
-}
-
 // ── Init ──
 buildAboutH2();
-buildMarquee();
 buildPortfolio();
 buildServices();
 buildStats();
