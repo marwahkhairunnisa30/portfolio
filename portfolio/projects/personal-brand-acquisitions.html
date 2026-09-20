@@ -70,7 +70,16 @@ h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;
 .step{display:inline-flex;align-items:center;gap:.375rem;border:1px solid var(--subtle);border-radius:.625rem;padding:.3125rem .75rem;font-size:.75rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.02)}
 .step__num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.04em}
 
-.spacer{flex:1;min-height:.5rem}
+/* Factors */
+.factors-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-top:.875rem;margin-bottom:.5rem}
+.factors{display:flex;flex-direction:column;gap:.375rem}
+.factor{display:flex;align-items:flex-start;gap:.75rem;padding:.5625rem .875rem;background:rgba(255,255,255,.025);border:1px solid var(--subtle);border-radius:var(--radius-card);transition:border-color .2s,background .2s}
+.factor:hover{border-color:rgba(185,43,43,.25);background:rgba(255,255,255,.045)}
+.factor__letter{font-size:.625rem;font-weight:800;color:var(--accent);letter-spacing:.06em;min-width:1rem;padding-top:.15rem;flex-shrink:0}
+.factor__title{font-size:.8125rem;font-weight:600;color:var(--text);margin-bottom:.125rem}
+.factor__desc{font-size:.75rem;color:var(--muted);line-height:1.5}
+
+.spacer{flex:1;min-height:.25rem}
 
 /* CTA */
 .cta-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding-top:.875rem;border-top:1px solid var(--subtle);flex-shrink:0;flex-wrap:wrap}
@@ -161,6 +170,31 @@ h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;
       <span class="step"><span class="step__num">05</span>Negotiate</span>
       <span class="step"><span class="step__num">06</span>Onboard</span>
       <span class="step"><span class="step__num">07</span>Retain</span>
+    </div>
+
+    <div class="factors-label">What closed these deals</div>
+    <div class="factors">
+      <div class="factor">
+        <span class="factor__letter">A</span>
+        <div>
+          <div class="factor__title">Personalized cold outreach</div>
+          <div class="factor__desc">Tailored hooks per brand vertical — not spray-and-pray. Every first touch referenced their actual product or store.</div>
+        </div>
+      </div>
+      <div class="factor">
+        <span class="factor__letter">B</span>
+        <div>
+          <div class="factor__title">ICP-first qualification</div>
+          <div class="factor__desc">Filtered by fit before investing time in calls — platform presence, GMV potential, and category match all screened upfront.</div>
+        </div>
+      </div>
+      <div class="factor">
+        <span class="factor__letter">C</span>
+        <div>
+          <div class="factor__title">Outcome-based pitch</div>
+          <div class="factor__desc">Led with what the brand gains — revenue growth, platform reach, and operational lift — not just what AHA Commerce does.</div>
+        </div>
+      </div>
     </div>
 
     <div class="spacer"></div>
