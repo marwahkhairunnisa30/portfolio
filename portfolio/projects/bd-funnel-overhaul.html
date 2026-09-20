@@ -11,9 +11,9 @@
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;--surface2:#161620;
-  --accent:#b92b2b;--accent-dim:rgba(185,43,43,.12);
+  --accent:#b92b2b;
   --text:#eceaf5;--muted:rgba(236,234,245,.45);--subtle:rgba(236,234,245,.09);
-  --radius:1rem;--radius-pill:9999px;
+  --radius-pill:9999px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased}
@@ -31,77 +31,74 @@ img{display:block}
 .topbar__back:hover svg{transform:translateX(-3px)}
 .topbar__brand{font-size:.8125rem;font-weight:600;letter-spacing:-.01em}
 
-/* ── Page layout ── */
-.page{display:grid;grid-template-columns:44% 56%;height:calc(100vh - 56px);margin-top:56px}
+/* ── Page grid ── */
+.page{display:grid;grid-template-columns:56% 44%;height:calc(100vh - 56px);margin-top:56px}
 @media(max-width:768px){.page{grid-template-columns:1fr;height:auto}}
 
-/* ── Left panel ── */
-.left{display:flex;flex-direction:column;padding:1.5rem 2rem 1.5rem;border-right:1px solid var(--subtle);overflow:hidden}
-@media(max-width:768px){.left{overflow:visible;border-right:none;border-bottom:1px solid var(--subtle);padding:1.5rem 1.25rem}}
+/* ── Left panel — all content ── */
+.left{display:flex;flex-direction:column;padding:1.375rem 2rem 1.375rem;border-right:1px solid var(--subtle);overflow:hidden;gap:.625rem}
+@media(max-width:768px){.left{overflow:visible;border-right:none;border-bottom:1px solid var(--subtle);padding:1.5rem 1.25rem;gap:.875rem}}
 
-.eyebrow{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.eyebrow{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);display:flex;align-items:center;gap:.4rem}
 .eyebrow::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:var(--accent);flex-shrink:0}
 
-h1{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.02;margin-bottom:.625rem}
+h1{font-size:clamp(1.625rem,3.2vw,2.375rem);font-weight:700;letter-spacing:-.035em;line-height:1.02}
 
-.desc{font-size:.8125rem;color:var(--muted);line-height:1.6;max-width:44ch;margin-bottom:.875rem}
+.desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
 
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
-.metric{padding:.625rem .75rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.875rem}
-.metric__num{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.metric__num sup{font-size:.8rem;vertical-align:super;color:var(--accent)}
-.metric__label{font-size:.5625rem;color:var(--muted);line-height:1.4;margin-top:.25rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.4375rem}
+.metric{padding:.5625rem .75rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.75rem}
+.metric__num{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.metric__num sup{font-size:.75rem;vertical-align:super;color:var(--accent)}
+.metric__label{font-size:.5rem;color:var(--muted);line-height:1.4;margin-top:.2rem}
 
-.tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.875rem}
-.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.2rem .625rem;font-size:.625rem;font-weight:500;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.1875rem .625rem;font-size:.5625rem;font-weight:500;color:var(--muted)}
 
-.divider{height:1px;background:var(--subtle);margin-bottom:.875rem}
+.divider{height:1px;background:var(--subtle);flex-shrink:0}
 
-.section-label{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.section-label::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
+.sec{display:flex;flex-direction:column;gap:.4375rem}
+.sec-label{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);display:flex;align-items:center;gap:.375rem}
+.sec-label::before{content:'';width:.275rem;height:.275rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
 
-.challenge-text{font-size:.75rem;color:var(--muted);line-height:1.65;max-width:44ch}
+.challenge-text{font-size:.75rem;color:var(--muted);line-height:1.65}
 
-/* ── BD Wiki screenshot ── */
-.built-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.625rem;display:flex;align-items:center;gap:.4rem}
-.built-label::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
+/* Funnel chips */
+.funnel-chips{display:flex;flex-wrap:wrap;gap:.3rem}
+.funnel-chip{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .75rem;border:1px solid var(--subtle);border-radius:var(--radius-pill);font-size:.625rem;font-weight:600;color:var(--muted);background:var(--surface);transition:border-color .2s,color .2s}
+.funnel-chip:hover{border-color:rgba(185,43,43,.35);color:var(--text)}
+.funnel-chip .n{font-size:.5rem;font-weight:700;color:var(--accent);letter-spacing:.06em}
 
-.wiki-shot-wrap{border:1px solid var(--subtle);border-radius:.875rem;overflow:hidden;flex-shrink:0;height:170px;position:relative}
-.wiki-shot-wrap img{position:absolute;top:-5.2%;left:-1.6%;width:106%;height:auto}
+/* Approach cards */
+.approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4375rem}
+.approach-card{padding:.6875rem .875rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.75rem;transition:border-color .2s,background .2s}
+.approach-card:hover{border-color:rgba(185,43,43,.3);background:var(--surface2)}
+.approach-card__title{font-size:.6875rem;font-weight:600;color:var(--text);margin-bottom:.3rem;line-height:1.3}
+.approach-card__body{font-size:.625rem;color:var(--muted);line-height:1.5}
 
-.spacer{flex:1;min-height:.5rem}
+/* Results */
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4375rem}
+.result-cell{padding:.5625rem .75rem;background:linear-gradient(135deg,rgba(185,43,43,.1),rgba(11,11,16,.6));border:1px solid rgba(185,43,43,.14);border-radius:.75rem}
+.result-cell__num{font-size:1.25rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.result-cell__num sup{font-size:.7rem;vertical-align:super;color:var(--accent)}
+.result-cell__label{font-size:.5rem;color:var(--muted);line-height:1.4;margin-top:.2rem}
 
-.cta-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.625rem 1.375rem;font-size:.8125rem;font-weight:600;transition:background .2s,transform .3s}
+/* CTA */
+.cta-row{display:flex;align-items:center;gap:.875rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.5625rem 1.25rem;font-size:.8125rem;font-weight:600;transition:background .2s,transform .3s}
 .btn:hover{background:#9b2424;transform:scale(1.03)}
 .btn svg{transition:transform .3s}
 .btn:hover svg{transform:translateX(3px)}
-.cta-note{font-size:.75rem;color:var(--muted)}
+.cta-note{font-size:.6875rem;color:var(--muted)}
 
-/* ── Right panel ── */
-.right{display:flex;flex-direction:column;padding:2.25rem 2.5rem 2rem;gap:1.625rem;overflow:hidden}
-@media(max-width:768px){.right{overflow:visible;padding:1.75rem 1.25rem}}
+/* ── Right panel — screenshots ── */
+.right{display:flex;flex-direction:column;gap:.625rem;padding:1.375rem 1.625rem;background:var(--surface);overflow:hidden}
+@media(max-width:768px){.right{overflow:visible;background:transparent;padding:1.5rem 1.25rem}}
 
-/* Process */
-.funnel-chips{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.625rem}
-.funnel-chip{display:inline-flex;align-items:center;gap:.375rem;padding:.375rem .875rem;border:1px solid var(--subtle);border-radius:var(--radius-pill);font-size:.6875rem;font-weight:600;color:var(--muted);background:var(--surface);transition:border-color .2s,color .2s}
-.funnel-chip:hover{border-color:rgba(185,43,43,.35);color:var(--text)}
-.funnel-chip .n{font-size:.5625rem;font-weight:700;color:var(--accent);letter-spacing:.06em}
-
-/* Approach cards */
-.approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.625rem}
-.approach-card{padding:.875rem 1rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.875rem;transition:border-color .2s,background .2s}
-.approach-card:hover{border-color:rgba(185,43,43,.3);background:var(--surface2)}
-.approach-card__icon{font-size:1.125rem;margin-bottom:.5rem}
-.approach-card__title{font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:.375rem;line-height:1.3}
-.approach-card__body{font-size:.6875rem;color:var(--muted);line-height:1.55}
-
-/* Results */
-.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.625rem}
-.result-cell{padding:.75rem .875rem;background:linear-gradient(135deg,rgba(185,43,43,.12),rgba(11,11,16,.6));border:1px solid rgba(185,43,43,.15);border-radius:.875rem}
-.result-cell__num{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.result-cell__num sup{font-size:.8rem;vertical-align:super;color:var(--accent)}
-.result-cell__label{font-size:.625rem;color:var(--muted);line-height:1.4;margin-top:.3rem}
+.shot-block{display:flex;flex-direction:column;gap:.375rem;flex:1;min-height:0}
+.shot-cap{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.25)}
+.shot-frame{flex:1;border-radius:.875rem;overflow:hidden;border:1px solid var(--subtle);position:relative;min-height:0}
+.shot-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left}
 </style>
 </head>
 <body>
@@ -116,10 +113,11 @@ h1{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.035em;
 
 <div class="page">
 
-  <!-- LEFT PANEL -->
+  <!-- LEFT — all content -->
   <div class="left">
+
     <div class="eyebrow">Strategy &amp; Leadership · 2024</div>
-    <h1>BD Team<br>Leadership</h1>
+    <h1>BD Team Leadership</h1>
     <p class="desc">Built and led a BD team of 8 at AHA Commerce — designed the acquisition funnel end-to-end, set KPIs, ran weekly 1-on-1s, and drove 47 brand partnerships across Shopee, TikTok Shop &amp; Tokopedia in 9 months.</p>
 
     <div class="metrics">
@@ -147,32 +145,15 @@ h1{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.035em;
 
     <div class="divider"></div>
 
-    <div class="section-label">The Challenge</div>
-    <p class="challenge-text">No structured acquisition process, no consistent KPIs, no pipeline visibility. My mandate: build a repeatable system a team of 8 could run at scale — and hit aggressive targets across Shopee, TikTok Shop &amp; Tokopedia.</p>
-
-    <div class="spacer"></div>
-
-    <!-- BD Wiki screenshot -->
-    <div class="built-label">What I Built for the Team</div>
-    <div class="wiki-shot-wrap">
-      <img src="../assets/bd-wiki-screenshot.png" alt="BD Wikipedia — internal knowledge base" />
+    <div class="sec">
+      <div class="sec-label">The Challenge</div>
+      <p class="challenge-text">No structured acquisition process, no consistent KPIs, no pipeline visibility. My mandate: build a repeatable system a team of 8 could run at scale — and hit aggressive targets across three e-commerce platforms.</p>
     </div>
 
-    <div class="cta-row">
-      <a href="https://wa.me/6285155343042" target="_blank" class="btn">
-        Let's talk
-        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <span class="cta-note">Want to scale your BD team?</span>
-    </div>
-  </div>
+    <div class="divider"></div>
 
-  <!-- RIGHT PANEL -->
-  <div class="right">
-
-    <!-- Process -->
-    <div>
-      <div class="section-label">The Process</div>
+    <div class="sec">
+      <div class="sec-label">The Process — 7-Stage Acquisition Funnel</div>
       <div class="funnel-chips">
         <span class="funnel-chip"><span class="n">01</span> Prospecting &amp; Research</span>
         <span class="funnel-chip"><span class="n">02</span> Outreach &amp; Engagement</span>
@@ -184,51 +165,70 @@ h1{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.035em;
       </div>
     </div>
 
-    <!-- Approach -->
-    <div>
-      <div class="section-label">Three Levers That Moved the Needle</div>
+    <div class="sec">
+      <div class="sec-label">Three Levers That Moved the Needle</div>
       <div class="approach-grid">
         <div class="approach-card">
-          <div class="approach-card__icon">⚙️</div>
-          <div class="approach-card__title">Data-Driven Qualification</div>
-          <div class="approach-card__body">Scoring framework by GMV potential, platform fit, and partnership readiness — cut effort on low-probability deals early.</div>
+          <div class="approach-card__title">⚙️ Data-Driven Qualification</div>
+          <div class="approach-card__body">Scoring by GMV potential, platform fit, and readiness — cut effort on low-probability deals early.</div>
         </div>
         <div class="approach-card">
-          <div class="approach-card__icon">🤖</div>
-          <div class="approach-card__title">AI &amp; Workflow Automation</div>
-          <div class="approach-card__body">n8n and Zapier outreach sequences reduced manual prospecting time by 150%, freeing the team for relationship-building.</div>
+          <div class="approach-card__title">🤖 AI &amp; Workflow Automation</div>
+          <div class="approach-card__body">n8n &amp; Zapier outreach sequences cut manual prospecting time by 150%.</div>
         </div>
         <div class="approach-card">
-          <div class="approach-card__icon">👥</div>
-          <div class="approach-card__title">Team &amp; KPI Culture</div>
-          <div class="approach-card__body">Weekly 1-on-1s, individual KPI dashboards, and performance reviews kept quota attainment consistent every quarter.</div>
+          <div class="approach-card__title">👥 Team &amp; KPI Culture</div>
+          <div class="approach-card__body">Weekly 1-on-1s and KPI dashboards kept quota attainment consistent every quarter.</div>
         </div>
       </div>
     </div>
 
-    <!-- Results -->
-    <div>
-      <div class="section-label">By the Numbers</div>
+    <div class="sec">
+      <div class="sec-label">By the Numbers</div>
       <div class="results-grid">
         <div class="result-cell">
           <div class="result-cell__num">47<sup>+</sup></div>
-          <div class="result-cell__label">Brand partnerships closed by the team</div>
+          <div class="result-cell__label">Brand partnerships closed</div>
         </div>
         <div class="result-cell">
           <div class="result-cell__num">56<sup>%</sup></div>
-          <div class="result-cell__label">Revenue growth across platforms</div>
+          <div class="result-cell__label">Revenue growth driven</div>
         </div>
         <div class="result-cell">
           <div class="result-cell__num">30<sup>%</sup></div>
-          <div class="result-cell__label">Lead-to-conversion rate improvement</div>
+          <div class="result-cell__label">Lead-to-conversion lift</div>
         </div>
         <div class="result-cell">
           <div class="result-cell__num">150<sup>%</sup></div>
-          <div class="result-cell__label">Reduction in manual prospecting time</div>
+          <div class="result-cell__label">Less manual prospecting</div>
         </div>
       </div>
     </div>
 
+    <div class="cta-row">
+      <a href="https://wa.me/6285155343042" target="_blank" class="btn">
+        Let's talk
+        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <span class="cta-note">Want to scale your BD team?</span>
+    </div>
+
+  </div>
+
+  <!-- RIGHT — screenshots -->
+  <div class="right">
+    <div class="shot-block">
+      <div class="shot-cap">BD Wikipedia — Modul Overview</div>
+      <div class="shot-frame">
+        <img src="../assets/bd-wiki-home.png" alt="BD Wikipedia homepage" />
+      </div>
+    </div>
+    <div class="shot-block">
+      <div class="shot-cap">Sales Strategy Module</div>
+      <div class="shot-frame">
+        <img src="../assets/bd-wiki-sales.png" alt="BD Wikipedia Sales Strategy" />
+      </div>
+    </div>
   </div>
 
 </div>
