@@ -243,26 +243,34 @@ img{display:block}
 .portfolio__h2{font-size:2.25rem;font-weight:600;letter-spacing:-.02em;width:fit-content;margin:1.25rem auto 0}
 @media(min-width:640px){.portfolio__h2{font-size:3rem}}
 .portfolio__grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
-@media(min-width:768px){.portfolio__grid{grid-template-columns:repeat(2,1fr)}}
 .portfolio__item{opacity:0;transform:translateY(48px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .portfolio__item.revealed{opacity:1;transform:translateY(0)}
-.portfolio__card{display:block;position:relative;min-height:22rem;overflow:hidden;border-radius:2rem;background:#7a1710;padding:1.5rem;color:#eceaf5;box-shadow:inset 0 0 0 1px rgba(236,234,245,.06);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-@media(min-width:640px){.portfolio__card{min-height:26rem;padding:2rem}}
-@media(hover:hover){.portfolio__card:hover{transform:translateY(-8px) scale(1.012)}}
+.portfolio__card{display:block;position:relative;overflow:hidden;border-radius:2rem;background:#7a1710;padding:1.5rem;color:#eceaf5;box-shadow:inset 0 0 0 1px rgba(236,234,245,.06)}
+@media(min-width:640px){.portfolio__card{padding:2rem}}
 .portfolio__canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;border-radius:2rem}
-.portfolio__meta{position:relative;z-index:1;display:flex;justify-content:space-between;font-size:.75rem;text-transform:uppercase;letter-spacing:.025em;color:rgba(236,234,245,.4)}
+.portfolio__meta{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;font-size:.75rem;text-transform:uppercase;letter-spacing:.025em;color:rgba(236,234,245,.4);margin-bottom:1.5rem}
 .portfolio__badge{width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:9999px;background:rgba(236,234,245,.07);color:#eceaf5;border:1px solid rgba(236,234,245,.1);flex-shrink:0;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-@media(hover:hover){.portfolio__card:hover .portfolio__badge{transform:rotate(45deg) scale(1.08)}}
-.portfolio__center{position:absolute;inset:0;z-index:1;display:grid;place-items:center;pointer-events:none}
-.portfolio__logo{font-size:4.5rem;color:rgba(236,234,245,.06)}
-.portfolio__reg{font-size:.75rem;color:rgba(236,234,245,.4);position:absolute;top:50%;margin-top:-1.5rem;margin-left:.25rem}
-.portfolio__bottom{position:absolute;inset-inline:1.5rem;bottom:1.5rem;z-index:1}
-@media(min-width:640px){.portfolio__bottom{inset-inline:2rem;bottom:2rem}}
-.portfolio__card h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em}
+.portfolio__card h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em;position:relative;z-index:1}
 @media(min-width:640px){.portfolio__card h3{font-size:1.875rem}}
-.portfolio__desc{margin-top:.5rem;max-width:28rem;font-size:.875rem;color:rgba(236,234,245,.5)}
-.portfolio__tags{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.portfolio__desc{margin-top:.5rem;max-width:28rem;font-size:.875rem;color:rgba(236,234,245,.5);position:relative;z-index:1}
+.portfolio__tags{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem;position:relative;z-index:1}
 .tag-chip{display:inline-flex;border:1px solid rgba(236,234,245,.15);color:#eceaf5;border-radius:9999px;padding:.5rem 1rem;font-size:.875rem}
+
+/* ── Sub-card grid (inside mega card) ── */
+.portfolio__subgrid{display:grid;grid-template-columns:1fr;gap:.75rem;position:relative;z-index:1;margin-top:1.75rem}
+@media(min-width:560px){.portfolio__subgrid{grid-template-columns:repeat(2,1fr)}}
+.portfolio__subcard{display:flex;flex-direction:column;gap:.75rem;background:rgba(0,0,0,.28);border:1px solid rgba(236,234,245,.1);border-radius:1.25rem;padding:1.25rem;color:#eceaf5;text-decoration:none;transition:background .25s,border-color .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+@media(min-width:640px){.portfolio__subcard{padding:1.5rem}}
+.portfolio__subcard--link:hover{background:rgba(0,0,0,.42);border-color:rgba(236,234,245,.22);transform:translateY(-3px)}
+.portfolio__subcard__cat{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.38)}
+.portfolio__subcard__head{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.portfolio__subcard__title{font-size:1.0625rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+@media(min-width:640px){.portfolio__subcard__title{font-size:1.25rem}}
+.portfolio__subcard__badge{width:2rem;height:2rem;flex-shrink:0;display:grid;place-items:center;border-radius:9999px;background:rgba(236,234,245,.07);border:1px solid rgba(236,234,245,.1);color:#eceaf5;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.portfolio__subcard--link:hover .portfolio__subcard__badge{transform:rotate(45deg) scale(1.08)}
+.portfolio__subcard__desc{font-size:.8125rem;color:rgba(236,234,245,.48);line-height:1.65;flex:1}
+.portfolio__subcard__tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.5rem}
+.portfolio__subcard__tag{display:inline-flex;border:1px solid rgba(236,234,245,.12);color:rgba(236,234,245,.6);border-radius:9999px;padding:.3125rem .75rem;font-size:.75rem}
 
 /* ── Services ── */
 .services{background:#0b0b10}
@@ -984,36 +992,72 @@ function setupCreateBand() {
 }
 
 // ── Portfolio ──
-const portfolioItems = [
-  { name:'Shopee Super Summit 2024 & 2025', category:'Offline Project', year:'2024–25', desc:'Served as Project Manager for Shopee Super Summit — orchestrating brand activations, cross-team coordination, and on-ground execution across two consecutive years.', tags:['Project Management','Brand Activation','Shopee'], link: null },
-  { name:'AI Outreach Automation', category:'Automation', year:'2024', desc:'Designed and deployed AI-powered outreach automation that reduced manual prospecting time by 150% and scaled pipeline capacity without headcount increase.', tags:['n8n','Zapier','Prompt Engineering'], link: null },
-  { name:'Personal Brand Acquisitions', category:'Individual Contributor', year:'2023–24', desc:'36 brand partnerships personally sourced, pitched, and closed — across fashion, lifestyle, F&B, sports, and beauty on Shopee, TikTok Shop, and Tokopedia.', tags:['B2B Sales','LeadGen','Closing'], link: 'projects/personal-brand-acquisitions.html' },
-  { name:'BD Team Leadership', category:'Strategy & Leadership', year:'2024', desc:'Built and led a BD team to 47 brand partnerships in 9 months — designing the acquisition funnel, setting KPIs, running weekly 1-on-1s, and driving 56% revenue growth at AHA Commerce.', tags:['Team Leadership','BD Strategy','Pipeline'], link: 'projects/bd-funnel-overhaul.html' }
+const subCards = [
+  {
+    name: 'Pencapaian Brand — Tim',
+    category: 'Strategy & Leadership · 2024',
+    desc: 'Built and led a BD team to 47 brand partnerships in 9 months — designing the acquisition funnel, setting KPIs, and running weekly 1-on-1s.',
+    tags: ['Team Leadership','BD Strategy','Pipeline'],
+    link: 'projects/bd-funnel-overhaul.html'
+  },
+  {
+    name: 'Pencapaian Brand — Personal',
+    category: 'Individual Contributor · 2023–24',
+    desc: '36 brand partnerships personally sourced, pitched, and closed — fashion, lifestyle, F&B, sports, and beauty across 3 platforms.',
+    tags: ['B2B Sales','Lead Gen','Closing'],
+    link: 'projects/personal-brand-acquisitions.html'
+  },
+  {
+    name: 'Shopee Super Summit 2024 & 2025',
+    category: 'Company Project · 2024–25',
+    desc: 'Project Manager for Shopee Super Summit — orchestrating brand activations, cross-team coordination, and on-ground execution across two years.',
+    tags: ['Project Management','Brand Activation','Shopee'],
+    link: null
+  },
+  {
+    name: 'AI Outreach Automation',
+    category: 'Automation · 2024',
+    desc: 'Designed and deployed AI-powered outreach automation that reduced manual prospecting time by 150% and scaled pipeline capacity without adding headcount.',
+    tags: ['n8n','Zapier','Prompt Engineering'],
+    link: null
+  }
 ];
+
 function buildPortfolio() {
   const grid = document.getElementById('portfolioGrid');
-  portfolioItems.forEach((item, idx) => {
-    const li = document.createElement('li');
-    li.className = 'portfolio__item';
-    li.style.transitionDelay = (idx * 90) + 'ms';
-    const tag = item.link ? 'a' : 'article';
-    const linkAttr = item.link ? `href="${item.link}"` : '';
-    li.innerHTML = `<${tag} class="portfolio__card" ${linkAttr}>
-      <canvas class="portfolio__canvas" aria-hidden="true"></canvas>
-      <div class="portfolio__meta">
-        <span>${item.category} — ${item.year}</span>
-        <div class="portfolio__badge">
-          <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        </div>
+  const li = document.createElement('li');
+  li.className = 'portfolio__item';
+
+  const arrowIcon = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
+
+  const subCardsHTML = subCards.map(s => {
+    const tag = s.link ? 'a' : 'div';
+    const href = s.link ? `href="${s.link}"` : '';
+    const linkClass = s.link ? ' portfolio__subcard--link' : '';
+    return `<${tag} class="portfolio__subcard${linkClass}" ${href}>
+      <div class="portfolio__subcard__cat">${s.category}</div>
+      <div class="portfolio__subcard__head">
+        <div class="portfolio__subcard__title">${s.name}</div>
+        ${s.link ? `<div class="portfolio__subcard__badge">${arrowIcon}</div>` : ''}
       </div>
-      <div class="portfolio__bottom">
-        <h3>${item.name}</h3>
-        <p class="portfolio__desc">${item.desc}</p>
-        <div class="portfolio__tags">${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>
-      </div>
+      <p class="portfolio__subcard__desc">${s.desc}</p>
+      <div class="portfolio__subcard__tags">${s.tags.map(t => `<span class="portfolio__subcard__tag">${t}</span>`).join('')}</div>
     </${tag}>`;
-    grid.appendChild(li);
-  });
+  }).join('');
+
+  li.innerHTML = `<article class="portfolio__card">
+    <canvas class="portfolio__canvas" aria-hidden="true"></canvas>
+    <div class="portfolio__meta">
+      <span>Business Development · AHA Commerce · 2023–2025</span>
+      <div class="portfolio__badge">${arrowIcon}</div>
+    </div>
+    <h3>BD Portfolio</h3>
+    <p class="portfolio__desc">4 projects across brand acquisition, team leadership, automation, and event management.</p>
+    <div class="portfolio__subgrid">${subCardsHTML}</div>
+  </article>`;
+
+  grid.appendChild(li);
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1023,7 +1067,7 @@ function buildPortfolio() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   grid.querySelectorAll('.portfolio__item').forEach(el => observer.observe(el));
 }
 
