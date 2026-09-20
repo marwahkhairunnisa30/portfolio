@@ -36,31 +36,38 @@ img{display:block}
 @media(max-width:768px){.page{grid-template-columns:1fr;height:auto}}
 
 /* ── Left panel ── */
-.left{display:flex;flex-direction:column;padding:2.25rem 2.5rem 2rem;border-right:1px solid var(--subtle);overflow:hidden}
-@media(max-width:768px){.left{overflow:visible;border-right:none;border-bottom:1px solid var(--subtle);padding:1.75rem 1.25rem}}
+.left{display:flex;flex-direction:column;padding:1.5rem 2rem 1.5rem;border-right:1px solid var(--subtle);overflow:hidden}
+@media(max-width:768px){.left{overflow:visible;border-right:none;border-bottom:1px solid var(--subtle);padding:1.5rem 1.25rem}}
 
-.eyebrow{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.eyebrow{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .eyebrow::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:var(--accent);flex-shrink:0}
 
-h1{font-size:clamp(2rem,3.8vw,2.75rem);font-weight:700;letter-spacing:-.035em;line-height:1.02;margin-bottom:.875rem}
+h1{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.02;margin-bottom:.625rem}
 
-.desc{font-size:.875rem;color:var(--muted);line-height:1.65;max-width:44ch;margin-bottom:1.25rem}
+.desc{font-size:.8125rem;color:var(--muted);line-height:1.6;max-width:44ch;margin-bottom:.875rem}
 
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem}
-.metric{padding:.75rem .875rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.875rem}
-.metric__num{font-size:1.625rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.metric__num sup{font-size:.875rem;vertical-align:super;color:var(--accent)}
-.metric__label{font-size:.625rem;color:var(--muted);line-height:1.4;margin-top:.3rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.metric{padding:.625rem .75rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.875rem}
+.metric__num{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.metric__num sup{font-size:.8rem;vertical-align:super;color:var(--accent)}
+.metric__label{font-size:.5625rem;color:var(--muted);line-height:1.4;margin-top:.25rem}
 
-.tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1.25rem}
-.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.25rem .75rem;font-size:.6875rem;font-weight:500;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.875rem}
+.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.2rem .625rem;font-size:.625rem;font-weight:500;color:var(--muted)}
 
-.divider{height:1px;background:var(--subtle);margin-bottom:1.25rem}
+.divider{height:1px;background:var(--subtle);margin-bottom:.875rem}
 
-.section-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.625rem;display:flex;align-items:center;gap:.4rem}
+.section-label{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .section-label::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
 
-.challenge-text{font-size:.8125rem;color:var(--muted);line-height:1.7;max-width:42ch}
+.challenge-text{font-size:.75rem;color:var(--muted);line-height:1.65;max-width:44ch}
+
+/* ── BD Wiki screenshot ── */
+.built-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.625rem;display:flex;align-items:center;gap:.4rem}
+.built-label::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
+
+.wiki-shot-wrap{border:1px solid var(--subtle);border-radius:.875rem;overflow:hidden;flex-shrink:0;height:170px;position:relative}
+.wiki-shot-wrap img{position:absolute;top:-5.2%;left:-1.6%;width:106%;height:auto}
 
 .spacer{flex:1;min-height:.5rem}
 
@@ -141,9 +148,15 @@ h1{font-size:clamp(2rem,3.8vw,2.75rem);font-weight:700;letter-spacing:-.035em;li
     <div class="divider"></div>
 
     <div class="section-label">The Challenge</div>
-    <p class="challenge-text">When I stepped into the BD Lead role, the team had no structured acquisition process, no consistent KPIs, and no visibility into pipeline health. My mandate: build a repeatable system a team of 8 could run at scale — and hit aggressive targets across three e-commerce platforms.</p>
+    <p class="challenge-text">No structured acquisition process, no consistent KPIs, no pipeline visibility. My mandate: build a repeatable system a team of 8 could run at scale — and hit aggressive targets across Shopee, TikTok Shop &amp; Tokopedia.</p>
 
     <div class="spacer"></div>
+
+    <!-- BD Wiki screenshot -->
+    <div class="built-label">What I Built for the Team</div>
+    <div class="wiki-shot-wrap">
+      <img src="../assets/bd-wiki-screenshot.png" alt="BD Wikipedia — internal knowledge base" />
+    </div>
 
     <div class="cta-row">
       <a href="https://wa.me/6285155343042" target="_blank" class="btn">
