@@ -36,60 +36,65 @@ img{display:block}
 @media(max-width:768px){.page{grid-template-columns:1fr;height:auto}}
 
 /* ── Left panel — all content ── */
-.left{display:flex;flex-direction:column;padding:1.375rem 2rem 1.375rem;border-right:1px solid var(--subtle);overflow:hidden;gap:.625rem}
+.left{display:flex;flex-direction:column;padding:1.25rem 2rem 1rem;border-right:1px solid var(--subtle);overflow:hidden;gap:.5rem}
 @media(max-width:768px){.left{overflow:visible;border-right:none;border-bottom:1px solid var(--subtle);padding:1.5rem 1.25rem;gap:.875rem}}
 
-.eyebrow{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);display:flex;align-items:center;gap:.4rem}
-.eyebrow::before{content:'';width:.3rem;height:.3rem;border-radius:50%;background:var(--accent);flex-shrink:0}
+.eyebrow{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);display:inline-flex;align-items:center;gap:.5rem}
+.eyebrow .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent);flex-shrink:0}
 
-h1{font-size:clamp(1.625rem,3.2vw,2.375rem);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.04}
 
-.desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+.desc{font-size:.9rem;color:var(--muted);line-height:1.65}
 
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.4375rem}
-.metric{padding:.5625rem .75rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.75rem}
-.metric__num{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.metric__num sup{font-size:.75rem;vertical-align:super;color:var(--accent)}
-.metric__label{font-size:.5rem;color:var(--muted);line-height:1.4;margin-top:.2rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem}
+.metric{padding:.75rem .875rem;background:rgba(255,255,255,.03);border:1px solid var(--subtle);border-radius:.875rem}
+.metric__num{font-size:1.875rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.metric__num span{color:var(--accent)}
+.metric__label{font-size:.6875rem;color:var(--muted);line-height:1.4;margin-top:.3rem}
 
-.tags{display:flex;flex-wrap:wrap;gap:.3rem}
-.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.1875rem .625rem;font-size:.5625rem;font-weight:500;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.375rem}
+.tag{display:inline-block;border:1px solid var(--subtle);border-radius:var(--radius-pill);padding:.3125rem .875rem;font-size:.75rem;font-weight:500;color:var(--muted)}
 
 .divider{height:1px;background:var(--subtle);flex-shrink:0}
 
-.sec{display:flex;flex-direction:column;gap:.4375rem}
-.sec-label{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);display:flex;align-items:center;gap:.375rem}
-.sec-label::before{content:'';width:.275rem;height:.275rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
+.sec{display:flex;flex-direction:column;gap:.375rem}
+.sec-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);display:inline-flex;align-items:center;gap:.5rem}
+.sec-label .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:rgba(185,43,43,.5);flex-shrink:0}
 
-.challenge-text{font-size:.75rem;color:var(--muted);line-height:1.65}
+.challenge-text{font-size:.8125rem;color:var(--muted);line-height:1.65}
 
-/* Funnel chips */
-.funnel-chips{display:flex;flex-wrap:wrap;gap:.3rem}
-.funnel-chip{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .75rem;border:1px solid var(--subtle);border-radius:var(--radius-pill);font-size:.625rem;font-weight:600;color:var(--muted);background:var(--surface);transition:border-color .2s,color .2s}
-.funnel-chip:hover{border-color:rgba(185,43,43,.35);color:var(--text)}
-.funnel-chip .n{font-size:.5rem;font-weight:700;color:var(--accent);letter-spacing:.06em}
+/* Funnel milestone line */
+.funnel-line{display:flex;align-items:flex-start;position:relative}
+.funnel-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
+.funnel-step:not(:last-child)::after{content:'';position:absolute;top:.6875rem;left:50%;width:100%;height:1px;background:var(--subtle);z-index:0}
+.funnel-step__dot{width:1.375rem;height:1.375rem;border-radius:50%;border:1px solid var(--subtle);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:800;color:var(--accent);background:var(--bg);position:relative;z-index:1;flex-shrink:0;letter-spacing:.04em;transition:border-color .2s,background .2s}
+.funnel-step:hover .funnel-step__dot{border-color:rgba(185,43,43,.5);background:rgba(185,43,43,.08)}
+.funnel-step__label{font-size:.5rem;color:var(--muted);text-align:center;margin-top:.375rem;line-height:1.35;padding:0 .125rem}
 
-/* Approach cards */
-.approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4375rem}
-.approach-card{padding:.6875rem .875rem;background:var(--surface);border:1px solid var(--subtle);border-radius:.75rem;transition:border-color .2s,background .2s}
-.approach-card:hover{border-color:rgba(185,43,43,.3);background:var(--surface2)}
-.approach-card__title{font-size:.6875rem;font-weight:600;color:var(--text);margin-bottom:.3rem;line-height:1.3}
-.approach-card__body{font-size:.625rem;color:var(--muted);line-height:1.5}
+/* Levers — compact icon+title only */
+.levers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.lever{padding:.6875rem .875rem;background:rgba(255,255,255,.025);border:1px solid var(--subtle);border-radius:.875rem;transition:border-color .2s,background .2s}
+.lever:hover{border-color:rgba(185,43,43,.3);background:rgba(255,255,255,.04)}
+.lever__icon{font-size:1rem;margin-bottom:.375rem}
+.lever__title{font-size:.75rem;font-weight:600;color:var(--text);line-height:1.3}
 
-/* Results */
-.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4375rem}
-.result-cell{padding:.5625rem .75rem;background:linear-gradient(135deg,rgba(185,43,43,.1),rgba(11,11,16,.6));border:1px solid rgba(185,43,43,.14);border-radius:.75rem}
-.result-cell__num{font-size:1.25rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.result-cell__num sup{font-size:.7rem;vertical-align:super;color:var(--accent)}
-.result-cell__label{font-size:.5rem;color:var(--muted);line-height:1.4;margin-top:.2rem}
+/* What I Made — numbered rows */
+.made-list{display:flex;flex-direction:column;gap:.375rem}
+.made-item{display:flex;align-items:center;gap:.75rem;padding:.5rem .875rem;background:rgba(255,255,255,.025);border:1px solid var(--subtle);border-radius:.875rem;transition:border-color .2s,background .2s}
+.made-item:hover{border-color:rgba(185,43,43,.25);background:rgba(255,255,255,.04)}
+.made-item__num{font-size:.5625rem;font-weight:800;color:var(--accent);letter-spacing:.06em;min-width:1.25rem;flex-shrink:0}
+.made-item__title{font-size:.8125rem;font-weight:600;color:var(--text)}
+.made-item__sub{font-size:.6875rem;color:var(--muted);margin-top:.0625rem}
+
+.spacer{flex:1;min-height:.25rem}
 
 /* CTA */
-.cta-row{display:flex;align-items:center;gap:.875rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.5625rem 1.25rem;font-size:.8125rem;font-weight:600;transition:background .2s,transform .3s}
+.cta-row{display:flex;align-items:center;gap:.875rem;flex-wrap:wrap;padding-top:.875rem;border-top:1px solid var(--subtle);flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:.5625rem 1.375rem;font-size:.875rem;font-weight:600;transition:background .2s,transform .3s}
 .btn:hover{background:#9b2424;transform:scale(1.03)}
 .btn svg{transition:transform .3s}
 .btn:hover svg{transform:translateX(3px)}
-.cta-note{font-size:.6875rem;color:var(--muted)}
+.cta-note{font-size:.8125rem;color:var(--muted)}
 
 /* ── Right panel — screenshots ── */
 .right{display:flex;flex-direction:column;gap:.625rem;padding:1.375rem 1.625rem;background:var(--surface);overflow:hidden}
@@ -116,21 +121,21 @@ h1{font-size:clamp(1.625rem,3.2vw,2.375rem);font-weight:700;letter-spacing:-.035
   <!-- LEFT — all content -->
   <div class="left">
 
-    <div class="eyebrow">Strategy &amp; Leadership · 2024</div>
+    <div class="eyebrow"><span class="dot"></span>Strategy &amp; Leadership · 2024</div>
     <h1>BD Team Leadership</h1>
     <p class="desc">Built and led a BD team of 8 at AHA Commerce — designed the acquisition funnel end-to-end, set KPIs, ran weekly 1-on-1s, and drove 47 brand partnerships across Shopee, TikTok Shop &amp; Tokopedia in 9 months.</p>
 
     <div class="metrics">
       <div class="metric">
-        <div class="metric__num">47<sup>+</sup></div>
+        <div class="metric__num">47<span>+</span></div>
         <div class="metric__label">Brand partnerships in 9 months</div>
       </div>
       <div class="metric">
-        <div class="metric__num">56<sup>%</sup></div>
+        <div class="metric__num">56<span>%</span></div>
         <div class="metric__label">Revenue growth driven</div>
       </div>
       <div class="metric">
-        <div class="metric__num">30<sup>%</sup></div>
+        <div class="metric__num">30<span>%</span></div>
         <div class="metric__label">Lead-to-conversion lift</div>
       </div>
     </div>
@@ -143,67 +148,52 @@ h1{font-size:clamp(1.625rem,3.2vw,2.375rem);font-weight:700;letter-spacing:-.035
       <span class="tag">AI &amp; Automation</span>
     </div>
 
-    <div class="divider"></div>
-
     <div class="sec">
-      <div class="sec-label">The Challenge</div>
+      <div class="sec-label"><span class="dot"></span>The Challenge</div>
       <p class="challenge-text">No structured acquisition process, no consistent KPIs, no pipeline visibility. My mandate: build a repeatable system a team of 8 could run at scale — and hit aggressive targets across three e-commerce platforms.</p>
     </div>
 
-    <div class="divider"></div>
-
     <div class="sec">
-      <div class="sec-label">The Process — 7-Stage Acquisition Funnel</div>
-      <div class="funnel-chips">
-        <span class="funnel-chip"><span class="n">01</span> Prospecting &amp; Research</span>
-        <span class="funnel-chip"><span class="n">02</span> Outreach &amp; Engagement</span>
-        <span class="funnel-chip"><span class="n">03</span> Pipeline Management</span>
-        <span class="funnel-chip"><span class="n">04</span> Meeting &amp; Proposal</span>
-        <span class="funnel-chip"><span class="n">05</span> Negotiation &amp; Closing</span>
-        <span class="funnel-chip"><span class="n">06</span> Onboarding &amp; Handover</span>
-        <span class="funnel-chip"><span class="n">07</span> Growth &amp; Retention</span>
+      <div class="sec-label"><span class="dot"></span>The Process — 7-Stage Acquisition Funnel</div>
+      <div class="funnel-line">
+        <div class="funnel-step"><div class="funnel-step__dot">01</div><div class="funnel-step__label">Prospecting &amp; Research</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">02</div><div class="funnel-step__label">Outreach &amp; Engagement</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">03</div><div class="funnel-step__label">Pipeline Management</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">04</div><div class="funnel-step__label">Meeting &amp; Proposal</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">05</div><div class="funnel-step__label">Negotiation &amp; Closing</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">06</div><div class="funnel-step__label">Onboarding &amp; Handover</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">07</div><div class="funnel-step__label">Growth &amp; Retention</div></div>
       </div>
     </div>
 
     <div class="sec">
-      <div class="sec-label">Three Levers That Moved the Needle</div>
-      <div class="approach-grid">
-        <div class="approach-card">
-          <div class="approach-card__title">⚙️ Data-Driven Qualification</div>
-          <div class="approach-card__body">Scoring by GMV potential, platform fit, and readiness — cut effort on low-probability deals early.</div>
+      <div class="sec-label"><span class="dot"></span>What I Made for the Team</div>
+      <div class="made-list">
+        <div class="made-item">
+          <span class="made-item__num">01</span>
+          <div>
+            <div class="made-item__title">AI Agentic Scraper</div>
+            <div class="made-item__sub">Apple Script automation for lead sourcing</div>
+          </div>
         </div>
-        <div class="approach-card">
-          <div class="approach-card__title">🤖 AI &amp; Workflow Automation</div>
-          <div class="approach-card__body">n8n &amp; Zapier outreach sequences cut manual prospecting time by 150%.</div>
+        <div class="made-item">
+          <span class="made-item__num">02</span>
+          <div>
+            <div class="made-item__title">Business Development Module</div>
+            <div class="made-item__sub">Internal knowledge base for the BD team</div>
+          </div>
         </div>
-        <div class="approach-card">
-          <div class="approach-card__title">👥 Team &amp; KPI Culture</div>
-          <div class="approach-card__body">Weekly 1-on-1s and KPI dashboards kept quota attainment consistent every quarter.</div>
+        <div class="made-item">
+          <span class="made-item__num">03</span>
+          <div>
+            <div class="made-item__title">Reliable Funnel Tracker</div>
+            <div class="made-item__sub">Pipeline visibility dashboard for the whole team</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="sec">
-      <div class="sec-label">By the Numbers</div>
-      <div class="results-grid">
-        <div class="result-cell">
-          <div class="result-cell__num">47<sup>+</sup></div>
-          <div class="result-cell__label">Brand partnerships closed</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-cell__num">56<sup>%</sup></div>
-          <div class="result-cell__label">Revenue growth driven</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-cell__num">30<sup>%</sup></div>
-          <div class="result-cell__label">Lead-to-conversion lift</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-cell__num">150<sup>%</sup></div>
-          <div class="result-cell__label">Less manual prospecting</div>
-        </div>
-      </div>
-    </div>
+    <div class="spacer"></div>
 
     <div class="cta-row">
       <a href="https://wa.me/6285155343042" target="_blank" class="btn">
