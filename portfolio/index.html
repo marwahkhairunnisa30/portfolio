@@ -222,9 +222,9 @@ img{display:block}
 
 /* ── Portfolio ── */
 .portfolio{background:#0b0b10}
-.portfolio__inner{padding:2.5rem 1.25rem 5rem}
+.portfolio__inner{padding:2.5rem 1.25rem 3rem}
 @media(min-width:640px){.portfolio__inner{padding-inline:2rem}}
-@media(min-width:1024px){.portfolio__inner{padding-bottom:7rem}}
+@media(min-width:1024px){.portfolio__inner{padding-bottom:4rem}}
 .portfolio__header{text-align:center;margin-bottom:3rem}
 .portfolio__h2{font-size:2.25rem;font-weight:600;letter-spacing:-.02em;width:fit-content;margin:1.25rem auto 0}
 @media(min-width:640px){.portfolio__h2{font-size:3rem}}
@@ -259,15 +259,15 @@ img{display:block}
 .portfolio__subcard--link:hover .portfolio__subcard__badge{transform:rotate(45deg) scale(1.08)}
 .portfolio__subcard__desc{font-size:.8125rem;color:rgba(236,234,245,.48);line-height:1.65;flex:1}
 @media(min-width:1024px){.portfolio__subcard__desc{font-size:.75rem;line-height:1.55}}
-.portfolio__subcard__tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.5rem}
+.portfolio__subcard__tags{display:flex;flex-wrap:nowrap;gap:.375rem;margin-top:.5rem;overflow:hidden}
 .portfolio__subcard__tag{display:inline-flex;border:1px solid rgba(236,234,245,.12);color:rgba(236,234,245,.6);border-radius:9999px;padding:.3125rem .75rem;font-size:.75rem}
 @media(min-width:1024px){.portfolio__subcard__tag{padding:.25rem .625rem;font-size:.6875rem}}
 
 /* ── Services ── */
 .services{background:#0b0b10}
-.services__inner{padding:5rem 1.25rem}
+.services__inner{padding:3rem 1.25rem}
 @media(min-width:640px){.services__inner{padding-inline:2rem}}
-@media(min-width:1024px){.services__inner{padding-block:7rem}}
+@media(min-width:1024px){.services__inner{padding-block:4rem}}
 .services__h2{margin:1.25rem 0 3rem;max-width:16ch;font-size:2.25rem;font-weight:600;letter-spacing:-.02em}
 @media(min-width:640px){.services__h2{margin-bottom:3.5rem;font-size:3rem}}
 .services__item{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
@@ -289,16 +289,16 @@ img{display:block}
 
 /* ── Stats ── */
 .stats-section{background:#0b0b10}
-.stats-section__inner{padding:0 1.25rem 5rem}
+.stats-section__inner{padding:0 1.25rem 2.5rem}
 @media(min-width:640px){.stats-section__inner{padding-inline:2rem}}
-@media(min-width:1024px){.stats-section__inner{padding-bottom:7rem}}
-.stats-panel{border-radius:2rem;background:#060609;padding:3rem 1.5rem;color:#eceaf5;border:1px solid rgba(236,234,245,.05);opacity:0;transform:translateY(40px) scale(.99);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+@media(min-width:1024px){.stats-section__inner{padding-bottom:2.5rem}}
+.stats-panel{border-radius:2rem;background:#060609;padding:2rem 1.5rem;color:#eceaf5;border:1px solid rgba(236,234,245,.05);opacity:0;transform:translateY(40px) scale(.99);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .stats-panel.revealed{opacity:1;transform:translateY(0) scale(1)}
-@media(min-width:640px){.stats-panel{padding:4rem 2rem}}
-@media(min-width:768px){.stats-panel{padding-inline:4rem}}
-.stats__h2{margin-top:1rem;max-width:20ch;font-size:1.875rem;font-weight:500;letter-spacing:-.01em}
+@media(min-width:640px){.stats-panel{padding:2.5rem 2rem}}
+@media(min-width:768px){.stats-panel{padding-inline:3rem}}
+.stats__h2{margin-top:.5rem;max-width:20ch;font-size:1.875rem;font-weight:500;letter-spacing:-.01em}
 @media(min-width:768px){.stats__h2{font-size:2.25rem}}
-.stats__grid{margin-top:3.5rem;display:grid;grid-template-columns:repeat(2,1fr);column-gap:2rem;row-gap:3rem}
+.stats__grid{margin-top:1.5rem;display:grid;grid-template-columns:repeat(2,1fr);column-gap:2rem;row-gap:3rem}
 @media(min-width:1024px){.stats__grid{grid-template-columns:repeat(4,1fr)}}
 .stats__item{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .stats__item.revealed{opacity:1;transform:translateY(0)}
@@ -309,10 +309,10 @@ img{display:block}
 
 /* ── Footer ── */
 .footer{position:relative;overflow:hidden;border-radius:2rem 2rem 0 0;background:#060609;color:#eceaf5;border-top:1px solid rgba(236,234,245,.05)}
-.footer__inner{position:relative;z-index:10;padding:5rem 1.25rem 2.5rem}
+.footer__inner{position:relative;z-index:10;padding:3.5rem 1.25rem 2rem}
 @media(min-width:640px){.footer__inner{padding-inline:2rem}}
-@media(min-width:1024px){.footer__inner{padding-top:6rem}}
-.footer__cta{display:flex;flex-direction:column;gap:2rem;border-bottom:1px solid rgba(236,234,245,.08);padding-bottom:4rem}
+@media(min-width:1024px){.footer__inner{padding-top:3.5rem}}
+.footer__cta{display:flex;flex-direction:column;gap:2rem;border-bottom:1px solid rgba(236,234,245,.08);padding-bottom:2rem}
 @media(min-width:1024px){.footer__cta{flex-direction:row;align-items:flex-end;justify-content:space-between}}
 .footer__cta-h2{max-width:16ch;font-size:2.25rem;font-weight:600;letter-spacing:-.02em}
 @media(min-width:640px){.footer__cta-h2{font-size:3rem}}
@@ -619,42 +619,8 @@ img{display:block}
         </span>
       </button>
     </div>
-    <div class="footer__cols">
-      <div>
-        <div class="footer__brand">
-          <svg width="1.25rem" height="1.25rem" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-          Marwah Khairunnisa
-        </div>
-        <p class="footer__tagline">Operations-oriented BD Lead combining pipeline management, CRM optimization, and workflow automation. Based in Jakarta — open to remote.</p>
-      </div>
-      <div>
-        <div class="footer__col-title">Connect</div>
-        <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="footer__link"><span>LinkedIn</span></a>
-        <a href="https://instagram.com/" target="_blank" rel="noopener" class="footer__link"><span>Instagram</span></a>
-        <a href="https://wa.me/6285155343042" target="_blank" rel="noopener" class="footer__link"><span>WhatsApp</span></a>
-        <a href="mailto:marwahkhairunnisa30@gmail.com" class="footer__link"><span>Email</span></a>
-      </div>
-      <div>
-        <div class="footer__col-title">Navigate</div>
-        <a href="#about" class="footer__link" onclick="event.preventDefault();scrollToSection('about')"><span>About</span></a>
-        <a href="#works" class="footer__link" onclick="event.preventDefault();scrollToSection('works')"><span>Work</span></a>
-        <a href="#services" class="footer__link" onclick="event.preventDefault();scrollToSection('services')"><span>Skills</span></a>
-        <a href="#contact" class="footer__link" onclick="event.preventDefault();openModal()"><span>Contact</span></a>
-      </div>
-      <div>
-        <div class="footer__col-title">Expertise</div>
-        <a href="#services" class="footer__link" onclick="event.preventDefault();scrollToSection('services')"><span>Business Development</span></a>
-        <a href="#services" class="footer__link" onclick="event.preventDefault();scrollToSection('services')"><span>Strategic Partnerships</span></a>
-        <a href="#services" class="footer__link" onclick="event.preventDefault();scrollToSection('services')"><span>AI & Automation</span></a>
-        <a href="#services" class="footer__link" onclick="event.preventDefault();scrollToSection('services')"><span>Team Leadership</span></a>
-      </div>
-    </div>
-    <div class="footer__legal">
-      <span>&copy; 2025 Marwah Khairunnisa. All rights reserved.</span>
-      <div class="footer__legal-links">
-        <a href="mailto:marwahkhairunnisa30@gmail.com" class="footer__legal-link"><span>Email</span></a>
-        <a href="https://linkedin.com/in/marwahkhr30" class="footer__legal-link"><span>LinkedIn</span></a>
-      </div>
+    <div class="footer__legal" style="padding-top:1.5rem;border-top:none">
+      <span>&copy; 2026 Marwah Khairunnisa. All rights reserved.</span>
     </div>
   </div>
 </footer>

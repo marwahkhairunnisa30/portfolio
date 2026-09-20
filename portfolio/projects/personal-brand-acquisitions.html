@@ -100,15 +100,15 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 .right__count{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;color:var(--accent)}
 
 /* ── Vertical marquee columns ── */
-.logo-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:.375rem;padding:.5rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
-.logo-col{display:flex;flex-direction:column;gap:.375rem}
+.logo-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;padding:.375rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
+.logo-col{display:flex;flex-direction:column;gap:.25rem}
 .logo-col--a{animation:colUp   32s linear infinite}
 .logo-col--b{animation:colDown 28s linear infinite}
 .logo-col--c{animation:colUp   38s linear infinite}
 .logo-col--d{animation:colDown 24s linear infinite}
 @keyframes colUp  {0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
 @keyframes colDown{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
-.logo-tile{aspect-ratio:3/2;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(236,234,245,.07);border-radius:var(--radius-card);padding:.625rem;flex-shrink:0;transition:border-color .25s,background .25s}
+.logo-tile{aspect-ratio:5/3;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(236,234,245,.07);border-radius:var(--radius-card);padding:.4375rem;flex-shrink:0;transition:border-color .25s,background .25s}
 .logo-tile:hover{border-color:rgba(185,43,43,.3);background:rgba(255,255,255,.09)}
 .logo-tile img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.6);transition:filter .3s}
 .logo-tile:hover img{filter:grayscale(0) brightness(1)}
