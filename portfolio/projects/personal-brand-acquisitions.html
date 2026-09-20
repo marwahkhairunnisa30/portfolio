@@ -42,7 +42,7 @@ img{display:block}
 .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.875rem}
 .eyebrow .dot{width:.3125rem;height:.3125rem;border-radius:50%;background:var(--accent);flex-shrink:0}
 
-h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin-bottom:.875rem}
+h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin-bottom:.875rem}
 
 .desc{font-size:.9rem;color:var(--muted);line-height:1.65;max-width:46ch;margin-bottom:.875rem}
 
@@ -64,14 +64,17 @@ h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;
 /* Divider */
 .divider{height:1px;background:var(--subtle);margin-bottom:.875rem;flex-shrink:0}
 
-/* Process */
-.process-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-bottom:.5rem}
-.process-steps{display:flex;flex-wrap:wrap;gap:.375rem}
-.step{display:inline-flex;align-items:center;gap:.375rem;border:1px solid var(--subtle);border-radius:.625rem;padding:.3125rem .75rem;font-size:.75rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.02)}
-.step__num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.04em}
+/* Process — milestone line */
+.process-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-bottom:.75rem}
+.process-steps{display:flex;align-items:flex-start}
+.step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;top:.6875rem;left:50%;width:100%;height:1px;background:var(--subtle);z-index:0}
+.step__dot{width:1.375rem;height:1.375rem;border-radius:50%;border:1px solid var(--subtle);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:800;color:var(--accent);background:var(--bg);position:relative;z-index:1;letter-spacing:.04em;transition:border-color .2s,background .2s}
+.step:hover .step__dot{border-color:rgba(185,43,43,.5);background:rgba(185,43,43,.08)}
+.step__label{font-size:.5rem;color:var(--muted);text-align:center;margin-top:.375rem;line-height:1.35;padding:0 .125rem}
 
 /* Factors */
-.factors-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-top:.875rem;margin-bottom:.5rem}
+.factors-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.28);margin-top:1.125rem;margin-bottom:.5rem}
 .factors{display:flex;flex-direction:column;gap:.375rem}
 .factor{display:flex;align-items:flex-start;gap:.75rem;padding:.5625rem .875rem;background:rgba(255,255,255,.025);border:1px solid var(--subtle);border-radius:var(--radius-card);transition:border-color .2s,background .2s}
 .factor:hover{border-color:rgba(185,43,43,.25);background:rgba(255,255,255,.045)}
@@ -163,13 +166,13 @@ h1{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:700;letter-spacing:-.03em;
 
     <div class="process-label">My Closing Process</div>
     <div class="process-steps">
-      <span class="step"><span class="step__num">01</span>Prospect</span>
-      <span class="step"><span class="step__num">02</span>Outreach</span>
-      <span class="step"><span class="step__num">03</span>Qualify</span>
-      <span class="step"><span class="step__num">04</span>Propose</span>
-      <span class="step"><span class="step__num">05</span>Negotiate</span>
-      <span class="step"><span class="step__num">06</span>Onboard</span>
-      <span class="step"><span class="step__num">07</span>Retain</span>
+      <div class="step"><div class="step__dot">01</div><div class="step__label">Prospect</div></div>
+      <div class="step"><div class="step__dot">02</div><div class="step__label">Outreach</div></div>
+      <div class="step"><div class="step__dot">03</div><div class="step__label">Qualify</div></div>
+      <div class="step"><div class="step__dot">04</div><div class="step__label">Propose</div></div>
+      <div class="step"><div class="step__dot">05</div><div class="step__label">Negotiate</div></div>
+      <div class="step"><div class="step__dot">06</div><div class="step__label">Onboard</div></div>
+      <div class="step"><div class="step__dot">07</div><div class="step__label">Retain</div></div>
     </div>
 
     <div class="factors-label">What closed these deals</div>
