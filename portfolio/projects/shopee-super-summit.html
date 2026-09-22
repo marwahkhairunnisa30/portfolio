@@ -70,12 +70,20 @@ a{color:inherit;text-decoration:none}
 
 /* RIGHT */
 .right{display:flex;flex-direction:column;padding:1.5rem 2rem 1.25rem;gap:1rem;overflow:hidden}
-.photo-area{flex:1;min-height:0;background:var(--surface2);border:1px solid var(--subtle);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;transition:border-color .2s}
-.photo-area:hover{border-color:rgba(185,43,43,.25)}
-.photo-area__icon{width:52px;height:52px;border-radius:12px;background:var(--subtle);display:flex;align-items:center;justify-content:center}
-.photo-area__icon svg{width:24px;height:24px;color:var(--muted)}
-.photo-area__label{font-size:.8125rem;font-weight:500;color:var(--muted);text-align:center}
-.photo-area__sub{font-size:.625rem;color:rgba(236,234,245,.22);font-style:italic;text-align:center}
+
+/* Slider */
+.slider{flex:1;min-height:0;position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface2);border:1px solid var(--subtle)}
+.slider__track{display:flex;height:100%;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.slider__slide{flex:0 0 100%;height:100%;overflow:hidden}
+.slider__slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slider__btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:2rem;height:2rem;border-radius:50%;background:rgba(11,11,16,.72);border:1px solid var(--subtle);backdrop-filter:blur(6px);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s}
+.slider__btn:hover{background:rgba(185,43,43,.18);border-color:rgba(185,43,43,.4)}
+.slider__btn--prev{left:.75rem}
+.slider__btn--next{right:.75rem}
+.slider__btn svg{width:14px;height:14px}
+.slider__dots{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;gap:.375rem;z-index:2}
+.slider__dot{width:.375rem;height:.375rem;border-radius:50%;background:rgba(236,234,245,.3);transition:background .2s,width .2s}
+.slider__dot.active{background:#eceaf5;width:.875rem;border-radius:9999px}
 </style>
 </head>
 <body>
@@ -164,15 +172,54 @@ a{color:inherit;text-decoration:none}
 
   <div class="right">
     <p class="sec-label">Photo &amp; Documentation</p>
-    <div class="photo-area">
-      <div class="photo-area__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 17l4-4 3 3 4-5 5 6"/></svg>
+    <div class="slider" id="slider">
+      <div class="slider__track" id="sliderTrack">
+        <div class="slider__slide"><img src="assets/shopee-summit-1.webp" alt="Shopee Super Summit 2024" draggable="false"></div>
+        <div class="slider__slide"><img src="assets/shopee-summit-2.webp" alt="Shopee Super Summit 2025" draggable="false"></div>
       </div>
-      <p class="photo-area__label">Photo to be added</p>
-      <p class="photo-area__sub">Documentation coming soon</p>
+      <button class="slider__btn slider__btn--prev" id="sliderPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M8.5 2.5L4 7l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="slider__btn slider__btn--next" id="sliderNext" aria-label="Next photo">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M5.5 2.5L10 7l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="slider__dots" id="sliderDots"></div>
     </div>
   </div>
 
 </main>
+<script>
+(function(){
+  const track = document.getElementById('sliderTrack');
+  const dots  = document.getElementById('sliderDots');
+  const slides = track.querySelectorAll('.slider__slide');
+  const total  = slides.length;
+  let cur = 0;
+
+  slides.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'slider__dot' + (i===0?' active':'');
+    d.addEventListener('click', () => goTo(i));
+    dots.appendChild(d);
+  });
+
+  function goTo(n) {
+    cur = (n + total) % total;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.querySelectorAll('.slider__dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  }
+
+  document.getElementById('sliderPrev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('sliderNext').addEventListener('click', () => goTo(cur + 1));
+
+  /* swipe */
+  let sx = 0;
+  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
