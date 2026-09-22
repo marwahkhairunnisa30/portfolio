@@ -1,0 +1,6 @@
+.DS_Store
+assets/.DS_Store
+*.png.backup
+node_modules/
+.env
+.env.local
