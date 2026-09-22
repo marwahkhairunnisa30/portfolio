@@ -707,15 +707,15 @@ img{display:block}
       <form class="modal__form" id="requestForm" onsubmit="handleSubmit(event)">
         <label class="modal__label">
           Name
-          <input class="modal__input" type="text" required placeholder="Your name" />
+          <input class="modal__input" type="text" name="name" required placeholder="Your name" />
         </label>
         <label class="modal__label">
           Email
-          <input class="modal__input" type="email" required placeholder="you@company.com" />
+          <input class="modal__input" type="email" name="email" required placeholder="you@company.com" />
         </label>
         <label class="modal__label">
           Message
-          <textarea class="modal__textarea" rows="4" required placeholder="Tell me about your project or how we can work together."></textarea>
+          <textarea class="modal__textarea" name="message" rows="4" required placeholder="Tell me about your project or how we can work together."></textarea>
         </label>
         <div class="modal__footer">
           <span class="modal__note">I reply within one business day.</span>
