@@ -73,12 +73,11 @@ a{color:inherit;text-decoration:none}
 
 /* RIGHT */
 .right{display:flex;flex-direction:column;padding:1.5rem 2rem 1.25rem;gap:1rem;overflow:hidden}
-.photo-area{flex:1;min-height:0;background:var(--surface2);border:1px solid var(--subtle);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;transition:border-color .2s}
-.photo-area:hover{border-color:rgba(185,43,43,.25)}
-.photo-area__icon{width:52px;height:52px;border-radius:12px;background:var(--subtle);display:flex;align-items:center;justify-content:center}
-.photo-area__icon svg{width:24px;height:24px;color:var(--muted)}
-.photo-area__label{font-size:.8125rem;font-weight:500;color:var(--muted);text-align:center}
-.photo-area__sub{font-size:.625rem;color:rgba(236,234,245,.22);font-style:italic;text-align:center}
+.photo-pan{flex:1;min-height:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--subtle);position:relative;cursor:grab;user-select:none}
+.photo-pan:active{cursor:grabbing}
+.photo-pan img{height:100%;width:auto;display:block;pointer-events:none;will-change:transform}
+.photo-pan__hint{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.375rem;padding:.3rem .75rem;background:rgba(11,11,16,.72);border:1px solid var(--subtle);border-radius:var(--radius-pill);backdrop-filter:blur(6px);font-size:.5625rem;font-weight:500;color:var(--muted);white-space:nowrap;pointer-events:none;transition:opacity .4s}
+.photo-pan__hint svg{width:12px;height:12px}
 </style>
 </head>
 <body>
@@ -181,15 +180,60 @@ a{color:inherit;text-decoration:none}
 
   <div class="right">
     <p class="sec-label">Photo &amp; Documentation</p>
-    <div class="photo-area">
-      <div class="photo-area__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 17l4-4 3 3 4-5 5 6"/></svg>
+    <div class="photo-pan" id="photoPan">
+      <img src="assets/aha-birthday-team.webp" alt="AHA 13 Birthday Celebration" id="panImg">
+      <div class="photo-pan__hint" id="panHint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M19 9l3 3-3 3M2 12h20"/></svg>
+        Drag to explore
       </div>
-      <p class="photo-area__label">Photo to be added</p>
-      <p class="photo-area__sub">Documentation coming soon</p>
     </div>
   </div>
 
 </main>
+<script>
+(function(){
+  const pan  = document.getElementById('photoPan');
+  const img  = document.getElementById('panImg');
+  const hint = document.getElementById('panHint');
+  let dragging = false, startX = 0, startLeft = 0;
+
+  function clamp(val, min, max){ return Math.min(Math.max(val, min), max); }
+
+  function maxLeft(){
+    return -(img.offsetWidth - pan.offsetWidth);
+  }
+
+  function setLeft(x){
+    img.style.transform = `translateX(${clamp(x, maxLeft(), 0)}px)`;
+  }
+
+  /* mouse */
+  pan.addEventListener('mousedown', e => {
+    dragging = true;
+    startX = e.clientX;
+    startLeft = parseFloat(img.style.transform?.replace(/[^-\d.]/g,'') || 0);
+    hint.style.opacity = '0';
+  });
+  window.addEventListener('mousemove', e => {
+    if(!dragging) return;
+    setLeft(startLeft + (e.clientX - startX));
+  });
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  /* touch */
+  pan.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startLeft = parseFloat(img.style.transform?.replace(/[^-\d.]/g,'') || 0);
+    hint.style.opacity = '0';
+  }, {passive:true});
+  pan.addEventListener('touchmove', e => {
+    setLeft(startLeft + (e.touches[0].clientX - startX));
+  }, {passive:true});
+
+  /* start centered */
+  img.addEventListener('load', () => setLeft(maxLeft() / 2));
+  if(img.complete) setLeft(maxLeft() / 2);
+})();
+</script>
 </body>
 </html>
