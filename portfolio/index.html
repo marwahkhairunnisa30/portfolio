@@ -259,7 +259,7 @@ img{display:block}
 .portfolio__subcard--link:hover .portfolio__subcard__badge{transform:rotate(45deg) scale(1.08)}
 .portfolio__subcard__desc{font-size:.8125rem;color:rgba(236,234,245,.48);line-height:1.65;flex:1}
 @media(min-width:1024px){.portfolio__subcard__desc{font-size:.75rem;line-height:1.55}}
-.portfolio__subcard__tags{display:flex;flex-wrap:nowrap;gap:.375rem;margin-top:.5rem;overflow:hidden}
+.portfolio__subcard__tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.5rem}
 .portfolio__subcard__tag{display:inline-flex;border:1px solid rgba(236,234,245,.12);color:rgba(236,234,245,.6);border-radius:9999px;padding:.3125rem .75rem;font-size:.75rem}
 @media(min-width:1024px){.portfolio__subcard__tag{padding:.25rem .625rem;font-size:.6875rem}}
 
@@ -282,7 +282,7 @@ img{display:block}
 @media(min-width:640px){.services__title{font-size:1.875rem}}
 @media(min-width:768px){.services__title{font-size:2.25rem}}
 .services__desc{display:none;max-width:20rem;font-size:.875rem;color:rgba(236,234,245,.5)}
-@media(min-width:1024px){.services__desc{display:block}}
+@media(min-width:640px){.services__desc{display:block}}
 .services__arrow{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:9999px;background:#eceaf5;color:#060609;flex-shrink:0;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 @media(min-width:640px){.services__arrow{width:3rem;height:3rem}}
 @media(hover:hover){.services__link:hover .services__arrow{transform:translateX(5px)}}
@@ -381,6 +381,56 @@ img{display:block}
 .modal__success-badge{width:3.5rem;height:3.5rem;display:grid;place-items:center;border-radius:9999px;background:#060609;color:#b92b2b;font-size:1.5rem}
 .modal__success h2{font-size:1.5rem;font-weight:600;color:#eceaf5}
 .modal__success p{max-width:32ch;font-size:.875rem;color:rgba(236,234,245,.5)}
+
+/* ── Mobile overrides (< 480px) ── */
+@media(max-width:479px){
+  /* Hero */
+  .hero__content{padding-top:5rem;padding-bottom:3rem}
+  .hero__h1{font-size:1.875rem}
+
+  /* Partners: 2-col grid instead of 4 on narrow screens */
+  .hero__partners-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Services: tighter heading + show desc on mobile via wrap layout */
+  .services__h2{font-size:1.875rem;margin-bottom:2rem}
+  .services__link{flex-wrap:wrap;row-gap:.375rem;padding-block:1.25rem}
+  .services__title{font-size:1.25rem;flex:1}
+  .services__desc{display:block;width:100%;padding-left:calc(1.75rem + 1rem);margin-top:.125rem;font-size:.8125rem}
+
+  /* Portfolio */
+  .portfolio__h2{font-size:1.875rem}
+  .portfolio__card{padding:1.25rem}
+  .portfolio__subcard{padding:1.125rem}
+
+  /* Stats: smaller numbers + tighter row gap */
+  .stats__number{font-size:2.25rem}
+  .stats__grid{row-gap:2rem}
+  .stats__label{font-size:.8125rem}
+
+  /* Footer */
+  .footer__cta-h2{font-size:1.875rem}
+  .footer__cols{padding-block:2.5rem;gap:2rem}
+
+  /* Nav menu: smaller items so full list fits without scrolling */
+  .nav-menu__item{font-size:1.75rem}
+  .nav-menu__nav{padding-inline:1.25rem}
+
+  /* About */
+  .about__h2{font-size:1.375rem}
+  .about__inner{padding:4rem 1.25rem}
+
+  /* Tag chips in portfolio sub-cards: tighter on mobile */
+  .portfolio__subcard__tag{font-size:.6875rem;padding:.25rem .625rem}
+
+  /* Services description (mobile, from the wrap layout above) */
+  .services__desc{max-width:100%}
+}
+
+/* ── Small-tablet (480px–639px): services description inline ── */
+@media(min-width:480px) and (max-width:639px){
+  .services__title{font-size:1.375rem}
+  .services__desc{display:block}
+}
 </style>
 </head>
 <body>
