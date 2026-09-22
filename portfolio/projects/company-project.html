@@ -42,7 +42,7 @@ a{color:inherit;text-decoration:none}
 
 .divider{flex-shrink:0;height:1px;background:var(--subtle)}
 
-.project-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:.875rem}
+.project-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem}
 
 .project-card{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);display:flex;flex-direction:column;overflow:hidden;transition:border-color .25s,box-shadow .25s}
 .project-card:hover{border-color:rgba(185,43,43,.35);box-shadow:0 0 0 1px rgba(185,43,43,.12),0 6px 24px rgba(0,0,0,.28)}
@@ -55,7 +55,8 @@ a{color:inherit;text-decoration:none}
 .card-view:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim)}
 .card-view svg{width:10px;height:10px}
 
-.card-body{flex:1;min-height:0;padding:.5rem 1rem;display:flex;flex-direction:column;gap:.375rem;overflow:hidden}
+.card-body{flex:1;min-height:0;padding:.5rem 1rem;display:flex;flex-direction:column;gap:.375rem;overflow:hidden;justify-content:space-between}
+.card-body>div:first-child{flex:1}
 .card-section__label{font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
 .card-section__text{font-size:.75rem;color:var(--muted);line-height:1.55}
 
@@ -191,36 +192,6 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
-    <!-- 04 -->
-    <div class="project-card">
-      <div class="card-header">
-        <div>
-          <p class="card-num">04</p>
-          <h2 class="card-title">Playbook Maker Project</h2>
-          <span class="card-role">Project Lead</span>
-        </div>
-        <a class="card-view" href="playbook-maker.html">
-          View
-          <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-      <div class="card-body">
-        <div>
-          <p class="card-section__label">Overview</p>
-          <p class="card-section__text">Built operational playbooks for recurring large-scale events to standardise processes for future editions. Developed two playbooks — Shopee Super Summit and Stock Options — covering workflows, roles, timelines, and execution checklists.</p>
-        </div>
-        <div>
-          <p class="card-section__label">Key Outcomes</p>
-          <ul class="outcome-list">
-            <li class="ph">See full details on the project page…</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="card-footer__year">2026</span>
-        <span class="status status--done"><span class="dot"></span>Completed</span>
-      </div>
-    </div>
 
   </div>
 </main>
