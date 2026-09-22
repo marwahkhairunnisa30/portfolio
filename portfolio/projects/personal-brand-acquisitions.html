@@ -94,13 +94,14 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 
 /* ── RIGHT panel ── */
 .right{display:flex;flex-direction:column;overflow:hidden;background:var(--surface)}
-@media(max-width:768px){.right{height:65vh;min-height:420px}}
+@media(max-width:768px){.right{height:70vh;min-height:460px;order:-1;border-bottom:1px solid var(--subtle)}}
 .right__header{padding:1rem 1.5rem;border-bottom:1px solid var(--subtle);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .right__title{font-size:.875rem;font-weight:600;letter-spacing:-.01em}
 .right__count{font-size:1.375rem;font-weight:700;letter-spacing:-.03em;color:var(--accent)}
 
 /* ── Vertical marquee columns ── */
-.logo-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;padding:.375rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%)}
+.logo-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;padding:.375rem;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 7%,#000 93%,transparent 100%);transform:translateZ(0)}
+@media(max-width:768px){.logo-columns{-webkit-mask-image:none;mask-image:none}}
 .logo-col{display:flex;flex-direction:column;gap:.25rem}
 .logo-col--a{animation:colUp   32s linear infinite}
 .logo-col--b{animation:colDown 28s linear infinite}
