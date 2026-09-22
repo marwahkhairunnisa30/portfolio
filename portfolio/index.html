@@ -844,7 +844,12 @@ function exitLoader() {
     loader.remove();
     introReady = true;
     startScroll();
-    revealHero();
+    const hash = window.location.hash.slice(1);
+    if (hash && document.getElementById(hash)) {
+      setTimeout(() => scrollToSection(hash), 50);
+    } else {
+      revealHero();
+    }
   }, 700);
 }
 
