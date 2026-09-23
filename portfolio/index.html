@@ -264,6 +264,8 @@ img{display:block}
 .portfolio__subcard__tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.5rem}
 .portfolio__subcard__tag{display:inline-flex;border:1px solid rgba(236,234,245,.12);color:rgba(236,234,245,.6);border-radius:9999px;padding:.3125rem .75rem;font-size:.75rem}
 @media(min-width:1024px){.portfolio__subcard__tag{padding:.25rem .625rem;font-size:.6875rem}}
+.portfolio__subcard--coming-soon{opacity:.5;cursor:default;pointer-events:none}
+.coming-soon-pill{display:inline-flex;align-items:center;gap:.25rem;background:rgba(236,234,245,.07);border:1px solid rgba(236,234,245,.1);border-radius:9999px;padding:.25rem .625rem;font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.4)}
 
 /* ── Services ── */
 .services{background:#0b0b10}
@@ -1028,21 +1030,35 @@ const megaCards = [
   {
     title: 'Personal Project',
     meta: 'Outside of Work · Ongoing',
-    desc: 'Digital builds and real-world pursuits beyond the 9-to-5.',
+    desc: 'Tools I build, things I explore, and experiments that scratch my own itch.',
     subs: [
       {
-        name: 'Digital Project',
-        category: 'Digital · Ongoing',
-        desc: 'Personal builds and experiments — portfolio, automation, and side projects.',
-        tags: ['Portfolio','Design','Personal Automation'],
+        name: 'OutreachAI',
+        category: 'AI Tool · 2026',
+        desc: 'BD cold outreach generator — input a brand, get 3 human-sounding pitch variations tailored to approach type and tone.',
+        tags: ['Claude API','BD Automation','Vibe Coding'],
         link: null
       },
       {
-        name: 'Activities',
-        category: 'Personal · Ongoing',
-        desc: 'Communities, hobbies, and everything that keeps the creative side alive.',
-        tags: ['Community','Hobbies','Personal Growth'],
-        link: null
+        name: 'Coming Soon',
+        category: 'Digital · 2026',
+        desc: 'Next build in progress.',
+        tags: [],
+        coming_soon: true
+      },
+      {
+        name: 'Coming Soon',
+        category: 'Digital · 2026',
+        desc: 'Next build in progress.',
+        tags: [],
+        coming_soon: true
+      },
+      {
+        name: 'Coming Soon',
+        category: 'Personal · 2026',
+        desc: 'Next build in progress.',
+        tags: [],
+        coming_soon: true
       }
     ]
   }
@@ -1058,6 +1074,16 @@ function buildPortfolio() {
     li.style.transitionDelay = (cardIdx * 120) + 'ms';
 
     const subCardsHTML = card.subs.map(s => {
+      if (s.coming_soon) {
+        return `<div class="portfolio__subcard portfolio__subcard--coming-soon">
+          <div class="portfolio__subcard__cat">${s.category}</div>
+          <div class="portfolio__subcard__head">
+            <div class="portfolio__subcard__title">${s.name}</div>
+            <span class="coming-soon-pill">Soon</span>
+          </div>
+          <p class="portfolio__subcard__desc">${s.desc}</p>
+        </div>`;
+      }
       const tag = s.link ? 'a' : 'div';
       const href = s.link ? `href="${s.link}"` : '';
       const linkClass = s.link ? ' portfolio__subcard--link' : '';
