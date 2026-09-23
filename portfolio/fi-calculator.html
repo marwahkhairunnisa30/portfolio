@@ -6,492 +6,379 @@
 <title>FI Calculator — Marwah K</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
     --bg: #0b0b10;
     --bg2: #060609;
     --surface: #18181b;
-    --surface2: #1f1f23;
-    --border: rgba(236,234,245,.12);
-    --border-dim: rgba(236,234,245,.07);
+    --surface2: #111115;
+    --border: rgba(236,234,245,.1);
+    --border-dim: rgba(236,234,245,.06);
     --text: #eceaf5;
     --muted: rgba(236,234,245,.45);
-    --muted2: rgba(236,234,245,.3);
+    --muted2: rgba(236,234,245,.28);
     --accent: #a78bfa;
-    --accent-dim: rgba(167,139,250,.15);
+    --accent-glow: rgba(167,139,250,.18);
     --green: #34d399;
-    --green-dim: rgba(52,211,153,.12);
-    --input-bg: #0e0e13;
-    --radius: 14px;
-    --radius-sm: 10px;
+    --green-glow: rgba(52,211,153,.15);
+    --input-bg: #0d0d12;
+    --r: 14px;
+    --r-sm: 10px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Onest', sans-serif;
     font-size: 15px;
     line-height: 1.6;
     min-height: 100vh;
-    padding: 0 0 80px;
+    padding-bottom: 80px;
   }
 
-  /* Nav */
+  /* ── Nav ── */
   .nav {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    padding: 18px 24px;
+    display: flex; align-items: center; gap: .625rem;
+    padding: 18px 20px;
     border-bottom: 1px solid var(--border-dim);
   }
-  .nav__back {
-    display: inline-flex;
-    align-items: center;
-    gap: .375rem;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: .8rem;
-    font-weight: 500;
+  .nav a {
+    display: inline-flex; align-items: center; gap: .35rem;
+    color: var(--muted); text-decoration: none; font-size: .8rem; font-weight: 500;
     transition: color .15s;
   }
-  .nav__back:hover { color: var(--text); }
-  .nav__back svg { width: 13px; height: 13px; }
-  .nav__sep { color: var(--border); font-size: .8rem; }
-  .nav__title { font-size: .8rem; color: var(--muted2); font-weight: 500; }
+  .nav a:hover { color: var(--text); }
+  .nav a svg { width: 12px; height: 12px; }
+  .nav__sep { color: var(--border); font-size: .75rem; }
+  .nav__cur { font-size: .8rem; color: var(--muted2); font-weight: 500; }
 
-  /* Layout */
-  .wrapper {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
+  /* ── Wrapper ── */
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
 
-  /* Header */
-  .header {
-    padding: 44px 0 28px;
+  /* ── Currency toggle ── */
+  .top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0 0;
   }
-  .header__top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+  .eyebrow {
+    font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--accent);
   }
-  .header__eyebrow {
-    font-size: .72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .header__title {
-    font-size: 1.9rem;
-    font-weight: 700;
-    letter-spacing: -.03em;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .header__desc {
-    color: var(--muted);
-    font-size: .875rem;
-  }
-
-  /* Currency toggle */
-  .currency-toggle {
+  .toggle {
     display: inline-flex;
-    background: var(--surface);
+    background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 3px;
-    gap: 2px;
-    flex-shrink: 0;
-    margin-top: 4px;
+    border-radius: 999px;
+    padding: 3px; gap: 2px;
   }
-  .currency-btn {
-    background: none;
-    border: none;
-    border-radius: 7px;
+  .toggle-btn {
+    background: none; border: none; border-radius: 999px;
+    color: var(--muted); font-family: inherit;
+    font-size: .75rem; font-weight: 700;
+    padding: 5px 16px; cursor: pointer;
+    transition: background .2s, color .2s;
+    letter-spacing: .03em;
+  }
+  .toggle-btn.on { background: var(--accent); color: #fff; }
+  .toggle-btn:not(.on):hover { color: var(--text); }
+
+  /* ── Hero result ── */
+  .hero {
+    padding: 36px 0 32px;
+    text-align: center;
+    position: relative;
+  }
+  .hero__label {
+    font-size: .75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .09em; color: var(--muted); margin-bottom: 10px;
+  }
+  .hero__number {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 40%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    transition: opacity .2s;
+  }
+  .hero__unit {
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--muted);
-    font-family: inherit;
-    font-size: .78rem;
-    font-weight: 600;
-    padding: 6px 14px;
-    cursor: pointer;
-    transition: background .15s, color .15s;
-    letter-spacing: .02em;
+    letter-spacing: -.02em;
+    margin-bottom: 14px;
   }
-  .currency-btn.active {
-    background: rgba(167,139,250,.15);
-    color: var(--accent);
-  }
-  .currency-btn:not(.active):hover {
-    color: var(--text);
-    background: rgba(236,234,245,.04);
-  }
-
-  /* Card */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px;
-    margin-bottom: 12px;
-  }
-  .card__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
-  }
-  .card__title {
-    font-size: .72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--muted2);
-  }
-
-  /* Grid */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 560px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .header__title { font-size: 1.5rem; }
-  }
-
-  /* Input fields */
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .field label {
-    font-size: .78rem;
+  .hero__insight {
+    font-size: .9rem;
     color: var(--muted);
     font-weight: 500;
+    min-height: 1.5em;
   }
-  .field__input-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  .field__prefix {
+  .hero__insight strong { color: var(--text); font-weight: 700; }
+  .hero__insight .green { color: var(--green); font-weight: 700; }
+  .hero__insight .accent { color: var(--accent); font-weight: 700; }
+
+  /* glow blob behind number */
+  .hero::before {
+    content: '';
     position: absolute;
-    left: 12px;
-    color: var(--muted2);
-    font-size: .875rem;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; height: 200px;
+    background: radial-gradient(ellipse, rgba(139,92,246,.12) 0%, transparent 70%);
     pointer-events: none;
-    font-weight: 600;
-    white-space: nowrap;
+    border-radius: 50%;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin-bottom: 28px;
+  }
+
+  /* ── Inputs ── */
+  .inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 520px) { .inputs-grid { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    font-size: .75rem; color: var(--muted); font-weight: 500;
+  }
+  .field__wrap { position: relative; }
+  .field__pfx {
+    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+    color: var(--muted2); font-size: .85rem; font-weight: 600;
+    pointer-events: none; white-space: nowrap;
   }
   .field input[type="number"] {
     width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--border-dim);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-size: .9rem;
-    font-family: inherit;
-    font-weight: 500;
-    padding: 10px 12px 10px 0;
-    padding-left: var(--prefix-pad, 28px);
-    outline: none;
-    transition: border-color .15s;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text); font-family: inherit; font-size: .9rem; font-weight: 600;
+    padding: 10px 12px;
+    padding-left: var(--pl, 26px);
+    outline: none; transition: border-color .15s;
     -moz-appearance: textfield;
   }
   .field input[type="number"]::-webkit-outer-spin-button,
   .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-  .field input[type="number"]:focus {
-    border-color: rgba(167,139,250,.4);
-  }
-  .field input[type="range"] {
-    width: 100%;
-    accent-color: var(--accent);
-    cursor: pointer;
-    height: 4px;
-  }
-  .field__range-val {
-    font-size: .875rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-align: right;
-    min-width: 40px;
-  }
-  .field__range-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .field input[type="number"]:focus { border-color: rgba(167,139,250,.5); }
 
-  /* Results */
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 18px;
+  /* return rate slider */
+  .return-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 28px;
   }
-  @media (max-width: 480px) {
-    .results-grid { grid-template-columns: 1fr 1fr; }
-  }
+  .return-card label { font-size: .75rem; color: var(--muted); font-weight: 500; white-space: nowrap; }
+  .return-card input[type="range"] { flex: 1; accent-color: var(--accent); cursor: pointer; height: 4px; }
+  .return-val { font-size: .9rem; font-weight: 700; color: var(--accent); min-width: 34px; text-align: right; }
+
+  /* ── Stats row ── */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+  @media (max-width: 400px) { .stats { grid-template-columns: 1fr 1fr; } }
 
   .stat {
-    background: var(--input-bg);
+    background: var(--surface2);
     border: 1px solid var(--border-dim);
-    border-radius: var(--radius-sm);
-    padding: 14px;
+    border-radius: var(--r-sm);
+    padding: 14px 12px;
   }
-  .stat__label {
-    font-size: .68rem;
-    color: var(--muted2);
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    font-weight: 600;
-    margin-bottom: 5px;
+  .stat__lbl {
+    font-size: .65rem; color: var(--muted2); text-transform: uppercase;
+    letter-spacing: .07em; font-weight: 700; margin-bottom: 4px;
   }
-  .stat__value {
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -.025em;
+  .stat__val {
+    font-size: 1.25rem; font-weight: 800; letter-spacing: -.025em;
     color: var(--text);
-    line-height: 1.1;
   }
-  .stat__value.accent { color: var(--accent); }
-  .stat__value.green { color: var(--green); }
-  .stat__sub {
-    font-size: .7rem;
-    color: var(--muted);
-    margin-top: 3px;
-    font-weight: 500;
-  }
+  .stat__val.a { color: var(--accent); }
+  .stat__val.g { color: var(--green); }
+  .stat__sub { font-size: .68rem; color: var(--muted); margin-top: 2px; }
 
-  /* Progress bar */
-  .progress-wrap { margin-bottom: 4px; }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: .75rem;
-    color: var(--muted);
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-  .progress-bar {
-    height: 5px;
-    background: var(--input-bg);
-    border-radius: 999px;
-    overflow: hidden;
+  /* ── Progress bar ── */
+  .prog-card {
+    background: var(--surface2);
     border: 1px solid var(--border-dim);
+    border-radius: var(--r-sm);
+    padding: 14px 16px;
+    margin-bottom: 12px;
   }
-  .progress-fill {
+  .prog-row { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+  .prog-track { height: 5px; background: var(--bg2); border-radius: 999px; overflow: hidden; }
+  .prog-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--green));
     border-radius: 999px;
-    transition: width .4s cubic-bezier(.22,1,.36,1);
-    min-width: 0;
+    transition: width .5s cubic-bezier(.22,1,.36,1);
   }
 
-  /* Chart */
-  .chart-wrap {
-    position: relative;
-    height: 230px;
+  /* ── Chart ── */
+  .chart-card {
+    background: var(--surface2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--r);
+    padding: 18px;
   }
+  .chart-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted2); margin-bottom: 14px; }
+  .chart-wrap { height: 220px; position: relative; }
 
-  /* Empty state */
-  .msg {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--muted);
-    font-size: .85rem;
-  }
-  .msg strong {
-    display: block;
-    font-size: .95rem;
-    color: var(--text);
-    margin-bottom: 5px;
-    font-weight: 600;
-  }
+  /* ── Empty ── */
+  .msg { text-align: center; padding: 32px; color: var(--muted); font-size: .85rem; }
+  .msg b { display: block; color: var(--text); margin-bottom: 4px; font-size: .95rem; }
 
-  /* Footer note */
-  .footnote {
-    font-size: .72rem;
-    color: var(--muted2);
-    text-align: center;
-    margin-top: 20px;
-    line-height: 1.7;
-  }
+  .footnote { font-size: .7rem; color: var(--muted2); text-align: center; margin-top: 20px; line-height: 1.8; }
+
+  /* animate number */
+  @keyframes pop { 0%{transform:scale(.92)} 60%{transform:scale(1.03)} 100%{transform:scale(1)} }
+  .hero__number.pop { animation: pop .3s cubic-bezier(.22,1,.36,1); }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="/" class="nav__back">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M10 12L6 8l4-4"/>
-    </svg>
+  <a href="/">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 12L6 8l4-4"/></svg>
     marwah.dev
   </a>
   <span class="nav__sep">/</span>
-  <span class="nav__title">FI Calculator</span>
+  <span class="nav__cur">FI Calculator</span>
 </nav>
 
-<div class="wrapper">
-  <div class="header">
-    <div class="header__top">
-      <div>
-        <div class="header__eyebrow">Personal Finance</div>
-        <h1 class="header__title">Financial Independence<br>Calculator</h1>
-        <p class="header__desc">Find out when you could stop working — based on your savings rate and the 4% rule.</p>
-      </div>
-      <div class="currency-toggle">
-        <button class="currency-btn active" id="btnUSD" onclick="setCurrency('USD')">USD</button>
-        <button class="currency-btn" id="btnIDR" onclick="setCurrency('IDR')">IDR</button>
-      </div>
+<div class="wrap">
+  <div class="top-bar">
+    <span class="eyebrow">Personal Finance</span>
+    <div class="toggle">
+      <button class="toggle-btn on" id="btnUSD" onclick="setCurrency('USD')">USD</button>
+      <button class="toggle-btn" id="btnIDR" onclick="setCurrency('IDR')">IDR</button>
     </div>
   </div>
+
+  <!-- Hero result -->
+  <div class="hero">
+    <div class="hero__label">Years to Financial Independence</div>
+    <div class="hero__number" id="heroNum">19</div>
+    <div class="hero__unit">years</div>
+    <div class="hero__insight" id="heroInsight"></div>
+  </div>
+
+  <div class="divider"></div>
 
   <!-- Inputs -->
-  <div class="card">
-    <div class="card__title">Your Numbers</div>
-    <div class="grid-2">
-      <div class="field">
-        <label>Monthly Income (after tax)</label>
-        <div class="field__input-wrap">
-          <span class="field__prefix" id="pfxIncome">$</span>
-          <input type="number" id="income" value="5000" min="0" step="100">
-        </div>
+  <div class="inputs-grid">
+    <div class="field">
+      <label>Monthly Income (after tax)</label>
+      <div class="field__wrap">
+        <span class="field__pfx" id="pfxA">$</span>
+        <input type="number" id="income" value="5000" min="0" step="100" style="--pl:26px">
       </div>
-      <div class="field">
-        <label>Monthly Expenses</label>
-        <div class="field__input-wrap">
-          <span class="field__prefix" id="pfxExpenses">$</span>
-          <input type="number" id="expenses" value="3000" min="0" step="100">
-        </div>
+    </div>
+    <div class="field">
+      <label>Monthly Expenses</label>
+      <div class="field__wrap">
+        <span class="field__pfx" id="pfxB">$</span>
+        <input type="number" id="expenses" value="3000" min="0" step="100" style="--pl:26px">
       </div>
-      <div class="field">
-        <label>Current Savings / Investments</label>
-        <div class="field__input-wrap">
-          <span class="field__prefix" id="pfxSavings">$</span>
-          <input type="number" id="savings" value="20000" min="0" step="1000">
-        </div>
-      </div>
-      <div class="field">
-        <label>Expected Annual Return</label>
-        <div class="field__range-row">
-          <input type="range" id="returnRate" min="1" max="15" step="0.5" value="7">
-          <span class="field__range-val" id="returnRateLabel">7%</span>
-        </div>
+    </div>
+    <div class="field">
+      <label>Current Savings / Investments</label>
+      <div class="field__wrap">
+        <span class="field__pfx" id="pfxC">$</span>
+        <input type="number" id="savings" value="20000" min="0" step="1000" style="--pl:26px">
       </div>
     </div>
   </div>
 
-  <!-- Results -->
-  <div class="card" id="resultsCard">
-    <div class="card__title">Results</div>
-    <div id="resultsContent"></div>
+  <div class="return-card">
+    <label>Expected Annual Return</label>
+    <input type="range" id="returnRate" min="1" max="15" step="0.5" value="7">
+    <span class="return-val" id="returnLbl">7%</span>
   </div>
+
+  <!-- Stats -->
+  <div id="statsArea"></div>
 
   <!-- Chart -->
-  <div class="card">
-    <div class="card__title">Net Worth Trajectory</div>
-    <div class="chart-wrap">
-      <canvas id="fiChart"></canvas>
-    </div>
+  <div class="chart-card">
+    <div class="chart-title">Net Worth Trajectory</div>
+    <div class="chart-wrap"><canvas id="chart"></canvas></div>
   </div>
 
-  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings and a fixed annual return.<br>This is not financial advice.</p>
+  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings & a fixed return rate.<br>Not financial advice.</p>
 </div>
 
 <script>
   let chart = null;
   let currency = 'USD';
+  let lastYears = null;
 
-  const DEFAULTS = {
-    USD: { income: 5000,      expenses: 3000,     savings: 20000 },
-    IDR: { income: 15000000,  expenses: 8000000,  savings: 50000000 }
+  const DEFS = {
+    USD: { income: 5000,     expenses: 3000,    savings: 20000,    step: [100, 100, 1000],    pl: '26px' },
+    IDR: { income: 15000000, expenses: 8000000, savings: 50000000, step: [500000, 500000, 5000000], pl: '36px' }
   };
 
-  const CURRENCY_META = {
-    USD: { symbol: '$', symbolWidth: 18, prefixPad: '26px', step: { income: 100, expenses: 100, savings: 1000 } },
-    IDR: { symbol: 'Rp', symbolWidth: 26, prefixPad: '36px', step: { income: 500000, expenses: 500000, savings: 5000000 } }
-  };
+  function sym() { return currency === 'IDR' ? 'Rp ' : '$'; }
 
-  function fmtNum(n) {
+  function fmt(n) {
     if (currency === 'IDR') {
-      if (n >= 1e12)  return 'Rp ' + (n / 1e12).toFixed(1).replace(/\.0$/, '') + 'T';
-      if (n >= 1e9)   return 'Rp ' + (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'M';
-      if (n >= 1e6)   return 'Rp ' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'Jt';
-      if (n >= 1e3)   return 'Rp ' + (n / 1e3).toFixed(0) + 'K';
-      return 'Rp ' + Math.round(n).toLocaleString();
+      if (n >= 1e12) return 'Rp ' + (n/1e12).toFixed(1).replace(/\.0$/,'') + 'T';
+      if (n >= 1e9)  return 'Rp ' + (n/1e9).toFixed(1).replace(/\.0$/,'') + 'M';
+      if (n >= 1e6)  return 'Rp ' + (n/1e6).toFixed(1).replace(/\.0$/,'') + 'Jt';
+      if (n >= 1e3)  return 'Rp ' + (n/1e3).toFixed(0) + 'K';
+      return 'Rp ' + Math.round(n);
     }
-    if (n >= 1e6) return '$' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
-    if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
-    return '$' + Math.round(n).toLocaleString();
+    if (n >= 1e6) return '$' + (n/1e6).toFixed(1).replace(/\.0$/,'') + 'M';
+    if (n >= 1e3) return '$' + (n/1e3).toFixed(0) + 'K';
+    return '$' + Math.round(n);
   }
 
-  function fmtMonthly(n) {
+  function fmtMo(n) {
     if (currency === 'IDR') {
-      if (n >= 1e6) return 'Rp ' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'Jt/mo';
-      if (n >= 1e3) return 'Rp ' + (n / 1e3).toFixed(0) + 'K/mo';
-      return 'Rp ' + Math.round(n).toLocaleString() + '/mo';
+      if (n >= 1e6) return 'Rp ' + (n/1e6).toFixed(1).replace(/\.0$/,'') + 'Jt';
+      if (n >= 1e3) return 'Rp ' + (n/1e3).toFixed(0) + 'K';
+      return 'Rp ' + Math.round(n);
     }
-    if (n >= 1e3) return '$' + (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K/mo';
-    return '$' + Math.round(n) + '/mo';
+    if (n >= 1e3) return '$' + (n/1e3).toFixed(1).replace(/\.0$/,'') + 'K';
+    return '$' + Math.round(n);
   }
 
-  function setCurrency(cur) {
-    currency = cur;
-
-    document.getElementById('btnUSD').classList.toggle('active', cur === 'USD');
-    document.getElementById('btnIDR').classList.toggle('active', cur === 'IDR');
-
-    const meta = CURRENCY_META[cur];
-    const def = DEFAULTS[cur];
-
-    ['Income','Expenses','Savings'].forEach(f => {
-      const el = document.getElementById('pfx' + f);
-      el.textContent = meta.symbol;
-    });
-
-    // Update padding on inputs based on prefix width
-    document.querySelectorAll('.field input[type="number"]').forEach(inp => {
-      inp.style.paddingLeft = meta.prefixPad;
-    });
-
-    // Update steps and default values
-    document.getElementById('income').step = meta.step.income;
-    document.getElementById('expenses').step = meta.step.expenses;
-    document.getElementById('savings').step = meta.step.savings;
-
-    document.getElementById('income').value = def.income;
-    document.getElementById('expenses').value = def.expenses;
-    document.getElementById('savings').value = def.savings;
-
-    calculate();
-  }
-
-  function yearsToFI(pv, pmt, fv, r) {
+  function yrToFI(pv, pmt, fv, r) {
     if (pmt <= 0 && pv >= fv) return 0;
     if (pmt <= 0) return Infinity;
     let lo = 0, hi = 200;
     for (let i = 0; i < 100; i++) {
-      const mid = (lo + hi) / 2;
-      const factor = Math.pow(1 + r, mid);
-      const nw = pv * factor + pmt * (factor - 1) / r;
-      if (nw < fv) lo = mid; else hi = mid;
+      const m = (lo + hi) / 2;
+      const f = Math.pow(1+r, m);
+      pv*f + pmt*(f-1)/r < fv ? (lo = m) : (hi = m);
     }
-    return (lo + hi) / 2;
+    return (lo+hi)/2;
   }
 
-  function netWorthAt(pv, pmt, r, n) {
-    const factor = Math.pow(1 + r, n);
-    return pv * factor + pmt * (factor - 1) / r;
+  function nwAt(pv, pmt, r, n) {
+    const f = Math.pow(1+r, n);
+    return pv*f + pmt*(f-1)/r;
+  }
+
+  function animatePop() {
+    const el = document.getElementById('heroNum');
+    el.classList.remove('pop');
+    void el.offsetWidth;
+    el.classList.add('pop');
   }
 
   function calculate() {
@@ -501,74 +388,78 @@
     const rPct     = parseFloat(document.getElementById('returnRate').value) || 7;
     const r = rPct / 100;
 
-    const monthly_savings = income - expenses;
-    const annual_savings  = monthly_savings * 12;
-    const savings_rate    = income > 0 ? (monthly_savings / income) * 100 : 0;
-    const fi_number       = expenses * 12 * 25;
-    const progress_pct    = fi_number > 0 ? Math.min((savings / fi_number) * 100, 100) : 0;
+    const mo_save    = income - expenses;
+    const yr_save    = mo_save * 12;
+    const sv_rate    = income > 0 ? (mo_save / income) * 100 : 0;
+    const fi_num     = expenses * 12 * 25;
+    const prog       = fi_num > 0 ? Math.min((savings / fi_num) * 100, 100) : 0;
+    const years      = yrToFI(savings, yr_save, fi_num, r);
+    const targetYear = new Date().getFullYear() + (years === Infinity ? 0 : Math.ceil(years));
 
-    const resultsContent = document.getElementById('resultsContent');
+    // Hero number
+    const heroNum = document.getElementById('heroNum');
+    const heroInsight = document.getElementById('heroInsight');
 
-    if (income <= 0 || expenses >= income) {
-      resultsContent.innerHTML = `
-        <div class="msg">
-          <strong>Not enough to save</strong>
-          Your expenses meet or exceed your income. Reduce expenses or increase income to start the FI journey.
-        </div>`;
+    if (income <= 0 || mo_save <= 0) {
+      heroNum.textContent = '—';
+      heroInsight.innerHTML = '<span>Expenses meet or exceed income — adjust your numbers.</span>';
+      document.getElementById('statsArea').innerHTML = '';
       renderChart([], [], 0);
       return;
     }
 
-    const years = yearsToFI(savings, annual_savings, fi_number, r);
-    const timeLabel = years === Infinity ? '—' : years < 1 ? 'Already there!' : `${Math.ceil(years)} yrs`;
+    const yrsLabel = years < 1 ? '<1' : Math.ceil(years).toString();
+    if (yrsLabel !== lastYears) { animatePop(); lastYears = yrsLabel; }
+    heroNum.textContent = yrsLabel;
 
-    resultsContent.innerHTML = `
-      <div class="results-grid">
+    // Insight line
+    const rateColor = sv_rate >= 50 ? 'green' : 'accent';
+    if (years < 1) {
+      heroInsight.innerHTML = `You're <strong>already financially independent</strong>. Your savings cover 25× annual expenses.`;
+    } else {
+      heroInsight.innerHTML = `Saving <span class="${rateColor}">${sv_rate.toFixed(0)}%</span> of income → reach <strong>${fmt(fi_num)}</strong> by <strong>${targetYear}</strong>`;
+    }
+
+    // Stats
+    document.getElementById('statsArea').innerHTML = `
+      <div class="stats">
         <div class="stat">
-          <div class="stat__label">Savings Rate</div>
-          <div class="stat__value ${savings_rate >= 25 ? 'accent' : ''}">${savings_rate.toFixed(0)}%</div>
-          <div class="stat__sub">${fmtMonthly(monthly_savings)} saved</div>
+          <div class="stat__lbl">Savings Rate</div>
+          <div class="stat__val ${sv_rate >= 25 ? 'a' : ''}">${sv_rate.toFixed(0)}%</div>
+          <div class="stat__sub">${fmtMo(mo_save)}/month</div>
         </div>
         <div class="stat">
-          <div class="stat__label">FI Number</div>
-          <div class="stat__value">${fmtNum(fi_number)}</div>
-          <div class="stat__sub">25× annual expenses</div>
+          <div class="stat__lbl">FI Number</div>
+          <div class="stat__val">${fmt(fi_num)}</div>
+          <div class="stat__sub">25× annual spend</div>
         </div>
         <div class="stat">
-          <div class="stat__label">Time to FI</div>
-          <div class="stat__value ${years !== Infinity && years <= 15 ? 'green' : 'accent'}">${timeLabel}</div>
-          <div class="stat__sub">at ${rPct}% annual return</div>
+          <div class="stat__lbl">Already saved</div>
+          <div class="stat__val g">${prog.toFixed(1)}%</div>
+          <div class="stat__sub">of FI number</div>
         </div>
       </div>
-      <div class="progress-wrap">
-        <div class="progress-label">
-          <span>Current progress</span>
-          <span>${progress_pct.toFixed(1)}% of FI number</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${progress_pct}%"></div>
-        </div>
+      <div class="prog-card">
+        <div class="prog-row"><span>Progress toward FI</span><span>${fmt(savings)} of ${fmt(fi_num)}</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div>
       </div>
     `;
 
-    const maxYears = years === Infinity ? 40 : Math.min(Math.ceil(years) + 5, 60);
+    // Chart data
+    const max = years === Infinity ? 40 : Math.min(Math.ceil(years) + 5, 60);
     const labels = [], data = [];
-    for (let y = 0; y <= maxYears; y++) {
-      labels.push(`Y${y}`);
-      data.push(netWorthAt(savings, annual_savings, r, y));
-    }
-
-    renderChart(labels, data, fi_number);
+    for (let y = 0; y <= max; y++) { labels.push(`Y${y}`); data.push(nwAt(savings, yr_save, r, y)); }
+    renderChart(labels, data, fi_num);
   }
 
-  function renderChart(labels, data, fiNumber) {
-    const ctx = document.getElementById('fiChart').getContext('2d');
+  function renderChart(labels, data, fiNum) {
+    const ctx = document.getElementById('chart').getContext('2d');
     if (chart) { chart.destroy(); chart = null; }
     if (!labels.length) return;
 
-    const crossover = data.findIndex(v => v >= fiNumber);
-    const pointRadius = data.map((_, i) => i === crossover ? 6 : 0);
-    const pointColors = data.map(v => v >= fiNumber ? '#34d399' : '#a78bfa');
+    const cross = data.findIndex(v => v >= fiNum);
+    const ptR = data.map((_,i) => i === cross ? 6 : 0);
+    const ptC = data.map(v => v >= fiNum ? '#34d399' : '#a78bfa');
 
     chart = new Chart(ctx, {
       type: 'line',
@@ -576,91 +467,73 @@
         labels,
         datasets: [
           {
-            label: 'Net Worth',
-            data,
+            label: 'Net Worth', data,
             borderColor: '#a78bfa',
-            backgroundColor: 'rgba(167,139,250,0.07)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.35,
-            pointRadius,
-            pointBackgroundColor: pointColors,
-            pointBorderColor: pointColors,
+            backgroundColor: (ctx) => {
+              const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 220);
+              g.addColorStop(0, 'rgba(167,139,250,.18)');
+              g.addColorStop(1, 'rgba(167,139,250,.01)');
+              return g;
+            },
+            borderWidth: 2, fill: true, tension: 0.38,
+            pointRadius: ptR, pointBackgroundColor: ptC, pointBorderColor: ptC,
           },
           {
-            label: 'FI Number',
-            data: labels.map(() => fiNumber),
-            borderColor: 'rgba(52,211,153,0.35)',
-            borderWidth: 1.5,
-            borderDash: [5, 5],
-            fill: false,
-            pointRadius: 0,
+            label: 'FI Number', data: labels.map(() => fiNum),
+            borderColor: 'rgba(52,211,153,.3)',
+            borderWidth: 1.5, borderDash: [5,4],
+            fill: false, pointRadius: 0,
           }
         ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: {
-            labels: {
-              color: 'rgba(236,234,245,0.4)',
-              font: { size: 11, family: 'Onest' },
-              boxWidth: 12,
-              padding: 16,
-            }
-          },
+          legend: { labels: { color: 'rgba(236,234,245,.35)', font: { size: 11, family: 'Onest' }, boxWidth: 12, padding: 14 } },
           tooltip: {
-            backgroundColor: '#18181b',
-            borderColor: 'rgba(236,234,245,0.12)',
-            borderWidth: 1,
-            titleColor: '#eceaf5',
-            bodyColor: 'rgba(236,234,245,0.55)',
+            backgroundColor: '#18181b', borderColor: 'rgba(236,234,245,.1)',
+            borderWidth: 1, titleColor: '#eceaf5', bodyColor: 'rgba(236,234,245,.5)',
             padding: 10,
-            callbacks: {
-              label: ctx => ` ${ctx.dataset.label}: ${fmtNum(ctx.parsed.y)}`
-            }
+            callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.parsed.y)}` }
           }
         },
         scales: {
-          x: {
-            ticks: {
-              color: 'rgba(236,234,245,0.25)',
-              font: { size: 10, family: 'Onest' },
-              maxTicksLimit: 10,
-            },
-            grid: { color: 'rgba(255,255,255,0.04)' },
-          },
-          y: {
-            ticks: {
-              color: 'rgba(236,234,245,0.25)',
-              font: { size: 10, family: 'Onest' },
-              callback: v => fmtNum(v),
-            },
-            grid: { color: 'rgba(255,255,255,0.04)' },
-          }
+          x: { ticks: { color: 'rgba(236,234,245,.22)', font: { size: 10 }, maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,.04)' } },
+          y: { ticks: { color: 'rgba(236,234,245,.22)', font: { size: 10 }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,.04)' } }
         }
       }
     });
   }
 
-  // Wire up inputs
-  ['income','expenses','savings'].forEach(id => {
-    document.getElementById(id).addEventListener('input', calculate);
-  });
+  function setCurrency(cur) {
+    currency = cur;
+    document.getElementById('btnUSD').classList.toggle('on', cur === 'USD');
+    document.getElementById('btnIDR').classList.toggle('on', cur === 'IDR');
 
-  const rSlider = document.getElementById('returnRate');
-  const rLabel  = document.getElementById('returnRateLabel');
-  rSlider.addEventListener('input', () => {
-    rLabel.textContent = rSlider.value + '%';
+    const d = DEFS[cur];
+    const pfx = cur === 'IDR' ? 'Rp' : '$';
+    ['pfxA','pfxB','pfxC'].forEach(id => document.getElementById(id).textContent = pfx);
+
+    const ids = ['income','expenses','savings'];
+    ids.forEach((id, i) => {
+      const inp = document.getElementById(id);
+      inp.step = d.step[i];
+      inp.value = [d.income, d.expenses, d.savings][i];
+      inp.style.setProperty('--pl', d.pl);
+    });
+
+    lastYears = null;
     calculate();
-  });
+  }
 
-  // Set initial padding for USD prefix
-  document.querySelectorAll('.field input[type="number"]').forEach(inp => {
-    inp.style.paddingLeft = CURRENCY_META.USD.prefixPad;
-  });
+  document.getElementById('income').addEventListener('input', calculate);
+  document.getElementById('expenses').addEventListener('input', calculate);
+  document.getElementById('savings').addEventListener('input', calculate);
+
+  const slider = document.getElementById('returnRate');
+  const sliderLbl = document.getElementById('returnLbl');
+  slider.addEventListener('input', () => { sliderLbl.textContent = slider.value + '%'; calculate(); });
 
   calculate();
 </script>
