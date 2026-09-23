@@ -123,6 +123,53 @@
       border-color: var(--border-hover);
     }
 
+    /* ─── OWNER TOGGLE ───────────────────── */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .owner-input {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 0.35rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--text);
+      outline: none;
+      width: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: width 0.2s ease, opacity 0.2s ease, border-color 0.15s;
+      overflow: hidden;
+    }
+
+    .owner-input.visible {
+      width: 140px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .owner-input:focus { border-color: rgba(192,48,48,0.45); }
+
+    .owner-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem 0.35rem;
+      opacity: 0.25;
+      transition: opacity 0.15s;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .owner-btn:hover { opacity: 0.55; }
+    .owner-btn.unlocked { opacity: 0.8; }
+
     /* ─── CARD ───────────────────────────── */
     .card {
       background: var(--surface);
@@ -509,7 +556,11 @@
         <p>Craft personalized BD messages in seconds</p>
       </div>
     </div>
-    <a class="back-link" href="https://marwahk-portfolio.vercel.app" target="_blank" rel="noopener">← Back to Portfolio</a>
+    <div class="header-right">
+      <a class="back-link" href="https://marwahk-portfolio.vercel.app" target="_blank" rel="noopener">← Back to Portfolio</a>
+      <input id="owner-input" class="owner-input" type="password" placeholder="owner code" autocomplete="off" />
+      <button id="owner-btn" class="owner-btn" title="Owner access">🔐</button>
+    </div>
   </header>
 
   <div class="cols">
@@ -660,6 +711,44 @@
   let tone = 'Semi-formal';
   let lang = 'Bahasa Indonesia';
 
+  // ── owner mode
+  const ownerBtn = document.getElementById('owner-btn');
+  const ownerInputEl = document.getElementById('owner-input');
+  let ownerToken = '';
+  try { ownerToken = localStorage.getItem('tai-owner') || ''; } catch {}
+
+  function applyOwnerState() {
+    if (ownerToken) {
+      ownerBtn.textContent = '🔓';
+      ownerBtn.classList.add('unlocked');
+    } else {
+      ownerBtn.textContent = '🔐';
+      ownerBtn.classList.remove('unlocked');
+    }
+  }
+  applyOwnerState();
+
+  ownerBtn.addEventListener('click', () => {
+    ownerInputEl.classList.toggle('visible');
+    if (ownerInputEl.classList.contains('visible')) {
+      ownerInputEl.value = ownerToken;
+      ownerInputEl.focus();
+      ownerInputEl.select();
+    }
+  });
+
+  ownerInputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      ownerToken = ownerInputEl.value.trim();
+      try { localStorage.setItem('tai-owner', ownerToken); } catch {}
+      ownerInputEl.classList.remove('visible');
+      applyOwnerState();
+    }
+    if (e.key === 'Escape') {
+      ownerInputEl.classList.remove('visible');
+    }
+  });
+
   // ── platform chips
   document.querySelectorAll('#platform-chips .chip').forEach(c => {
     c.addEventListener('click', () => {
@@ -731,6 +820,7 @@
           tone,
           goal,
           language: lang,
+          ...(ownerToken ? { owner_token: ownerToken } : {}),
         }),
       });
 

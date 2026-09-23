@@ -1,9 +1,8 @@
 const Anthropic = require('@anthropic-ai/sdk');
 
-// In-memory rate limit: Map<ip, {count, resetAt}>
 const rateLimit = new Map();
-const LIMIT = 10;
-const WINDOW_MS = 60 * 60 * 1000;
+const PUBLIC_LIMIT = 3;
+const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function isAllowed(ip) {
   const now = Date.now();
@@ -12,35 +11,31 @@ function isAllowed(ip) {
     rateLimit.set(ip, { count: 1, resetAt: now + WINDOW_MS });
     return true;
   }
-  if (rec.count >= LIMIT) return false;
+  if (rec.count >= PUBLIC_LIMIT) return false;
   rec.count++;
   return true;
 }
 
-const SYSTEM_PROMPT = `You are a BD specialist who has been doing outreach for years. You write messages that feel like they come from a real person — not a tool, not a template. Your messages have natural imperfections: sometimes you start mid-thought, use casual connectors, or reference something specific that shows you actually looked at the brand. Never start with 'Hi [name]' or 'I hope this finds you well'. Never use words like: leverage, synergy, seamless, cutting-edge, excited to connect, or any phrase that sounds like it came from a bot.
+const SYSTEM_PROMPT = `You write BD cold outreach that sounds like it came from a real person — someone who actually knows the brand, not someone filling in a template.
 
-Generate 3 variations of a cold outreach message. Each max 100 words. Each must feel like it was written specifically for this brand by someone who genuinely knows the space.
+Hard rules — break any of these and the output fails:
+- Max 80 words per variation. Shorter is better.
+- Never open with: "Hi [name]", "I hope", "I noticed that", "I came across", "I've been following", "Just wanted to reach out", or anything that announces you're about to pitch
+- Never use: leverage, synergy, seamless, cutting-edge, alignment, partnership opportunity, value proposition, mutually beneficial, would love to explore, excited to connect, I believe there's
+- "I" must not be the first word of the message
+- No framing language ("I'm writing because...", "The reason I'm reaching out...")
+- Contact name if provided: weave it naturally mid-sentence, never as a standalone greeting opener
+- Bahasa Indonesia: write the way real BD people in Jakarta actually message — direct, natural mix of BI and English where it fits, not translated English patterns
 
-Approach types:
-- Personal: address the individual directly, reference their role or something they'd care about personally, feel like a peer reaching out
-- Brand: speak to the brand identity and audience, feel collaborative
-- Company: speak to business outcomes and team-level value, slightly more formal but still human
+Write 3 variations, each with a different energy and opening style:
+1. "Direct & Punchy" — 2–3 sentences max. Lead with the point. No setup, no buildup, no softening.
+2. "Curiosity-led" — open with one specific observation or question that shows you actually looked at the brand. Not a generic compliment — something that would make them think "huh, they noticed that."
+3. "Proof-first" — drop one concrete result or experience in the first sentence, then connect it to them in the second. Zero preamble.
 
-If a contact name is provided, weave it naturally into the message body — not just as a greeting opener.
-
-Variation styles:
-1. Direct & Punchy — one strong hook, straight to the point, confident
-2. Curiosity-led — open with an observation or question about their brand that makes them want to respond
-3. Proof-first — briefly mention something you've done that's relevant, then connect it to them
+Use the approach type (Personal/Brand/Company) to decide who you're addressing, not what you're saying.
 
 Output as valid JSON only, no markdown, no explanation:
-{
-  "variations": [
-    { "name": "Direct & Punchy", "message": "..." },
-    { "name": "Curiosity-led", "message": "..." },
-    { "name": "Proof-first", "message": "..." }
-  ]
-}`;
+{"variations":[{"name":"Direct & Punchy","message":"..."},{"name":"Curiosity-led","message":"..."},{"name":"Proof-first","message":"..."}]}`;
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -57,11 +52,15 @@ module.exports = async function handler(req, res) {
   const forwarded = req.headers['x-forwarded-for'];
   const ip = (forwarded ? forwarded.split(',')[0] : req.socket?.remoteAddress || 'unknown').trim();
 
-  if (!isAllowed(ip)) {
-    return res.status(429).json({ error: 'Too many requests. Try again in a bit.' });
-  }
+  const { brand, industry, platform, approach_type, contact_name, tone, goal, language, owner_token } = req.body || {};
 
-  const { brand, industry, platform, approach_type, contact_name, tone, goal, language } = req.body || {};
+  const isOwner = owner_token && process.env.OWNER_TOKEN && owner_token === process.env.OWNER_TOKEN;
+
+  if (!isOwner && !isAllowed(ip)) {
+    return res.status(429).json({
+      error: 'Sudah 3x generate hari ini. Coba lagi besok ya!',
+    });
+  }
 
   if (!brand || !industry || !platform || !tone || !goal || !language) {
     return res.status(400).json({ error: 'All fields are required.' });
