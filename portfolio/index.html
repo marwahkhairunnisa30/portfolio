@@ -640,6 +640,16 @@ img{display:block}
       Core Capabilities
     </div>
     <ul id="servicesList" style="margin-top:1.25rem"></ul>
+    <div style="margin-top:2rem;display:flex;justify-content:flex-end" data-reveal>
+      <a href="/constellation.html" class="pill pill--outline pill--arrow">
+        <span class="pill__inner">
+          Explore all 14 skills
+          <span class="pill__badge">
+            <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1299,9 +1309,9 @@ void main(){
 
 // ── Services / Skills ──
 const servicesData = [
-  { title:'Business Development', desc:'Sustainable growth strategies and end-to-end BD funnel management.' },
+  { title:'Business Development', desc:'55+ deals sourced and closed — end-to-end pipeline from prospecting to contract.', link:'/projects/personal-brand-acquisitions.html' },
   { title:'Strategic Partnerships', desc:'Building and managing high-value brand partnerships across markets.' },
-  { title:'AI & Workflow Automation', desc:'Leveraging AI tools and automation to maximize operational efficiency.' },
+  { title:'AI & Workflow Automation', desc:'Built AI-powered outreach tools used in live BD workflows — not just familiarity, shipped product.', link:'https://bdtailored-ai.vercel.app', external:true },
   { title:'Team Leadership', desc:'Developing high-performance teams and fostering results-driven culture.' }
 ];
 function buildServices() {
@@ -1310,12 +1320,14 @@ function buildServices() {
     const li = document.createElement('li');
     li.className = 'services__item';
     li.style.transitionDelay = (i * 80) + 'ms';
-    li.innerHTML = `<div class="services__link">
+    const tag = s.link ? 'a' : 'div';
+    const attrs = s.link ? `href="${s.link}"${s.external ? ' target="_blank" rel="noopener noreferrer"' : ''}` : '';
+    li.innerHTML = `<${tag} class="services__link" ${attrs}>
       <span class="services__idx">0${i+1}</span>
       <h3 class="services__title">${s.title}</h3>
       <p class="services__desc">${s.desc}</p>
       <span class="services__arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </div>`;
+    </${tag}>`;
     list.appendChild(li);
   });
   const observer = new IntersectionObserver((entries) => {
