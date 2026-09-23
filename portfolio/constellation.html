@@ -24,7 +24,6 @@
     display: flex; flex-direction: column;
   }
 
-  /* Nav */
   .nav {
     flex-shrink: 0;
     display: flex; align-items: center; gap: .625rem;
@@ -42,7 +41,6 @@
   .nav__sep { color: var(--border); }
   .nav__cur { font-size: .8rem; color: var(--muted2); font-weight: 500; }
 
-  /* Canvas fills remaining space */
   .stage {
     flex: 1;
     position: relative;
@@ -54,7 +52,6 @@
     cursor: default;
   }
 
-  /* Corner labels */
   .corner {
     position: absolute;
     bottom: 24px; left: 24px;
@@ -79,37 +76,35 @@
     text-align: right; line-height: 1.7;
   }
 
-  /* Tooltip */
   #tip {
     position: absolute;
-    background: rgba(18,18,24,.92);
-    border: 1px solid rgba(236,234,245,.12);
-    border-radius: 10px;
-    padding: 12px 14px;
+    background: rgba(11,11,16,.9);
+    border: 1px solid rgba(236,234,245,.14);
+    border-radius: 12px;
+    padding: 13px 16px;
     pointer-events: none;
     opacity: 0;
     transition: opacity .18s;
-    max-width: 200px;
-    backdrop-filter: blur(8px);
+    max-width: 210px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 20;
   }
   #tip.show { opacity: 1; }
+  #tip .tip-cluster {
+    font-size: .62rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 6px; opacity: .8;
+  }
   #tip .tip-label {
-    font-size: .85rem; font-weight: 700;
-    color: var(--text); margin-bottom: 4px;
+    font-size: .9rem; font-weight: 700;
+    color: var(--text); margin-bottom: 5px;
   }
   #tip .tip-desc {
-    font-size: .75rem; color: var(--muted);
-    line-height: 1.5; font-weight: 500;
-  }
-  #tip .tip-cluster {
-    font-size: .65rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .07em;
-    margin-bottom: 5px;
-    opacity: .8;
+    font-size: .76rem; color: var(--muted);
+    line-height: 1.55; font-weight: 500;
   }
 
-  /* Legend */
   .legend {
     position: absolute;
     top: 20px; right: 20px;
@@ -154,15 +149,20 @@
 
   <div class="hint">
     Hover to explore<br>
-    Drag to move
+    Drag to rearrange<br>
+    Click to focus
   </div>
 
   <div class="legend" id="legend"></div>
-  <div id="tip"><div class="tip-cluster" id="tipCluster"></div><div class="tip-label" id="tipLabel"></div><div class="tip-desc" id="tipDesc"></div></div>
+  <div id="tip">
+    <div class="tip-cluster" id="tipCluster"></div>
+    <div class="tip-label" id="tipLabel"></div>
+    <div class="tip-desc" id="tipDesc"></div>
+  </div>
 </div>
 
 <script>
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const CLUSTERS = {
   biz:     { name: 'BD & Commercial', color: '#a78bfa' },
   content: { name: 'Content & Story',  color: '#f9a8d4' },
@@ -171,40 +171,28 @@ const CLUSTERS = {
 };
 
 const NODES = [
-  // BD cluster
   { id:'bd',           label:'BD Strategy',         desc:'Pipeline building, partner acquisition, and commercial growth at scale.',            size:26, bx:.38, by:.42, cluster:'biz' },
   { id:'outreach',     label:'Cold Outreach',        desc:'Writing pitches that actually get replies — human, credible, worth responding to.',  size:20, bx:.22, by:.30, cluster:'biz' },
   { id:'partnerships', label:'Creator Partnerships', desc:'Structuring and closing brand × creator deals end-to-end.',                          size:21, bx:.53, by:.33, cluster:'biz' },
-  { id:'negotiation',  label:'Negotiation',           desc:'Getting to yes without leaving value on the table.',                                size:13, bx:.20, by:.50, cluster:'biz' },
+  { id:'negotiation',  label:'Negotiation',          desc:'Getting to yes without leaving value on the table.',                                 size:13, bx:.20, by:.50, cluster:'biz' },
   { id:'campaigns',    label:'Campaign Management',  desc:'Running creator campaigns from brief to post-campaign report.',                      size:15, bx:.40, by:.58, cluster:'biz' },
-
-  // Content cluster
-  { id:'storytelling', label:'Storytelling',          desc:'Turning data and ideas into something worth reading or sharing.',                   size:20, bx:.73, by:.34, cluster:'content' },
-  { id:'strategy',     label:'Content Strategy',      desc:'Deciding what to say, to whom, and why it matters right now.',                      size:17, bx:.78, by:.52, cluster:'content' },
-  { id:'copy',         label:'Copywriting',            desc:'Words that move people to act — without sounding like an ad.',                     size:13, bx:.86, by:.42, cluster:'content' },
-  { id:'hooks',        label:'Hook Writing',           desc:'First lines that make people stop and keep reading.',                               size:13, bx:.82, by:.65, cluster:'content' },
-
-  // Tech cluster
-  { id:'ai',           label:'AI Tools',               desc:'Building with and prompting LLMs to solve problems that used to need a team.',     size:20, bx:.48, by:.73, cluster:'tech' },
-  { id:'automation',   label:'Automation',              desc:'Systemizing workflows so humans can focus on what actually needs them.',           size:17, bx:.33, by:.74, cluster:'tech' },
-  { id:'vibe',         label:'Vibe Coding',             desc:'Shipping functional products without being a full developer.',                    size:13, bx:.20, by:.67, cluster:'tech' },
-
-  // Data cluster
-  { id:'research',     label:'Market Research',        desc:'Finding signal before committing — who, what, and whether it\'s worth pursuing.',   size:17, bx:.62, by:.20, cluster:'data' },
-  { id:'analytics',    label:'Creator Analytics',      desc:'Reading performance data to tell what worked and what to do differently.',          size:13, bx:.76, by:.16, cluster:'data' },
+  { id:'storytelling', label:'Storytelling',         desc:'Turning data and ideas into something worth reading or sharing.',                    size:20, bx:.73, by:.34, cluster:'content' },
+  { id:'strategy',     label:'Content Strategy',     desc:'Deciding what to say, to whom, and why it matters right now.',                      size:17, bx:.78, by:.52, cluster:'content' },
+  { id:'copy',         label:'Copywriting',          desc:'Words that move people to act — without sounding like an ad.',                      size:13, bx:.86, by:.42, cluster:'content' },
+  { id:'hooks',        label:'Hook Writing',         desc:'First lines that make people stop and keep reading.',                                size:13, bx:.82, by:.65, cluster:'content' },
+  { id:'ai',           label:'AI Tools',             desc:'Building with and prompting LLMs to solve problems that used to need a team.',      size:20, bx:.48, by:.73, cluster:'tech' },
+  { id:'automation',   label:'Automation',           desc:'Systemizing workflows so humans can focus on what actually needs them.',             size:17, bx:.33, by:.74, cluster:'tech' },
+  { id:'vibe',         label:'Vibe Coding',          desc:'Shipping functional products without being a full developer.',                      size:13, bx:.20, by:.67, cluster:'tech' },
+  { id:'research',     label:'Market Research',      desc:"Finding signal before committing — who, what, and whether it's worth pursuing.",    size:17, bx:.62, by:.20, cluster:'data' },
+  { id:'analytics',   label:'Creator Analytics',    desc:'Reading performance data to tell what worked and what to do differently.',           size:13, bx:.76, by:.16, cluster:'data' },
 ];
 
 const EDGES = [
-  // Business
   ['bd','outreach'], ['bd','partnerships'], ['bd','negotiation'], ['bd','campaigns'],
   ['outreach','negotiation'], ['partnerships','campaigns'],
-  // Content
   ['storytelling','strategy'], ['storytelling','copy'], ['strategy','hooks'], ['copy','hooks'],
-  // Tech
   ['ai','automation'], ['automation','vibe'],
-  // Data
   ['research','analytics'],
-  // Cross-cluster
   ['bd','storytelling'], ['outreach','copy'], ['partnerships','strategy'],
   ['campaigns','automation'], ['ai','outreach'], ['research','partnerships'],
   ['analytics','campaigns'], ['storytelling','research'],
@@ -226,38 +214,77 @@ function resize() {
   initNodes();
 }
 
-// ─── Node state ───────────────────────────────────────────────────────────────
-let nodes = [];
-let stars = [];
+// ─── State ────────────────────────────────────────────────────────────────────
+let nodes = [], stars = [], shootingStars = [], edgePulses = [];
+let focusedNode = null, hoveredNode = null;
+let mouse = { x: -999, y: -999 };
+let dragNode = null, dragOffX = 0, dragOffY = 0;
+let dragDist = 0, dragStart = null;
+let lastPulseSpawn = 0;
+let t = 0;
 
 function initNodes() {
-  nodes = NODES.map((n, i) => ({
+  nodes = NODES.map(n => ({
     ...n,
     x: n.bx * W,
     y: n.by * H,
-    phase: Math.random() * Math.PI * 2,
-    speed: 0.0003 + Math.random() * 0.0002,
-    amp:   W * 0.012 + Math.random() * W * 0.008,
-    phaseY: Math.random() * Math.PI * 2,
-    color: CLUSTERS[n.cluster].color,
-    hovered: false,
-    // drag
-    dragging: false,
-    dx: 0, dy: 0,
+    phase:      Math.random() * Math.PI * 2,
+    speed:      0.0003 + Math.random() * 0.0002,
+    amp:        W * 0.012 + Math.random() * W * 0.008,
+    phaseY:     Math.random() * Math.PI * 2,
+    color:      CLUSTERS[n.cluster].color,
+    pulsePhase: Math.random() * Math.PI * 2,
   }));
 
-  // background stars
-  stars = Array.from({ length: 120 }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: Math.random() * 1.2,
-    a: 0.05 + Math.random() * 0.2,
-    twinkle: Math.random() * Math.PI * 2,
-    twinkleSpeed: 0.001 + Math.random() * 0.002,
+  stars = Array.from({ length: 150 }, () => ({
+    x:           Math.random() * W,
+    y:           Math.random() * H,
+    r:           0.3 + Math.random() * 1.1,
+    a:           0.06 + Math.random() * 0.22,
+    twinkle:     Math.random() * Math.PI * 2,
+    twinkleSpeed:0.0008 + Math.random() * 0.002,
   }));
 }
 
-// ─── Build legend ─────────────────────────────────────────────────────────────
+// ─── Shooting stars ───────────────────────────────────────────────────────────
+function maybeSpawnShootingStar() {
+  if (Math.random() < 0.0012 && shootingStars.length < 2) {
+    const angle = Math.PI / 8 + Math.random() * (Math.PI / 5);
+    const speed = 5 + Math.random() * 8;
+    shootingStars.push({
+      x:    Math.random() * W * 0.65,
+      y:    Math.random() * H * 0.45,
+      vx:   Math.cos(angle) * speed,
+      vy:   Math.sin(angle) * speed,
+      len:  55 + Math.random() * 110,
+      a:    0.85,
+      fade: 0.013 + Math.random() * 0.01,
+    });
+  }
+}
+
+// ─── Edge pulse spawning ──────────────────────────────────────────────────────
+function trySpawnEdgePulses(node) {
+  const now = Date.now();
+  if (now - lastPulseSpawn < 320) return;
+  lastPulseSpawn = now;
+  EDGES.forEach(([a, b]) => {
+    if (a !== node.id && b !== node.id) return;
+    const fromId = a === node.id ? a : b;
+    const toId   = a === node.id ? b : a;
+    const live   = edgePulses.find(p => p.fromId === fromId && p.toId === toId && p.t < 0.25);
+    if (!live) {
+      edgePulses.push({
+        fromId, toId,
+        t:     0,
+        speed: 0.009 + Math.random() * 0.005,
+        color: node.color,
+      });
+    }
+  });
+}
+
+// ─── Legend ───────────────────────────────────────────────────────────────────
 const legendEl = document.getElementById('legend');
 Object.entries(CLUSTERS).forEach(([, c]) => {
   const item = document.createElement('div');
@@ -266,17 +293,10 @@ Object.entries(CLUSTERS).forEach(([, c]) => {
   legendEl.appendChild(item);
 });
 
-// ─── Mouse / touch ────────────────────────────────────────────────────────────
-let mouse = { x: -999, y: -999 };
-let hoveredNode = null;
-let dragNode = null;
-let dragOffX = 0, dragOffY = 0;
-
+// ─── Input ────────────────────────────────────────────────────────────────────
 function getPos(e) {
   const r = canvas.getBoundingClientRect();
-  if (e.touches) {
-    return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
-  }
+  if (e.touches) return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
   return { x: e.clientX - r.left, y: e.clientY - r.top };
 }
 
@@ -290,47 +310,51 @@ function findNearest(x, y) {
 }
 
 canvas.addEventListener('mousemove', e => {
-  const {x, y} = getPos(e);
-  mouse = {x, y};
+  const { x, y } = getPos(e);
+  mouse = { x, y };
+  if (dragStart) dragDist = Math.hypot(x - dragStart.x, y - dragStart.y);
   if (dragNode) {
-    dragNode.x = x + dragOffX;
-    dragNode.y = y + dragOffY;
-    // pin bx/by so it stays after drag
+    dragNode.x  = x + dragOffX;
+    dragNode.y  = y + dragOffY;
     dragNode.bx = dragNode.x / W;
     dragNode.by = dragNode.y / H;
   }
 });
 
 canvas.addEventListener('mousedown', e => {
-  const {x, y} = getPos(e);
+  const { x, y } = getPos(e);
+  dragStart = { x, y }; dragDist = 0;
   const n = findNearest(x, y);
-  if (n) {
-    dragNode = n;
-    dragOffX = n.x - x;
-    dragOffY = n.y - y;
-    canvas.style.cursor = 'grabbing';
-  }
+  if (n) { dragNode = n; dragOffX = n.x - x; dragOffY = n.y - y; canvas.style.cursor = 'grabbing'; }
 });
 
 window.addEventListener('mouseup', () => {
-  dragNode = null;
+  dragNode = null; dragStart = null;
   canvas.style.cursor = 'default';
+});
+
+canvas.addEventListener('click', e => {
+  if (dragDist > 5) return;
+  const { x, y } = getPos(e);
+  const n = findNearest(x, y);
+  focusedNode = (n && focusedNode !== n) ? n : null;
+  if (!focusedNode) hideTip();
 });
 
 canvas.addEventListener('touchstart', e => {
   e.preventDefault();
-  const {x, y} = getPos(e);
+  const { x, y } = getPos(e);
   const n = findNearest(x, y);
   if (n) { dragNode = n; dragOffX = n.x - x; dragOffY = n.y - y; }
 }, { passive: false });
 
 canvas.addEventListener('touchmove', e => {
   e.preventDefault();
-  const {x, y} = getPos(e);
-  mouse = {x, y};
+  const { x, y } = getPos(e);
+  mouse = { x, y };
   if (dragNode) {
-    dragNode.x = x + dragOffX;
-    dragNode.y = y + dragOffY;
+    dragNode.x  = x + dragOffX;
+    dragNode.y  = y + dragOffY;
     dragNode.bx = dragNode.x / W;
     dragNode.by = dragNode.y / H;
   }
@@ -338,20 +362,19 @@ canvas.addEventListener('touchmove', e => {
 
 canvas.addEventListener('touchend', () => { dragNode = null; });
 
-// ─── Tooltip positioning ──────────────────────────────────────────────────────
+// ─── Tooltip ──────────────────────────────────────────────────────────────────
 function showTip(node) {
-  document.getElementById('tipCluster').textContent = CLUSTERS[node.cluster].name;
-  document.getElementById('tipCluster').style.color = node.color;
-  document.getElementById('tipLabel').textContent = node.label;
-  document.getElementById('tipDesc').textContent  = node.desc;
+  document.getElementById('tipCluster').textContent  = CLUSTERS[node.cluster].name;
+  document.getElementById('tipCluster').style.color  = node.color;
+  document.getElementById('tipLabel').textContent    = node.label;
+  document.getElementById('tipDesc').textContent     = node.desc;
   tip.classList.add('show');
-
-  const tw = 200, th = 90;
+  const tw = 210, th = 100;
   let tx = node.x + node.size + 14;
   let ty = node.y - th / 2;
-  if (tx + tw > W - 10) tx = node.x - node.size - tw - 14;
-  if (ty < 10) ty = 10;
-  if (ty + th > H - 10) ty = H - th - 10;
+  if (tx + tw > W - 12) tx = node.x - node.size - tw - 14;
+  if (ty < 10)           ty = 10;
+  if (ty + th > H - 10)  ty = H - th - 10;
   tip.style.left = tx + 'px';
   tip.style.top  = ty + 'px';
 }
@@ -365,76 +388,119 @@ function hexToRgb(hex) {
   return `${r},${g},${b}`;
 }
 
-function drawNode(n, highlight) {
-  const glowSize  = highlight ? n.size * 2.8 : n.size * 1.6;
-  const glowAlpha = highlight ? 0.22 : 0.09;
-  const rgb = hexToRgb(n.color);
+function drawNebula() {
+  const centers = {};
+  nodes.forEach(n => {
+    if (!centers[n.cluster]) centers[n.cluster] = { x:0, y:0, c:0 };
+    centers[n.cluster].x += n.x;
+    centers[n.cluster].y += n.y;
+    centers[n.cluster].c++;
+  });
+  Object.entries(centers).forEach(([clusterId, ctr]) => {
+    const cx  = ctr.x / ctr.c;
+    const cy  = ctr.y / ctr.c;
+    const rgb = hexToRgb(CLUSTERS[clusterId].color);
+    const r   = Math.min(W, H) * 0.24;
+    const g   = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    g.addColorStop(0,   `rgba(${rgb},0.06)`);
+    g.addColorStop(0.5, `rgba(${rgb},0.02)`);
+    g.addColorStop(1,   `rgba(${rgb},0)`);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  });
+}
+
+function drawNode(n, highlight, alpha) {
+  const pulse = Math.sin(t * 0.0008 + n.pulsePhase);
+  const glowR = highlight ? n.size * (2.9 + pulse * 0.35) : n.size * (1.8 + pulse * 0.22);
+  const glowA = highlight ? 0.30 + pulse * 0.07 : 0.09 + pulse * 0.025;
+  const rgb   = hexToRgb(n.color);
+
+  ctx.globalAlpha = alpha;
 
   // outer glow
-  const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowSize);
-  grd.addColorStop(0,   `rgba(${rgb},${glowAlpha})`);
-  grd.addColorStop(1,   `rgba(${rgb},0)`);
-  ctx.beginPath();
-  ctx.arc(n.x, n.y, glowSize, 0, Math.PI*2);
-  ctx.fillStyle = grd;
-  ctx.fill();
+  const og = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+  og.addColorStop(0, `rgba(${rgb},${glowA})`);
+  og.addColorStop(1, `rgba(${rgb},0)`);
+  ctx.beginPath(); ctx.arc(n.x, n.y, glowR, 0, Math.PI*2);
+  ctx.fillStyle = og; ctx.fill();
 
-  // inner circle
-  ctx.beginPath();
-  ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
-  const innerGrd = ctx.createRadialGradient(n.x - n.size*.3, n.y - n.size*.3, 0, n.x, n.y, n.size);
-  innerGrd.addColorStop(0, `rgba(${rgb},${highlight ? .9 : .55})`);
-  innerGrd.addColorStop(1, `rgba(${rgb},${highlight ? .55 : .28})`);
-  ctx.fillStyle = innerGrd;
-  ctx.fill();
+  // corona on highlight
+  if (highlight) {
+    const cr = n.size * (5 + pulse * 0.6);
+    const cg = ctx.createRadialGradient(n.x, n.y, n.size, n.x, n.y, cr);
+    cg.addColorStop(0, `rgba(${rgb},0.07)`);
+    cg.addColorStop(1, `rgba(${rgb},0)`);
+    ctx.beginPath(); ctx.arc(n.x, n.y, cr, 0, Math.PI*2);
+    ctx.fillStyle = cg; ctx.fill();
+  }
+
+  // inner fill
+  ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+  const ig = ctx.createRadialGradient(n.x - n.size*.3, n.y - n.size*.3, 0, n.x, n.y, n.size);
+  ig.addColorStop(0, `rgba(${rgb},${highlight ? .92 : .56})`);
+  ig.addColorStop(1, `rgba(${rgb},${highlight ? .55 : .28})`);
+  ctx.fillStyle = ig; ctx.fill();
 
   // ring
-  ctx.beginPath();
-  ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
-  ctx.strokeStyle = `rgba(${rgb},${highlight ? .7 : .3})`;
-  ctx.lineWidth = highlight ? 1.5 : 1;
+  ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+  ctx.strokeStyle = `rgba(${rgb},${highlight ? .88 : .30})`;
+  ctx.lineWidth   = highlight ? 2 : 1;
   ctx.stroke();
 
   // label
-  const showLabel = n.size >= 18 || highlight;
-  if (showLabel) {
-    ctx.font = `${highlight ? 600 : 500} ${highlight ? 12 : 11}px Onest, sans-serif`;
-    ctx.fillStyle = highlight ? `rgba(236,234,245,1)` : `rgba(236,234,245,0.65)`;
-    ctx.textAlign = 'center';
+  if (n.size >= 18 || highlight) {
+    ctx.font         = `${highlight ? 600 : 500} ${highlight ? 12 : 11}px Onest, sans-serif`;
+    ctx.fillStyle    = highlight ? 'rgba(236,234,245,1)' : 'rgba(236,234,245,0.65)';
+    ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(n.label, n.x, n.y + n.size + 13);
   }
+
+  ctx.globalAlpha = 1;
 }
 
-function drawEdge(a, b, alpha) {
-  ctx.beginPath();
-  ctx.moveTo(a.x, a.y);
-  ctx.lineTo(b.x, b.y);
+function drawEdge(ax, ay, bx, by, alpha) {
+  ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
   ctx.strokeStyle = `rgba(236,234,245,${alpha})`;
-  ctx.lineWidth = 0.8;
+  ctx.lineWidth   = 0.8;
   ctx.stroke();
 }
 
 // ─── Main loop ────────────────────────────────────────────────────────────────
-let t = 0;
-
 function frame() {
   requestAnimationFrame(frame);
   t += 16;
 
   ctx.clearRect(0, 0, W, H);
 
-  // background stars
+  drawNebula();
+
+  // stars
   stars.forEach(s => {
     s.twinkle += s.twinkleSpeed;
     const a = s.a + Math.sin(s.twinkle) * 0.08;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(236,234,245,${a})`;
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(236,234,245,${a})`; ctx.fill();
   });
 
-  // float nodes (skip if dragging)
+  // shooting stars
+  maybeSpawnShootingStar();
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    const ss  = shootingStars[i];
+    const spd = Math.hypot(ss.vx, ss.vy);
+    const tx  = ss.x - (ss.vx / spd) * ss.len;
+    const ty  = ss.y - (ss.vy / spd) * ss.len;
+    const gr  = ctx.createLinearGradient(ss.x, ss.y, tx, ty);
+    gr.addColorStop(0, `rgba(255,255,255,${ss.a})`);
+    gr.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath(); ctx.moveTo(ss.x, ss.y); ctx.lineTo(tx, ty);
+    ctx.strokeStyle = gr; ctx.lineWidth = 1.5; ctx.stroke();
+    ss.x += ss.vx; ss.y += ss.vy; ss.a -= ss.fade;
+    if (ss.a <= 0) shootingStars.splice(i, 1);
+  }
+
+  // float nodes
   nodes.forEach(n => {
     if (!dragNode || dragNode !== n) {
       n.x = n.bx * W + Math.sin(t * n.speed + n.phase)  * n.amp;
@@ -442,47 +508,96 @@ function frame() {
     }
   });
 
-  // find hovered node
-  const prev = hoveredNode;
-  hoveredNode = findNearest(mouse.x, mouse.y);
+  // hover
+  hoveredNode = dragNode ? null : findNearest(mouse.x, mouse.y);
 
   if (hoveredNode) {
     canvas.style.cursor = 'grab';
     showTip(hoveredNode);
+    trySpawnEdgePulses(hoveredNode);
+  } else if (focusedNode) {
+    canvas.style.cursor = 'default';
+    showTip(focusedNode);
   } else {
     canvas.style.cursor = dragNode ? 'grabbing' : 'default';
     hideTip();
   }
 
-  // build lookup
-  const nodeMap = {};
-  nodes.forEach(n => nodeMap[n.id] = n);
+  // highlight source: hovered takes priority for edges; focused controls dimming
+  const hlSource = hoveredNode || focusedNode;
 
-  // determine highlighted edges
-  const hlEdges = new Set();
-  if (hoveredNode) {
-    EDGES.forEach(([a,b]) => {
-      if (a === hoveredNode.id || b === hoveredNode.id) hlEdges.add(`${a}-${b}`);
+  // node lookup
+  const nodeMap = {};
+  nodes.forEach(n => { nodeMap[n.id] = n; });
+
+  // connected ids
+  const hlEdges  = new Set();
+  const connected = new Set();
+  if (hlSource) {
+    connected.add(hlSource.id);
+    EDGES.forEach(([a, b]) => {
+      if (a === hlSource.id || b === hlSource.id) {
+        hlEdges.add(`${a}-${b}`);
+        connected.add(a); connected.add(b);
+      }
     });
   }
 
-  // draw edges
+  // edges
   EDGES.forEach(([aId, bId]) => {
     const a = nodeMap[aId], b = nodeMap[bId];
     if (!a || !b) return;
-    const key = `${aId}-${bId}`;
-    const isHL = hlEdges.has(key);
-    drawEdge(a, b, isHL ? 0.35 : 0.07);
+    const hl    = hlEdges.has(`${aId}-${bId}`);
+    const alpha = focusedNode ? (hl ? 0.5 : 0.02) : (hl ? 0.38 : 0.07);
+    drawEdge(a.x, a.y, b.x, b.y, alpha);
   });
 
-  // draw nodes
+  // edge pulses
+  for (let i = edgePulses.length - 1; i >= 0; i--) {
+    const p  = edgePulses[i];
+    const na = nodeMap[p.fromId], nb = nodeMap[p.toId];
+    if (!na || !nb || p.t > 1.1) { edgePulses.splice(i, 1); continue; }
+    p.t += p.speed;
+    const prog = Math.min(p.t, 1);
+    const px   = na.x + (nb.x - na.x) * prog;
+    const py   = na.y + (nb.y - na.y) * prog;
+    const rgb  = hexToRgb(p.color);
+    const pa   = Math.max(0, 0.9 - p.t * 0.85);
+    // halo
+    const pg = ctx.createRadialGradient(px, py, 0, px, py, 9);
+    pg.addColorStop(0, `rgba(${rgb},${pa * 0.5})`);
+    pg.addColorStop(1, `rgba(${rgb},0)`);
+    ctx.beginPath(); ctx.arc(px, py, 9, 0, Math.PI*2);
+    ctx.fillStyle = pg; ctx.fill();
+    // core
+    ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(${rgb},${pa})`; ctx.fill();
+  }
+
+  // nodes
   nodes.forEach(n => {
-    const isHL = hoveredNode && (
-      hoveredNode.id === n.id ||
-      EDGES.some(([a,b]) => (a === hoveredNode.id || b === hoveredNode.id) && (a === n.id || b === n.id))
+    const isHL = hlSource && (
+      hlSource.id === n.id ||
+      EDGES.some(([a, b]) => (a === hlSource.id || b === hlSource.id) && (a === n.id || b === n.id))
     );
-    drawNode(n, isHL);
+    const alpha = focusedNode ? (connected.has(n.id) ? 1 : 0.07) : 1;
+    drawNode(n, isHL, alpha);
   });
+
+  // animated dashed ring on focused node
+  if (focusedNode) {
+    const n   = focusedNode;
+    const pls = Math.sin(t * 0.002) * 2;
+    const rgb = hexToRgb(n.color);
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.size + 7 + pls, 0, Math.PI*2);
+    ctx.strokeStyle    = `rgba(${rgb},0.7)`;
+    ctx.lineWidth      = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.lineDashOffset = -(t * 0.04);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
