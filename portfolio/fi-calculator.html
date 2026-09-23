@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FI Calculator — Marwah K</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #18181b;
+    --surface2: #1f1f23;
+    --border: rgba(255,255,255,0.07);
+    --text: #eceaf5;
+    --muted: rgba(236,234,245,0.45);
+    --accent: #a78bfa;
+    --accent-dim: rgba(167,139,250,0.15);
+    --green: #34d399;
+    --green-dim: rgba(52,211,153,0.12);
+    --input-bg: #111113;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    transition: color .15s;
+  }
+  .nav__back:hover { color: var(--text); }
+  .nav__back svg { width: 14px; height: 14px; }
+  .nav__title {
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .nav__dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  /* Layout */
+  .wrapper {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* Header */
+  .header {
+    padding: 48px 0 32px;
+  }
+  .header__eyebrow {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .header__title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header__desc {
+    color: var(--muted);
+    font-size: .9rem;
+    max-width: 480px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card__title {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  /* Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .header__title { font-size: 1.5rem; }
+  }
+
+  /* Input fields */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field label {
+    font-size: .8rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .field__input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .field__prefix {
+    position: absolute;
+    left: 12px;
+    color: var(--muted);
+    font-size: .9rem;
+    pointer-events: none;
+    font-weight: 500;
+  }
+  .field__suffix {
+    position: absolute;
+    right: 12px;
+    color: var(--muted);
+    font-size: .85rem;
+    pointer-events: none;
+  }
+  .field input[type="number"] {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: .95rem;
+    font-family: inherit;
+    padding: 10px 36px 10px 28px;
+    outline: none;
+    transition: border-color .15s;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field input[type="number"]:focus {
+    border-color: var(--accent);
+  }
+  .field input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+    cursor: pointer;
+    height: 4px;
+  }
+  .field__range-val {
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: right;
+    min-width: 42px;
+  }
+  .field__range-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Results */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 480px) {
+    .results-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .stat {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .stat__label {
+    font-size: .72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .stat__value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--text);
+  }
+  .stat__value.accent { color: var(--accent); }
+  .stat__value.green { color: var(--green); }
+  .stat__sub {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    margin-bottom: 20px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: .78rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    border-radius: 999px;
+    transition: width .4s ease;
+    min-width: 0;
+  }
+
+  /* Chart */
+  .chart-wrap {
+    position: relative;
+    height: 240px;
+  }
+
+  /* Warning / empty */
+  .msg {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--muted);
+    font-size: .85rem;
+  }
+  .msg strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent-dim);
+    border: 1px solid rgba(167,139,250,.2);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .badge.green {
+    background: var(--green-dim);
+    border-color: rgba(52,211,153,.2);
+    color: var(--green);
+  }
+
+  /* Footer note */
+  .footnote {
+    font-size: .75rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 24px;
+    opacity: .6;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav__back">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M10 12L6 8l4-4"/>
+    </svg>
+    marwah.dev
+  </a>
+  <div class="nav__dot"></div>
+  <span class="nav__title">FI Calculator</span>
+</nav>
+
+<div class="wrapper">
+  <div class="header">
+    <div class="header__eyebrow">Personal Finance</div>
+    <h1 class="header__title">Financial Independence<br>Calculator</h1>
+    <p class="header__desc">Find out when you could stop working — based on your savings rate and the 4% rule.</p>
+  </div>
+
+  <!-- Inputs -->
+  <div class="card">
+    <div class="card__title">Your Numbers</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Monthly Income (after tax)</label>
+        <div class="field__input-wrap">
+          <span class="field__prefix">$</span>
+          <input type="number" id="income" value="5000" min="0" step="100">
+        </div>
+      </div>
+      <div class="field">
+        <label>Monthly Expenses</label>
+        <div class="field__input-wrap">
+          <span class="field__prefix">$</span>
+          <input type="number" id="expenses" value="3000" min="0" step="100">
+        </div>
+      </div>
+      <div class="field">
+        <label>Current Savings / Investments</label>
+        <div class="field__input-wrap">
+          <span class="field__prefix">$</span>
+          <input type="number" id="savings" value="20000" min="0" step="1000">
+        </div>
+      </div>
+      <div class="field">
+        <label>Expected Annual Return</label>
+        <div class="field__range-row">
+          <input type="range" id="returnRate" min="1" max="15" step="0.5" value="7">
+          <span class="field__range-val" id="returnRateLabel">7%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card" id="resultsCard">
+    <div class="card__title">Results</div>
+    <div id="resultsContent"></div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card">
+    <div class="card__title">Net Worth Trajectory</div>
+    <div class="chart-wrap">
+      <canvas id="fiChart"></canvas>
+    </div>
+  </div>
+
+  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings and a fixed annual return. This is not financial advice.</p>
+</div>
+
+<script>
+  let chart = null;
+
+  function fmt(n) {
+    if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function yearsToFI(pv, pmt, fv, r) {
+    // Solve: fv = pv*(1+r)^n + pmt*((1+r)^n - 1)/r for n
+    // Binary search
+    if (pmt <= 0 && pv >= fv) return 0;
+    if (pmt <= 0) return Infinity;
+    let lo = 0, hi = 200;
+    for (let i = 0; i < 100; i++) {
+      const mid = (lo + hi) / 2;
+      const factor = Math.pow(1 + r, mid);
+      const nw = pv * factor + pmt * (factor - 1) / r;
+      if (nw < fv) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  function netWorthAt(pv, pmt, r, n) {
+    const factor = Math.pow(1 + r, n);
+    return pv * factor + pmt * (factor - 1) / r;
+  }
+
+  function calculate() {
+    const income = parseFloat(document.getElementById('income').value) || 0;
+    const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+    const savings = parseFloat(document.getElementById('savings').value) || 0;
+    const rPct = parseFloat(document.getElementById('returnRate').value) || 7;
+    const r = rPct / 100;
+
+    const monthly_savings = income - expenses;
+    const annual_savings = monthly_savings * 12;
+    const savings_rate = income > 0 ? (monthly_savings / income) * 100 : 0;
+    const fi_number = expenses * 12 * 25;
+    const progress_pct = fi_number > 0 ? Math.min((savings / fi_number) * 100, 100) : 0;
+
+    const resultsContent = document.getElementById('resultsContent');
+
+    if (income <= 0 || expenses >= income) {
+      resultsContent.innerHTML = `
+        <div class="msg">
+          <strong>Not enough to save</strong>
+          Your expenses meet or exceed your income. Reduce expenses or increase income to start the FI journey.
+        </div>`;
+      renderChart([], [], 0);
+      return;
+    }
+
+    const years = yearsToFI(savings, annual_savings, fi_number, r);
+    const fi_age_note = years === Infinity ? '—' : years < 1 ? 'Already there!' : `${Math.ceil(years)} yrs`;
+
+    const badgeClass = savings_rate >= 50 ? 'green' : savings_rate >= 25 ? '' : '';
+
+    resultsContent.innerHTML = `
+      <div class="results-grid">
+        <div class="stat">
+          <div class="stat__label">Savings Rate</div>
+          <div class="stat__value ${savings_rate >= 25 ? 'accent' : ''}">${savings_rate.toFixed(0)}%</div>
+          <div class="stat__sub">${fmt(monthly_savings)}/mo saved</div>
+        </div>
+        <div class="stat">
+          <div class="stat__label">FI Number</div>
+          <div class="stat__value">${fmt(fi_number)}</div>
+          <div class="stat__sub">25× annual expenses</div>
+        </div>
+        <div class="stat">
+          <div class="stat__label">Time to FI</div>
+          <div class="stat__value ${years <= 15 ? 'green' : 'accent'}">${fi_age_note}</div>
+          <div class="stat__sub">at ${rPct}% annual return</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Current progress</span>
+          <span>${progress_pct.toFixed(1)}% of FI number</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${progress_pct}%"></div>
+        </div>
+      </div>
+    `;
+
+    // Build chart data
+    const maxYears = years === Infinity ? 40 : Math.min(Math.ceil(years) + 5, 60);
+    const labels = [];
+    const data = [];
+    for (let y = 0; y <= maxYears; y++) {
+      labels.push(`Y${y}`);
+      data.push(netWorthAt(savings, annual_savings, r, y));
+    }
+
+    renderChart(labels, data, fi_number);
+  }
+
+  function renderChart(labels, data, fiNumber) {
+    const ctx = document.getElementById('fiChart').getContext('2d');
+
+    if (chart) { chart.destroy(); chart = null; }
+
+    if (!labels.length) return;
+
+    // Find FI crossover index
+    const crossover = data.findIndex(v => v >= fiNumber);
+
+    const pointColors = data.map((v, i) => v >= fiNumber ? '#34d399' : '#a78bfa');
+    const pointRadius = data.map((v, i) => i === crossover ? 6 : 0);
+
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Net Worth',
+            data,
+            borderColor: '#a78bfa',
+            backgroundColor: 'rgba(167,139,250,0.07)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.35,
+            pointRadius,
+            pointBackgroundColor: pointColors,
+            pointBorderColor: pointColors,
+          },
+          {
+            label: 'FI Number',
+            data: labels.map(() => fiNumber),
+            borderColor: 'rgba(52,211,153,0.4)',
+            borderWidth: 1.5,
+            borderDash: [5, 5],
+            fill: false,
+            pointRadius: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(236,234,245,0.45)',
+              font: { size: 11 },
+              boxWidth: 12,
+              padding: 16,
+            }
+          },
+          tooltip: {
+            backgroundColor: '#18181b',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            titleColor: '#eceaf5',
+            bodyColor: 'rgba(236,234,245,0.6)',
+            callbacks: {
+              label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: 'rgba(236,234,245,0.3)',
+              font: { size: 10 },
+              maxTicksLimit: 10,
+            },
+            grid: { color: 'rgba(255,255,255,0.04)' },
+          },
+          y: {
+            ticks: {
+              color: 'rgba(236,234,245,0.3)',
+              font: { size: 10 },
+              callback: v => fmt(v),
+            },
+            grid: { color: 'rgba(255,255,255,0.04)' },
+          }
+        }
+      }
+    });
+  }
+
+  // Wire up inputs
+  ['income','expenses','savings'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calculate);
+  });
+
+  const rSlider = document.getElementById('returnRate');
+  const rLabel = document.getElementById('returnRateLabel');
+  rSlider.addEventListener('input', () => {
+    rLabel.textContent = rSlider.value + '%';
+    calculate();
+  });
+
+  // Initial calc
+  calculate();
+</script>
+</body>
+</html>
