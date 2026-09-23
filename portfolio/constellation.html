@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Constellation — Marwah K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0b10;
+    --border: rgba(236,234,245,.08);
+    --text: #eceaf5;
+    --muted: rgba(236,234,245,.4);
+    --muted2: rgba(236,234,245,.22);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Onest', sans-serif;
+    display: flex; flex-direction: column;
+  }
+
+  /* Nav */
+  .nav {
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: .625rem;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+  .nav a {
+    display: inline-flex; align-items: center; gap: .35rem;
+    color: var(--muted); text-decoration: none;
+    font-size: .8rem; font-weight: 500; transition: color .15s;
+  }
+  .nav a:hover { color: var(--text); }
+  .nav a svg { width: 12px; height: 12px; }
+  .nav__sep { color: var(--border); }
+  .nav__cur { font-size: .8rem; color: var(--muted2); font-weight: 500; }
+
+  /* Canvas fills remaining space */
+  .stage {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    cursor: default;
+  }
+
+  /* Corner labels */
+  .corner {
+    position: absolute;
+    bottom: 24px; left: 24px;
+    pointer-events: none;
+  }
+  .corner__title {
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .corner__sub {
+    font-size: .75rem; color: var(--muted);
+    font-weight: 500;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 24px; right: 24px;
+    font-size: .7rem; color: var(--muted2);
+    font-weight: 500; pointer-events: none;
+    text-align: right; line-height: 1.7;
+  }
+
+  /* Tooltip */
+  #tip {
+    position: absolute;
+    background: rgba(18,18,24,.92);
+    border: 1px solid rgba(236,234,245,.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .18s;
+    max-width: 200px;
+    backdrop-filter: blur(8px);
+    z-index: 20;
+  }
+  #tip.show { opacity: 1; }
+  #tip .tip-label {
+    font-size: .85rem; font-weight: 700;
+    color: var(--text); margin-bottom: 4px;
+  }
+  #tip .tip-desc {
+    font-size: .75rem; color: var(--muted);
+    line-height: 1.5; font-weight: 500;
+  }
+  #tip .tip-cluster {
+    font-size: .65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .07em;
+    margin-bottom: 5px;
+    opacity: .8;
+  }
+
+  /* Legend */
+  .legend {
+    position: absolute;
+    top: 20px; right: 20px;
+    display: flex; flex-direction: column; gap: 6px;
+    pointer-events: none;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: .68rem; font-weight: 600;
+    color: var(--muted2);
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .legend-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .legend { display: none; }
+    .corner { bottom: 16px; left: 16px; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 12L6 8l4-4"/></svg>
+    marwah.dev
+  </a>
+  <span class="nav__sep">/</span>
+  <span class="nav__cur">Skills Constellation</span>
+</nav>
+
+<div class="stage">
+  <canvas id="c"></canvas>
+
+  <div class="corner">
+    <div class="corner__title">Marwah Khairunnisa</div>
+    <div class="corner__sub">BD · Content · Tech · Research</div>
+  </div>
+
+  <div class="hint">
+    Hover to explore<br>
+    Drag to move
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div id="tip"><div class="tip-cluster" id="tipCluster"></div><div class="tip-label" id="tipLabel"></div><div class="tip-desc" id="tipDesc"></div></div>
+</div>
+
+<script>
+// ─── Data ────────────────────────────────────────────────────────────────────
+const CLUSTERS = {
+  biz:     { name: 'BD & Commercial', color: '#a78bfa' },
+  content: { name: 'Content & Story',  color: '#f9a8d4' },
+  tech:    { name: 'Tech & Tools',     color: '#67e8f9' },
+  data:    { name: 'Research & Data',  color: '#6ee7b7' },
+};
+
+const NODES = [
+  // BD cluster
+  { id:'bd',           label:'BD Strategy',         desc:'Pipeline building, partner acquisition, and commercial growth at scale.',            size:26, bx:.38, by:.42, cluster:'biz' },
+  { id:'outreach',     label:'Cold Outreach',        desc:'Writing pitches that actually get replies — human, credible, worth responding to.',  size:20, bx:.22, by:.30, cluster:'biz' },
+  { id:'partnerships', label:'Creator Partnerships', desc:'Structuring and closing brand × creator deals end-to-end.',                          size:21, bx:.53, by:.33, cluster:'biz' },
+  { id:'negotiation',  label:'Negotiation',           desc:'Getting to yes without leaving value on the table.',                                size:13, bx:.20, by:.50, cluster:'biz' },
+  { id:'campaigns',    label:'Campaign Management',  desc:'Running creator campaigns from brief to post-campaign report.',                      size:15, bx:.40, by:.58, cluster:'biz' },
+
+  // Content cluster
+  { id:'storytelling', label:'Storytelling',          desc:'Turning data and ideas into something worth reading or sharing.',                   size:20, bx:.73, by:.34, cluster:'content' },
+  { id:'strategy',     label:'Content Strategy',      desc:'Deciding what to say, to whom, and why it matters right now.',                      size:17, bx:.78, by:.52, cluster:'content' },
+  { id:'copy',         label:'Copywriting',            desc:'Words that move people to act — without sounding like an ad.',                     size:13, bx:.86, by:.42, cluster:'content' },
+  { id:'hooks',        label:'Hook Writing',           desc:'First lines that make people stop and keep reading.',                               size:13, bx:.82, by:.65, cluster:'content' },
+
+  // Tech cluster
+  { id:'ai',           label:'AI Tools',               desc:'Building with and prompting LLMs to solve problems that used to need a team.',     size:20, bx:.48, by:.73, cluster:'tech' },
+  { id:'automation',   label:'Automation',              desc:'Systemizing workflows so humans can focus on what actually needs them.',           size:17, bx:.33, by:.74, cluster:'tech' },
+  { id:'vibe',         label:'Vibe Coding',             desc:'Shipping functional products without being a full developer.',                    size:13, bx:.20, by:.67, cluster:'tech' },
+
+  // Data cluster
+  { id:'research',     label:'Market Research',        desc:'Finding signal before committing — who, what, and whether it\'s worth pursuing.',   size:17, bx:.62, by:.20, cluster:'data' },
+  { id:'analytics',    label:'Creator Analytics',      desc:'Reading performance data to tell what worked and what to do differently.',          size:13, bx:.76, by:.16, cluster:'data' },
+];
+
+const EDGES = [
+  // Business
+  ['bd','outreach'], ['bd','partnerships'], ['bd','negotiation'], ['bd','campaigns'],
+  ['outreach','negotiation'], ['partnerships','campaigns'],
+  // Content
+  ['storytelling','strategy'], ['storytelling','copy'], ['strategy','hooks'], ['copy','hooks'],
+  // Tech
+  ['ai','automation'], ['automation','vibe'],
+  // Data
+  ['research','analytics'],
+  // Cross-cluster
+  ['bd','storytelling'], ['outreach','copy'], ['partnerships','strategy'],
+  ['campaigns','automation'], ['ai','outreach'], ['research','partnerships'],
+  ['analytics','campaigns'], ['storytelling','research'],
+];
+
+// ─── Canvas setup ─────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const tip    = document.getElementById('tip');
+let W, H, dpr;
+
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = rect.width; H = rect.height;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+  initNodes();
+}
+
+// ─── Node state ───────────────────────────────────────────────────────────────
+let nodes = [];
+let stars = [];
+
+function initNodes() {
+  nodes = NODES.map((n, i) => ({
+    ...n,
+    x: n.bx * W,
+    y: n.by * H,
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.0003 + Math.random() * 0.0002,
+    amp:   W * 0.012 + Math.random() * W * 0.008,
+    phaseY: Math.random() * Math.PI * 2,
+    color: CLUSTERS[n.cluster].color,
+    hovered: false,
+    // drag
+    dragging: false,
+    dx: 0, dy: 0,
+  }));
+
+  // background stars
+  stars = Array.from({ length: 120 }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: Math.random() * 1.2,
+    a: 0.05 + Math.random() * 0.2,
+    twinkle: Math.random() * Math.PI * 2,
+    twinkleSpeed: 0.001 + Math.random() * 0.002,
+  }));
+}
+
+// ─── Build legend ─────────────────────────────────────────────────────────────
+const legendEl = document.getElementById('legend');
+Object.entries(CLUSTERS).forEach(([, c]) => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>${c.name}`;
+  legendEl.appendChild(item);
+});
+
+// ─── Mouse / touch ────────────────────────────────────────────────────────────
+let mouse = { x: -999, y: -999 };
+let hoveredNode = null;
+let dragNode = null;
+let dragOffX = 0, dragOffY = 0;
+
+function getPos(e) {
+  const r = canvas.getBoundingClientRect();
+  if (e.touches) {
+    return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+  }
+  return { x: e.clientX - r.left, y: e.clientY - r.top };
+}
+
+function findNearest(x, y) {
+  let best = null, bestD = Infinity;
+  nodes.forEach(n => {
+    const d = Math.hypot(n.x - x, n.y - y);
+    if (d < Math.max(n.size + 14, 28) && d < bestD) { bestD = d; best = n; }
+  });
+  return best;
+}
+
+canvas.addEventListener('mousemove', e => {
+  const {x, y} = getPos(e);
+  mouse = {x, y};
+  if (dragNode) {
+    dragNode.x = x + dragOffX;
+    dragNode.y = y + dragOffY;
+    // pin bx/by so it stays after drag
+    dragNode.bx = dragNode.x / W;
+    dragNode.by = dragNode.y / H;
+  }
+});
+
+canvas.addEventListener('mousedown', e => {
+  const {x, y} = getPos(e);
+  const n = findNearest(x, y);
+  if (n) {
+    dragNode = n;
+    dragOffX = n.x - x;
+    dragOffY = n.y - y;
+    canvas.style.cursor = 'grabbing';
+  }
+});
+
+window.addEventListener('mouseup', () => {
+  dragNode = null;
+  canvas.style.cursor = 'default';
+});
+
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const {x, y} = getPos(e);
+  const n = findNearest(x, y);
+  if (n) { dragNode = n; dragOffX = n.x - x; dragOffY = n.y - y; }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const {x, y} = getPos(e);
+  mouse = {x, y};
+  if (dragNode) {
+    dragNode.x = x + dragOffX;
+    dragNode.y = y + dragOffY;
+    dragNode.bx = dragNode.x / W;
+    dragNode.by = dragNode.y / H;
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchend', () => { dragNode = null; });
+
+// ─── Tooltip positioning ──────────────────────────────────────────────────────
+function showTip(node) {
+  document.getElementById('tipCluster').textContent = CLUSTERS[node.cluster].name;
+  document.getElementById('tipCluster').style.color = node.color;
+  document.getElementById('tipLabel').textContent = node.label;
+  document.getElementById('tipDesc').textContent  = node.desc;
+  tip.classList.add('show');
+
+  const tw = 200, th = 90;
+  let tx = node.x + node.size + 14;
+  let ty = node.y - th / 2;
+  if (tx + tw > W - 10) tx = node.x - node.size - tw - 14;
+  if (ty < 10) ty = 10;
+  if (ty + th > H - 10) ty = H - th - 10;
+  tip.style.left = tx + 'px';
+  tip.style.top  = ty + 'px';
+}
+function hideTip() { tip.classList.remove('show'); }
+
+// ─── Draw helpers ─────────────────────────────────────────────────────────────
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function drawNode(n, highlight) {
+  const glowSize  = highlight ? n.size * 2.8 : n.size * 1.6;
+  const glowAlpha = highlight ? 0.22 : 0.09;
+  const rgb = hexToRgb(n.color);
+
+  // outer glow
+  const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowSize);
+  grd.addColorStop(0,   `rgba(${rgb},${glowAlpha})`);
+  grd.addColorStop(1,   `rgba(${rgb},0)`);
+  ctx.beginPath();
+  ctx.arc(n.x, n.y, glowSize, 0, Math.PI*2);
+  ctx.fillStyle = grd;
+  ctx.fill();
+
+  // inner circle
+  ctx.beginPath();
+  ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+  const innerGrd = ctx.createRadialGradient(n.x - n.size*.3, n.y - n.size*.3, 0, n.x, n.y, n.size);
+  innerGrd.addColorStop(0, `rgba(${rgb},${highlight ? .9 : .55})`);
+  innerGrd.addColorStop(1, `rgba(${rgb},${highlight ? .55 : .28})`);
+  ctx.fillStyle = innerGrd;
+  ctx.fill();
+
+  // ring
+  ctx.beginPath();
+  ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+  ctx.strokeStyle = `rgba(${rgb},${highlight ? .7 : .3})`;
+  ctx.lineWidth = highlight ? 1.5 : 1;
+  ctx.stroke();
+
+  // label
+  const showLabel = n.size >= 18 || highlight;
+  if (showLabel) {
+    ctx.font = `${highlight ? 600 : 500} ${highlight ? 12 : 11}px Onest, sans-serif`;
+    ctx.fillStyle = highlight ? `rgba(236,234,245,1)` : `rgba(236,234,245,0.65)`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(n.label, n.x, n.y + n.size + 13);
+  }
+}
+
+function drawEdge(a, b, alpha) {
+  ctx.beginPath();
+  ctx.moveTo(a.x, a.y);
+  ctx.lineTo(b.x, b.y);
+  ctx.strokeStyle = `rgba(236,234,245,${alpha})`;
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+}
+
+// ─── Main loop ────────────────────────────────────────────────────────────────
+let t = 0;
+
+function frame() {
+  requestAnimationFrame(frame);
+  t += 16;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // background stars
+  stars.forEach(s => {
+    s.twinkle += s.twinkleSpeed;
+    const a = s.a + Math.sin(s.twinkle) * 0.08;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(236,234,245,${a})`;
+    ctx.fill();
+  });
+
+  // float nodes (skip if dragging)
+  nodes.forEach(n => {
+    if (!dragNode || dragNode !== n) {
+      n.x = n.bx * W + Math.sin(t * n.speed + n.phase)  * n.amp;
+      n.y = n.by * H + Math.sin(t * n.speed + n.phaseY) * n.amp * 0.6;
+    }
+  });
+
+  // find hovered node
+  const prev = hoveredNode;
+  hoveredNode = findNearest(mouse.x, mouse.y);
+
+  if (hoveredNode) {
+    canvas.style.cursor = 'grab';
+    showTip(hoveredNode);
+  } else {
+    canvas.style.cursor = dragNode ? 'grabbing' : 'default';
+    hideTip();
+  }
+
+  // build lookup
+  const nodeMap = {};
+  nodes.forEach(n => nodeMap[n.id] = n);
+
+  // determine highlighted edges
+  const hlEdges = new Set();
+  if (hoveredNode) {
+    EDGES.forEach(([a,b]) => {
+      if (a === hoveredNode.id || b === hoveredNode.id) hlEdges.add(`${a}-${b}`);
+    });
+  }
+
+  // draw edges
+  EDGES.forEach(([aId, bId]) => {
+    const a = nodeMap[aId], b = nodeMap[bId];
+    if (!a || !b) return;
+    const key = `${aId}-${bId}`;
+    const isHL = hlEdges.has(key);
+    drawEdge(a, b, isHL ? 0.35 : 0.07);
+  });
+
+  // draw nodes
+  nodes.forEach(n => {
+    const isHL = hoveredNode && (
+      hoveredNode.id === n.id ||
+      EDGES.some(([a,b]) => (a === hoveredNode.id || b === hoveredNode.id) && (a === n.id || b === n.id))
+    );
+    drawNode(n, isHL);
+  });
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  ctx.setTransform(1,0,0,1,0,0);
+  resize();
+});
+resize();
+frame();
+</script>
+</body>
+</html>
