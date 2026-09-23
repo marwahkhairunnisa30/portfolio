@@ -4,22 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FI Calculator — Marwah K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0e0e10;
+    --bg: #0b0b10;
+    --bg2: #060609;
     --surface: #18181b;
     --surface2: #1f1f23;
-    --border: rgba(255,255,255,0.07);
+    --border: rgba(236,234,245,.12);
+    --border-dim: rgba(236,234,245,.07);
     --text: #eceaf5;
-    --muted: rgba(236,234,245,0.45);
+    --muted: rgba(236,234,245,.45);
+    --muted2: rgba(236,234,245,.3);
     --accent: #a78bfa;
-    --accent-dim: rgba(167,139,250,0.15);
+    --accent-dim: rgba(167,139,250,.15);
     --green: #34d399;
-    --green-dim: rgba(52,211,153,0.12);
-    --input-bg: #111113;
-    --radius: 12px;
-    --radius-sm: 8px;
+    --green-dim: rgba(52,211,153,.12);
+    --input-bg: #0e0e13;
+    --radius: 14px;
+    --radius-sm: 10px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +33,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px;
     line-height: 1.6;
     min-height: 100vh;
@@ -38,30 +44,24 @@
   .nav {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
+    gap: .75rem;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-dim);
   }
   .nav__back {
     display: inline-flex;
     align-items: center;
-    gap: .4rem;
+    gap: .375rem;
     color: var(--muted);
     text-decoration: none;
-    font-size: .85rem;
+    font-size: .8rem;
+    font-weight: 500;
     transition: color .15s;
   }
   .nav__back:hover { color: var(--text); }
-  .nav__back svg { width: 14px; height: 14px; }
-  .nav__title {
-    font-size: .85rem;
-    color: var(--muted);
-  }
-  .nav__dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: var(--border);
-  }
+  .nav__back svg { width: 13px; height: 13px; }
+  .nav__sep { color: var(--border); font-size: .8rem; }
+  .nav__title { font-size: .8rem; color: var(--muted2); font-weight: 500; }
 
   /* Layout */
   .wrapper {
@@ -72,27 +72,66 @@
 
   /* Header */
   .header {
-    padding: 48px 0 32px;
+    padding: 44px 0 28px;
+  }
+  .header__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
   .header__eyebrow {
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .08em;
     color: var(--accent);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .header__title {
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 700;
     letter-spacing: -.03em;
-    line-height: 1.2;
-    margin-bottom: 10px;
+    line-height: 1.15;
+    margin-bottom: 8px;
   }
   .header__desc {
     color: var(--muted);
-    font-size: .9rem;
-    max-width: 480px;
+    font-size: .875rem;
+  }
+
+  /* Currency toggle */
+  .currency-toggle {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .currency-btn {
+    background: none;
+    border: none;
+    border-radius: 7px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    letter-spacing: .02em;
+  }
+  .currency-btn.active {
+    background: rgba(167,139,250,.15);
+    color: var(--accent);
+  }
+  .currency-btn:not(.active):hover {
+    color: var(--text);
+    background: rgba(236,234,245,.04);
   }
 
   /* Card */
@@ -100,25 +139,30 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 16px;
+    padding: 22px;
+    margin-bottom: 12px;
+  }
+  .card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
   }
   .card__title {
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .07em;
-    color: var(--muted);
-    margin-bottom: 18px;
+    color: var(--muted2);
   }
 
   /* Grid */
   .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 560px) {
     .grid-2 { grid-template-columns: 1fr; }
     .header__title { font-size: 1.5rem; }
   }
@@ -130,7 +174,7 @@
     gap: 6px;
   }
   .field label {
-    font-size: .8rem;
+    font-size: .78rem;
     color: var(--muted);
     font-weight: 500;
   }
@@ -142,27 +186,23 @@
   .field__prefix {
     position: absolute;
     left: 12px;
-    color: var(--muted);
-    font-size: .9rem;
+    color: var(--muted2);
+    font-size: .875rem;
     pointer-events: none;
-    font-weight: 500;
-  }
-  .field__suffix {
-    position: absolute;
-    right: 12px;
-    color: var(--muted);
-    font-size: .85rem;
-    pointer-events: none;
+    font-weight: 600;
+    white-space: nowrap;
   }
   .field input[type="number"] {
     width: 100%;
     background: var(--input-bg);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-dim);
     border-radius: var(--radius-sm);
     color: var(--text);
-    font-size: .95rem;
+    font-size: .9rem;
     font-family: inherit;
-    padding: 10px 36px 10px 28px;
+    font-weight: 500;
+    padding: 10px 12px 10px 0;
+    padding-left: var(--prefix-pad, 28px);
     outline: none;
     transition: border-color .15s;
     -moz-appearance: textfield;
@@ -170,7 +210,7 @@
   .field input[type="number"]::-webkit-outer-spin-button,
   .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
   .field input[type="number"]:focus {
-    border-color: var(--accent);
+    border-color: rgba(167,139,250,.4);
   }
   .field input[type="range"] {
     width: 100%;
@@ -179,11 +219,11 @@
     height: 4px;
   }
   .field__range-val {
-    font-size: .9rem;
-    font-weight: 600;
+    font-size: .875rem;
+    font-weight: 700;
     color: var(--accent);
     text-align: right;
-    min-width: 42px;
+    min-width: 40px;
   }
   .field__range-row {
     display: flex;
@@ -195,113 +235,96 @@
   .results-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 18px;
   }
   @media (max-width: 480px) {
     .results-grid { grid-template-columns: 1fr 1fr; }
   }
 
   .stat {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--input-bg);
+    border: 1px solid var(--border-dim);
     border-radius: var(--radius-sm);
-    padding: 16px;
+    padding: 14px;
   }
   .stat__label {
-    font-size: .72rem;
-    color: var(--muted);
+    font-size: .68rem;
+    color: var(--muted2);
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .07em;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
   .stat__value {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    letter-spacing: -.02em;
+    letter-spacing: -.025em;
     color: var(--text);
+    line-height: 1.1;
   }
   .stat__value.accent { color: var(--accent); }
   .stat__value.green { color: var(--green); }
   .stat__sub {
-    font-size: .72rem;
+    font-size: .7rem;
     color: var(--muted);
-    margin-top: 2px;
+    margin-top: 3px;
+    font-weight: 500;
   }
 
   /* Progress bar */
-  .progress-wrap {
-    margin-bottom: 20px;
-  }
+  .progress-wrap { margin-bottom: 4px; }
   .progress-label {
     display: flex;
     justify-content: space-between;
-    font-size: .78rem;
+    font-size: .75rem;
     color: var(--muted);
     margin-bottom: 6px;
+    font-weight: 500;
   }
   .progress-bar {
-    height: 6px;
-    background: var(--surface2);
+    height: 5px;
+    background: var(--input-bg);
     border-radius: 999px;
     overflow: hidden;
+    border: 1px solid var(--border-dim);
   }
   .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--green));
     border-radius: 999px;
-    transition: width .4s ease;
+    transition: width .4s cubic-bezier(.22,1,.36,1);
     min-width: 0;
   }
 
   /* Chart */
   .chart-wrap {
     position: relative;
-    height: 240px;
+    height: 230px;
   }
 
-  /* Warning / empty */
+  /* Empty state */
   .msg {
     text-align: center;
-    padding: 48px 20px;
+    padding: 40px 20px;
     color: var(--muted);
     font-size: .85rem;
   }
   .msg strong {
     display: block;
-    font-size: 1rem;
+    font-size: .95rem;
     color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  /* Badge */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    background: var(--accent-dim);
-    border: 1px solid rgba(167,139,250,.2);
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-size: .72rem;
+    margin-bottom: 5px;
     font-weight: 600;
-    color: var(--accent);
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  .badge.green {
-    background: var(--green-dim);
-    border-color: rgba(52,211,153,.2);
-    color: var(--green);
   }
 
   /* Footer note */
   .footnote {
-    font-size: .75rem;
-    color: var(--muted);
+    font-size: .72rem;
+    color: var(--muted2);
     text-align: center;
-    margin-top: 24px;
-    opacity: .6;
+    margin-top: 20px;
+    line-height: 1.7;
   }
 </style>
 </head>
@@ -314,15 +337,23 @@
     </svg>
     marwah.dev
   </a>
-  <div class="nav__dot"></div>
+  <span class="nav__sep">/</span>
   <span class="nav__title">FI Calculator</span>
 </nav>
 
 <div class="wrapper">
   <div class="header">
-    <div class="header__eyebrow">Personal Finance</div>
-    <h1 class="header__title">Financial Independence<br>Calculator</h1>
-    <p class="header__desc">Find out when you could stop working — based on your savings rate and the 4% rule.</p>
+    <div class="header__top">
+      <div>
+        <div class="header__eyebrow">Personal Finance</div>
+        <h1 class="header__title">Financial Independence<br>Calculator</h1>
+        <p class="header__desc">Find out when you could stop working — based on your savings rate and the 4% rule.</p>
+      </div>
+      <div class="currency-toggle">
+        <button class="currency-btn active" id="btnUSD" onclick="setCurrency('USD')">USD</button>
+        <button class="currency-btn" id="btnIDR" onclick="setCurrency('IDR')">IDR</button>
+      </div>
+    </div>
   </div>
 
   <!-- Inputs -->
@@ -332,21 +363,21 @@
       <div class="field">
         <label>Monthly Income (after tax)</label>
         <div class="field__input-wrap">
-          <span class="field__prefix">$</span>
+          <span class="field__prefix" id="pfxIncome">$</span>
           <input type="number" id="income" value="5000" min="0" step="100">
         </div>
       </div>
       <div class="field">
         <label>Monthly Expenses</label>
         <div class="field__input-wrap">
-          <span class="field__prefix">$</span>
+          <span class="field__prefix" id="pfxExpenses">$</span>
           <input type="number" id="expenses" value="3000" min="0" step="100">
         </div>
       </div>
       <div class="field">
         <label>Current Savings / Investments</label>
         <div class="field__input-wrap">
-          <span class="field__prefix">$</span>
+          <span class="field__prefix" id="pfxSavings">$</span>
           <input type="number" id="savings" value="20000" min="0" step="1000">
         </div>
       </div>
@@ -374,21 +405,78 @@
     </div>
   </div>
 
-  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings and a fixed annual return. This is not financial advice.</p>
+  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings and a fixed annual return.<br>This is not financial advice.</p>
 </div>
 
 <script>
   let chart = null;
+  let currency = 'USD';
 
-  function fmt(n) {
-    if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  const DEFAULTS = {
+    USD: { income: 5000,      expenses: 3000,     savings: 20000 },
+    IDR: { income: 15000000,  expenses: 8000000,  savings: 50000000 }
+  };
+
+  const CURRENCY_META = {
+    USD: { symbol: '$', symbolWidth: 18, prefixPad: '26px', step: { income: 100, expenses: 100, savings: 1000 } },
+    IDR: { symbol: 'Rp', symbolWidth: 26, prefixPad: '36px', step: { income: 500000, expenses: 500000, savings: 5000000 } }
+  };
+
+  function fmtNum(n) {
+    if (currency === 'IDR') {
+      if (n >= 1e12)  return 'Rp ' + (n / 1e12).toFixed(1).replace(/\.0$/, '') + 'T';
+      if (n >= 1e9)   return 'Rp ' + (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'M';
+      if (n >= 1e6)   return 'Rp ' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'Jt';
+      if (n >= 1e3)   return 'Rp ' + (n / 1e3).toFixed(0) + 'K';
+      return 'Rp ' + Math.round(n).toLocaleString();
+    }
+    if (n >= 1e6) return '$' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
     if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
     return '$' + Math.round(n).toLocaleString();
   }
 
+  function fmtMonthly(n) {
+    if (currency === 'IDR') {
+      if (n >= 1e6) return 'Rp ' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'Jt/mo';
+      if (n >= 1e3) return 'Rp ' + (n / 1e3).toFixed(0) + 'K/mo';
+      return 'Rp ' + Math.round(n).toLocaleString() + '/mo';
+    }
+    if (n >= 1e3) return '$' + (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K/mo';
+    return '$' + Math.round(n) + '/mo';
+  }
+
+  function setCurrency(cur) {
+    currency = cur;
+
+    document.getElementById('btnUSD').classList.toggle('active', cur === 'USD');
+    document.getElementById('btnIDR').classList.toggle('active', cur === 'IDR');
+
+    const meta = CURRENCY_META[cur];
+    const def = DEFAULTS[cur];
+
+    ['Income','Expenses','Savings'].forEach(f => {
+      const el = document.getElementById('pfx' + f);
+      el.textContent = meta.symbol;
+    });
+
+    // Update padding on inputs based on prefix width
+    document.querySelectorAll('.field input[type="number"]').forEach(inp => {
+      inp.style.paddingLeft = meta.prefixPad;
+    });
+
+    // Update steps and default values
+    document.getElementById('income').step = meta.step.income;
+    document.getElementById('expenses').step = meta.step.expenses;
+    document.getElementById('savings').step = meta.step.savings;
+
+    document.getElementById('income').value = def.income;
+    document.getElementById('expenses').value = def.expenses;
+    document.getElementById('savings').value = def.savings;
+
+    calculate();
+  }
+
   function yearsToFI(pv, pmt, fv, r) {
-    // Solve: fv = pv*(1+r)^n + pmt*((1+r)^n - 1)/r for n
-    // Binary search
     if (pmt <= 0 && pv >= fv) return 0;
     if (pmt <= 0) return Infinity;
     let lo = 0, hi = 200;
@@ -396,8 +484,7 @@
       const mid = (lo + hi) / 2;
       const factor = Math.pow(1 + r, mid);
       const nw = pv * factor + pmt * (factor - 1) / r;
-      if (nw < fv) lo = mid;
-      else hi = mid;
+      if (nw < fv) lo = mid; else hi = mid;
     }
     return (lo + hi) / 2;
   }
@@ -408,17 +495,17 @@
   }
 
   function calculate() {
-    const income = parseFloat(document.getElementById('income').value) || 0;
+    const income   = parseFloat(document.getElementById('income').value)   || 0;
     const expenses = parseFloat(document.getElementById('expenses').value) || 0;
-    const savings = parseFloat(document.getElementById('savings').value) || 0;
-    const rPct = parseFloat(document.getElementById('returnRate').value) || 7;
+    const savings  = parseFloat(document.getElementById('savings').value)  || 0;
+    const rPct     = parseFloat(document.getElementById('returnRate').value) || 7;
     const r = rPct / 100;
 
     const monthly_savings = income - expenses;
-    const annual_savings = monthly_savings * 12;
-    const savings_rate = income > 0 ? (monthly_savings / income) * 100 : 0;
-    const fi_number = expenses * 12 * 25;
-    const progress_pct = fi_number > 0 ? Math.min((savings / fi_number) * 100, 100) : 0;
+    const annual_savings  = monthly_savings * 12;
+    const savings_rate    = income > 0 ? (monthly_savings / income) * 100 : 0;
+    const fi_number       = expenses * 12 * 25;
+    const progress_pct    = fi_number > 0 ? Math.min((savings / fi_number) * 100, 100) : 0;
 
     const resultsContent = document.getElementById('resultsContent');
 
@@ -433,25 +520,23 @@
     }
 
     const years = yearsToFI(savings, annual_savings, fi_number, r);
-    const fi_age_note = years === Infinity ? '—' : years < 1 ? 'Already there!' : `${Math.ceil(years)} yrs`;
-
-    const badgeClass = savings_rate >= 50 ? 'green' : savings_rate >= 25 ? '' : '';
+    const timeLabel = years === Infinity ? '—' : years < 1 ? 'Already there!' : `${Math.ceil(years)} yrs`;
 
     resultsContent.innerHTML = `
       <div class="results-grid">
         <div class="stat">
           <div class="stat__label">Savings Rate</div>
           <div class="stat__value ${savings_rate >= 25 ? 'accent' : ''}">${savings_rate.toFixed(0)}%</div>
-          <div class="stat__sub">${fmt(monthly_savings)}/mo saved</div>
+          <div class="stat__sub">${fmtMonthly(monthly_savings)} saved</div>
         </div>
         <div class="stat">
           <div class="stat__label">FI Number</div>
-          <div class="stat__value">${fmt(fi_number)}</div>
+          <div class="stat__value">${fmtNum(fi_number)}</div>
           <div class="stat__sub">25× annual expenses</div>
         </div>
         <div class="stat">
           <div class="stat__label">Time to FI</div>
-          <div class="stat__value ${years <= 15 ? 'green' : 'accent'}">${fi_age_note}</div>
+          <div class="stat__value ${years !== Infinity && years <= 15 ? 'green' : 'accent'}">${timeLabel}</div>
           <div class="stat__sub">at ${rPct}% annual return</div>
         </div>
       </div>
@@ -466,10 +551,8 @@
       </div>
     `;
 
-    // Build chart data
     const maxYears = years === Infinity ? 40 : Math.min(Math.ceil(years) + 5, 60);
-    const labels = [];
-    const data = [];
+    const labels = [], data = [];
     for (let y = 0; y <= maxYears; y++) {
       labels.push(`Y${y}`);
       data.push(netWorthAt(savings, annual_savings, r, y));
@@ -480,16 +563,12 @@
 
   function renderChart(labels, data, fiNumber) {
     const ctx = document.getElementById('fiChart').getContext('2d');
-
     if (chart) { chart.destroy(); chart = null; }
-
     if (!labels.length) return;
 
-    // Find FI crossover index
     const crossover = data.findIndex(v => v >= fiNumber);
-
-    const pointColors = data.map((v, i) => v >= fiNumber ? '#34d399' : '#a78bfa');
-    const pointRadius = data.map((v, i) => i === crossover ? 6 : 0);
+    const pointRadius = data.map((_, i) => i === crossover ? 6 : 0);
+    const pointColors = data.map(v => v >= fiNumber ? '#34d399' : '#a78bfa');
 
     chart = new Chart(ctx, {
       type: 'line',
@@ -511,7 +590,7 @@
           {
             label: 'FI Number',
             data: labels.map(() => fiNumber),
-            borderColor: 'rgba(52,211,153,0.4)',
+            borderColor: 'rgba(52,211,153,0.35)',
             borderWidth: 1.5,
             borderDash: [5, 5],
             fill: false,
@@ -526,37 +605,38 @@
         plugins: {
           legend: {
             labels: {
-              color: 'rgba(236,234,245,0.45)',
-              font: { size: 11 },
+              color: 'rgba(236,234,245,0.4)',
+              font: { size: 11, family: 'Onest' },
               boxWidth: 12,
               padding: 16,
             }
           },
           tooltip: {
             backgroundColor: '#18181b',
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(236,234,245,0.12)',
             borderWidth: 1,
             titleColor: '#eceaf5',
-            bodyColor: 'rgba(236,234,245,0.6)',
+            bodyColor: 'rgba(236,234,245,0.55)',
+            padding: 10,
             callbacks: {
-              label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}`
+              label: ctx => ` ${ctx.dataset.label}: ${fmtNum(ctx.parsed.y)}`
             }
           }
         },
         scales: {
           x: {
             ticks: {
-              color: 'rgba(236,234,245,0.3)',
-              font: { size: 10 },
+              color: 'rgba(236,234,245,0.25)',
+              font: { size: 10, family: 'Onest' },
               maxTicksLimit: 10,
             },
             grid: { color: 'rgba(255,255,255,0.04)' },
           },
           y: {
             ticks: {
-              color: 'rgba(236,234,245,0.3)',
-              font: { size: 10 },
-              callback: v => fmt(v),
+              color: 'rgba(236,234,245,0.25)',
+              font: { size: 10, family: 'Onest' },
+              callback: v => fmtNum(v),
             },
             grid: { color: 'rgba(255,255,255,0.04)' },
           }
@@ -571,13 +651,17 @@
   });
 
   const rSlider = document.getElementById('returnRate');
-  const rLabel = document.getElementById('returnRateLabel');
+  const rLabel  = document.getElementById('returnRateLabel');
   rSlider.addEventListener('input', () => {
     rLabel.textContent = rSlider.value + '%';
     calculate();
   });
 
-  // Initial calc
+  // Set initial padding for USD prefix
+  document.querySelectorAll('.field input[type="number"]').forEach(inp => {
+    inp.style.paddingLeft = CURRENCY_META.USD.prefixPad;
+  });
+
   calculate();
 </script>
 </body>
