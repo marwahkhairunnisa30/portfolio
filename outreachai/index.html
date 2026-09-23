@@ -569,6 +569,29 @@
   <div class="card">
     <div class="form-stack">
 
+      <!-- Sender Name | Sender Company -->
+      <div>
+        <label class="field-label" for="sender-name">Your Name</label>
+        <input id="sender-name" class="input" type="text" placeholder="e.g. Marwah" autocomplete="off" />
+      </div>
+      <div>
+        <label class="field-label" for="sender-company">Your Company / Team</label>
+        <input id="sender-company" class="input" type="text" placeholder="e.g. AHA Commerce" autocomplete="off" />
+      </div>
+
+      <!-- Platform (full) -->
+      <div class="field-full">
+        <label class="field-label">Target Platform</label>
+        <div class="chips" id="platform-chips">
+          <button class="chip" data-v="Shopee">Shopee</button>
+          <button class="chip" data-v="Tokopedia">Tokopedia</button>
+          <button class="chip" data-v="TikTok Shop">TikTok Shop</button>
+          <button class="chip" data-v="Lazada">Lazada</button>
+          <button class="chip" data-v="Instagram">Instagram</button>
+          <button class="chip" data-v="Other">Other</button>
+        </div>
+      </div>
+
       <!-- Brand Name | Industry -->
       <div>
         <label class="field-label" for="brand">Brand Name</label>
@@ -586,19 +609,6 @@
             <option value="Electronics">Electronics</option>
             <option value="Other">Other</option>
           </select>
-        </div>
-      </div>
-
-      <!-- Platform (full) -->
-      <div class="field-full">
-        <label class="field-label">Target Platform</label>
-        <div class="chips" id="platform-chips">
-          <button class="chip" data-v="Shopee">Shopee</button>
-          <button class="chip" data-v="Tokopedia">Tokopedia</button>
-          <button class="chip" data-v="TikTok Shop">TikTok Shop</button>
-          <button class="chip" data-v="Lazada">Lazada</button>
-          <button class="chip" data-v="Instagram">Instagram</button>
-          <button class="chip" data-v="Other">Other</button>
         </div>
       </div>
 
@@ -641,16 +651,6 @@
             <option value="Other">Other</option>
           </select>
         </div>
-      </div>
-
-      <!-- Sender Name | Sender Company -->
-      <div>
-        <label class="field-label" for="sender-name">Your Name</label>
-        <input id="sender-name" class="input" type="text" placeholder="e.g. Marwah" autocomplete="off" />
-      </div>
-      <div>
-        <label class="field-label" for="sender-company">Your Company / Team</label>
-        <input id="sender-company" class="input" type="text" placeholder="e.g. AHA Commerce" autocomplete="off" />
       </div>
 
       <!-- Tone | Language -->
