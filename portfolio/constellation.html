@@ -236,13 +236,23 @@ function initNodes() {
     pulsePhase: Math.random() * Math.PI * 2,
   }));
 
+  // 75% neutral (#eceaf5), 25% brand warm accents (Warm Pop palette)
+  const STAR_PALETTE = [
+    '236,234,245', // #eceaf5 — text primary
+    '236,234,245',
+    '236,234,245',
+    '255,107,90',  // #ff6b5a — Warm Mid
+    '232,52,43',   // #e8342b — Warm Accent
+    '255,179,164', // #ffb3a4 — Warm Highlight
+  ];
   stars = Array.from({ length: 150 }, () => ({
     x:           Math.random() * W,
     y:           Math.random() * H,
     r:           0.3 + Math.random() * 1.1,
-    a:           0.06 + Math.random() * 0.22,
+    a:           0.05 + Math.random() * 0.18,
     twinkle:     Math.random() * Math.PI * 2,
     twinkleSpeed:0.0008 + Math.random() * 0.002,
+    rgb:         STAR_PALETTE[Math.floor(Math.random() * STAR_PALETTE.length)],
   }));
 }
 
@@ -481,7 +491,7 @@ function frame() {
     s.twinkle += s.twinkleSpeed;
     const a = s.a + Math.sin(s.twinkle) * 0.08;
     ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(236,234,245,${a})`; ctx.fill();
+    ctx.fillStyle = `rgba(${s.rgb},${a})`; ctx.fill();
   });
 
   // shooting stars
@@ -491,9 +501,11 @@ function frame() {
     const spd = Math.hypot(ss.vx, ss.vy);
     const tx  = ss.x - (ss.vx / spd) * ss.len;
     const ty  = ss.y - (ss.vy / spd) * ss.len;
+    // Warm Pop brand gradient: #e8342b → #ff6b5a → #ffb3a4
     const gr  = ctx.createLinearGradient(ss.x, ss.y, tx, ty);
-    gr.addColorStop(0, `rgba(255,255,255,${ss.a})`);
-    gr.addColorStop(1, 'rgba(255,255,255,0)');
+    gr.addColorStop(0,   `rgba(232,52,43,${ss.a})`);
+    gr.addColorStop(0.4, `rgba(255,107,90,${ss.a * 0.6})`);
+    gr.addColorStop(1,   'rgba(255,179,164,0)');
     ctx.beginPath(); ctx.moveTo(ss.x, ss.y); ctx.lineTo(tx, ty);
     ctx.strokeStyle = gr; ctx.lineWidth = 1.5; ctx.stroke();
     ss.x += ss.vx; ss.y += ss.vy; ss.a -= ss.fade;
