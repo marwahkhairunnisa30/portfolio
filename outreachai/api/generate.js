@@ -16,23 +16,28 @@ function isAllowed(ip) {
   return true;
 }
 
-const SYSTEM_PROMPT = `You write BD cold outreach that sounds like it came from a real person — someone who actually knows the brand, not someone filling in a template.
+const SYSTEM_PROMPT = `You write BD cold outreach messages that feel like they came from a real person who genuinely knows the brand and the space — credible, personal, and worth replying to.
 
-Hard rules — break any of these and the output fails:
-- Max 80 words per variation. Shorter is better.
-- Never open with: "Hi [name]", "I hope", "I noticed that", "I came across", "I've been following", "Just wanted to reach out", or anything that announces you're about to pitch
+Format — each message must have exactly 2 paragraphs, separated by a blank line:
+- Paragraph 1 (2–3 sentences): Brief, natural self-introduction (who you are, what you do) + one specific, personalized observation about the brand that shows you actually looked at them — not a generic compliment
+- Paragraph 2 (2–3 sentences): Your value or relevant proof + a clear CTA proposing a 20-minute meeting or call to discuss further
+
+Length: 130–180 words total. Detailed enough to be credible, tight enough to respect their time.
+
+Hard rules — break any and the output fails:
+- Never open with "Hi [name]", "I hope this finds you well", "I noticed that", "I came across", "Just wanted to reach out", or any AI opener
 - Never use: leverage, synergy, seamless, cutting-edge, alignment, partnership opportunity, value proposition, mutually beneficial, would love to explore, excited to connect, I believe there's
-- "I" must not be the first word of the message
-- No framing language ("I'm writing because...", "The reason I'm reaching out...")
-- Contact name if provided: weave it naturally mid-sentence, never as a standalone greeting opener
-- Bahasa Indonesia: write the way real BD people in Jakarta actually message — direct, natural mix of BI and English where it fits, not translated English patterns
+- Contact name if provided: use it naturally mid-message, never as a standalone greeting opener
+- Sender's name and company must appear naturally in paragraph 1 — not robotically ("My name is X from Y"), but woven in
+- Bahasa Indonesia: natural code-switching BI/EN where it fits, not translated English patterns
+- The CTA in paragraph 2 must be specific: propose a 20-minute meeting/call, not a vague "let me know if you're interested"
 
-Write 3 variations, each with a different energy and opening style:
-1. "Direct & Punchy" — 2–3 sentences max. Lead with the point. No setup, no buildup, no softening.
-2. "Curiosity-led" — open with one specific observation or question that shows you actually looked at the brand. Not a generic compliment — something that would make them think "huh, they noticed that."
-3. "Proof-first" — drop one concrete result or experience in the first sentence, then connect it to them in the second. Zero preamble.
+3 variations, each with different energy:
+1. "Direct & Punchy" — confident, straight to the point, assertive CTA. No softening.
+2. "Curiosity-led" — open with a specific brand observation that makes them think "they actually looked." Warm but direct CTA.
+3. "Proof-first" — lead paragraph 1 with a concrete result or experience before the intro. CTA ties the proof to what you'd discuss.
 
-Use the approach type (Personal/Brand/Company) to decide who you're addressing, not what you're saying.
+Use approach type (Personal/Brand/Company) to decide who you're addressing.
 
 Output as valid JSON only, no markdown, no explanation:
 {"variations":[{"name":"Direct & Punchy","message":"..."},{"name":"Curiosity-led","message":"..."},{"name":"Proof-first","message":"..."}]}`;
@@ -52,21 +57,22 @@ module.exports = async function handler(req, res) {
   const forwarded = req.headers['x-forwarded-for'];
   const ip = (forwarded ? forwarded.split(',')[0] : req.socket?.remoteAddress || 'unknown').trim();
 
-  const { brand, industry, platform, approach_type, contact_name, tone, goal, language, owner_token } = req.body || {};
+  const { brand, industry, platform, approach_type, contact_name, tone, goal, language, sender_name, sender_company, owner_token } = req.body || {};
 
   const isOwner = owner_token && process.env.OWNER_TOKEN && owner_token === process.env.OWNER_TOKEN;
+  const isLocalhost = ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1';
 
-  if (!isOwner && !isAllowed(ip)) {
+  if (!isOwner && !isLocalhost && !isAllowed(ip)) {
     return res.status(429).json({
       error: 'Sudah 3x generate hari ini. Coba lagi besok ya!',
     });
   }
 
-  if (!brand || !industry || !platform || !tone || !goal || !language) {
+  if (!brand || !industry || !platform || !tone || !goal || !language || !sender_name || !sender_company) {
     return res.status(400).json({ error: 'All fields are required.' });
   }
 
-  const userMessage = `Brand: ${brand}. Industry: ${industry}. Platform: ${platform}. Approach: ${approach_type || 'Personal'}. Contact name: ${contact_name || 'not provided'}. Tone: ${tone}. Goal: ${goal}. Write in ${language}.`;
+  const userMessage = `Sender: ${sender_name} from ${sender_company}. Brand: ${brand}. Industry: ${industry}. Platform: ${platform}. Approach: ${approach_type || 'Personal'}. Contact name: ${contact_name || 'not provided'}. Tone: ${tone}. Goal: ${goal}. Write in ${language}.`;
 
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
