@@ -9,10 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0b10;--card:#13131f;--card2:#1a1a28;
-  --border:rgba(255,255,255,.1);--border-dim:rgba(255,255,255,.06);
+  --bg:#0b0b10;--card:#141421;--card2:#1b1b2b;
+  --border:rgba(255,255,255,.1);--border-dim:rgba(255,255,255,.065);
   --text:#eceaf5;--text-dim:rgba(236,234,245,.55);--text-faint:rgba(236,234,245,.3);
-  --accent:#c03030;--accent-glow:rgba(192,48,48,.18);
+  --accent:#c03030;--accent-glow:rgba(192,48,48,.15);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Onest',sans-serif}
@@ -20,157 +20,172 @@ body{display:flex;flex-direction:column}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 
-/* Header */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.75rem;border-bottom:1px solid var(--border-dim);flex-shrink:0}
-.hdr__back{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--text-dim);transition:color .2s}
-.hdr__back:hover{color:var(--text)}
-.hdr__brand{display:flex;align-items:center;gap:.375rem;font-size:.8125rem;font-weight:600}
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;border-bottom:1px solid var(--border-dim);flex-shrink:0}
+.nav__back{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;color:var(--text-dim);transition:color .2s}
+.nav__back:hover{color:var(--text)}
+.nav__brand{display:flex;align-items:center;gap:.375rem;font-size:.8125rem;font-weight:600;color:var(--text-faint)}
 
-/* Main split */
-.main{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0;padding:2rem 1.75rem;gap:1.5rem;align-items:start}
+/* Page content */
+.page{flex:1;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
 
-/* Form card */
-.card{background:var(--card);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
+/* Title block */
+.title-block{width:100%;max-width:960px;margin-bottom:1.5rem}
+.title-block h1{font-size:1.375rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.3rem}
+.title-block p{font-size:.875rem;color:var(--text-dim)}
+
+/* Unified split card */
+.split-card{width:100%;max-width:960px;background:var(--card);border:1px solid var(--border);border-radius:1.25rem;display:grid;grid-template-columns:380px 1fr;overflow:hidden}
+
+/* Form panel */
+.form-panel{border-right:1px solid var(--border-dim);padding:1.5rem;display:flex;flex-direction:column;gap:1.125rem}
 
 /* Mode toggle */
-.mode-toggle{display:flex;background:var(--card2);border:1px solid var(--border-dim);border-radius:.625rem;padding:.1875rem;gap:.125rem}
-.mode-btn{flex:1;padding:.4375rem .75rem;border-radius:.4375rem;font-size:.8125rem;font-weight:500;color:var(--text-dim);transition:all .2s;text-align:center}
-.mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 12px var(--accent-glow)}
+.mode-toggle{display:flex;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.1875rem;gap:.125rem}
+.mode-btn{flex:1;padding:.375rem .75rem;border-radius:.375rem;font-size:.8125rem;font-weight:500;color:var(--text-dim);transition:all .2s;text-align:center}
+.mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--accent-glow)}
 
-/* Field groups */
+/* Field */
 .field{display:flex;flex-direction:column;gap:.375rem}
-.field-label{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim)}
-.field-label span{color:var(--accent)}
-.inp{background:var(--card2);border:1px solid var(--border-dim);border-radius:.625rem;padding:.6875rem .875rem;font-size:.9rem;font-family:inherit;color:var(--text);transition:border-color .2s;width:100%}
-.inp:focus{outline:none;border-color:rgba(192,48,48,.45)}
+.flabel{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim)}
+.flabel span{color:var(--accent)}
+.inp{background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;font-family:inherit;color:var(--text);transition:border-color .2s;width:100%}
+.inp:focus{outline:none;border-color:rgba(192,48,48,.4)}
 .inp::placeholder{color:var(--text-faint)}
 
-/* Chip selectors */
-.chips{display:flex;flex-wrap:wrap;gap:.375rem}
-.chip{padding:.375rem .875rem;border:1px solid var(--border-dim);border-radius:9999px;font-size:.8rem;font-weight:500;color:var(--text-dim);background:transparent;transition:all .18s;cursor:pointer}
-.chip:hover{border-color:rgba(255,255,255,.22);color:var(--text)}
-.chip.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 10px var(--accent-glow)}
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:.3rem}
+.chip{padding:.3125rem .75rem;border:1px solid var(--border-dim);border-radius:9999px;font-size:.8rem;font-weight:500;color:var(--text-dim);background:transparent;transition:all .15s;cursor:pointer}
+.chip:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* Right: results */
-.results-area{display:flex;flex-direction:column;height:100%;overflow-y:auto;min-height:0}
+/* Results panel */
+.results-panel{padding:1.5rem;overflow-y:auto;display:flex;flex-direction:column}
 
-/* Empty state */
-.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;color:var(--text-faint);text-align:center;padding:2rem}
-.empty-star{font-size:1.75rem;opacity:.4;margin-bottom:.25rem}
-.empty p{font-size:.875rem;line-height:1.5;max-width:22ch}
+/* Empty */
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-faint);text-align:center}
+.empty-icon{font-size:1.5rem;opacity:.35;margin-bottom:.25rem}
+.empty p{font-size:.8125rem;line-height:1.5;max-width:20ch}
 
 /* Results header */
-.res-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;gap:.75rem}
-.res-title{font-size:1rem;font-weight:600}
-.res-count{font-size:.75rem;color:var(--text-faint)}
-.open-all{display:flex;align-items:center;gap:.375rem;padding:.4375rem .875rem;border:1px solid var(--border);border-radius:.5rem;font-size:.75rem;font-weight:500;color:var(--text-dim);transition:all .2s}
+.res-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.res-title{font-size:.9375rem;font-weight:600}
+.res-count{font-size:.75rem;color:var(--text-faint);margin-top:.125rem}
+.open-all{display:flex;align-items:center;gap:.3rem;padding:.375rem .75rem;border:1px solid var(--border);border-radius:.4375rem;font-size:.75rem;font-weight:500;color:var(--text-dim);transition:all .18s;white-space:nowrap}
 .open-all:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow)}
 
 /* Group */
-.group-label{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-faint);margin:1rem 0 .375rem}
-.group-label:first-of-type{margin-top:0}
+.glabel{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.065em;color:var(--text-faint);margin:.875rem 0 .3rem}
+.glabel:first-child{margin-top:0}
 
-/* Link cards */
-.link-card{display:flex;align-items:center;gap:.75rem;background:var(--card);border:1px solid var(--border-dim);border-radius:.75rem;padding:.75rem 1rem;text-decoration:none;transition:all .18s;margin-bottom:.375rem}
-.link-card:last-child{margin-bottom:0}
-.link-card:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.04)}
-.link-icon{width:1.875rem;height:1.875rem;display:grid;place-items:center;background:var(--card2);border:1px solid var(--border-dim);border-radius:.4375rem;flex-shrink:0;font-size:.9375rem;line-height:1}
-.link-label{font-size:.875rem;font-weight:500;flex:1}
-.link-arrow{color:var(--text-faint);flex-shrink:0;transition:all .18s}
-.link-card:hover .link-arrow{transform:translate(2px,-2px);color:var(--accent)}
+/* Link rows */
+.lrow{display:flex;align-items:center;gap:.625rem;padding:.5625rem .75rem;border:1px solid var(--border-dim);border-radius:.5625rem;text-decoration:none;transition:all .15s;margin-bottom:.25rem;background:var(--card2)}
+.lrow:last-child{margin-bottom:0}
+.lrow:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.06)}
+.lrow-icon{width:1.625rem;height:1.625rem;display:grid;place-items:center;flex-shrink:0;font-size:.875rem;line-height:1}
+.lrow-label{font-size:.8375rem;font-weight:500;flex:1;color:var(--text)}
+.lrow-arr{color:var(--text-faint);flex-shrink:0;transition:all .15s}
+.lrow:hover .lrow-arr{transform:translate(2px,-2px);color:var(--accent)}
 </style>
 </head>
 <body>
 
-<header class="hdr">
-  <a href="/" class="hdr__back">
+<nav class="nav">
+  <a href="/" class="nav__back">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     marwah.dev
   </a>
-  <div class="hdr__brand">
-    <svg width="13" height="13" viewBox="0 0 48 48" fill="#c03030"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-    Research Toolkit
+  <div class="nav__brand">
+    <svg width="12" height="12" viewBox="0 0 48 48" fill="#c03030"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
+    Personal toolkit
   </div>
-</header>
+</nav>
 
-<div class="main">
+<div class="page">
 
-  <!-- LEFT: Form Card -->
-  <div class="card">
-
-    <div class="mode-toggle">
-      <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales">BD / Sales</button>
-      <button class="mode-btn" onclick="setMode('job')" id="btn-job">Job Hunt</button>
-    </div>
-
-    <!-- Sales fields -->
-    <div id="fields-sales">
-      <div class="field" style="margin-bottom:.75rem">
-        <label class="field-label" for="s-brand">Nama brand <span>*</span></label>
-        <input class="inp" id="s-brand" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
-      </div>
-      <div class="field" style="margin-bottom:.75rem">
-        <div class="field-label">Market</div>
-        <div class="chips" id="chips-market">
-          <button class="chip active" onclick="toggleChipSingle(this,'chips-market')">Indonesia</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-market')">SE Asia</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-market')">Global</button>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">Platform</div>
-        <div class="chips" id="chips-platform">
-          <button class="chip active" onclick="toggleChipSingle(this,'chips-platform')">Semua</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-platform')">Shopee</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-platform')">Tokopedia</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-platform')">Instagram</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-platform')">TikTok</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Job Hunt fields -->
-    <div id="fields-job" style="display:none">
-      <div class="field" style="margin-bottom:.75rem">
-        <label class="field-label" for="j-role">Target role <span>*</span></label>
-        <input class="inp" id="j-role" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
-      </div>
-      <div class="field" style="margin-bottom:.75rem">
-        <div class="field-label">Tipe kerja</div>
-        <div class="chips" id="chips-worktype">
-          <button class="chip active" onclick="toggleChipSingle(this,'chips-worktype')">Remote</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-worktype')">Hybrid</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-worktype')">WFO</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-worktype')">Semua</button>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">Lokasi</div>
-        <div class="chips" id="chips-loc">
-          <button class="chip active" onclick="toggleChipSingle(this,'chips-loc')">Indonesia</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-loc')">Jakarta</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-loc')">SE Asia</button>
-          <button class="chip" onclick="toggleChipSingle(this,'chips-loc')">Global</button>
-        </div>
-      </div>
-    </div>
-
+  <div class="title-block">
+    <h1>BD Research Toolkit</h1>
+    <p>Generate all Google search links for a brand or role — open in one click.</p>
   </div>
 
-  <!-- RIGHT: Results -->
-  <div class="results-area">
-    <div class="empty" id="emptyState">
-      <div class="empty-star">✦</div>
-      <p>Isi form di kiri untuk mulai riset</p>
-    </div>
-    <div id="resultsInner" style="display:none"></div>
-  </div>
+  <div class="split-card">
 
+    <!-- Form -->
+    <div class="form-panel">
+
+      <div class="mode-toggle">
+        <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales">BD / Sales</button>
+        <button class="mode-btn" onclick="setMode('job')" id="btn-job">Job Hunt</button>
+      </div>
+
+      <!-- Sales -->
+      <div id="fields-sales">
+        <div class="field" style="margin-bottom:.875rem">
+          <label class="flabel" for="s-brand">Nama brand <span>*</span></label>
+          <input class="inp" id="s-brand" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
+        </div>
+        <div class="field" style="margin-bottom:.75rem">
+          <div class="flabel">Market</div>
+          <div class="chips" id="chips-market">
+            <button class="chip active" onclick="pick(this,'chips-market')">Indonesia</button>
+            <button class="chip" onclick="pick(this,'chips-market')">SE Asia</button>
+            <button class="chip" onclick="pick(this,'chips-market')">Global</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="flabel">Platform</div>
+          <div class="chips" id="chips-platform">
+            <button class="chip active" onclick="pick(this,'chips-platform')">Semua</button>
+            <button class="chip" onclick="pick(this,'chips-platform')">Shopee</button>
+            <button class="chip" onclick="pick(this,'chips-platform')">Tokopedia</button>
+            <button class="chip" onclick="pick(this,'chips-platform')">Instagram</button>
+            <button class="chip" onclick="pick(this,'chips-platform')">TikTok</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Hunt -->
+      <div id="fields-job" style="display:none">
+        <div class="field" style="margin-bottom:.875rem">
+          <label class="flabel" for="j-role">Target role <span>*</span></label>
+          <input class="inp" id="j-role" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
+        </div>
+        <div class="field" style="margin-bottom:.75rem">
+          <div class="flabel">Tipe kerja</div>
+          <div class="chips" id="chips-worktype">
+            <button class="chip active" onclick="pick(this,'chips-worktype')">Remote</button>
+            <button class="chip" onclick="pick(this,'chips-worktype')">Hybrid</button>
+            <button class="chip" onclick="pick(this,'chips-worktype')">WFO</button>
+            <button class="chip" onclick="pick(this,'chips-worktype')">Semua</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="flabel">Lokasi</div>
+          <div class="chips" id="chips-loc">
+            <button class="chip active" onclick="pick(this,'chips-loc')">Indonesia</button>
+            <button class="chip" onclick="pick(this,'chips-loc')">Jakarta</button>
+            <button class="chip" onclick="pick(this,'chips-loc')">SE Asia</button>
+            <button class="chip" onclick="pick(this,'chips-loc')">Global</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Results -->
+    <div class="results-panel">
+      <div class="empty" id="emptyState">
+        <div class="empty-icon">✦</div>
+        <p>Isi form di kiri untuk mulai riset</p>
+      </div>
+      <div id="resultsInner" style="display:none"></div>
+    </div>
+
+  </div>
 </div>
 
 <script>
-let mode = 'sales';
-let timer = null;
+let mode = 'sales', timer = null;
 
 function setMode(m) {
   mode = m;
@@ -181,124 +196,110 @@ function setMode(m) {
   showEmpty();
 }
 
-function toggleChipSingle(el, groupId) {
-  document.querySelectorAll(`#${groupId} .chip`).forEach(c => c.classList.remove('active'));
+function pick(el, id) {
+  document.querySelectorAll(`#${id} .chip`).forEach(c => c.classList.remove('active'));
   el.classList.add('active');
   generate();
 }
 
-function getChip(groupId) {
-  const active = document.querySelector(`#${groupId} .chip.active`);
-  return active ? active.textContent.trim() : '';
+function chip(id) {
+  const a = document.querySelector(`#${id} .chip.active`);
+  return a ? a.textContent.trim() : '';
 }
 
 function debouncedGenerate() { clearTimeout(timer); timer = setTimeout(generate, 280); }
-
 function encode(q) { return encodeURIComponent(q); }
 
 function salesLinks(brand, market, platform) {
   const loc = market && market !== 'Global' ? ` ${market}` : '';
-  const li_roles = '(Founder OR CEO OR Director OR "Head of Business" OR "Marketing Manager" OR "Ecommerce Manager")';
-  const social = [
-    { label:'Instagram', icon:'📸', url:`https://www.google.com/search?q=${encode('site:instagram.com ' + brand)}` },
-    { label:'TikTok',   icon:'🎵', url:`https://www.google.com/search?q=${encode('site:tiktok.com ' + brand)}` },
-    { label:'Facebook', icon:'👤', url:`https://www.google.com/search?q=${encode('site:facebook.com ' + brand)}` },
-    { label:'X',        icon:'✕',  url:`https://www.google.com/search?q=${encode('site:x.com ' + brand)}` },
-    { label:'Threads',  icon:'🧵', url:`https://www.google.com/search?q=${encode('site:threads.net ' + brand)}` },
+  const roles = '(Founder OR CEO OR Director OR "Head of Business" OR "Marketing Manager" OR "Ecommerce Manager")';
+  let social = [
+    { l:'Instagram', i:'📸', u:`https://www.google.com/search?q=${encode('site:instagram.com '+brand)}` },
+    { l:'TikTok',   i:'🎵', u:`https://www.google.com/search?q=${encode('site:tiktok.com '+brand)}` },
+    { l:'Facebook', i:'👤', u:`https://www.google.com/search?q=${encode('site:facebook.com '+brand)}` },
+    { l:'X',        i:'✕',  u:`https://www.google.com/search?q=${encode('site:x.com '+brand)}` },
+    { l:'Threads',  i:'🧵', u:`https://www.google.com/search?q=${encode('site:threads.net '+brand)}` },
   ];
-  const mktplace = [
-    { label:'Shopee',    icon:'🛒', url:`https://www.google.com/search?q=${encode('site:shopee.co.id ' + brand)}` },
-    { label:'Tokopedia', icon:'🛍️', url:`https://www.google.com/search?q=${encode('site:tokopedia.com ' + brand)}` },
+  let mkt = [
+    { l:'Shopee',    i:'🛒', u:`https://www.google.com/search?q=${encode('site:shopee.co.id '+brand)}` },
+    { l:'Tokopedia', i:'🛍️', u:`https://www.google.com/search?q=${encode('site:tokopedia.com '+brand)}` },
   ];
-  let s = social, m2 = mktplace;
-  if (platform === 'Instagram') s = social.filter(x => x.label === 'Instagram'), m2 = [];
-  else if (platform === 'TikTok') s = social.filter(x => x.label === 'TikTok'), m2 = [];
-  else if (platform === 'Shopee') { s = []; m2 = mktplace.filter(x => x.label === 'Shopee'); }
-  else if (platform === 'Tokopedia') { s = []; m2 = mktplace.filter(x => x.label === 'Tokopedia'); }
-  const groups = [{
-    group:'Web', items:[
-      { label:'Official Site', icon:'🌐', url:`https://www.google.com/search?q=${encode(brand + ' official site')}` },
-      { label:'Google Maps',   icon:'📍', url:`https://www.google.com/maps?q=${encode(brand)}` },
-    ]
-  }];
-  if (s.length)  groups.push({ group:'Social Media', items:s });
-  if (m2.length) groups.push({ group:'Marketplace', items:m2 });
-  groups.push({ group:'Decision Maker', items:[
-    { label:'LinkedIn People',  icon:'💼', url:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ AND (' + brand + ') AND ' + li_roles + loc)}` },
-    { label:'LinkedIn Company', icon:'🏢', url:`https://www.google.com/search?q=${encode('site:linkedin.com/company/ ' + brand)}` },
+  if (platform==='Instagram') { social=social.filter(x=>x.l==='Instagram'); mkt=[]; }
+  else if (platform==='TikTok') { social=social.filter(x=>x.l==='TikTok'); mkt=[]; }
+  else if (platform==='Shopee') { social=[]; mkt=mkt.filter(x=>x.l==='Shopee'); }
+  else if (platform==='Tokopedia') { social=[]; mkt=mkt.filter(x=>x.l==='Tokopedia'); }
+  const groups = [{ g:'Web', items:[
+    { l:'Official Site', i:'🌐', u:`https://www.google.com/search?q=${encode(brand+' official site')}` },
+    { l:'Google Maps',   i:'📍', u:`https://www.google.com/maps?q=${encode(brand)}` },
+  ]}];
+  if (social.length) groups.push({ g:'Social Media', items:social });
+  if (mkt.length)    groups.push({ g:'Marketplace', items:mkt });
+  groups.push({ g:'Decision Maker', items:[
+    { l:'LinkedIn People',  i:'💼', u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ AND ('+brand+') AND '+roles+loc)}` },
+    { l:'LinkedIn Company', i:'🏢', u:`https://www.google.com/search?q=${encode('site:linkedin.com/company/ '+brand)}` },
   ]});
   return groups;
 }
 
 function jobLinks(role, worktype, loc) {
-  const wt = worktype && worktype !== 'Semua' ? ` ${worktype}` : '';
-  const l  = loc && loc !== 'Global' ? ` ${loc}` : '';
-  const q  = role + wt + l;
-  const li_rec = '(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
+  const wt = worktype && worktype!=='Semua' ? ` ${worktype}` : '';
+  const l  = loc && loc!=='Global' ? ` ${loc}` : '';
+  const q  = role+wt+l;
+  const rec = '(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
   return [
-    { group:'Job Boards', items:[
-      { label:'LinkedIn Jobs', icon:'💼', url:`https://www.google.com/search?q=${encode('site:linkedin.com/jobs/ ' + q)}` },
-      { label:'Glints',        icon:'🎯', url:`https://www.google.com/search?q=${encode('site:glints.com ' + q)}` },
-      { label:'Kalibrr',       icon:'📌', url:`https://www.google.com/search?q=${encode('site:kalibrr.com ' + q)}` },
-      { label:'Jobstreet',     icon:'📄', url:`https://www.google.com/search?q=${encode('site:jobstreet.co.id ' + q)}` },
-      { label:'Indeed',        icon:'🔍', url:`https://www.google.com/search?q=${encode('site:id.indeed.com ' + q)}` },
+    { g:'Job Boards', items:[
+      { l:'LinkedIn Jobs', i:'💼', u:`https://www.google.com/search?q=${encode('site:linkedin.com/jobs/ '+q)}` },
+      { l:'Glints',        i:'🎯', u:`https://www.google.com/search?q=${encode('site:glints.com '+q)}` },
+      { l:'Kalibrr',       i:'📌', u:`https://www.google.com/search?q=${encode('site:kalibrr.com '+q)}` },
+      { l:'Jobstreet',     i:'📄', u:`https://www.google.com/search?q=${encode('site:jobstreet.co.id '+q)}` },
+      { l:'Indeed',        i:'🔍', u:`https://www.google.com/search?q=${encode('site:id.indeed.com '+q)}` },
     ]},
-    { group:'Find Recruiter', items:[
-      { label:'LinkedIn Recruiter', icon:'🤝', url:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ ' + li_rec + (l ? l : ''))}` },
-      { label:'Recruiter posting',  icon:'📢', url:`https://www.google.com/search?q=${encode('"hiring" "' + role + '"' + wt + l + ' site:linkedin.com')}` },
+    { g:'Find Recruiter', items:[
+      { l:'LinkedIn Recruiter', i:'🤝', u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ '+rec+(l?l:''))}` },
+      { l:'Recruiter posting',  i:'📢', u:`https://www.google.com/search?q=${encode('"hiring" "'+role+'"'+wt+l+' site:linkedin.com')}` },
     ]},
-    { group:'Open Web', items:[
-      { label:'Google Jobs',    icon:'🌐', url:`https://www.google.com/search?q=${encode(q + ' lowongan kerja')}` },
-      { label:'X Hiring Posts', icon:'✕',  url:`https://www.google.com/search?q=${encode('site:x.com "hiring" "' + role + '"' + wt)}` },
+    { g:'Open Web', items:[
+      { l:'Google Jobs',    i:'🌐', u:`https://www.google.com/search?q=${encode(q+' lowongan kerja')}` },
+      { l:'X Hiring Posts', i:'✕',  u:`https://www.google.com/search?q=${encode('site:x.com "hiring" "'+role+'"'+wt)}` },
     ]},
   ];
 }
-
-function allUrls(groups) { return groups.flatMap(g => g.items.map(i => i.url)); }
 
 function generate() {
   let groups, title;
   if (mode === 'sales') {
     const brand = document.getElementById('s-brand').value.trim();
     if (!brand) { showEmpty(); return; }
-    const market   = getChip('chips-market');
-    const platform = getChip('chips-platform');
-    groups = salesLinks(brand, market, platform);
-    title  = brand;
+    groups = salesLinks(brand, chip('chips-market'), chip('chips-platform'));
+    title = brand;
   } else {
     const role = document.getElementById('j-role').value.trim();
     if (!role) { showEmpty(); return; }
-    const worktype = getChip('chips-worktype');
-    const loc      = getChip('chips-loc');
-    groups = jobLinks(role, worktype, loc);
-    title  = role;
+    groups = jobLinks(role, chip('chips-worktype'), chip('chips-loc'));
+    title = role;
   }
-
-  const urls = allUrls(groups);
-  const urlsJson = JSON.stringify(urls);
-
+  const urls = groups.flatMap(g => g.items.map(i => i.u));
+  const uj = JSON.stringify(urls);
   let html = `<div class="res-hdr">
     <div>
       <div class="res-title">${title}</div>
       <div class="res-count">${urls.length} search links</div>
     </div>
-    <button class="open-all" onclick='openAll(${urlsJson})'>
+    <button class="open-all" onclick='openAll(${uj})'>
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Open All
     </button>
   </div>`;
-
   groups.forEach(g => {
-    html += `<div class="group-label">${g.group}</div>`;
-    g.items.forEach(item => {
-      html += `<a class="link-card" href="${item.url}" target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">${item.icon}</span>
-        <span class="link-label">${item.label}</span>
-        <svg class="link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    html += `<div class="glabel">${g.g}</div>`;
+    g.items.forEach(it => {
+      html += `<a class="lrow" href="${it.u}" target="_blank" rel="noopener noreferrer">
+        <span class="lrow-icon">${it.i}</span>
+        <span class="lrow-label">${it.l}</span>
+        <svg class="lrow-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>`;
     });
   });
-
   document.getElementById('emptyState').style.display   = 'none';
   document.getElementById('resultsInner').style.display = 'block';
   document.getElementById('resultsInner').innerHTML     = html;
@@ -309,13 +310,9 @@ function showEmpty() {
   document.getElementById('resultsInner').style.display = 'none';
 }
 
-function openAll(urls) {
-  urls.forEach((u, i) => setTimeout(() => window.open(u, '_blank'), i * 150));
-}
+function openAll(urls) { urls.forEach((u,i) => setTimeout(() => window.open(u,'_blank'), i*150)); }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter') generate();
-});
+document.addEventListener('keydown', e => { if(e.key==='Enter') generate(); });
 </script>
 
 </body>
