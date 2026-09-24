@@ -20,72 +20,64 @@ body{display:flex;flex-direction:column}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 
-/* Nav */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;border-bottom:1px solid var(--border-dim);flex-shrink:0}
 .nav__back{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;color:var(--text-dim);transition:color .2s}
 .nav__back:hover{color:var(--text)}
 .nav__brand{display:flex;align-items:center;gap:.375rem;font-size:.8125rem;font-weight:600;color:var(--text-faint)}
 
-/* Page content */
-.page{flex:1;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+.page{flex:1;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 2rem}
 
-/* Title block */
-.title-block{width:100%;max-width:960px;margin-bottom:1.5rem}
-.title-block h1{font-size:1.375rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.3rem}
-.title-block p{font-size:.875rem;color:var(--text-dim)}
+.title-block{width:100%;max-width:920px;margin-bottom:1.125rem}
+.title-block h1{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.25rem}
+.title-block p{font-size:.8125rem;color:var(--text-dim)}
 
-/* Unified split card */
-.split-card{width:100%;max-width:960px;background:var(--card);border:1px solid var(--border);border-radius:1.25rem;display:grid;grid-template-columns:380px 1fr;overflow:hidden}
+/* Card */
+.split-card{width:100%;max-width:920px;background:var(--card);border:1px solid var(--border);border-radius:1.125rem;display:grid;grid-template-columns:340px 1fr;overflow:hidden}
 
 /* Form panel */
-.form-panel{border-right:1px solid var(--border-dim);padding:1.5rem;display:flex;flex-direction:column;gap:1.125rem}
+.form-panel{border-right:1px solid var(--border-dim);padding:1.25rem;display:flex;flex-direction:column;gap:1rem}
 
-/* Mode toggle */
 .mode-toggle{display:flex;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.1875rem;gap:.125rem}
-.mode-btn{flex:1;padding:.375rem .75rem;border-radius:.375rem;font-size:.8125rem;font-weight:500;color:var(--text-dim);transition:all .2s;text-align:center}
+.mode-btn{flex:1;padding:.375rem .75rem;border-radius:.375rem;font-size:.8rem;font-weight:500;color:var(--text-dim);transition:all .2s;text-align:center}
 .mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--accent-glow)}
 
-/* Field */
-.field{display:flex;flex-direction:column;gap:.375rem}
-.flabel{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim)}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.flabel{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim)}
 .flabel span{color:var(--accent)}
-.inp{background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;font-family:inherit;color:var(--text);transition:border-color .2s;width:100%}
+.inp{background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.5625rem .75rem;font-size:.875rem;font-family:inherit;color:var(--text);transition:border-color .2s;width:100%}
 .inp:focus{outline:none;border-color:rgba(192,48,48,.4)}
 .inp::placeholder{color:var(--text-faint)}
 
-/* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:.3rem}
-.chip{padding:.3125rem .75rem;border:1px solid var(--border-dim);border-radius:9999px;font-size:.8rem;font-weight:500;color:var(--text-dim);background:transparent;transition:all .15s;cursor:pointer}
+.chip{padding:.25rem .7rem;border:1px solid var(--border-dim);border-radius:9999px;font-size:.775rem;font-weight:500;color:var(--text-dim);background:transparent;transition:all .15s;cursor:pointer}
 .chip:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
 .chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
 /* Results panel */
-.results-panel{padding:1.5rem;overflow-y:auto;display:flex;flex-direction:column}
+.results-panel{padding:1.25rem;display:flex;flex-direction:column;overflow:hidden}
 
 /* Empty */
 .empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-faint);text-align:center}
-.empty-icon{font-size:1.5rem;opacity:.35;margin-bottom:.25rem}
-.empty p{font-size:.8125rem;line-height:1.5;max-width:20ch}
+.empty-icon{font-size:1.25rem;opacity:.3;margin-bottom:.125rem}
+.empty p{font-size:.8125rem;line-height:1.5}
 
-/* Results header */
-.res-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.res-title{font-size:.9375rem;font-weight:600}
-.res-count{font-size:.75rem;color:var(--text-faint);margin-top:.125rem}
-.open-all{display:flex;align-items:center;gap:.3rem;padding:.375rem .75rem;border:1px solid var(--border);border-radius:.4375rem;font-size:.75rem;font-weight:500;color:var(--text-dim);transition:all .18s;white-space:nowrap}
+/* Results */
+.res-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;gap:.5rem}
+.res-name{font-size:.9375rem;font-weight:600}
+.res-count{font-size:.7rem;color:var(--text-faint);margin-top:.125rem}
+.open-all{display:flex;align-items:center;gap:.3rem;padding:.3125rem .6875rem;border:1px solid var(--border);border-radius:.4375rem;font-size:.75rem;font-weight:500;color:var(--text-dim);transition:all .15s;white-space:nowrap;flex-shrink:0}
 .open-all:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow)}
 
-/* Group */
-.glabel{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.065em;color:var(--text-faint);margin:.875rem 0 .3rem}
-.glabel:first-child{margin-top:0}
+/* 4-col grid cards */
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.gcard{display:flex;align-items:center;gap:7px;padding:0 10px;height:44px;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;text-decoration:none;transition:all .15s;overflow:hidden;min-width:0}
+.gcard:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.05)}
+.gcard .gi{flex-shrink:0;font-size:.875rem;line-height:1}
+.gcard .gn{font-size:.775rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcard:hover .gn{color:var(--text)}
 
-/* Link rows */
-.lrow{display:flex;align-items:center;gap:.625rem;padding:.5625rem .75rem;border:1px solid var(--border-dim);border-radius:.5625rem;text-decoration:none;transition:all .15s;margin-bottom:.25rem;background:var(--card2)}
-.lrow:last-child{margin-bottom:0}
-.lrow:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.06)}
-.lrow-icon{width:1.625rem;height:1.625rem;display:grid;place-items:center;flex-shrink:0;font-size:.875rem;line-height:1}
-.lrow-label{font-size:.8375rem;font-weight:500;flex:1;color:var(--text)}
-.lrow-arr{color:var(--text-faint);flex-shrink:0;transition:all .15s}
-.lrow:hover .lrow-arr{transform:translate(2px,-2px);color:var(--accent)}
+/* Group separator */
+.gsep{grid-column:1/-1;height:1px;background:var(--border-dim);margin:2px 0}
 </style>
 </head>
 <body>
@@ -105,26 +97,24 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 
   <div class="title-block">
     <h1>BD Research Toolkit</h1>
-    <p>Generate all Google search links for a brand or role — open in one click.</p>
+    <p>Generate Google search links for a brand or role — open in one click.</p>
   </div>
 
   <div class="split-card">
 
     <!-- Form -->
     <div class="form-panel">
-
       <div class="mode-toggle">
         <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales">BD / Sales</button>
         <button class="mode-btn" onclick="setMode('job')" id="btn-job">Job Hunt</button>
       </div>
 
-      <!-- Sales -->
       <div id="fields-sales">
         <div class="field" style="margin-bottom:.875rem">
           <label class="flabel" for="s-brand">Nama brand <span>*</span></label>
           <input class="inp" id="s-brand" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
         </div>
-        <div class="field" style="margin-bottom:.75rem">
+        <div class="field" style="margin-bottom:.6875rem">
           <div class="flabel">Market</div>
           <div class="chips" id="chips-market">
             <button class="chip active" onclick="pick(this,'chips-market')">Indonesia</button>
@@ -144,13 +134,12 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
         </div>
       </div>
 
-      <!-- Job Hunt -->
       <div id="fields-job" style="display:none">
         <div class="field" style="margin-bottom:.875rem">
           <label class="flabel" for="j-role">Target role <span>*</span></label>
           <input class="inp" id="j-role" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
         </div>
-        <div class="field" style="margin-bottom:.75rem">
+        <div class="field" style="margin-bottom:.6875rem">
           <div class="flabel">Tipe kerja</div>
           <div class="chips" id="chips-worktype">
             <button class="chip active" onclick="pick(this,'chips-worktype')">Remote</button>
@@ -169,7 +158,6 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Results -->
@@ -185,134 +173,142 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 </div>
 
 <script>
-let mode = 'sales', timer = null;
+let mode='sales', timer=null;
 
-function setMode(m) {
-  mode = m;
-  document.getElementById('btn-sales').classList.toggle('active', m === 'sales');
-  document.getElementById('btn-job').classList.toggle('active', m === 'job');
-  document.getElementById('fields-sales').style.display = m === 'sales' ? 'block' : 'none';
-  document.getElementById('fields-job').style.display  = m === 'job'   ? 'block' : 'none';
+function setMode(m){
+  mode=m;
+  document.getElementById('btn-sales').classList.toggle('active',m==='sales');
+  document.getElementById('btn-job').classList.toggle('active',m==='job');
+  document.getElementById('fields-sales').style.display=m==='sales'?'block':'none';
+  document.getElementById('fields-job').style.display=m==='job'?'block':'none';
   showEmpty();
 }
 
-function pick(el, id) {
-  document.querySelectorAll(`#${id} .chip`).forEach(c => c.classList.remove('active'));
+function pick(el,id){
+  document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   generate();
 }
 
-function chip(id) {
-  const a = document.querySelector(`#${id} .chip.active`);
-  return a ? a.textContent.trim() : '';
+function chip(id){
+  const a=document.querySelector(`#${id} .chip.active`);
+  return a?a.textContent.trim():'';
 }
 
-function debouncedGenerate() { clearTimeout(timer); timer = setTimeout(generate, 280); }
-function encode(q) { return encodeURIComponent(q); }
+function debouncedGenerate(){clearTimeout(timer);timer=setTimeout(generate,280);}
+function encode(q){return encodeURIComponent(q);}
 
-function salesLinks(brand, market, platform) {
-  const loc = market && market !== 'Global' ? ` ${market}` : '';
-  const roles = '(Founder OR CEO OR Director OR "Head of Business" OR "Marketing Manager" OR "Ecommerce Manager")';
-  let social = [
-    { l:'Instagram', i:'📸', u:`https://www.google.com/search?q=${encode('site:instagram.com '+brand)}` },
-    { l:'TikTok',   i:'🎵', u:`https://www.google.com/search?q=${encode('site:tiktok.com '+brand)}` },
-    { l:'Facebook', i:'👤', u:`https://www.google.com/search?q=${encode('site:facebook.com '+brand)}` },
-    { l:'X',        i:'✕',  u:`https://www.google.com/search?q=${encode('site:x.com '+brand)}` },
-    { l:'Threads',  i:'🧵', u:`https://www.google.com/search?q=${encode('site:threads.net '+brand)}` },
+function salesLinks(brand,market,platform){
+  const loc=market&&market!=='Global'?` ${market}`:'';
+  const roles='(Founder OR CEO OR Director OR "Head of Business" OR "Marketing Manager" OR "Ecommerce Manager")';
+  let social=[
+    {l:'Instagram',i:'📸',u:`https://www.google.com/search?q=${encode('site:instagram.com '+brand)}`},
+    {l:'TikTok',i:'🎵',u:`https://www.google.com/search?q=${encode('site:tiktok.com '+brand)}`},
+    {l:'Facebook',i:'👤',u:`https://www.google.com/search?q=${encode('site:facebook.com '+brand)}`},
+    {l:'X',i:'✕',u:`https://www.google.com/search?q=${encode('site:x.com '+brand)}`},
+    {l:'Threads',i:'🧵',u:`https://www.google.com/search?q=${encode('site:threads.net '+brand)}`},
   ];
-  let mkt = [
-    { l:'Shopee',    i:'🛒', u:`https://www.google.com/search?q=${encode('site:shopee.co.id '+brand)}` },
-    { l:'Tokopedia', i:'🛍️', u:`https://www.google.com/search?q=${encode('site:tokopedia.com '+brand)}` },
+  let mkt=[
+    {l:'Shopee',i:'🛒',u:`https://www.google.com/search?q=${encode('site:shopee.co.id '+brand)}`},
+    {l:'Tokopedia',i:'🛍️',u:`https://www.google.com/search?q=${encode('site:tokopedia.com '+brand)}`},
   ];
-  if (platform==='Instagram') { social=social.filter(x=>x.l==='Instagram'); mkt=[]; }
-  else if (platform==='TikTok') { social=social.filter(x=>x.l==='TikTok'); mkt=[]; }
-  else if (platform==='Shopee') { social=[]; mkt=mkt.filter(x=>x.l==='Shopee'); }
-  else if (platform==='Tokopedia') { social=[]; mkt=mkt.filter(x=>x.l==='Tokopedia'); }
-  const groups = [{ g:'Web', items:[
-    { l:'Official Site', i:'🌐', u:`https://www.google.com/search?q=${encode(brand+' official site')}` },
-    { l:'Google Maps',   i:'📍', u:`https://www.google.com/maps?q=${encode(brand)}` },
-  ]}];
-  if (social.length) groups.push({ g:'Social Media', items:social });
-  if (mkt.length)    groups.push({ g:'Marketplace', items:mkt });
-  groups.push({ g:'Decision Maker', items:[
-    { l:'LinkedIn People',  i:'💼', u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ AND ('+brand+') AND '+roles+loc)}` },
-    { l:'LinkedIn Company', i:'🏢', u:`https://www.google.com/search?q=${encode('site:linkedin.com/company/ '+brand)}` },
-  ]});
+  if(platform==='Instagram'){social=social.filter(x=>x.l==='Instagram');mkt=[];}
+  else if(platform==='TikTok'){social=social.filter(x=>x.l==='TikTok');mkt=[];}
+  else if(platform==='Shopee'){social=[];mkt=mkt.filter(x=>x.l==='Shopee');}
+  else if(platform==='Tokopedia'){social=[];mkt=mkt.filter(x=>x.l==='Tokopedia');}
+
+  // Flat item list with group separators
+  const groups=[
+    {sep:false,items:[
+      {l:'Website',i:'🌐',u:`https://www.google.com/search?q=${encode(brand+' official site')}`},
+      {l:'Maps',i:'📍',u:`https://www.google.com/maps?q=${encode(brand)}`},
+    ]},
+    social.length?{sep:true,items:social}:null,
+    mkt.length?{sep:true,items:mkt}:null,
+    {sep:!!(social.length||mkt.length),items:[
+      {l:'People',i:'💼',u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ AND ('+brand+') AND '+roles+loc)}`},
+      {l:'Company',i:'🏢',u:`https://www.google.com/search?q=${encode('site:linkedin.com/company/ '+brand)}`},
+    ]},
+  ].filter(Boolean);
   return groups;
 }
 
-function jobLinks(role, worktype, loc) {
-  const wt = worktype && worktype!=='Semua' ? ` ${worktype}` : '';
-  const l  = loc && loc!=='Global' ? ` ${loc}` : '';
-  const q  = role+wt+l;
-  const rec = '(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
-  return [
-    { g:'Job Boards', items:[
-      { l:'LinkedIn Jobs', i:'💼', u:`https://www.google.com/search?q=${encode('site:linkedin.com/jobs/ '+q)}` },
-      { l:'Glints',        i:'🎯', u:`https://www.google.com/search?q=${encode('site:glints.com '+q)}` },
-      { l:'Kalibrr',       i:'📌', u:`https://www.google.com/search?q=${encode('site:kalibrr.com '+q)}` },
-      { l:'Jobstreet',     i:'📄', u:`https://www.google.com/search?q=${encode('site:jobstreet.co.id '+q)}` },
-      { l:'Indeed',        i:'🔍', u:`https://www.google.com/search?q=${encode('site:id.indeed.com '+q)}` },
+function jobLinks(role,worktype,loc){
+  const wt=worktype&&worktype!=='Semua'?` ${worktype}`:'';
+  const l=loc&&loc!=='Global'?` ${loc}`:'';
+  const q=role+wt+l;
+  const rec='(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
+  return[
+    {sep:false,items:[
+      {l:'LinkedIn',i:'💼',u:`https://www.google.com/search?q=${encode('site:linkedin.com/jobs/ '+q)}`},
+      {l:'Glints',i:'🎯',u:`https://www.google.com/search?q=${encode('site:glints.com '+q)}`},
+      {l:'Kalibrr',i:'📌',u:`https://www.google.com/search?q=${encode('site:kalibrr.com '+q)}`},
+      {l:'Jobstreet',i:'📄',u:`https://www.google.com/search?q=${encode('site:jobstreet.co.id '+q)}`},
+      {l:'Indeed',i:'🔍',u:`https://www.google.com/search?q=${encode('site:id.indeed.com '+q)}`},
     ]},
-    { g:'Find Recruiter', items:[
-      { l:'LinkedIn Recruiter', i:'🤝', u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ '+rec+(l?l:''))}` },
-      { l:'Recruiter posting',  i:'📢', u:`https://www.google.com/search?q=${encode('"hiring" "'+role+'"'+wt+l+' site:linkedin.com')}` },
+    {sep:true,items:[
+      {l:'Recruiter',i:'🤝',u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ '+rec+(l?l:''))}`},
+      {l:'Hiring post',i:'📢',u:`https://www.google.com/search?q=${encode('"hiring" "'+role+'"'+wt+l+' site:linkedin.com')}`},
     ]},
-    { g:'Open Web', items:[
-      { l:'Google Jobs',    i:'🌐', u:`https://www.google.com/search?q=${encode(q+' lowongan kerja')}` },
-      { l:'X Hiring Posts', i:'✕',  u:`https://www.google.com/search?q=${encode('site:x.com "hiring" "'+role+'"'+wt)}` },
+    {sep:true,items:[
+      {l:'Google Jobs',i:'🌐',u:`https://www.google.com/search?q=${encode(q+' lowongan kerja')}`},
+      {l:'X Hiring',i:'✕',u:`https://www.google.com/search?q=${encode('site:x.com "hiring" "'+role+'"'+wt)}`},
     ]},
   ];
 }
 
-function generate() {
-  let groups, title;
-  if (mode === 'sales') {
-    const brand = document.getElementById('s-brand').value.trim();
-    if (!brand) { showEmpty(); return; }
-    groups = salesLinks(brand, chip('chips-market'), chip('chips-platform'));
-    title = brand;
-  } else {
-    const role = document.getElementById('j-role').value.trim();
-    if (!role) { showEmpty(); return; }
-    groups = jobLinks(role, chip('chips-worktype'), chip('chips-loc'));
-    title = role;
+function generate(){
+  let groups,title;
+  if(mode==='sales'){
+    const brand=document.getElementById('s-brand').value.trim();
+    if(!brand){showEmpty();return;}
+    groups=salesLinks(brand,chip('chips-market'),chip('chips-platform'));
+    title=brand;
+  }else{
+    const role=document.getElementById('j-role').value.trim();
+    if(!role){showEmpty();return;}
+    groups=jobLinks(role,chip('chips-worktype'),chip('chips-loc'));
+    title=role;
   }
-  const urls = groups.flatMap(g => g.items.map(i => i.u));
-  const uj = JSON.stringify(urls);
-  let html = `<div class="res-hdr">
-    <div>
-      <div class="res-title">${title}</div>
-      <div class="res-count">${urls.length} search links</div>
-    </div>
-    <button class="open-all" onclick='openAll(${uj})'>
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Open All
-    </button>
-  </div>`;
-  groups.forEach(g => {
-    html += `<div class="glabel">${g.g}</div>`;
-    g.items.forEach(it => {
-      html += `<a class="lrow" href="${it.u}" target="_blank" rel="noopener noreferrer">
-        <span class="lrow-icon">${it.i}</span>
-        <span class="lrow-label">${it.l}</span>
-        <svg class="lrow-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+  const allItems=groups.flatMap(g=>g.items);
+  const urls=allItems.map(i=>i.u);
+  const uj=JSON.stringify(urls);
+
+  let gridHtml='';
+  groups.forEach((g,gi)=>{
+    if(g.sep&&gi>0) gridHtml+=`<div class="gsep"></div>`;
+    g.items.forEach(it=>{
+      gridHtml+=`<a class="gcard" href="${it.u}" target="_blank" rel="noopener noreferrer" title="${it.l}">
+        <span class="gi">${it.i}</span>
+        <span class="gn">${it.l}</span>
       </a>`;
     });
   });
-  document.getElementById('emptyState').style.display   = 'none';
-  document.getElementById('resultsInner').style.display = 'block';
-  document.getElementById('resultsInner').innerHTML     = html;
+
+  const html=`<div class="res-hdr">
+    <div>
+      <div class="res-name">${title}</div>
+      <div class="res-count">${urls.length} links</div>
+    </div>
+    <button class="open-all" onclick='openAll(${uj})'>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Open All
+    </button>
+  </div>
+  <div class="res-grid">${gridHtml}</div>`;
+
+  document.getElementById('emptyState').style.display='none';
+  document.getElementById('resultsInner').style.display='block';
+  document.getElementById('resultsInner').innerHTML=html;
 }
 
-function showEmpty() {
-  document.getElementById('emptyState').style.display   = 'flex';
-  document.getElementById('resultsInner').style.display = 'none';
+function showEmpty(){
+  document.getElementById('emptyState').style.display='flex';
+  document.getElementById('resultsInner').style.display='none';
 }
 
-function openAll(urls) { urls.forEach((u,i) => setTimeout(() => window.open(u,'_blank'), i*150)); }
-
-document.addEventListener('keydown', e => { if(e.key==='Enter') generate(); });
+function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
+document.addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
 </script>
 
 </body>
