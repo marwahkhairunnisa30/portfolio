@@ -268,6 +268,17 @@ img{display:block}
 .portfolio__subcard--folder{border-radius:0 1.25rem 1.25rem 1.25rem;position:relative}
 .portfolio__subcard--folder::before{content:'';position:absolute;top:-9px;left:-1px;width:2.75rem;height:9px;background:rgba(0,0,0,.28);border:1px solid rgba(236,234,245,.1);border-bottom:none;border-radius:.5rem .5rem 0 0}
 .portfolio__subcard--folder.portfolio__subcard--link:hover::before{background:rgba(0,0,0,.42);border-color:rgba(236,234,245,.22)}
+.portfolio__subcard--nest{cursor:default}
+.pf-folder__title{font-size:.875rem;font-weight:600;color:#eceaf5;margin-bottom:.625rem}
+.pf-nested-list{display:flex;flex-direction:column;gap:.375rem;flex:1}
+.pf-nested{display:flex;flex-direction:column;gap:.1rem;padding:.5rem .625rem;background:rgba(255,255,255,.05);border:1px solid rgba(236,234,245,.08);border-radius:.625rem;text-decoration:none;color:#eceaf5;transition:background .2s,border-color .2s}
+.pf-nested--link:hover{background:rgba(255,255,255,.09);border-color:rgba(236,234,245,.18)}
+.pf-nested--link{cursor:pointer;position:relative}
+.pf-nested__name{font-size:.75rem;font-weight:600;color:#eceaf5}
+.pf-nested__desc{font-size:.625rem;color:rgba(236,234,245,.5);line-height:1.4}
+.pf-nested__arrow{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);font-size:.75rem;color:rgba(236,234,245,.4)}
+.pf-nested--soon{opacity:.45;cursor:default}
+.pf-nested--soon .pf-nested__name{font-style:italic}
 .coming-soon-pill{display:inline-flex;align-items:center;gap:.25rem;background:rgba(236,234,245,.07);border:1px solid rgba(236,234,245,.1);border-radius:9999px;padding:.25rem .625rem;font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.4)}
 
 /* ── Services ── */
@@ -1053,36 +1064,36 @@ const megaCards = [
     desc: 'Tools I build and experiments that scratch my own itch.',
     subs: [
       {
-        name: 'TailoredAI',
-        category: 'AI Tool · 2026',
-        desc: 'Stop sending DMs that get ignored — get 3 pitch variations that sound like you, not a template.',
-        tags: ['Personalized Outreach'],
-        link: 'https://bdtailored-ai.vercel.app',
-        folder: true
-      },
-      {
-        name: 'Affiliate Threads Generator',
-        category: 'Content Tool · 2026',
-        desc: 'Turn affiliate products into content people actually share — not ads they scroll past.',
-        tags: ['Content Automation'],
-        link: 'https://shopee-thread-generator.vercel.app/',
-        folder: true
-      },
-      {
-        name: 'Leads Generator',
-        category: 'Productivity Tool · 2026',
-        desc: 'Cut prospecting time from hours to seconds — research any brand or find the right recruiter before anyone else in the room does.',
-        tags: ['BD Workflow'],
-        link: '/leads-generator.html',
-        folder: true
+        name: 'AI Tools',
+        category: 'Built with AI · 2026',
+        folder: true,
+        nested: [
+          { name: 'TailoredAI', desc: 'Personalized BD outreach generator', link: 'https://bdtailored-ai.vercel.app' },
+          { name: 'Affiliate Threads', desc: 'Affiliate content that doesn\'t read like an ad', link: 'https://shopee-thread-generator.vercel.app/' },
+          { name: 'Leads Generator', desc: 'Brand & recruiter research toolkit', link: '/leads-generator.html' }
+        ]
       },
       {
         name: 'Skills Constellation',
         category: 'Interactive Viz · 2026',
         desc: 'Not a list. A live map of 14 skills across BD, content, and tech — and how they connect.',
         tags: ['Canvas', 'Interactive'],
-        link: '/constellation.html',
-        folder: true
+        link: '/constellation.html'
+      },
+      {
+        name: 'Social Proof – Speaker',
+        category: 'Thought Leadership · 2026',
+        folder: true,
+        nested: [
+          { name: 'Beyond Your Degree', desc: 'GoVokasi × Maxwell Leadership · Sep 2026', link: null },
+          { name: 'Coming Soon', desc: 'Another speaking engagement', coming_soon: true }
+        ]
+      },
+      {
+        coming_soon: true,
+        name: '···',
+        category: 'Coming Soon',
+        desc: 'Something new is brewing.'
       }
     ]
   }
@@ -1108,11 +1119,29 @@ function buildPortfolio() {
           <p class="portfolio__subcard__desc">${s.desc}</p>
         </div>`;
       }
+      if (s.folder && s.nested) {
+        const nestedHTML = s.nested.map(n => {
+          if (n.coming_soon) {
+            return `<div class="pf-nested pf-nested--soon"><span class="pf-nested__name">${n.name}</span><span class="pf-nested__desc">${n.desc}</span></div>`;
+          }
+          const ntag = n.link ? 'a' : 'div';
+          const nhref = n.link ? `href="${n.link}" target="_blank" rel="noopener"` : '';
+          return `<${ntag} class="pf-nested${n.link ? ' pf-nested--link' : ''}" ${nhref}>
+            <span class="pf-nested__name">${n.name}</span>
+            <span class="pf-nested__desc">${n.desc}</span>
+            ${n.link ? `<span class="pf-nested__arrow">${arrowIcon}</span>` : ''}
+          </${ntag}>`;
+        }).join('');
+        return `<div class="portfolio__subcard portfolio__subcard--folder portfolio__subcard--nest">
+          <div class="portfolio__subcard__cat">${s.category}</div>
+          <div class="portfolio__subcard__title pf-folder__title">${s.name}</div>
+          <div class="pf-nested-list">${nestedHTML}</div>
+        </div>`;
+      }
       const tag = s.link ? 'a' : 'div';
       const href = s.link ? `href="${s.link}"` : '';
       const linkClass = s.link ? ' portfolio__subcard--link' : '';
-      const folderClass = s.folder ? ' portfolio__subcard--folder' : '';
-      return `<${tag} class="portfolio__subcard${linkClass}${folderClass}" ${href}>
+      return `<${tag} class="portfolio__subcard${linkClass}" ${href}>
         <div class="portfolio__subcard__cat">${s.category}</div>
         <div class="portfolio__subcard__head">
           <div class="portfolio__subcard__title">${s.name}</div>
