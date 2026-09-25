@@ -265,6 +265,9 @@ img{display:block}
 .portfolio__subcard__tag{display:inline-flex;border:1px solid rgba(236,234,245,.12);color:rgba(236,234,245,.6);border-radius:9999px;padding:.3125rem .75rem;font-size:.75rem}
 @media(min-width:1024px){.portfolio__subcard__tag{padding:.25rem .625rem;font-size:.6875rem}}
 .portfolio__subcard--coming-soon{opacity:.5;cursor:default;pointer-events:none}
+.portfolio__subcard--folder{border-radius:0 1.25rem 1.25rem 1.25rem;position:relative}
+.portfolio__subcard--folder::before{content:'';position:absolute;top:-9px;left:-1px;width:2.75rem;height:9px;background:rgba(0,0,0,.28);border:1px solid rgba(236,234,245,.1);border-bottom:none;border-radius:.5rem .5rem 0 0}
+.portfolio__subcard--folder.portfolio__subcard--link:hover::before{background:rgba(0,0,0,.42);border-color:rgba(236,234,245,.22)}
 .coming-soon-pill{display:inline-flex;align-items:center;gap:.25rem;background:rgba(236,234,245,.07);border:1px solid rgba(236,234,245,.1);border-radius:9999px;padding:.25rem .625rem;font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.4)}
 
 /* ── Services ── */
@@ -1054,28 +1057,32 @@ const megaCards = [
         category: 'AI Tool · 2026',
         desc: 'Stop sending DMs that get ignored — get 3 pitch variations that sound like you, not a template.',
         tags: ['Personalized Outreach'],
-        link: 'https://bdtailored-ai.vercel.app'
+        link: 'https://bdtailored-ai.vercel.app',
+        folder: true
       },
       {
         name: 'Affiliate Threads Generator',
         category: 'Content Tool · 2026',
         desc: 'Turn affiliate products into content people actually share — not ads they scroll past.',
         tags: ['Content Automation'],
-        link: 'https://shopee-thread-generator.vercel.app/'
+        link: 'https://shopee-thread-generator.vercel.app/',
+        folder: true
       },
       {
         name: 'Leads Generator',
         category: 'Productivity Tool · 2026',
         desc: 'Cut prospecting time from hours to seconds — research any brand or find the right recruiter before anyone else in the room does.',
         tags: ['BD Workflow'],
-        link: '/leads-generator.html'
+        link: '/leads-generator.html',
+        folder: true
       },
       {
         name: 'Skills Constellation',
         category: 'Interactive Viz · 2026',
         desc: 'Not a list. A live map of 14 skills across BD, content, and tech — and how they connect.',
         tags: ['Canvas', 'Interactive'],
-        link: '/constellation.html'
+        link: '/constellation.html',
+        folder: true
       }
     ]
   }
@@ -1104,7 +1111,8 @@ function buildPortfolio() {
       const tag = s.link ? 'a' : 'div';
       const href = s.link ? `href="${s.link}"` : '';
       const linkClass = s.link ? ' portfolio__subcard--link' : '';
-      return `<${tag} class="portfolio__subcard${linkClass}" ${href}>
+      const folderClass = s.folder ? ' portfolio__subcard--folder' : '';
+      return `<${tag} class="portfolio__subcard${linkClass}${folderClass}" ${href}>
         <div class="portfolio__subcard__cat">${s.category}</div>
         <div class="portfolio__subcard__head">
           <div class="portfolio__subcard__title">${s.name}</div>
