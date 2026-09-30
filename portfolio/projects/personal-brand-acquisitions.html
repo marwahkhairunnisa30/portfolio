@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;
@@ -120,38 +121,41 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 <nav class="topbar">
   <a href="../#works" class="topbar__back">
     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-    Back to portfolio
+    <span data-i18n="topbar.backPortfolio">Back to portfolio</span>
   </a>
-  <span class="topbar__brand">✦ Marwah K</span>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <span class="topbar__brand">✦ Marwah K</span>
+  </div>
 </nav>
 
 <div class="page">
 
   <!-- LEFT: Content -->
   <div class="left">
-    <div class="eyebrow"><span class="dot"></span>Individual Contributor · 2023–2024</div>
+    <div class="eyebrow"><span class="dot"></span><span data-i18n="pba.eyebrow">Individual Contributor · 2023–2024</span></div>
 
-    <h1>Personal Brand<br>Acquisitions</h1>
+    <h1 data-i18n-html="pba.h1">Personal Brand<br>Acquisitions</h1>
 
-    <p class="desc">Every brand here was personally sourced, qualified, pitched, and closed by me — not the team. Proof I can sell, not just lead people who sell.</p>
+    <p class="desc" data-i18n="pba.desc">Every brand here was personally sourced, qualified, pitched, and closed by me — not the team. Proof I can sell, not just lead people who sell.</p>
 
     <div class="note">
       <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      Separate from the <strong>47 brand partnerships</strong> my team closed under my leadership — that's a different story.
+      <span data-i18n-html="pba.note">Separate from the <strong>47 brand partnerships</strong> my team closed under my leadership — that's a different story.</span>
     </div>
 
     <div class="metrics">
       <div class="metric">
         <div class="metric__num">55<span>+</span></div>
-        <div class="metric__label">Brands personally closed</div>
+        <div class="metric__label" data-i18n="pba.m0.label">Brands personally closed</div>
       </div>
       <div class="metric">
         <div class="metric__num">3</div>
-        <div class="metric__label">Platforms — Shopee, TikTok Shop, Tokopedia</div>
+        <div class="metric__label" data-i18n="pba.m1.label">Platforms — Shopee, TikTok Shop, Tokopedia</div>
       </div>
       <div class="metric">
         <div class="metric__num">6</div>
-        <div class="metric__label">Categories — fashion, F&B, sports, beauty & more</div>
+        <div class="metric__label" data-i18n="pba.m2.label">Categories — fashion, F&B, sports, beauty & more</div>
       </div>
     </div>
 
@@ -165,38 +169,35 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 
     <div class="divider"></div>
 
-    <div class="process-label">My Closing Process</div>
+    <div class="process-label" data-i18n="pba.process.label">My Closing Process</div>
     <div class="process-steps">
-      <div class="step"><div class="step__dot">01</div><div class="step__label">Prospect</div></div>
-      <div class="step"><div class="step__dot">02</div><div class="step__label">Outreach</div></div>
-      <div class="step"><div class="step__dot">03</div><div class="step__label">Qualify</div></div>
-      <div class="step"><div class="step__dot">04</div><div class="step__label">Propose</div></div>
-      <div class="step"><div class="step__dot">05</div><div class="step__label">Negotiate</div></div>
-      <div class="step"><div class="step__dot">06</div><div class="step__label">Onboard</div></div>
-      <div class="step"><div class="step__dot">07</div><div class="step__label">Retain</div></div>
+      <div class="step"><div class="step__dot">01</div><div class="step__label" data-i18n="pba.process.0">Prospect</div></div>
+      <div class="step"><div class="step__dot">02</div><div class="step__label" data-i18n="pba.process.1">Outreach</div></div>
+      <div class="step"><div class="step__dot">03</div><div class="step__label" data-i18n="pba.process.2">Qualify</div></div>
+      <div class="step"><div class="step__dot">04</div><div class="step__label" data-i18n="pba.process.3">Propose</div></div>
+      <div class="step"><div class="step__dot">05</div><div class="step__label" data-i18n="pba.process.4">Negotiate</div></div>
+      <div class="step"><div class="step__dot">06</div><div class="step__label" data-i18n="pba.process.5">Onboard</div></div>
+      <div class="step"><div class="step__dot">07</div><div class="step__label" data-i18n="pba.process.5">Retain</div></div>
     </div>
 
-    <div class="factors-label">What closed these deals</div>
+    <div class="factors-label" data-i18n="pba.factors.label">What closed these deals</div>
     <div class="factors">
       <div class="factor">
         <span class="factor__letter">A</span>
         <div>
-          <div class="factor__title">Personalized cold outreach</div>
-          <div class="factor__desc">Tailored hooks per brand vertical — not spray-and-pray. Every first touch referenced their actual product or store.</div>
+          <div class="factor__title" data-i18n="pba.factor.0">Personalized cold outreach</div>
         </div>
       </div>
       <div class="factor">
         <span class="factor__letter">B</span>
         <div>
-          <div class="factor__title">ICP-first qualification</div>
-          <div class="factor__desc">Filtered by fit before investing time in calls — platform presence, GMV potential, and category match all screened upfront.</div>
+          <div class="factor__title" data-i18n="pba.factor.1">ICP-first qualification</div>
         </div>
       </div>
       <div class="factor">
         <span class="factor__letter">C</span>
         <div>
-          <div class="factor__title">Outcome-based pitch</div>
-          <div class="factor__desc">Led with what the brand gains — revenue growth, platform reach, and operational lift — not just what AHA Commerce does.</div>
+          <div class="factor__title" data-i18n="pba.factor.2">Outcome-based pitch</div>
         </div>
       </div>
     </div>
@@ -204,9 +205,9 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
     <div class="spacer"></div>
 
     <div class="cta-row">
-      <span class="cta-label">Want to see what I can close for your team?</span>
+      <span class="cta-label" data-i18n="pba.cta.note">Want to see what I can close for your team?</span>
       <a href="https://wa.me/6285155343042" target="_blank" class="btn">
-        Let's talk
+        <span data-i18n="common.letsTalk">Let's talk</span>
         <svg width=".875em" height=".875em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -229,6 +230,9 @@ h1{font-size:clamp(1.5rem,2.5vw,2.125rem);font-weight:700;letter-spacing:-.03em;
 </div>
 
 <script>
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => I18n.applyI18n());
+
 const brands = [
   { name:'Teddie Clubs', img:'brand_01.png' },
   { name:'in-lite',      img:'brand_02.png' },

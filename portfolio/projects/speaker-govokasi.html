@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;--surface2:#161620;--surface3:#1b1b24;
@@ -80,18 +81,21 @@ a{color:inherit;text-decoration:none}
 <header class="topbar">
   <a class="topbar__back" href="../#works">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 2.5L4 7l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back
+    <span data-i18n="topbar.back">Back</span>
   </a>
-  <span class="topbar__label">Speaker</span>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <span class="topbar__label">Speaker</span>
+  </div>
 </header>
 
 <main class="page">
 
   <div class="left">
-    <p class="eyebrow">GoVokasi × Maxwell Leadership · Sep 2026</p>
-    <h1 class="h1">Beyond Your Degree: Building a Career Outside Your Background</h1>
-    <span class="role-chip">Guest Speaker</span>
-    <p class="desc">Guest speaker for GoVokasi's #LetsGoPRO Community Talks — online session on building a career outside your degree, hosted by Maxwell Leadership Corporate Solutions Group.</p>
+    <p class="eyebrow" data-i18n="gov.eyebrow">GoVokasi × Maxwell Leadership · Sep 2026</p>
+    <h1 class="h1" data-i18n="gov.h1">Beyond Your Degree: Building a Career Outside Your Background</h1>
+    <span class="role-chip" data-i18n="gov.role">Guest Speaker</span>
+    <p class="desc" data-i18n="gov.desc">Guest speaker for GoVokasi's #LetsGoPRO Community Talks — online session on building a career outside your degree, hosted by Maxwell Leadership Corporate Solutions Group.</p>
     <div class="tags">
       <span class="tag">Public Speaking</span>
       <span class="tag">Career Development</span>
@@ -102,42 +106,42 @@ a{color:inherit;text-decoration:none}
     <div class="stat-row">
       <div class="stat-chip">
         <span class="stat-chip__num">14</span>
-        <span class="stat-chip__label">Slides</span>
+        <span class="stat-chip__label" data-i18n="gov.stat.slides.label">Slides</span>
       </div>
       <div class="stat-chip">
-        <span class="stat-chip__num">Public</span>
-        <span class="stat-chip__label">Audience</span>
+        <span class="stat-chip__num" data-i18n="gov.stat.audience.val">Public</span>
+        <span class="stat-chip__label" data-i18n="gov.stat.audience.label">Audience</span>
       </div>
       <div class="stat-chip">
-        <span class="stat-chip__num">Online</span>
-        <span class="stat-chip__label">Format</span>
+        <span class="stat-chip__num" data-i18n="gov.stat.format.val">Online</span>
+        <span class="stat-chip__label" data-i18n="gov.stat.format.label">Format</span>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <p class="sec-label">What I Covered</p>
+      <p class="sec-label" data-i18n="sec.whatICovered">What I Covered</p>
       <div class="topic-list">
         <div class="topic-item">
           <div class="topic-num">01</div>
-          <p class="topic-text"><strong>Career ≠ a straight line</strong> — reframing how we think about career paths and transitions</p>
+          <p class="topic-text" data-i18n-html="gov.topic.0"><strong>Career ≠ a straight line</strong> — reframing how we think about career paths and transitions</p>
         </div>
         <div class="topic-item">
           <div class="topic-num">02</div>
-          <p class="topic-text"><strong>Your degree vs your skills</strong> — what you studied ≠ what you can do</p>
+          <p class="topic-text" data-i18n-html="gov.topic.1"><strong>Your degree vs your skills</strong> — what you studied ≠ what you can do</p>
         </div>
         <div class="topic-item">
           <div class="topic-num">03</div>
-          <p class="topic-text"><strong>Transferable skills as career currency</strong> — communication, problem solving, analysis, and how to carry them across industries</p>
+          <p class="topic-text" data-i18n-html="gov.topic.2"><strong>Transferable skills as career currency</strong> — communication, problem solving, analysis, and how to carry them across industries</p>
         </div>
         <div class="topic-item">
           <div class="topic-num">04</div>
-          <p class="topic-text"><strong>Proof of work</strong> — how to turn "I can do this" into evidence recruiters actually believe</p>
+          <p class="topic-text" data-i18n-html="gov.topic.3"><strong>Proof of work</strong> — how to turn "I can do this" into evidence recruiters actually believe</p>
         </div>
         <div class="topic-item">
           <div class="topic-num">05</div>
-          <p class="topic-text"><strong>The bridge role strategy</strong> — why you don't always need to leap, and how to build a bridge instead</p>
+          <p class="topic-text" data-i18n-html="gov.topic.4"><strong>The bridge role strategy</strong> — why you don't always need to leap, and how to build a bridge instead</p>
         </div>
       </div>
     </div>
@@ -145,14 +149,14 @@ a{color:inherit;text-decoration:none}
     <div class="divider"></div>
 
     <div>
-      <p class="sec-label">Deck</p>
+      <p class="sec-label" data-i18n="sec.deck">Deck</p>
       <a class="deck-cta" href="assets/beyond-your-degree-deck.pdf" target="_blank" rel="noopener">
         <div class="deck-cta__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <div>
-          <div class="deck-cta__label">Beyond Your Degree — Slide Deck</div>
-          <div class="deck-cta__sub">Career Transition Playbook · 14 slides · PDF</div>
+          <div class="deck-cta__label" data-i18n="gov.deck.label">Beyond Your Degree — Slide Deck</div>
+          <div class="deck-cta__sub" data-i18n="gov.deck.sub">Career Transition Playbook · 14 slides · PDF</div>
         </div>
         <div class="deck-cta__arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -168,5 +172,9 @@ a{color:inherit;text-decoration:none}
   </div>
 
 </main>
+<script>
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => I18n.applyI18n());
+</script>
 </body>
 </html>

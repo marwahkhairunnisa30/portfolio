@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="/i18n.js"></script>
 <style>
   :root {
     --bg: #0b0b10;
@@ -254,15 +255,16 @@
 <nav class="nav">
   <a href="/">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 12L6 8l4-4"/></svg>
-    marwah.dev
+    <span data-i18n="fi.nav">marwah.dev</span>
   </a>
   <span class="nav__sep">/</span>
-  <span class="nav__cur">FI Calculator</span>
+  <span class="nav__cur" data-i18n="fi.cur">FI Calculator</span>
+  <div id="langToggle" style="margin-left:auto"></div>
 </nav>
 
 <div class="wrap">
   <div class="top-bar">
-    <span class="eyebrow">Personal Finance</span>
+    <span class="eyebrow" data-i18n="fi.eyebrow">Personal Finance</span>
     <div class="toggle">
       <button class="toggle-btn on" id="btnUSD" onclick="setCurrency('USD')">USD</button>
       <button class="toggle-btn" id="btnIDR" onclick="setCurrency('IDR')">IDR</button>
@@ -271,9 +273,9 @@
 
   <!-- Hero result -->
   <div class="hero">
-    <div class="hero__label">Years to Financial Independence</div>
+    <div class="hero__label" data-i18n="fi.hero.label">Years to Financial Independence</div>
     <div class="hero__number" id="heroNum">19</div>
-    <div class="hero__unit">years</div>
+    <div class="hero__unit" data-i18n="fi.hero.unit">years</div>
     <div class="hero__insight" id="heroInsight"></div>
   </div>
 
@@ -282,21 +284,21 @@
   <!-- Inputs -->
   <div class="inputs-grid">
     <div class="field">
-      <label>Monthly Income (after tax)</label>
+      <label data-i18n="fi.income.label">Monthly Income (after tax)</label>
       <div class="field__wrap">
         <span class="field__pfx" id="pfxA">$</span>
         <input type="number" id="income" value="5000" min="0" step="100" style="--pl:26px">
       </div>
     </div>
     <div class="field">
-      <label>Monthly Expenses</label>
+      <label data-i18n="fi.expenses.label">Monthly Expenses</label>
       <div class="field__wrap">
         <span class="field__pfx" id="pfxB">$</span>
         <input type="number" id="expenses" value="3000" min="0" step="100" style="--pl:26px">
       </div>
     </div>
     <div class="field">
-      <label>Current Savings / Investments</label>
+      <label data-i18n="fi.savings.label">Current Savings / Investments</label>
       <div class="field__wrap">
         <span class="field__pfx" id="pfxC">$</span>
         <input type="number" id="savings" value="20000" min="0" step="1000" style="--pl:26px">
@@ -305,7 +307,7 @@
   </div>
 
   <div class="return-card">
-    <label>Expected Annual Return</label>
+    <label data-i18n="fi.return.label">Expected Annual Return</label>
     <input type="range" id="returnRate" min="1" max="15" step="0.5" value="7">
     <span class="return-val" id="returnLbl">7%</span>
   </div>
@@ -315,11 +317,11 @@
 
   <!-- Chart -->
   <div class="chart-card">
-    <div class="chart-title">Net Worth Trajectory</div>
+    <div class="chart-title" data-i18n="fi.chart.title">Net Worth Trajectory</div>
     <div class="chart-wrap"><canvas id="chart"></canvas></div>
   </div>
 
-  <p class="footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings & a fixed return rate.<br>Not financial advice.</p>
+  <p class="footnote" data-i18n-html="fi.footnote">Based on the 4% rule (25× annual expenses). Assumes consistent savings & a fixed return rate.<br>Not financial advice.</p>
 </div>
 
 <script>
@@ -402,7 +404,7 @@
 
     if (income <= 0 || mo_save <= 0) {
       heroNum.textContent = '—';
-      heroInsight.innerHTML = '<span>Expenses meet or exceed income — adjust your numbers.</span>';
+      heroInsight.innerHTML = `<span>${I18n.t('fi.insight.negative')}</span>`;
       document.getElementById('statsArea').innerHTML = '';
       renderChart([], [], 0);
       return;
@@ -415,32 +417,32 @@
     // Insight line
     const rateColor = sv_rate >= 50 ? 'green' : 'accent';
     if (years < 1) {
-      heroInsight.innerHTML = `You're <strong>already financially independent</strong>. Your savings cover 25× annual expenses.`;
+      heroInsight.innerHTML = I18n.t('fi.insight.already');
     } else {
-      heroInsight.innerHTML = `Saving <span class="${rateColor}">${sv_rate.toFixed(0)}%</span> of income → reach <strong>${fmt(fi_num)}</strong> by <strong>${targetYear}</strong>`;
+      heroInsight.innerHTML = I18n.t('fi.insight.saving', {cls: rateColor, rate: sv_rate.toFixed(0), fi: fmt(fi_num), year: targetYear});
     }
 
     // Stats
     document.getElementById('statsArea').innerHTML = `
       <div class="stats">
         <div class="stat">
-          <div class="stat__lbl">Savings Rate</div>
+          <div class="stat__lbl">${I18n.t('fi.stat.savingsRate')}</div>
           <div class="stat__val ${sv_rate >= 25 ? 'a' : ''}">${sv_rate.toFixed(0)}%</div>
-          <div class="stat__sub">${fmtMo(mo_save)}/month</div>
+          <div class="stat__sub">${fmtMo(mo_save)}${I18n.t('fi.stat.month')}</div>
         </div>
         <div class="stat">
-          <div class="stat__lbl">FI Number</div>
+          <div class="stat__lbl">${I18n.t('fi.stat.fiNumber')}</div>
           <div class="stat__val">${fmt(fi_num)}</div>
-          <div class="stat__sub">25× annual spend</div>
+          <div class="stat__sub">${I18n.t('fi.stat.annualSpend')}</div>
         </div>
         <div class="stat">
-          <div class="stat__lbl">Already saved</div>
+          <div class="stat__lbl">${I18n.t('fi.stat.alreadySaved')}</div>
           <div class="stat__val g">${prog.toFixed(1)}%</div>
-          <div class="stat__sub">of FI number</div>
+          <div class="stat__sub">${I18n.t('fi.stat.ofFI')}</div>
         </div>
       </div>
       <div class="prog-card">
-        <div class="prog-row"><span>Progress toward FI</span><span>${fmt(savings)} of ${fmt(fi_num)}</span></div>
+        <div class="prog-row"><span>${I18n.t('fi.prog.label')}</span><span>${fmt(savings)} of ${fmt(fi_num)}</span></div>
         <div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div>
       </div>
     `;
@@ -536,6 +538,9 @@
   slider.addEventListener('input', () => { sliderLbl.textContent = slider.value + '%'; calculate(); });
 
   calculate();
+
+  document.getElementById('langToggle').appendChild(I18n.createToggle());
+  document.addEventListener('langchange', () => { I18n.applyI18n(); calculate(); });
 </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--card:#141421;--card2:#1b1b2b;
@@ -85,19 +86,22 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 <nav class="nav">
   <a href="javascript:history.back()" class="nav__back">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Back
+    <span data-i18n="topbar.back">Back</span>
   </a>
-  <div class="nav__brand">
-    <svg width="12" height="12" viewBox="0 0 48 48" fill="#c03030"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-    Personal toolkit
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <div class="nav__brand">
+      <svg width="12" height="12" viewBox="0 0 48 48" fill="#c03030"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
+      <span data-i18n="leads.brand">Personal toolkit</span>
+    </div>
   </div>
 </nav>
 
 <div class="page">
 
   <div class="title-block">
-    <h1>BD Research Toolkit</h1>
-    <p>Generate Google search links for a brand or role — open in one click.</p>
+    <h1 data-i18n="leads.title">BD Research Toolkit</h1>
+    <p data-i18n="leads.desc">Generate Google search links for a brand or role — open in one click.</p>
   </div>
 
   <div class="split-card">
@@ -105,56 +109,56 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
     <!-- Form -->
     <div class="form-panel">
       <div class="mode-toggle">
-        <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales">BD / Sales</button>
-        <button class="mode-btn" onclick="setMode('job')" id="btn-job">Job Hunt</button>
+        <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales" data-i18n="leads.mode.sales">BD / Sales</button>
+        <button class="mode-btn" onclick="setMode('job')" id="btn-job" data-i18n="leads.mode.job">Job Hunt</button>
       </div>
 
       <div id="fields-sales">
         <div class="field" style="margin-bottom:.875rem">
-          <label class="flabel" for="s-brand">Nama brand <span>*</span></label>
-          <input class="inp" id="s-brand" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
+          <label class="flabel" for="s-brand"><span data-i18n="leads.s.brand.label">Brand name</span> <span>*</span></label>
+          <input class="inp" id="s-brand" data-i18n-placeholder="leads.s.brand.ph" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
         </div>
         <div class="field" style="margin-bottom:.6875rem">
-          <div class="flabel">Market</div>
+          <div class="flabel" data-i18n="leads.s.market.label">Market</div>
           <div class="chips" id="chips-market">
-            <button class="chip active" onclick="pick(this,'chips-market')">Indonesia</button>
-            <button class="chip" onclick="pick(this,'chips-market')">SE Asia</button>
-            <button class="chip" onclick="pick(this,'chips-market')">Global</button>
+            <button class="chip active" data-value="Indonesia" onclick="pick(this,'chips-market')">Indonesia</button>
+            <button class="chip" data-value="SE Asia" onclick="pick(this,'chips-market')">SE Asia</button>
+            <button class="chip" data-value="Global" onclick="pick(this,'chips-market')">Global</button>
           </div>
         </div>
         <div class="field">
-          <div class="flabel">Platform</div>
+          <div class="flabel" data-i18n="leads.s.platform.label">Platform</div>
           <div class="chips" id="chips-platform">
-            <button class="chip active" onclick="pick(this,'chips-platform')">Semua</button>
-            <button class="chip" onclick="pick(this,'chips-platform')">Shopee</button>
-            <button class="chip" onclick="pick(this,'chips-platform')">Tokopedia</button>
-            <button class="chip" onclick="pick(this,'chips-platform')">Instagram</button>
-            <button class="chip" onclick="pick(this,'chips-platform')">TikTok</button>
+            <button class="chip active" data-value="all" data-i18n="leads.all" onclick="pick(this,'chips-platform')">All</button>
+            <button class="chip" data-value="Shopee" onclick="pick(this,'chips-platform')">Shopee</button>
+            <button class="chip" data-value="Tokopedia" onclick="pick(this,'chips-platform')">Tokopedia</button>
+            <button class="chip" data-value="Instagram" onclick="pick(this,'chips-platform')">Instagram</button>
+            <button class="chip" data-value="TikTok" onclick="pick(this,'chips-platform')">TikTok</button>
           </div>
         </div>
       </div>
 
       <div id="fields-job" style="display:none">
         <div class="field" style="margin-bottom:.875rem">
-          <label class="flabel" for="j-role">Target role <span>*</span></label>
-          <input class="inp" id="j-role" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
+          <label class="flabel" for="j-role"><span data-i18n="leads.j.role.label">Target role</span> <span>*</span></label>
+          <input class="inp" id="j-role" data-i18n-placeholder="leads.j.role.ph" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
         </div>
         <div class="field" style="margin-bottom:.6875rem">
-          <div class="flabel">Tipe kerja</div>
+          <div class="flabel" data-i18n="leads.j.worktype.label">Work type</div>
           <div class="chips" id="chips-worktype">
-            <button class="chip active" onclick="pick(this,'chips-worktype')">Remote</button>
-            <button class="chip" onclick="pick(this,'chips-worktype')">Hybrid</button>
-            <button class="chip" onclick="pick(this,'chips-worktype')">WFO</button>
-            <button class="chip" onclick="pick(this,'chips-worktype')">Semua</button>
+            <button class="chip active" data-value="Remote" onclick="pick(this,'chips-worktype')">Remote</button>
+            <button class="chip" data-value="Hybrid" onclick="pick(this,'chips-worktype')">Hybrid</button>
+            <button class="chip" data-value="WFO" onclick="pick(this,'chips-worktype')">WFO</button>
+            <button class="chip" data-value="all" data-i18n="leads.all" onclick="pick(this,'chips-worktype')">All</button>
           </div>
         </div>
         <div class="field">
-          <div class="flabel">Lokasi</div>
+          <div class="flabel" data-i18n="leads.j.loc.label">Location</div>
           <div class="chips" id="chips-loc">
-            <button class="chip active" onclick="pick(this,'chips-loc')">Indonesia</button>
-            <button class="chip" onclick="pick(this,'chips-loc')">Jakarta</button>
-            <button class="chip" onclick="pick(this,'chips-loc')">SE Asia</button>
-            <button class="chip" onclick="pick(this,'chips-loc')">Global</button>
+            <button class="chip active" data-value="Indonesia" onclick="pick(this,'chips-loc')">Indonesia</button>
+            <button class="chip" data-value="Jakarta" onclick="pick(this,'chips-loc')">Jakarta</button>
+            <button class="chip" data-value="SE Asia" onclick="pick(this,'chips-loc')">SE Asia</button>
+            <button class="chip" data-value="Global" onclick="pick(this,'chips-loc')">Global</button>
           </div>
         </div>
       </div>
@@ -164,7 +168,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
     <div class="results-panel">
       <div class="empty" id="emptyState">
         <div class="empty-icon">✦</div>
-        <p>Isi form di kiri untuk mulai riset</p>
+        <p data-i18n="leads.empty">Fill in the form on the left to start researching</p>
       </div>
       <div id="resultsInner" style="display:none"></div>
     </div>
@@ -192,7 +196,8 @@ function pick(el,id){
 
 function chip(id){
   const a=document.querySelector(`#${id} .chip.active`);
-  return a?a.textContent.trim():'';
+  if(!a)return'';
+  return a.dataset.value||a.textContent.trim();
 }
 
 function debouncedGenerate(){clearTimeout(timer);timer=setTimeout(generate,280);}
@@ -225,7 +230,7 @@ function salesLinks(brand,market,platform){
   ];
 
   // Platform filter
-  if(platform&&platform!=='Semua'){
+  if(platform&&platform!=='all'){
     if(platform==='Instagram'){midRow=midRow.filter(x=>x.l==='Instagram');botRow=[];}
     else if(platform==='TikTok'){midRow=[];botRow=botRow.filter(x=>x.l==='TikTok');}
     else if(platform==='Shopee'){midRow=[];botRow=botRow.filter(x=>x.l==='Shopee');}
@@ -239,7 +244,7 @@ function salesLinks(brand,market,platform){
 }
 
 function jobLinks(role,worktype,loc){
-  const wt=worktype&&worktype!=='Semua'?` ${worktype}`:'';
+  const wt=worktype&&worktype!=='all'?` ${worktype}`:'';
   const l=loc&&loc!=='Global'?` ${loc}`:'';
   const q=role+wt+l;
   const rec='(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
@@ -298,7 +303,7 @@ function generate(){
     </div>
     <button class="open-all" onclick='openAll(${uj})'>
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Open All
+      ${I18n.t('leads.openAll')}
     </button>
   </div>
   <div class="res-grid ${cols}">${flatHtml}</div>`;
@@ -315,6 +320,8 @@ function showEmpty(){
 
 function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
 document.addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange',()=>{I18n.applyI18n();generate();});
 </script>
 <div class="watermark">© 2026 Marwah Khairunnisa. All rights reserved.</div>
 </body>

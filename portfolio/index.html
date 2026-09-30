@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 /* ── Reset ── */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -462,12 +463,12 @@ img{display:block}
       <svg width="1.875rem" height="1.875rem" viewBox="0 0 48 48" fill="#c03030" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
       Marwah K
     </div>
-    <p class="loader__tagline">Growth Efficient Obsessed.</p>
+    <p class="loader__tagline" data-i18n="loader.tagline">Growth Efficient Obsessed.</p>
   </div>
   <div class="loader__progress">
     <div class="loader__track"><div class="loader__fill" id="loaderFill"></div></div>
     <div class="loader__meta">
-      <span>Loading</span>
+      <span data-i18n="loader.loading">Loading</span>
       <span class="loader__counter" id="loaderCounter">000</span>
     </div>
   </div>
@@ -481,22 +482,23 @@ img{display:block}
       Marwah K
     </button>
     <nav class="header__nav" aria-label="Primary navigation">
-      <button onclick="scrollToSection('home')" aria-current="page">Home</button>
-      <button onclick="scrollToSection('works')">Work</button>
-      <button onclick="scrollToSection('services')">Skills<span class="caret">&#9662;</span></button>
-      <button onclick="scrollToSection('about')">About</button>
-      <button onclick="openModal()">Contact</button>
+      <button onclick="scrollToSection('home')" aria-current="page" data-i18n="nav.home">Home</button>
+      <button onclick="scrollToSection('works')" data-i18n="nav.work">Work</button>
+      <button onclick="scrollToSection('services')"><span data-i18n="nav.skills">Skills</span><span class="caret">&#9662;</span></button>
+      <button onclick="scrollToSection('about')" data-i18n="nav.about">About</button>
+      <button onclick="openModal()" data-i18n="nav.contact">Contact</button>
     </nav>
     <div class="header__right">
       <div class="header__clock">
-        <span class="header__clock-label">Local time</span>
+        <span class="header__clock-label" data-i18n="header.localTime">Local time</span>
         <span class="header__clock-time" id="clockTime">9:41am</span>
         <span class="header__clock-sep">&bull;</span>
         <span class="header__clock-date" id="clockDate">5 Sep, 2026</span>
       </div>
+      <div id="headerLangToggle"></div>
       <button class="header__menu-btn" onclick="openNav()" aria-label="Open navigation menu">
         <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <span class="header__menu-label">Menu</span>
+        <span class="header__menu-label" data-i18n="header.menu">Menu</span>
       </button>
     </div>
   </div>
@@ -515,20 +517,20 @@ img{display:block}
     <div class="hero__left">
       <div class="hero__eyebrow" id="heroEyebrow">
         <span class="dot"></span>
-        Personal Studio &nbsp;·&nbsp; Jakarta
+        <span data-i18n="hero.eyebrow">Personal Studio &nbsp;·&nbsp; Jakarta</span>
       </div>
       <h1 class="hero__h1" id="heroH1">
-        <span class="line-wrap"><span class="line-inner" data-line="0">Driving growth</span></span>
-        <span class="line-wrap"><span class="line-inner" data-line="1">through strategy</span></span>
-        <span class="line-wrap"><span class="line-inner" data-line="2">and bold vision.</span></span>
+        <span class="line-wrap"><span class="line-inner" data-line="0" data-i18n="hero.h1.0">Driving growth</span></span>
+        <span class="line-wrap"><span class="line-inner" data-line="1" data-i18n="hero.h1.1">through strategy</span></span>
+        <span class="line-wrap"><span class="line-inner" data-line="2" data-i18n="hero.h1.2">and bold vision.</span></span>
       </h1>
       <div class="hero__rating" id="heroRating">
-        <span class="hero__rating-text">BizTech Enthusiast</span>
+        <span class="hero__rating-text" data-i18n="hero.rating">BizTech Enthusiast</span>
       </div>
       <div class="hero__ctas" id="heroCtas">
         <button class="pill pill--dark pill--arrow" onclick="openModal()">
           <span class="pill__inner">
-            Let's Connect
+            <span data-i18n="hero.cta.connect">Let's Connect</span>
             <span class="pill__badge">
               <svg class="arrow-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </span>
@@ -536,7 +538,7 @@ img{display:block}
         </button>
         <button class="pill pill--outline pill--arrow" onclick="scrollToSection('works')">
           <span class="pill__inner">
-            See my work
+            <span data-i18n="hero.cta.work">See my work</span>
             <span class="pill__badge">
               <svg class="arrow-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </span>
@@ -569,9 +571,9 @@ img{display:block}
     </div>
   </div>
   <div class="shell hero__status" id="heroStatus">
-    <span>Leading BD since 2023</span>
-    <span class="hero__status-center">Jakarta, Indonesia &nbsp;·&nbsp; Remote-friendly</span>
-    <span class="hero__status-right">Scroll to explore <span>&darr;</span></span>
+    <span data-i18n="hero.status.left">Leading BD since 2023</span>
+    <span class="hero__status-center" data-i18n="hero.status.center">Jakarta, Indonesia &nbsp;·&nbsp; Remote-friendly</span>
+    <span class="hero__status-right"><span data-i18n="hero.status.right">Scroll to explore</span> <span>&darr;</span></span>
   </div>
 </section>
 
@@ -584,18 +586,18 @@ img{display:block}
       </div>
       <div class="eyebrow eyebrow--dark about__eyebrow" data-reveal>
         <span class="dot"></span>
-        About Me
+        <span data-i18n="about.eyebrow">About Me</span>
       </div>
       <div class="about__distributed" data-reveal style="position:absolute;bottom:0;left:0">
         <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="flex-shrink:0;color:#eceaf5"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg>
-        <span>Based in Jakarta, building partnerships across markets.</span>
+        <span data-i18n="about.distributed">Based in Jakarta, building partnerships across markets.</span>
       </div>
     </div>
     <div class="about__right">
       <h2 class="about__h2" id="aboutH2"></h2>
       <div class="about__footer" data-reveal data-delay="200">
         <div>
-          <div class="about__social-label">Find me online</div>
+          <div class="about__social-label" data-i18n="about.findOnline">Find me online</div>
           <div class="about__social-row">
             <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="about__social-chip about__social-chip--accent" aria-label="LinkedIn">
               <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -610,7 +612,7 @@ img{display:block}
         </div>
         <button onclick="openModal()" class="pill pill--outline pill--arrow">
           <span class="pill__inner">
-            Get in touch
+            <span data-i18n="about.getInTouch">Get in touch</span>
             <span class="pill__badge">
               <svg class="arrow-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </span>
@@ -628,10 +630,10 @@ img{display:block}
     <div class="portfolio__header">
       <div class="eyebrow eyebrow--dark eyebrow--bordered" data-reveal>
         <span class="dot"></span>
-        Portfolio
+        <span data-i18n="portfolio.eyebrow">Portfolio</span>
       </div>
       <h2 class="portfolio__h2">
-        <span class="line-wrap"><span class="line-inner" data-reveal-line>Selected Work</span></span>
+        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="portfolio.h2">Selected Work</span></span>
       </h2>
     </div>
     <ul class="portfolio__grid" id="portfolioGrid"></ul>
@@ -643,13 +645,13 @@ img{display:block}
   <div class="shell services__inner">
     <div class="eyebrow eyebrow--dark" data-reveal>
       <span class="dot"></span>
-      Core Capabilities
+      <span data-i18n="services.eyebrow">Core Capabilities</span>
     </div>
     <ul id="servicesList" style="margin-top:1.25rem"></ul>
     <div style="margin-top:2rem;display:flex;justify-content:flex-end" data-reveal>
       <a href="/constellation.html" class="pill pill--outline pill--arrow">
         <span class="pill__inner">
-          Explore all 14 skills
+          <span data-i18n="services.exploreAll">Explore all 14 skills</span>
           <span class="pill__badge">
             <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </span>
@@ -665,10 +667,10 @@ img{display:block}
     <div class="stats-panel" data-reveal>
       <div class="eyebrow eyebrow--light" data-reveal>
         <span class="dot"></span>
-        By the numbers
+        <span data-i18n="stats.eyebrow">By the numbers</span>
       </div>
       <h2 class="stats__h2">
-        <span class="line-wrap"><span class="line-inner" data-reveal-line>Proof in the work, not the words.</span></span>
+        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="stats.h2">Proof in the work, not the words.</span></span>
       </h2>
       <ul class="stats__grid" id="statsGrid"></ul>
     </div>
@@ -682,12 +684,12 @@ img{display:block}
   <div class="shell footer__inner">
     <div class="footer__cta">
       <h2 class="footer__cta-h2" id="footerH2">
-        <span class="line-wrap"><span class="line-inner" data-reveal-line>Have a growth challenge?</span></span>
-        <span class="line-wrap"><span class="line-inner" data-reveal-line>Let's talk.</span></span>
+        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="footer.h2.0">Have a growth challenge?</span></span>
+        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="footer.h2.1">Let's talk.</span></span>
       </h2>
       <button class="pill pill--light pill--arrow" onclick="openModal()">
         <span class="pill__inner">
-          Get in touch
+          <span data-i18n="footer.cta">Get in touch</span>
           <span class="pill__badge">
             <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </span>
@@ -695,10 +697,10 @@ img{display:block}
       </button>
     </div>
     <div class="footer__legal" style="padding-top:1.5rem;border-top:none">
-      <span>&copy; 2026 Marwah Khairunnisa. All rights reserved.</span>
+      <span data-i18n="footer.legal">&copy; 2026 Marwah Khairunnisa. All rights reserved.</span>
       <div class="footer__legal-links">
-        <a href="mailto:marwahkhairunnisa30@gmail.com" class="footer__legal-link"><span>Get in touch &rarr;</span></a>
-        <a href="/marwah-cv.pdf" download="Marwah K - CV.pdf" class="footer__legal-link"><span>Download CV &rarr;</span></a>
+        <a href="mailto:marwahkhairunnisa30@gmail.com" class="footer__legal-link"><span data-i18n="footer.link.contact">Get in touch &rarr;</span></a>
+        <a href="/marwah-cv.pdf" download="Marwah K - CV.pdf" class="footer__legal-link"><span data-i18n="footer.link.cv">Download CV &rarr;</span></a>
       </div>
     </div>
   </div>
@@ -713,17 +715,17 @@ img{display:block}
     </div>
     <button class="nav-menu__close" onclick="closeNav()" aria-label="Close navigation menu">
       <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4 4 20"/></svg>
-      Close
+      <span data-i18n="navmenu.close">Close</span>
     </button>
   </div>
   <nav class="nav-menu__nav" aria-label="Main navigation">
     <ul class="nav-menu__list" id="navMenuList"></ul>
   </nav>
   <div class="nav-menu__bottom">
-    <span>Local time — <span id="navMenuTime">9:41am</span></span>
+    <span><span data-i18n="navmenu.localTime">Local time —</span> <span id="navMenuTime">9:41am</span></span>
     <div style="display:flex;gap:.75rem;align-items:center">
-      <a href="/marwah-cv.pdf" download="Marwah K - CV.pdf" class="nav-menu__project-btn" style="text-decoration:none">Download CV &darr;</a>
-      <button class="nav-menu__project-btn" onclick="closeNav();setTimeout(openModal,300)">Get in touch &rarr;</button>
+      <a href="/marwah-cv.pdf" download="Marwah K - CV.pdf" class="nav-menu__project-btn" style="text-decoration:none" data-i18n="navmenu.downloadCV">Download CV &darr;</a>
+      <button class="nav-menu__project-btn" onclick="closeNav();setTimeout(openModal,300)" data-i18n="navmenu.getInTouch">Get in touch &rarr;</button>
     </div>
   </div>
 </div>
@@ -736,27 +738,27 @@ img{display:block}
     </button>
     <div id="modalFormState">
       <div class="modal__header">
-        <div class="modal__eyebrow"><span class="dot"></span> Get in touch</div>
-        <h2 class="modal__title">Let's build something great.</h2>
+        <div class="modal__eyebrow"><span class="dot"></span> <span data-i18n="modal.eyebrow">Get in touch</span></div>
+        <h2 class="modal__title" data-i18n="modal.title">Let's build something great.</h2>
       </div>
       <form class="modal__form" id="requestForm" onsubmit="handleSubmit(event)">
         <label class="modal__label">
-          Name
-          <input class="modal__input" type="text" name="name" required placeholder="Your name" />
+          <span data-i18n="modal.name">Name</span>
+          <input class="modal__input" type="text" name="name" required placeholder="Your name" data-i18n-placeholder="modal.name.ph" />
         </label>
         <label class="modal__label">
-          Email
-          <input class="modal__input" type="email" name="email" required placeholder="you@company.com" />
+          <span data-i18n="modal.email">Email</span>
+          <input class="modal__input" type="email" name="email" required placeholder="you@company.com" data-i18n-placeholder="modal.email.ph" />
         </label>
         <label class="modal__label">
-          Message
-          <textarea class="modal__textarea" name="message" rows="4" required placeholder="Tell me about your project or how we can work together."></textarea>
+          <span data-i18n="modal.message">Message</span>
+          <textarea class="modal__textarea" name="message" rows="4" required placeholder="Tell me about your project or how we can work together." data-i18n-placeholder="modal.message.ph"></textarea>
         </label>
         <div class="modal__footer">
-          <span class="modal__note">I reply within one business day.</span>
+          <span class="modal__note" data-i18n="modal.note">I reply within one business day.</span>
           <button class="pill pill--dark pill--arrow" type="submit" id="submitBtn">
             <span class="pill__inner">
-              <span id="submitLabel">Send message</span>
+              <span id="submitLabel" data-i18n="modal.submit">Send message</span>
               <span class="pill__badge">
                 <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
               </span>
@@ -770,10 +772,10 @@ img{display:block}
         <div class="modal__success-badge">
           <svg width="1.5rem" height="1.5rem" viewBox="0 0 48 48" fill="currentColor"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
         </div>
-        <h2>Message received!</h2>
-        <p>Thanks for reaching out — I'll get back to you within one business day.</p>
+        <h2 data-i18n="modal.success.title">Message received!</h2>
+        <p data-i18n="modal.success.text">Thanks for reaching out — I'll get back to you within one business day.</p>
         <button class="pill pill--dark pill--no-arrow" onclick="closeModal()">
-          <span class="pill__inner">Close</span>
+          <span class="pill__inner" data-i18n="modal.close">Close</span>
         </button>
       </div>
     </div>
@@ -838,7 +840,7 @@ function updateClock() {
   const mer = h >= 12 ? 'pm' : 'am';
   h = h % 12 || 12;
   const timeStr = h + ':' + String(m).padStart(2, '0') + mer;
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const months = Array.from({length:12}, (_,i) => I18n.t('month.'+i));
   const dateStr = d.getDate() + ' ' + months[d.getMonth()] + ', ' + d.getFullYear();
   document.getElementById('clockTime').textContent = timeStr;
   document.getElementById('clockDate').textContent = dateStr;
@@ -929,11 +931,11 @@ function setupRevealObserver() {
 }
 
 // ── About word reveal ──
-const aboutText = 'Operations-oriented BD Lead combining pipeline management, CRM optimization, and workflow automation ';
-const aboutMuted = 'to boost conversion efficiency — with experience in team leadership, KPI design, and bridging sales strategy with execution.';
 function buildAboutH2() {
   const h2 = document.getElementById('aboutH2');
   h2.style.wordSpacing = 'normal';
+  const aboutText = I18n.t('about.main');
+  const aboutMuted = I18n.t('about.muted');
   const allWords = aboutText.split(' ').filter(w => w);
   const mutedWords = aboutMuted.split(' ').filter(w => w);
   allWords.forEach((w, i) => {
@@ -964,11 +966,6 @@ function buildAboutH2() {
 }
 
 // ── Hero Card carousel ──
-const cardItems = [
-  { caption: 'Business Development', title: 'Built to grow.' },
-  { caption: 'Strategic Partnerships', title: 'Forged to last.' },
-  { caption: 'AI & Automation', title: 'Designed to scale.' }
-];
 let cardIdx = 0;
 function renderCard(dir) {
   const slot = document.getElementById('heroCardSlot');
@@ -982,7 +979,7 @@ function renderCard(dir) {
   item.className = 'hero-card__item';
   item.style.opacity = '0';
   item.style.transform = `translateY(${dir > 0 ? 14 : -14}px)`;
-  item.innerHTML = `<div class="hero-card__caption">${cardItems[cardIdx].caption}</div><div class="hero-card__title">${cardItems[cardIdx].title}</div>`;
+  item.innerHTML = `<div class="hero-card__caption">${I18n.t('card.'+cardIdx+'.caption')}</div><div class="hero-card__title">${I18n.t('card.'+cardIdx+'.title')}</div>`;
   slot.appendChild(item);
   requestAnimationFrame(() => {
     item.style.opacity = '1';
@@ -993,14 +990,14 @@ function renderCard(dir) {
 function renderDots() {
   const dots = document.getElementById('heroCardDots');
   dots.innerHTML = '';
-  cardItems.forEach((_, i) => {
+  [0,1,2].forEach(i => {
     const d = document.createElement('div');
     d.className = i === cardIdx ? 'hero-card__dot hero-card__dot--active' : 'hero-card__dot hero-card__dot--inactive';
     dots.appendChild(d);
   });
 }
-function nextCard() { cardIdx = (cardIdx + 1) % cardItems.length; renderCard(1); }
-function prevCard() { cardIdx = (cardIdx - 1 + cardItems.length) % cardItems.length; renderCard(-1); }
+function nextCard() { cardIdx = (cardIdx + 1) % 3; renderCard(1); }
+function prevCard() { cardIdx = (cardIdx - 1 + 3) % 3; renderCard(-1); }
 document.getElementById('heroCardNext').addEventListener('click', (e) => { e.stopPropagation(); nextCard(); });
 document.getElementById('heroCardPrev').addEventListener('click', (e) => { e.stopPropagation(); prevCard(); });
 document.getElementById('heroCardBody').addEventListener('click', nextCard);
@@ -1022,86 +1019,89 @@ function setupCreateBand() {
 }
 
 // ── Portfolio ──
-const megaCards = [
-  {
-    title: 'BD Portfolio',
-    meta: 'Business Development · AHA Commerce · 2023–2025',
-    desc: 'How I drove growth, led teams, and shipped things that moved the needle.',
-    subs: [
-      {
-        name: 'Brand Acquisition — Team',
-        category: 'Strategy & Leadership · 2024',
-        desc: 'Scaled a team of 8 to 47 brand partnerships in 9 months — system built from scratch, results delivered.',
-        tags: ['Team Leadership','BD Strategy'],
-        link: 'projects/bd-funnel-overhaul.html'
-      },
-      {
-        name: 'Brand Acquisition — Personal',
-        category: 'Individual Contributor · 2023–24',
-        desc: '55+ deals closed solo, end-to-end — cold to signed across fashion, F&B, and sports.',
-        tags: ['Lead Gen','Stakeholder Engagement'],
-        link: 'projects/personal-brand-acquisitions.html'
-      },
-      {
-        name: 'Company Project',
-        category: 'Company Project · 2024–25',
-        desc: 'Multiple company-wide projects, one project lead — Shopee Super Summit, Thailand campaigns, internal activations. Different teams, different timelines, always delivered.',
-        tags: ['Project Management','Brand Activation'],
-        link: 'projects/company-project.html'
-      },
-      {
-        name: 'Digital Project',
-        category: 'Automation & Digital · 2024',
-        desc: 'Shipped AI-powered outreach tools that cut manual prospecting time — from prompt engineering to live workflow.',
-        tags: ['Vibe Coding','Prompt Engineering'],
-        link: null
-      }
-    ]
-  },
-  {
-    title: 'Personal Project',
-    meta: 'Outside of Work · Ongoing',
-    desc: 'Tools I build and experiments that scratch my own itch.',
-    subs: [
-      {
-        name: 'AI Tools',
-        category: 'Built with AI · 2026',
-        folder: true,
-        nested: [
-          { name: 'TailoredAI', desc: 'Personalized BD outreach generator', link: 'https://bdtailored-ai.vercel.app' },
-          { name: 'Affiliate Threads', desc: 'Affiliate content that doesn\'t read like an ad', link: 'https://shopee-thread-generator.vercel.app/' },
-          { name: 'Leads Generator', desc: 'Brand & recruiter research toolkit', link: '/leads-generator.html' }
-        ]
-      },
-      {
-        name: 'Skills Constellation',
-        category: 'Interactive Viz · 2026',
-        desc: 'Not a list. A live map of 14 skills across BD, content, and tech — and how they connect.',
-        tags: ['Canvas', 'Interactive'],
-        link: '/constellation.html'
-      },
-      {
-        name: 'Social Proof – Speaker',
-        category: 'Thought Leadership · 2026',
-        folder: true,
-        nested: [
-          { name: 'Beyond Your Degree', desc: 'GoVokasi × Maxwell Leadership · Sep 2026', link: 'projects/speaker-govokasi.html' },
-          { name: 'Coming Soon', desc: 'Another speaking engagement', coming_soon: true }
-        ]
-      },
-      {
-        coming_soon: true,
-        name: '···',
-        category: 'Coming Soon',
-        desc: 'Something new is brewing.'
-      }
-    ]
-  }
-];
+function getMegaCards() {
+  return [
+    {
+      title: I18n.t('pf.bd.title'),
+      meta: I18n.t('pf.bd.meta'),
+      desc: I18n.t('pf.bd.desc'),
+      subs: [
+        {
+          name: I18n.t('pf.bd.0.name'),
+          category: I18n.t('pf.bd.0.cat'),
+          desc: I18n.t('pf.bd.0.desc'),
+          tags: ['Team Leadership','BD Strategy'],
+          link: 'projects/bd-funnel-overhaul.html'
+        },
+        {
+          name: I18n.t('pf.bd.1.name'),
+          category: I18n.t('pf.bd.1.cat'),
+          desc: I18n.t('pf.bd.1.desc'),
+          tags: ['Lead Gen','Stakeholder Engagement'],
+          link: 'projects/personal-brand-acquisitions.html'
+        },
+        {
+          name: I18n.t('pf.bd.2.name'),
+          category: I18n.t('pf.bd.2.cat'),
+          desc: I18n.t('pf.bd.2.desc'),
+          tags: ['Project Management','Brand Activation'],
+          link: 'projects/company-project.html'
+        },
+        {
+          name: I18n.t('pf.bd.3.name'),
+          category: I18n.t('pf.bd.3.cat'),
+          desc: I18n.t('pf.bd.3.desc'),
+          tags: ['Vibe Coding','Prompt Engineering'],
+          link: null
+        }
+      ]
+    },
+    {
+      title: I18n.t('pf.pp.title'),
+      meta: I18n.t('pf.pp.meta'),
+      desc: I18n.t('pf.pp.desc'),
+      subs: [
+        {
+          name: I18n.t('pf.pp.0.name'),
+          category: I18n.t('pf.pp.0.cat'),
+          folder: true,
+          nested: [
+            { name: 'TailoredAI', desc: I18n.t('pf.pp.0.n.0.desc'), link: 'https://bdtailored-ai.vercel.app' },
+            { name: 'Affiliate Threads', desc: I18n.t('pf.pp.0.n.1.desc'), link: 'https://shopee-thread-generator.vercel.app/' },
+            { name: 'Leads Generator', desc: I18n.t('pf.pp.0.n.2.desc'), link: '/leads-generator.html' }
+          ]
+        },
+        {
+          name: I18n.t('pf.pp.1.name'),
+          category: I18n.t('pf.pp.1.cat'),
+          desc: I18n.t('pf.pp.1.desc'),
+          tags: ['Canvas', 'Interactive'],
+          link: '/constellation.html'
+        },
+        {
+          name: I18n.t('pf.pp.2.name'),
+          category: I18n.t('pf.pp.2.cat'),
+          folder: true,
+          nested: [
+            { name: I18n.t('pf.pp.2.n.0.name'), desc: I18n.t('pf.pp.2.n.0.desc'), link: 'projects/speaker-govokasi.html' },
+            { name: I18n.t('pf.pp.2.n.1.name'), desc: I18n.t('pf.pp.2.n.1.desc'), coming_soon: true }
+          ]
+        },
+        {
+          coming_soon: true,
+          name: I18n.t('pf.pp.3.name'),
+          category: I18n.t('pf.pp.3.cat'),
+          desc: I18n.t('pf.pp.3.desc')
+        }
+      ]
+    }
+  ];
+}
 
 function buildPortfolio() {
   const grid = document.getElementById('portfolioGrid');
   const arrowIcon = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
+  const megaCards = getMegaCards();
 
   megaCards.forEach((card, cardIdx) => {
     const li = document.createElement('li');
@@ -1114,7 +1114,7 @@ function buildPortfolio() {
           <div class="portfolio__subcard__cat">${s.category}</div>
           <div class="portfolio__subcard__head">
             <div class="portfolio__subcard__title">${s.name}</div>
-            <span class="coming-soon-pill">Soon</span>
+            <span class="coming-soon-pill">${I18n.t('soon')}</span>
           </div>
           <p class="portfolio__subcard__desc">${s.desc}</p>
         </div>`;
@@ -1340,13 +1340,13 @@ void main(){
 }
 
 // ── Services / Skills ──
-const servicesData = [
-  { title:'Business Development', desc:'55+ deals sourced and closed — end-to-end pipeline from prospecting to contract.', link:'/projects/personal-brand-acquisitions.html' },
-  { title:'Strategic Partnerships', desc:'Building and managing high-value brand partnerships across markets.' },
-  { title:'AI & Workflow Automation', desc:'Built AI-powered outreach tools used in live BD workflows — not just familiarity, shipped product.', link:'https://bdtailored-ai.vercel.app', external:true },
-  { title:'Team Leadership', desc:'Developing high-performance teams and fostering results-driven culture.' }
-];
 function buildServices() {
+  const servicesData = [
+    { title:I18n.t('services.0.title'), desc:I18n.t('services.0.desc'), link:'/projects/personal-brand-acquisitions.html' },
+    { title:I18n.t('services.1.title'), desc:I18n.t('services.1.desc') },
+    { title:I18n.t('services.2.title'), desc:I18n.t('services.2.desc'), link:'https://bdtailored-ai.vercel.app', external:true },
+    { title:I18n.t('services.3.title'), desc:I18n.t('services.3.desc') }
+  ];
   const list = document.getElementById('servicesList');
   servicesData.forEach((s, i) => {
     const li = document.createElement('li');
@@ -1371,13 +1371,13 @@ function buildServices() {
 }
 
 // ── Stats ──
-const statsData = [
-  { value:55, suffix:'+', label:'Brand partnerships secured across e-commerce platforms' },
-  { value:56, suffix:'%', label:'Revenue growth driven through strategic brand acquisition' },
-  { value:30, suffix:'%', label:'Lead-to-conversion rate improvement via pipeline optimization' },
-  { value:2, suffix:'+', label:'Years as Top Performer — BD Lead at AHA Commerce' }
-];
 function buildStats() {
+  const statsData = [
+    { value:55, suffix:'+', label:I18n.t('stats.0.label') },
+    { value:56, suffix:'%', label:I18n.t('stats.1.label') },
+    { value:30, suffix:'%', label:I18n.t('stats.2.label') },
+    { value:2, suffix:'+', label:I18n.t('stats.3.label') }
+  ];
   const grid = document.getElementById('statsGrid');
   statsData.forEach((s, i) => {
     const li = document.createElement('li');
@@ -1417,14 +1417,14 @@ function setupCountUp() {
 }
 
 // ── Nav Menu ──
-const navItems = [
-  { label:'Home', target:'home' },
-  { label:'Work', target:'works' },
-  { label:'Skills', target:'services' },
-  { label:'About', target:'about' },
-  { label:'Contact', target:'contact' }
-];
 function buildNavMenu() {
+  const navItems = [
+    { label:I18n.t('nav.home'), target:'home' },
+    { label:I18n.t('nav.work'), target:'works' },
+    { label:I18n.t('nav.skills'), target:'services' },
+    { label:I18n.t('nav.about'), target:'about' },
+    { label:I18n.t('nav.contact'), target:'contact' }
+  ];
   const list = document.getElementById('navMenuList');
   navItems.forEach((item, i) => {
     const li = document.createElement('li');
@@ -1472,7 +1472,7 @@ window.closeModal = function() {
     document.getElementById('modalFormState').style.display = '';
     document.getElementById('modalSuccessState').style.display = 'none';
     document.getElementById('requestForm').reset();
-    document.getElementById('submitLabel').textContent = 'Send message';
+    document.getElementById('submitLabel').textContent = I18n.t('modal.submit');
   }, 300);
 };
 function modalEscHandler(e) { if (e.key === 'Escape') closeModal(); }
@@ -1484,7 +1484,7 @@ window.handleSubmit = async function(e) {
   const btn = document.getElementById('submitBtn');
   const label = document.getElementById('submitLabel');
   btn.disabled = true;
-  label.textContent = 'Sending…';
+  label.textContent = I18n.t('modal.sending');
   const form = e.target;
   const data = new FormData(form);
   try {
@@ -1497,11 +1497,11 @@ window.handleSubmit = async function(e) {
       document.getElementById('modalFormState').style.display = 'none';
       document.getElementById('modalSuccessState').style.display = '';
     } else {
-      label.textContent = 'Try again';
+      label.textContent = I18n.t('modal.tryAgain');
       btn.disabled = false;
     }
   } catch {
-    label.textContent = 'Try again';
+    label.textContent = I18n.t('modal.tryAgain');
     btn.disabled = false;
   }
 };
@@ -1619,6 +1619,29 @@ buildPortfolio();
 buildServices();
 buildStats();
 setupRevealObserver();
+
+// ── Language toggle ──
+document.getElementById('headerLangToggle').appendChild(I18n.createToggle());
+
+// ── Lang change handler ──
+document.addEventListener('langchange', () => {
+  // Rebuild dynamic sections
+  document.getElementById('portfolioGrid').innerHTML = '';
+  buildPortfolio();
+  document.getElementById('servicesList').innerHTML = '';
+  buildServices();
+  document.getElementById('statsGrid').innerHTML = '';
+  buildStats();
+  document.getElementById('navMenuList').innerHTML = '';
+  buildNavMenu();
+  // Update clock immediately (month name may change)
+  updateClock();
+  // Rebuild about text
+  document.getElementById('aboutH2').innerHTML = '';
+  buildAboutH2();
+  // Re-render hero card
+  renderCard(0);
+});
 </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;--surface2:#161620;--surface3:#1b1b24;
@@ -85,18 +86,21 @@ a{color:inherit;text-decoration:none}
 <header class="topbar">
   <a class="topbar__back" href="company-project.html">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 2.5L4 7l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Company Projects
+    <span data-i18n="topbar.backCompany">Company Projects</span>
   </a>
-  <span class="topbar__label">AHA 13 Birthday</span>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <span class="topbar__label">AHA 13 Birthday</span>
+  </div>
 </header>
 
 <main class="page">
 
   <div class="left">
-    <p class="eyebrow">AHA Commerce · 2024</p>
-    <h1 class="h1">AHA 13 Birthday Celebration</h1>
-    <span class="role-chip">Project Lead</span>
-    <p class="desc">Served as Project Lead for AHA Commerce's 13th anniversary — managing the full company outing for 110+ attendees from concept to on-day execution.</p>
+    <p class="eyebrow" data-i18n="aha_bday.eyebrow">AHA Commerce · 2024</p>
+    <h1 class="h1" data-i18n="aha_bday.h1">AHA 13 Birthday Celebration</h1>
+    <span class="role-chip" data-i18n="aha_bday.role">Project Lead</span>
+    <p class="desc" data-i18n="aha_bday.desc">Served as Project Lead for AHA Commerce's 13th anniversary — managing the full company outing for 110+ attendees from concept to on-day execution.</p>
     <div class="tags">
       <span class="tag">Project Management</span>
       <span class="tag">Event Planning</span>
@@ -107,30 +111,30 @@ a{color:inherit;text-decoration:none}
     <div class="stat-row">
       <div class="stat-chip">
         <span class="stat-chip__num">110+</span>
-        <span class="stat-chip__label">Attendees</span>
+        <span class="stat-chip__label" data-i18n="aha_bday.stat0">Attendees</span>
       </div>
       <div class="stat-chip">
         <span class="stat-chip__num">9</span>
-        <span class="stat-chip__label">Committee I Led</span>
+        <span class="stat-chip__label" data-i18n="aha_bday.stat1">Committee I Led</span>
       </div>
       <div class="stat-chip">
         <span class="stat-chip__num">9.46</span>
-        <span class="stat-chip__label">Satisfaction Score</span>
+        <span class="stat-chip__label" data-i18n="aha_bday.stat2">Satisfaction Score</span>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div class="sec--grow">
-      <p class="sec-label">What I Did</p>
+      <p class="sec-label" data-i18n="sec.whatIDid">What I Did</p>
       <div class="did-list">
         <div class="did-item">
           <div class="did-item__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
           <div>
-            <p class="did-item__name">Concept Development</p>
-            <p class="did-item__desc">Defined theme, venue, and activity lineup for 110+ attendees — aligned with company culture and budget.</p>
+            <p class="did-item__name" data-i18n="aha_bday.did0.name">Concept Development</p>
+            <p class="did-item__desc" data-i18n="aha_bday.did0.desc">Defined theme, venue, and activity lineup for 110+ attendees — aligned with company culture and budget.</p>
           </div>
         </div>
         <div class="did-item">
@@ -138,8 +142,8 @@ a{color:inherit;text-decoration:none}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div>
-            <p class="did-item__name">Vendor &amp; Logistics</p>
-            <p class="did-item__desc">Selected and coordinated vendors (venue, catering, transport, entertainment) — negotiated contracts and delivery timelines.</p>
+            <p class="did-item__name" data-i18n="aha_bday.did1.name">Vendor &amp; Logistics</p>
+            <p class="did-item__desc" data-i18n="aha_bday.did1.desc">Selected and coordinated vendors (venue, catering, transport, entertainment) — negotiated contracts and delivery timelines.</p>
           </div>
         </div>
         <div class="did-item">
@@ -147,8 +151,8 @@ a{color:inherit;text-decoration:none}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <div>
-            <p class="did-item__name">On-day Execution</p>
-            <p class="did-item__desc">On-day PIC — managed event flow, team coordination, and ensured everything ran on plan from start to finish.</p>
+            <p class="did-item__name" data-i18n="aha_bday.did2.name">On-day Execution</p>
+            <p class="did-item__desc" data-i18n="aha_bday.did2.desc">On-day PIC — managed event flow, team coordination, and ensured everything ran on plan from start to finish.</p>
           </div>
         </div>
       </div>
@@ -157,41 +161,44 @@ a{color:inherit;text-decoration:none}
     <div class="divider"></div>
 
     <div>
-      <p class="sec-label">Process</p>
+      <p class="sec-label" data-i18n="sec.process">Process</p>
       <div class="milestone-line">
-        <div class="ms-step"><div class="ms-dot">01</div><div class="ms-label">Concept &amp; Brief</div></div>
-        <div class="ms-step"><div class="ms-dot">02</div><div class="ms-label">Vendor Search</div></div>
-        <div class="ms-step"><div class="ms-dot">03</div><div class="ms-label">Detailed Planning</div></div>
-        <div class="ms-step"><div class="ms-dot">04</div><div class="ms-label">Event Day</div></div>
-        <div class="ms-step"><div class="ms-dot">05</div><div class="ms-label">Wrap-up</div></div>
+        <div class="ms-step"><div class="ms-dot">01</div><div class="ms-label" data-i18n="aha_bday.ms0">Concept &amp; Brief</div></div>
+        <div class="ms-step"><div class="ms-dot">02</div><div class="ms-label" data-i18n="aha_bday.ms1">Vendor Search</div></div>
+        <div class="ms-step"><div class="ms-dot">03</div><div class="ms-label" data-i18n="aha_bday.ms2">Detailed Planning</div></div>
+        <div class="ms-step"><div class="ms-dot">04</div><div class="ms-label" data-i18n="aha_bday.ms3">Event Day</div></div>
+        <div class="ms-step"><div class="ms-dot">05</div><div class="ms-label" data-i18n="aha_bday.ms4">Wrap-up</div></div>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <p class="sec-label">Outcomes</p>
+      <p class="sec-label" data-i18n="sec.outcomes">Outcomes</p>
       <ul class="outcome-list">
-        <li>Delivered a full-day outing for 110+ attendees with zero critical issues on event day</li>
-        <li>Led a 9-person committee — coordinated venue, catering, transport, and entertainment end-to-end</li>
-        <li>Achieved 9.46/10 attendee satisfaction score in post-event survey</li>
+        <li data-i18n="aha_bday.outcome0">Delivered a full-day outing for 110+ attendees with zero critical issues on event day</li>
+        <li data-i18n="aha_bday.outcome1">Led a 9-person committee — coordinated venue, catering, transport, and entertainment end-to-end</li>
+        <li data-i18n="aha_bday.outcome2">Achieved 9.46/10 attendee satisfaction score in post-event survey</li>
       </ul>
     </div>
   </div>
 
   <div class="right">
-    <p class="sec-label">Photo &amp; Documentation</p>
+    <p class="sec-label" data-i18n="sec.photoDoc">Photo &amp; Documentation</p>
     <div class="photo-pan" id="photoPan">
       <img src="assets/aha-birthday-team.webp" alt="AHA 13 Birthday Celebration" id="panImg">
       <div class="photo-pan__hint" id="panHint">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M19 9l3 3-3 3M2 12h20"/></svg>
-        Drag to explore
+        <span data-i18n="aha_bday.dragHint">Drag to explore</span>
       </div>
     </div>
   </div>
 
 </main>
 <script>
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => I18n.applyI18n());
+
 (function(){
   const pan  = document.getElementById('photoPan');
   const img  = document.getElementById('panImg');

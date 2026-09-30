@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;--surface2:#161620;
@@ -81,16 +82,19 @@ a{color:inherit;text-decoration:none}
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 2.5L4 7l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Back
   </a>
-  <span class="topbar__label">Company Projects</span>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <span class="topbar__label" data-i18n="topbar.backCompany">Company Projects</span>
+  </div>
 </header>
 
 <main class="page">
 
   <section class="hero">
     <div class="hero__left">
-      <p class="eyebrow">AHA Commerce · 2024–26</p>
-      <h1 class="hero__title">Company Projects</h1>
-      <p class="hero__desc">Cross-functional project leadership — large-scale activations, culture adoption, and operational tooling.</p>
+      <p class="eyebrow" data-i18n="cp.eyebrow">AHA Commerce · 2024–26</p>
+      <h1 class="hero__title" data-i18n="cp.h1">Company Projects</h1>
+      <p class="hero__desc" data-i18n="cp.desc">Cross-functional project leadership — large-scale activations, culture adoption, and operational tooling.</p>
     </div>
   </section>
 
@@ -103,32 +107,31 @@ a{color:inherit;text-decoration:none}
       <div class="card-header">
         <div>
           <p class="card-num">01</p>
-          <h2 class="card-title">Shopee Super Summit 2024 &amp; 2025</h2>
-          <span class="card-role">Project Lead</span>
+          <h2 class="card-title" data-i18n="cp.proj1.title">Shopee Super Summit 2024 &amp; 2025</h2>
+          <span class="card-role" data-i18n="cp.proj1.role">Project Lead</span>
         </div>
         <a class="card-view" href="shopee-super-summit.html">
-          View
+          <span data-i18n="common.view">View</span>
           <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="card-body">
         <div>
-          <p class="card-section__label">Overview</p>
-          <p class="card-section__text">AHA Commerce participated as an exhibitor at Shopee Super Summit — operating a live brand activation booth. I owned the full process end-to-end, coordinating cross-functionally from pre-event planning through on-ground execution and wrap-up.</p>
+          <p class="card-section__label" data-i18n="cp.overview">Overview</p>
+          <p class="card-section__text" data-i18n="cp.proj1.overview">AHA Commerce participated as an exhibitor at Shopee Super Summit — operating a live brand activation booth. I owned the full process end-to-end, coordinating cross-functionally from pre-event planning through on-ground execution and wrap-up.</p>
         </div>
         <div>
-          <p class="card-section__label">Key Outcomes</p>
+          <p class="card-section__label" data-i18n="cp.keyOutcomes">Key Outcomes</p>
           <ul class="outcome-list">
-            <li>2024: 100+ leads captured, 76 ICP-matched · 2025: 170+ leads, 130+ ICP-matched</li>
-            <li>>50% of ICP leads converted to 1st meeting each year</li>
-            <li>Elevated AHA's brand presence at Shopee's largest merchant summit</li>
+            <li data-i18n="cp.proj1.outcomes.0">2024: 100+ leads captured, 76 ICP-matched · 2025: 170+ leads, 130+ ICP-matched</li>
+            <li data-i18n="cp.proj1.outcomes.1">&gt;50% of ICP leads converted to 1st meeting each year</li>
+            <li data-i18n="cp.proj1.outcomes.2">Elevated AHA's brand presence at Shopee's largest merchant summit</li>
           </ul>
         </div>
       </div>
       <div class="card-footer">
         <span class="card-footer__year">2024 · 2025</span>
-
-        <span class="status status--done"><span class="dot"></span>Completed</span>
+        <span class="status status--done"><span class="dot"></span><span data-i18n="common.completed">Completed</span></span>
       </div>
     </div>
 
@@ -137,31 +140,31 @@ a{color:inherit;text-decoration:none}
       <div class="card-header">
         <div>
           <p class="card-num">02</p>
-          <h2 class="card-title">AHA 13 Birthday Celebration</h2>
-          <span class="card-role">Project Lead</span>
+          <h2 class="card-title" data-i18n="cp.proj2.title">AHA 13 Birthday Celebration</h2>
+          <span class="card-role" data-i18n="cp.proj2.role">Project Lead</span>
         </div>
         <a class="card-view" href="aha-birthday.html">
-          View
+          <span data-i18n="common.view">View</span>
           <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="card-body">
         <div>
-          <p class="card-section__label">Overview</p>
-          <p class="card-section__text">Project-led AHA Commerce's 13th anniversary company outing for 110+ attendees. Managed the full process from concept to delivery — vendor selection, logistics, timeline, and on-day execution.</p>
+          <p class="card-section__label" data-i18n="cp.overview">Overview</p>
+          <p class="card-section__text" data-i18n="cp.proj2.overview">Project-led AHA Commerce's 13th anniversary company outing for 110+ attendees. Managed the full process from concept to delivery — vendor selection, logistics, timeline, and on-day execution.</p>
         </div>
         <div>
-          <p class="card-section__label">Key Outcomes</p>
+          <p class="card-section__label" data-i18n="cp.keyOutcomes">Key Outcomes</p>
           <ul class="outcome-list">
-            <li>Full-day outing for 110+ attendees — zero critical issues on event day</li>
-            <li>Led a 9-person committee across venue, catering, transport & entertainment</li>
-            <li>9.46/10 attendee satisfaction score post-event</li>
+            <li data-i18n="cp.proj2.outcomes.0">Full-day outing for 110+ attendees — zero critical issues on event day</li>
+            <li data-i18n="cp.proj2.outcomes.1">Led a 9-person committee across venue, catering, transport &amp; entertainment</li>
+            <li data-i18n="cp.proj2.outcomes.2">9.46/10 attendee satisfaction score post-event</li>
           </ul>
         </div>
       </div>
       <div class="card-footer">
         <span class="card-footer__year">2024</span>
-        <span class="status status--done"><span class="dot"></span>Completed</span>
+        <span class="status status--done"><span class="dot"></span><span data-i18n="common.completed">Completed</span></span>
       </div>
     </div>
 
@@ -170,31 +173,31 @@ a{color:inherit;text-decoration:none}
       <div class="card-header">
         <div>
           <p class="card-num">03</p>
-          <h2 class="card-title">AHA Commerce Thailand</h2>
-          <span class="card-role">Culture Building</span>
+          <h2 class="card-title" data-i18n="cp.proj3.title">AHA Commerce Thailand</h2>
+          <span class="card-role" data-i18n="cp.proj3.role">Culture Building</span>
         </div>
         <a class="card-view" href="aha-thailand.html">
-          View
+          <span data-i18n="common.view">View</span>
           <svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="card-body">
         <div>
-          <p class="card-section__label">Overview</p>
-          <p class="card-section__text">Led a culture adoption initiative for the BD Thailand team — delivering structured training across product knowledge, sales strategy, and pipeline management to align them with AHA Commerce's operating playbook.</p>
+          <p class="card-section__label" data-i18n="cp.overview">Overview</p>
+          <p class="card-section__text" data-i18n="cp.proj3.overview">Led a culture adoption initiative for the BD Thailand team — delivering structured training across product knowledge, sales strategy, and pipeline management to align them with AHA Commerce's operating playbook.</p>
         </div>
         <div>
-          <p class="card-section__label">Key Outcomes</p>
+          <p class="card-section__label" data-i18n="cp.keyOutcomes">Key Outcomes</p>
           <ul class="outcome-list">
-            <li>9 BD members onboarded across 3 structured training sessions</li>
-            <li>Thailand team equipped with AHA's BD playbook — pitch, pipeline & review cadence</li>
-            <li>Weekly review established — aligned with AHA Commerce reporting standards</li>
+            <li data-i18n="cp.proj3.outcomes.0">9 BD members onboarded across 3 structured training sessions</li>
+            <li data-i18n="cp.proj3.outcomes.1">Thailand team equipped with AHA's BD playbook — pitch, pipeline &amp; review cadence</li>
+            <li data-i18n="cp.proj3.outcomes.2">Weekly review established — aligned with AHA Commerce reporting standards</li>
           </ul>
         </div>
       </div>
       <div class="card-footer">
         <span class="card-footer__year">2026</span>
-        <span class="status status--done"><span class="dot"></span>Completed</span>
+        <span class="status status--done"><span class="dot"></span><span data-i18n="common.completed">Completed</span></span>
       </div>
     </div>
 
@@ -202,5 +205,9 @@ a{color:inherit;text-decoration:none}
   </div>
 </main>
 
+<script>
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => I18n.applyI18n());
+</script>
 </body>
 </html>

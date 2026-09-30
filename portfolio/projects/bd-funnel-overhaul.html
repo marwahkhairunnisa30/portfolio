@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
 :root{
   --bg:#0b0b10;--surface:#111118;--surface2:#161620;
@@ -144,9 +145,12 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
 <nav class="topbar">
   <a href="../#works" class="topbar__back">
     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-    Back to portfolio
+    <span data-i18n="topbar.backPortfolio">Back to portfolio</span>
   </a>
-  <span class="topbar__brand">✦ Marwah K</span>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div id="langToggle"></div>
+    <span class="topbar__brand">✦ Marwah K</span>
+  </div>
 </nav>
 
 <div class="page">
@@ -154,22 +158,22 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
   <!-- LEFT — all content -->
   <div class="left">
 
-    <div class="eyebrow"><span class="dot"></span>Strategy &amp; Leadership · 2024</div>
-    <h1>BD Team Leadership</h1>
-    <p class="desc">Built and led a BD team of 8 at AHA Commerce — designed the acquisition funnel end-to-end, set KPIs, ran weekly 1-on-1s, and drove 47 brand partnerships across Shopee, TikTok Shop &amp; Tokopedia in 9 months.</p>
+    <div class="eyebrow"><span class="dot"></span><span data-i18n="bd_team.eyebrow">Strategy &amp; Leadership · 2024</span></div>
+    <h1 data-i18n="bd_team.h1">BD Team Leadership</h1>
+    <p class="desc" data-i18n="bd_team.desc">Built and led a BD team of 8 at AHA Commerce — designed the acquisition funnel end-to-end, set KPIs, ran weekly 1-on-1s, and drove 47 brand partnerships across Shopee, TikTok Shop &amp; Tokopedia in 9 months.</p>
 
     <div class="metrics">
       <div class="metric">
         <div class="metric__num">47<span>+</span></div>
-        <div class="metric__label">Brand partnerships in 9 months</div>
+        <div class="metric__label" data-i18n="bd_team.m0.label">Brand partnerships in 9 months</div>
       </div>
       <div class="metric">
         <div class="metric__num">56<span>%</span></div>
-        <div class="metric__label">Revenue growth driven</div>
+        <div class="metric__label" data-i18n="bd_team.m1.label">Revenue growth driven</div>
       </div>
       <div class="metric">
         <div class="metric__num">30<span>%</span></div>
-        <div class="metric__label">Lead-to-conversion lift</div>
+        <div class="metric__label" data-i18n="bd_team.m2.label">Lead-to-conversion lift</div>
       </div>
     </div>
 
@@ -182,45 +186,45 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
     </div>
 
     <div class="sec">
-      <div class="sec-label"><span class="dot"></span>The Challenge</div>
-      <p class="challenge-text">No structured acquisition process, inconsistent close achievement — my mandate: build a repeatable system a team of 8 could run at scale.</p>
+      <div class="sec-label"><span class="dot"></span><span data-i18n="sec.theChallenge">The Challenge</span></div>
+      <p class="challenge-text" data-i18n="bd_team.challenge">No structured acquisition process, inconsistent close achievement — my mandate: build a repeatable system a team of 8 could run at scale.</p>
     </div>
 
     <div class="sec">
-      <div class="sec-label"><span class="dot"></span>The Process — 7-Stage Acquisition Funnel</div>
+      <div class="sec-label"><span class="dot"></span><span data-i18n="sec.process7stage">The Process — 7-Stage Acquisition Funnel</span></div>
       <div class="funnel-line">
-        <div class="funnel-step"><div class="funnel-step__dot">01</div><div class="funnel-step__label">Prospecting &amp; Research</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">02</div><div class="funnel-step__label">Outreach &amp; Engagement</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">03</div><div class="funnel-step__label">Pipeline Management</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">04</div><div class="funnel-step__label">Meeting &amp; Proposal</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">05</div><div class="funnel-step__label">Negotiation &amp; Closing</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">06</div><div class="funnel-step__label">Onboarding &amp; Handover</div></div>
-        <div class="funnel-step"><div class="funnel-step__dot">07</div><div class="funnel-step__label">Growth &amp; Retention</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">01</div><div class="funnel-step__label" data-i18n="bd_team.funnel.0">Prospecting &amp; Research</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">02</div><div class="funnel-step__label" data-i18n="bd_team.funnel.1">Outreach &amp; Engagement</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">03</div><div class="funnel-step__label" data-i18n="bd_team.funnel.2">Pipeline Management</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">04</div><div class="funnel-step__label" data-i18n="bd_team.funnel.3">Meeting &amp; Proposal</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">05</div><div class="funnel-step__label" data-i18n="bd_team.funnel.4">Negotiation &amp; Closing</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">06</div><div class="funnel-step__label" data-i18n="bd_team.funnel.5">Onboarding &amp; Handover</div></div>
+        <div class="funnel-step"><div class="funnel-step__dot">07</div><div class="funnel-step__label" data-i18n="bd_team.funnel.6">Growth &amp; Retention</div></div>
       </div>
     </div>
 
     <div class="sec sec--grow">
-      <div class="sec-label"><span class="dot"></span>What I Made for the Team</div>
+      <div class="sec-label"><span class="dot"></span><span data-i18n="sec.madeForTeam">What I Made for the Team</span></div>
       <div class="made-list">
         <div class="made-item">
           <span class="made-item__num">01</span>
           <div>
-            <div class="made-item__title">AI Agentic Scraper</div>
-            <div class="made-item__sub">Apple Script automation for lead sourcing</div>
+            <div class="made-item__title" data-i18n="bd_team.made.0.title">AI Agentic Scraper</div>
+            <div class="made-item__sub" data-i18n="bd_team.made.0.sub">Apple Script automation for lead sourcing</div>
           </div>
         </div>
         <div class="made-item">
           <span class="made-item__num">02</span>
           <div>
-            <div class="made-item__title">Business Development Module</div>
-            <div class="made-item__sub">Internal knowledge base for the BD team</div>
+            <div class="made-item__title" data-i18n="bd_team.made.1.title">Business Development Module</div>
+            <div class="made-item__sub" data-i18n="bd_team.made.1.sub">Internal knowledge base for the BD team</div>
           </div>
         </div>
         <div class="made-item">
           <span class="made-item__num">03</span>
           <div>
-            <div class="made-item__title">Reliable Funnel Tracker</div>
-            <div class="made-item__sub">Pipeline visibility dashboard for the whole team</div>
+            <div class="made-item__title" data-i18n="bd_team.made.2.title">Reliable Funnel Tracker</div>
+            <div class="made-item__sub" data-i18n="bd_team.made.2.sub">Pipeline visibility dashboard for the whole team</div>
           </div>
         </div>
       </div>
@@ -228,10 +232,10 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
 
     <div class="cta-row">
       <a href="https://wa.me/6285155343042" target="_blank" class="btn">
-        Let's talk
+        <span data-i18n="common.letsTalk">Let's talk</span>
         <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <span class="cta-note">Want to scale your BD team?</span>
+      <span class="cta-note" data-i18n="bd_team.cta.note">Want to scale your BD team?</span>
     </div>
 
   </div>
@@ -239,7 +243,7 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
   <!-- RIGHT — screenshots -->
   <div class="right">
     <div class="shot-block">
-      <div class="shot-cap">BD Wikipedia — Modul Overview</div>
+      <div class="shot-cap" data-i18n="bd_team.shot.0">BD Wikipedia — Modul Overview</div>
       <div class="shot-tilt">
         <div class="shot-frame">
           <img src="../assets/bd-wiki-home.png" alt="BD Wikipedia homepage" />
@@ -247,7 +251,7 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
       </div>
     </div>
     <div class="shot-block">
-      <div class="shot-cap">Sales Strategy Module</div>
+      <div class="shot-cap" data-i18n="bd_team.shot.1">Sales Strategy Module</div>
       <div class="shot-tilt">
         <div class="shot-frame">
           <img src="../assets/bd-wiki-sales.png" alt="BD Wikipedia Sales Strategy" />
@@ -259,6 +263,9 @@ h1{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.03em;l
 </div>
 
 <script>
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => I18n.applyI18n());
+
 document.querySelectorAll('.shot-tilt').forEach(tilt => {
   const frame = tilt.querySelector('.shot-frame');
   const MAX = 10;

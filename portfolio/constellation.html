@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/i18n.js"></script>
 <style>
   :root {
     --bg: #0b0b10;
@@ -134,10 +135,11 @@
 <nav class="nav">
   <a href="/">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 12L6 8l4-4"/></svg>
-    marwah.dev
+    <span data-i18n="const.nav">marwah.dev</span>
   </a>
   <span class="nav__sep">/</span>
-  <span class="nav__cur">Skills Constellation</span>
+  <span class="nav__cur" data-i18n="const.cur">Skills Constellation</span>
+  <div id="langToggle" style="margin-left:auto"></div>
 </nav>
 
 <div class="stage">
@@ -145,10 +147,10 @@
 
   <div class="corner">
     <div class="corner__title">Marwah Khairunnisa</div>
-    <div class="corner__sub">BD · Content · Tech · Research</div>
+    <div class="corner__sub" data-i18n="const.corner.sub">BD · Content · Tech · Research</div>
   </div>
 
-  <div class="hint">
+  <div class="hint" data-i18n-html="const.hint">
     Hover to explore<br>
     Drag to rearrange<br>
     Click to focus
@@ -297,12 +299,16 @@ function trySpawnEdgePulses(node) {
 
 // ─── Legend ───────────────────────────────────────────────────────────────────
 const legendEl = document.getElementById('legend');
-Object.entries(CLUSTERS).forEach(([, c]) => {
-  const item = document.createElement('div');
-  item.className = 'legend-item';
-  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>${c.name}`;
-  legendEl.appendChild(item);
-});
+function buildLegend() {
+  legendEl.innerHTML = '';
+  Object.entries(CLUSTERS).forEach(([key, c]) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>${I18n.t('const.cluster.' + key)}`;
+    legendEl.appendChild(item);
+  });
+}
+buildLegend();
 
 // ─── Input ────────────────────────────────────────────────────────────────────
 function getPos(e) {
@@ -375,10 +381,10 @@ canvas.addEventListener('touchend', () => { dragNode = null; });
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 function showTip(node) {
-  document.getElementById('tipCluster').textContent  = CLUSTERS[node.cluster].name;
+  document.getElementById('tipCluster').textContent  = I18n.t('const.cluster.' + node.cluster);
   document.getElementById('tipCluster').style.color  = node.color;
-  document.getElementById('tipLabel').textContent    = node.label;
-  document.getElementById('tipDesc').textContent     = node.desc;
+  document.getElementById('tipLabel').textContent    = I18n.t('const.node.' + node.id + '.label');
+  document.getElementById('tipDesc').textContent     = I18n.t('const.node.' + node.id + '.desc');
   tip.classList.add('show');
   const tw = 210, th = 100;
   let tx = node.x + node.size + 14;
@@ -465,7 +471,7 @@ function drawNode(n, highlight, alpha) {
     ctx.fillStyle    = highlight ? 'rgba(236,234,245,1)' : 'rgba(236,234,245,0.65)';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(n.label, n.x, n.y + n.size + 13);
+    ctx.fillText(I18n.t('const.node.' + n.id + '.label'), n.x, n.y + n.size + 13);
   }
 
   ctx.globalAlpha = 1;
@@ -620,6 +626,13 @@ window.addEventListener('resize', () => {
 });
 resize();
 frame();
+
+document.getElementById('langToggle').appendChild(I18n.createToggle());
+document.addEventListener('langchange', () => {
+  I18n.applyI18n();
+  buildLegend();
+  hideTip();
+});
 </script>
 <div class="watermark">© 2026 Marwah Khairunnisa. All rights reserved.</div>
 </body>
