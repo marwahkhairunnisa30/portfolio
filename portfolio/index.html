@@ -161,7 +161,8 @@ img{display:block}
 .work-preview{position:relative;flex:1;min-width:0;overflow:hidden;min-height:23rem;border-radius:1.125rem;padding:1.625rem 1.75rem;display:flex;flex-direction:column;color:#eceaf5;background:radial-gradient(90% 70% at 100% 0%,rgba(255,107,90,.22),transparent 60%),linear-gradient(160deg,#7a1710 0%,#2a1220 48%,#1c1c2a 100%);border:1px solid rgba(255,179,164,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 .pv-anim{animation:pv-in .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes pv-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.pv-kicker{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#ffb3a4;margin-bottom:.5rem}
+.pv-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.625rem}
+.pv-kicker{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#ffb3a4}
 .pv-story{font-size:.8125rem;line-height:1.6;color:rgba(236,234,245,.78);margin-bottom:1.125rem}
 .pv-nums{display:flex;flex-wrap:wrap}
 .pv-num{padding-right:1.5rem;margin-right:1.5rem;border-right:1px solid rgba(236,234,245,.12)}
@@ -175,7 +176,7 @@ img{display:block}
 .pv-track{display:flex;gap:.5rem;width:max-content;animation:pv-marquee 40s linear infinite}
 .pv-track:nth-child(2){animation-direction:reverse;animation-duration:46s}
 .pv-slider:hover .pv-track{animation-play-state:paused}
-.pv-logo{width:4rem;height:2.5rem;flex-shrink:0;background:#eceaf5;border-radius:.5rem;display:grid;place-items:center;padding:.3rem;opacity:.85}
+.pv-logo{width:5.5rem;height:3.25rem;flex-shrink:0;background:#eceaf5;border-radius:.5rem;display:grid;place-items:center;padding:.3rem;opacity:.85}
 .pv-logo img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply}
 @keyframes pv-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .pv-mods{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
@@ -183,12 +184,11 @@ img{display:block}
 .pv-mod i{display:block;font-style:normal;font-size:.6rem;font-weight:700;color:#ff6b5a;margin-bottom:.35rem}
 .pv-mod small{display:block;font-size:.65rem;font-weight:400;color:rgba(236,234,245,.5);margin-top:.25rem}
 .pv-media{display:flex;gap:.625rem}
-.pv-media img{flex:1;min-width:0;height:5.75rem;object-fit:cover;border-radius:.75rem;border:1px solid rgba(236,234,245,.1)}
+.pv-media img{flex:1;min-width:0;height:9.5rem;object-fit:cover;border-radius:.75rem;border:1px solid rgba(236,234,245,.1)}
 .pv-topics{display:flex;flex-direction:column;gap:.35rem;font-size:.75rem;color:rgba(236,234,245,.8)}
 .pv-topics div{display:flex;gap:.6rem}
 .pv-topics i{font-style:normal;font-weight:700;color:#ff6b5a;min-width:1.1rem}
-.pv-actions{display:flex;justify-content:flex-end;margin-top:.875rem}
-.pv-link{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border-radius:.625rem;background:#eceaf5;color:#131320;font-size:.75rem;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
+.pv-link{flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .85rem;border-radius:.625rem;background:#eceaf5;color:#131320;font-size:.75rem;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
 .pv-link:hover{background:#fff;transform:translateY(-1px)}
 @media (prefers-reduced-motion:reduce){.pv-track,.pv-anim{animation:none}}
 
@@ -434,37 +434,74 @@ img{display:block}
 @media(min-width:640px){.services__arrow{width:3rem;height:3rem}}
 @media(hover:hover){.services__link:hover .services__arrow{transform:translateX(5px)}}
 
-/* ── Skills Cards ── */
-.skills-cats{display:flex;flex-direction:column;gap:2.5rem;margin-top:2rem}
-.skills-cat__header{display:flex;align-items:center;gap:.875rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.35);margin-bottom:1.25rem}
-.skills-cat__header-icon{width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:.5rem;background:rgba(236,234,245,.06);border:1px solid rgba(236,234,245,.08);flex-shrink:0}
-.skills-cat__header::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.07)}
-.skills-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem}
-@media(min-width:768px){.skills-cards{grid-template-columns:repeat(4,1fr)}}
-.skill-card{padding:1.125rem;border-radius:1rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);display:flex;flex-direction:column;gap:.625rem;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}
-.skill-card.revealed{opacity:1;transform:translateY(0)}
-@media(hover:hover){.skill-card:hover{background:rgba(236,234,245,.07);border-color:rgba(236,234,245,.12)}}
-.skill-card__icon{font-size:1.25rem;line-height:1}
-.skill-card__name{font-size:.9375rem;font-weight:500;color:#eceaf5}
-.skill-card__desc{font-size:.75rem;color:rgba(236,234,245,.45);line-height:1.55}
-
-/* ── Connecting All ── */
-.connecting-all{margin-top:3.5rem;padding:2rem;border-radius:1.5rem;background:rgba(236,234,245,.02);border:1px solid rgba(236,234,245,.07)}
-.connecting-all__header{display:flex;align-items:center;justify-content:center;gap:.875rem;margin-bottom:2rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(236,234,245,.3)}
-.connecting-all__header::before,.connecting-all__header::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.07)}
-.connecting-all__grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start}
-@media(max-width:767px){.connecting-all__grid{grid-template-columns:1fr;gap:1rem}}
-.connecting-all__col-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem}
-.connecting-all__col-label::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.06)}
-.signal-card{display:flex;align-items:center;gap:.625rem;padding:.625rem .75rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);font-size:.8rem;color:rgba(236,234,245,.65);margin-bottom:.5rem}
-.signal-card__dot{width:.375rem;height:.375rem;border-radius:9999px;background:rgba(236,234,245,.3);flex-shrink:0}
-.result-card{display:flex;align-items:center;justify-content:flex-end;gap:.625rem;padding:.625rem .75rem;border-radius:.75rem;background:rgba(185,43,43,.08);border:1px solid rgba(185,43,43,.15);font-size:.8rem;color:rgba(236,234,245,.7);margin-bottom:.5rem}
-.result-card__check{color:#b92b2b;font-size:.8125rem;flex-shrink:0}
-.connecting-all__center{display:flex;flex-direction:column;align-items:center;gap:.875rem;padding:1rem;min-width:10rem}
-.connecting-all__engine{width:3.5rem;height:3.5rem;border-radius:50%;background:linear-gradient(135deg,#b92b2b,#7a1710);display:grid;place-items:center;box-shadow:0 0 32px rgba(185,43,43,.3)}
-.connecting-all__label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.4);text-align:center}
-.connecting-all__explore{font-size:.75rem;color:rgba(236,234,245,.45);text-decoration:none;border:1px solid rgba(236,234,245,.1);border-radius:9999px;padding:.375rem .875rem;transition:color .2s,border-color .2s}
-.connecting-all__explore:hover{color:#eceaf5;border-color:rgba(236,234,245,.3)}
+/* ── Forte: Skills in → How I work → Output ── */
+.flow-intro{display:grid;gap:1.25rem;margin:1.25rem 0 3rem}
+@media(min-width:1024px){.flow-intro{grid-template-columns:1.3fr 1fr;align-items:end}}
+.flow-intro h2{font-size:2.25rem;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+@media(min-width:640px){.flow-intro h2{font-size:3rem}}
+.flow-intro h2 em{font-style:normal;color:#c03030}
+.flow-intro p{font-size:.875rem;line-height:1.6;color:rgba(236,234,245,.55);max-width:26rem}
+.flow{--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+.flow__heads{display:grid;grid-template-columns:1fr;gap:.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(236,234,245,.1);margin-bottom:2.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:rgba(236,234,245,.6)}
+.flow__grid{position:relative;display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:1024px){
+  .flow__heads{grid-template-columns:1fr 1.2fr 1fr;gap:8rem}
+  .flow__grid{grid-template-columns:1fr 1.2fr 1fr;gap:8rem;align-items:center}
+}
+.flow__wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;display:none}
+@media(min-width:1024px){.flow__wires{display:block}}
+.flow__wire{fill:none;stroke:rgba(236,234,245,.42);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:0 5;animation:flow-dash 1.6s linear infinite}
+.flow__wire--out{stroke:rgba(255,107,90,.5)}
+@keyframes flow-dash{to{stroke-dashoffset:-10}}
+.flow__node{fill:rgba(236,234,245,.45)}
+.flow__pulse{fill:#ff8a7a;filter:drop-shadow(0 0 5px #e8342b)}
+.flow-card{position:relative;z-index:1;background:#131320;border:1px solid rgba(236,234,245,.08);border-radius:1rem;padding:1.375rem 1.5rem}
+.flow-card__head{display:flex;align-items:center;gap:.875rem;margin-bottom:1.125rem}
+.flow-card__ava{width:2.5rem;height:2.5rem;border-radius:.625rem;display:grid;place-items:center;background:linear-gradient(135deg,#e8342b,#7a1710);font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.flow-card__ava svg{width:1.125rem;height:1.125rem}
+.flow-card__name{font-size:1.125rem;font-weight:600;letter-spacing:-.01em}
+.flow-card__sub{font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:rgba(236,234,245,.45);margin-top:.15rem}
+.flow-kv{display:flex;justify-content:space-between;align-items:baseline;padding:.75rem .5rem;border-bottom:1px solid rgba(236,234,245,.08);font-size:.875rem;font-weight:600}
+.flow-kv span{font-family:var(--mono);font-size:.65rem;font-weight:400;letter-spacing:.06em;color:rgba(236,234,245,.45)}
+.flow-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;color:rgba(236,234,245,.45);margin:1.25rem .5rem .5rem}
+.flow-list{list-style:none;margin:0;padding:0}
+.flow-list li{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.4rem .5rem;font-size:.8125rem;color:rgba(236,234,245,.85);border-radius:.5rem;transition:background .25s}
+.flow-list li::before{content:'';width:.3rem;height:.3rem;border-radius:9999px;background:rgba(236,234,245,.35);margin-right:-.375rem;flex-shrink:0}
+.flow-list li b{flex:1;font-weight:400}
+.flow-list li span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:rgba(236,234,245,.4)}
+.flow-list li.lit{background:rgba(185,43,43,.12)}
+.flow-list li.lit::before{background:#ff6b5a}
+/* Engine */
+.flow-engine{position:relative;display:flex;flex-direction:column;align-items:center}
+.flow-engine__cloud{position:absolute;left:50%;top:calc(50% - 1rem);width:150%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+.flow-steps{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3.25rem 2.25rem;width:100%;max-width:24rem}
+.flow-step{position:relative;z-index:1;aspect-ratio:1;border-radius:.75rem;padding:1rem;background:rgba(19,19,32,.82);backdrop-filter:blur(2px);border:1px solid rgba(236,234,245,.14);transition:border-color .4s,box-shadow .4s,background .4s;cursor:default}
+.flow-step i{display:block;font-style:normal;font-family:var(--mono);font-size:.7rem;color:rgba(236,234,245,.45);margin-bottom:.5rem;transition:color .4s}
+.flow-step b{display:block;font-size:.95rem;font-weight:600;line-height:1.2}
+.flow-step small{display:block;margin-top:.5rem;font-size:.68rem;line-height:1.45;color:rgba(236,234,245,.45)}
+.flow-step.on{border-color:#e8342b;box-shadow:0 0 0 1px rgba(232,52,43,.35),0 0 30px rgba(232,52,43,.25);background:rgba(36,16,24,.9)}
+.flow-step.on i{color:#ff6b5a}
+.flow-pill{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;padding:.4rem .9rem;border-radius:9999px;background:linear-gradient(135deg,#e8342b,#b92b2b);color:#fff;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.06em;box-shadow:0 0 24px rgba(232,52,43,.45)}
+.flow-engine__cap{position:relative;z-index:1;margin-top:1.75rem;font-size:.8rem;color:rgba(236,234,245,.55);text-align:center}
+/* Output */
+.flow-out{display:flex;flex-direction:column;gap:1.25rem}
+.flow-out .flow-card__ava{background:rgba(236,234,245,.08);color:#ff6b5a}
+.flow-acts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+.flow-acts li{display:flex;align-items:baseline;gap:.75rem;font-size:.8125rem;color:rgba(236,234,245,.85)}
+.flow-acts li span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;white-space:nowrap;min-width:5.5rem}
+.t-bd{color:#ff6b5a}.t-ai{color:#eceaf5}.t-pm{color:#ffb3a4}.t-plus{color:rgba(236,234,245,.35)}
+.flow__foot{display:flex;justify-content:flex-end;margin-top:2.5rem}
+.flow__foot a{display:inline-flex;align-items:center;gap:.625rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;color:#eceaf5;text-decoration:none}
+.flow__foot a b{width:1.375rem;height:1.375rem;border-radius:9999px;display:grid;place-items:center;background:rgba(236,234,245,.1);font-weight:400;transition:background .25s,transform .25s}
+.flow__foot a:hover b{background:#c03030;transform:translateX(3px)}
+/* Staged reveal (Salesloft-style) */
+.flow [data-stage]{opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.flow.is-in [data-stage]{opacity:1;transform:none}
+.flow.is-in [data-stage="1"]{transition-delay:.0s}.flow.is-in [data-stage="2"]{transition-delay:.35s}.flow.is-in [data-stage="3"]{transition-delay:.7s}.flow.is-in [data-stage="4"]{transition-delay:.95s}
+.flow__wires g{opacity:0;transition:opacity .9s ease}
+.flow.is-in .flow__wires .w-in{opacity:1;transition-delay:.3s}
+.flow.is-in .flow__wires .w-out{opacity:1;transition-delay:.85s}
+@media (prefers-reduced-motion:reduce){.flow__wire{animation:none}.flow [data-stage]{transition:none}}
 
 /* ── Stats ── */
 .stats-section{background:#0b0b10}
@@ -895,103 +932,72 @@ img{display:block}
   <div class="shell services__inner">
     <div class="eyebrow eyebrow--dark" data-reveal>
       <span class="dot"></span>
-      <span data-i18n="services.eyebrow">Core Capabilities</span>
+      <span>Forte</span>
+    </div>
+    <div class="flow-intro" data-reveal>
+      <h2>Skills in.<br><em>Outcomes</em> out.</h2>
+      <p>How I turn what I know into results — BD instinct and AI-powered workflows, running through one process, shipping real output for brands and teams.</p>
     </div>
 
-    <div class="skills-cats">
-      <!-- Category 1 -->
-      <div>
-        <div class="skills-cat__header">
-          <div class="skills-cat__header-icon">
-            <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <div class="flow" id="flow">
+      <div class="flow__heads"><span>SKILLS IN.</span><span>ALWAYS LEARNING, ALWAYS SHIPPING.</span><span>OUTCOME-DRIVEN OUTPUT.</span></div>
+      <div class="flow__grid" id="flowGrid">
+        <svg class="flow__wires" id="flowWires" aria-hidden="true"><g class="w-in"></g><g class="w-out"></g><g class="w-pulse"></g></svg>
+
+        <div class="flow-card" data-stage="1" id="flowIn">
+          <div class="flow-card__head">
+            <div class="flow-card__ava">MK</div>
+            <div><div class="flow-card__name">Marwah K</div><div class="flow-card__sub">BD LEAD · AHA COMMERCE</div></div>
           </div>
-          For BD &amp; Growth
+          <div class="flow-kv"><span>BRANDS CLOSED</span>55+</div>
+          <div class="flow-kv"><span>TEAM LED</span>8 people</div>
+          <div class="flow-label">CORE SKILLS</div>
+          <ul class="flow-list" id="flowSkills">
+            <li><b>BD Strategy</b><span>GROWTH</span></li>
+            <li><b>Cold Outreach</b><span>BD</span></li>
+            <li><b>Creator Partnerships</b><span>BD</span></li>
+            <li><b>Negotiation</b><span>CLOSING</span></li>
+            <li><b>AI &amp; LLM Tools</b><span>AI</span></li>
+            <li><b>Workflow Automation</b><span>OPS</span></li>
+            <li><b>Market Research</b><span>RESEARCH</span></li>
+            <li><b>Content Strategy</b><span>CONTENT</span></li>
+          </ul>
         </div>
-        <div class="skills-cards" id="skillsCatBD">
-          <div class="skill-card">
-            <div class="skill-card__icon">📈</div>
-            <div class="skill-card__name">BD Strategy</div>
-            <div class="skill-card__desc">Pipeline building, partner acquisition, and commercial growth at scale.</div>
+
+        <div class="flow-engine" data-stage="2">
+          <canvas class="flow-engine__cloud" id="flowCloud"></canvas>
+          <div class="flow-steps" id="flowSteps">
+            <div class="flow-step on"><i>01</i><b>Research &amp; qualify</b><small>ICP-first — know the brand before the first message</small></div>
+            <div class="flow-step"><i>02</i><b>Outreach &amp; pitch</b><small>Personalized, outcome-based, never generic</small></div>
+            <div class="flow-step"><i>03</i><b>Automate with AI</b><small>Scrapers, trackers &amp; tools that scale the work</small></div>
+            <div class="flow-step"><i>04</i><b>Close &amp; deliver</b><small>Negotiate, onboard, and keep it growing</small></div>
+            <div class="flow-pill">SKILLS + AI ENGINE</div>
           </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">📩</div>
-            <div class="skill-card__name">Cold Outreach</div>
-            <div class="skill-card__desc">Writing pitches that actually get replies — human, credible, worth responding to.</div>
+          <div class="flow-engine__cap">Tailored to every brand, team, and market I work with</div>
+        </div>
+
+        <div class="flow-out" id="flowOut">
+          <div class="flow-card" data-stage="3">
+            <div class="flow-card__head"><div class="flow-card__ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="flow-card__name">Brands &amp; Partners</div></div>
+            <ul class="flow-acts">
+              <li><span><i class="t-bd" style="font-style:normal">BD</i></span>55+ brands personally closed</li>
+              <li><span><i class="t-bd" style="font-style:normal">BD</i> <i class="t-plus">+</i> <i class="t-ai" style="font-style:normal">AI</i></span>Personalized outreach at scale</li>
+              <li><span><i class="t-bd" style="font-style:normal">BD</i></span>47 partnerships via my team</li>
+            </ul>
           </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">🤝</div>
-            <div class="skill-card__name">Creator Partnerships</div>
-            <div class="skill-card__desc">Structuring and closing brand × creator deals end-to-end.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">⚖️</div>
-            <div class="skill-card__name">Negotiation</div>
-            <div class="skill-card__desc">Getting to yes without leaving value on the table.</div>
+          <div class="flow-card" data-stage="4">
+            <div class="flow-card__head"><div class="flow-card__ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="flow-card__name">Team &amp; Company</div></div>
+            <ul class="flow-acts">
+              <li><span><i class="t-ai" style="font-style:normal">AI</i></span>AI Agentic Scraper &amp; Funnel Tracker</li>
+              <li><span><i class="t-pm" style="font-style:normal">CONTENT</i></span>BD Module &amp; event playbooks</li>
+              <li><span><i class="t-pm" style="font-style:normal">PM</i></span>Shopee Super Summit · AHA 13</li>
+              <li><span><i class="t-bd" style="font-style:normal">BD</i> <i class="t-plus">+</i> <i class="t-pm" style="font-style:normal">PM</i></span>Thailand team onboarded</li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <!-- Category 2 -->
-      <div>
-        <div class="skills-cat__header">
-          <div class="skills-cat__header-icon">
-            <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          For Automation &amp; Ops
-        </div>
-        <div class="skills-cards" id="skillsCatOps">
-          <div class="skill-card">
-            <div class="skill-card__icon">🤖</div>
-            <div class="skill-card__name">AI &amp; LLM Tools</div>
-            <div class="skill-card__desc">Building with and prompting LLMs to solve problems that used to need a team.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">⚡</div>
-            <div class="skill-card__name">Workflow Automation</div>
-            <div class="skill-card__desc">Systemizing with Make.com, n8n, Apps Script so humans focus on what needs them.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">🔬</div>
-            <div class="skill-card__name">Market Research</div>
-            <div class="skill-card__desc">Finding signal before committing — who, what, and whether it's worth pursuing.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-card__icon">✍️</div>
-            <div class="skill-card__name">Content Strategy</div>
-            <div class="skill-card__desc">Deciding what to say, to whom, and why it matters right now.</div>
-          </div>
-        </div>
-      </div>
+      <div class="flow__foot"><a href="/constellation.html">EXPLORE THE SKILLS CONSTELLATION <b>→</b></a></div>
     </div>
-
-    <!-- Connecting It All -->
-    <div class="connecting-all" data-reveal>
-      <div class="connecting-all__header">Connecting It All</div>
-      <div class="connecting-all__grid">
-        <div>
-          <div class="connecting-all__col-label">Signals In</div>
-          <div class="signal-card"><span class="signal-card__dot"></span>Incoming lead / cold prospect</div>
-          <div class="signal-card"><span class="signal-card__dot"></span>Partner / brand inquiry</div>
-          <div class="signal-card"><span class="signal-card__dot"></span>Market gap identified</div>
-          <div class="signal-card"><span class="signal-card__dot"></span>Campaign brief received</div>
-        </div>
-        <div class="connecting-all__center">
-          <div class="connecting-all__engine">
-            <svg width="1.25rem" height="1.25rem" viewBox="0 0 48 48" fill="#fff" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-          </div>
-          <div class="connecting-all__label">Skills &amp;<br>Tools Engine</div>
-          <a href="/constellation.html" class="connecting-all__explore">Explore map ↗</a>
-        </div>
-        <div>
-          <div class="connecting-all__col-label" style="justify-content:flex-end">Results</div>
-          <div class="result-card"><span class="result-card__check">✓</span>Pipeline built &amp; deals closed</div>
-          <div class="result-card"><span class="result-card__check">✓</span>Partnership signed</div>
-          <div class="result-card"><span class="result-card__check">✓</span>Automation deployed</div>
-          <div class="result-card"><span class="result-card__check">✓</span>Campaign delivered</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1230,7 +1236,7 @@ lenis.on('scroll', ({ scroll }) => {
   function brandSlider() {
     const rows = [BRANDS.slice(0, 18), BRANDS.slice(18)];
     return '<div class="pv-slider">' + rows.map(r =>
-      '<div class="pv-track">' + [...r, ...r].map(b => `<div class="pv-logo"><img src="${b.img}" alt="${b.name}" loading="lazy"></div>`).join('') + '</div>'
+      '<div class="pv-track">' + [...r, ...r].map(b => `<div class="pv-logo"><img src="${b.img}" alt="${b.name}"></div>`).join('') + '</div>'
     ).join('') + '</div>';
   }
 
@@ -1246,7 +1252,7 @@ lenis.on('scroll', ({ scroll }) => {
     const target = d.ext ? ' target="_blank" rel="noopener"' : '';
     el.innerHTML = `
       <div class="pv-top pv-anim">
-        <div class="pv-kicker">${d.kicker}</div>
+        <div class="pv-head"><div class="pv-kicker">${d.kicker}</div><a class="pv-link" href="${d.link}"${target}>${d.cta || 'See details ↗'}</a></div>
         <p class="pv-story">${d.story}</p>
         <div class="pv-nums">${nums}</div>
       </div>
@@ -1254,7 +1260,6 @@ lenis.on('scroll', ({ scroll }) => {
       <div class="pv-bottom pv-anim">
         <div class="pv-label">${d.label}</div>
         ${bodies[d.bottom]()}
-        <div class="pv-actions"><a class="pv-link" href="${d.link}"${target}>${d.cta || 'See details ↗'}</a></div>
       </div>`;
   }
 
@@ -2125,21 +2130,123 @@ buildServices();
 buildStats();
 setupRevealObserver();
 
-// ── Skill cards reveal ──
+// ── Forte flow: staged reveal, moving wires, particle cloud, step cycle ──
 (function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const cards = entry.target.querySelectorAll('.skill-card');
-        cards.forEach((c, i) => setTimeout(() => c.classList.add('revealed'), i * 80));
-        observer.unobserve(entry.target);
-      }
+  const flow = document.getElementById('flow');
+  if (!flow) return;
+  const grid = document.getElementById('flowGrid');
+  const svg = document.getElementById('flowWires');
+  const gIn = svg.querySelector('.w-in'), gOut = svg.querySelector('.w-out'), gPulse = svg.querySelector('.w-pulse');
+  const steps = [...document.querySelectorAll('#flowSteps .flow-step')];
+  const skills = [...document.querySelectorAll('#flowSkills li')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+  let visible = false, pulses = [];
+
+  // Offset-based position (ignores reveal transforms)
+  function pos(el) {
+    let x = 0, y = 0, n = el;
+    while (n && n !== grid) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+    return { x, y, w: el.offsetWidth, h: el.offsetHeight };
+  }
+  function curve(x1, y1, x2, y2) {
+    const mx = (x1 + x2) / 2;
+    return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+  }
+  function mk(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  }
+
+  function buildWires() {
+    [gIn, gOut, gPulse].forEach(g => g.innerHTML = '');
+    pulses = [];
+    if (getComputedStyle(svg).display === 'none') return;
+    const card = pos(document.getElementById('flowIn'));
+    const st = pos(document.getElementById('flowSteps'));
+    const cy = st.y + st.h / 2;
+    skills.forEach((li, i) => {
+      const r = pos(li);
+      const x1 = card.x + card.w, y1 = r.y + r.h / 2;
+      const y2 = cy + (i - (skills.length - 1) / 2) * 7;
+      const path = mk('path', { class: 'flow__wire', d: curve(x1, y1, st.x - 6, y2) }, gIn);
+      mk('circle', { class: 'flow__node', cx: x1, cy: y1, r: 2.2 }, gIn);
+      pulses.push({ path, len: path.getTotalLength(), t: Math.random(), speed: .18 + Math.random() * .12, skill: li, dot: mk('circle', { class: 'flow__pulse', r: 3 }, gPulse) });
     });
-  }, { threshold: 0.1 });
-  ['skillsCatBD', 'skillsCatOps'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
+    document.querySelectorAll('#flowOut .flow-acts li').forEach((li, i) => {
+      const r = pos(li);
+      const x2 = r.x - 14, y2 = r.y + r.h / 2;
+      const y1 = cy + (i - 3) * 7;
+      const path = mk('path', { class: 'flow__wire flow__wire--out', d: curve(st.x + st.w + 6, y1, x2, y2) }, gOut);
+      mk('circle', { class: 'flow__node', cx: x2, cy: y2, r: 2.2 }, gOut);
+      pulses.push({ path, len: path.getTotalLength(), t: Math.random(), speed: .2 + Math.random() * .12, dot: mk('circle', { class: 'flow__pulse', r: 3 }, gPulse) });
+    });
+  }
+
+  // Dotted particle cloud behind the engine
+  const cv = document.getElementById('flowCloud'), ctx = cv.getContext('2d');
+  let dots = [], W = 0;
+  function buildCloud() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = cv.offsetWidth; cv.width = cv.height = W * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dots = [];
+    const R = W / 2;
+    for (let r = 10; r < R; r += 7) {
+      const n = Math.floor((2 * Math.PI * r) / 7);
+      const keep = Math.pow(1 - r / R, 1.6);
+      for (let k = 0; k < n; k++) {
+        if (Math.random() > keep * 1.15) continue;
+        dots.push({ r: r + (Math.random() - .5) * 3, a: (k / n) * Math.PI * 2 + Math.random() * .2, dir: (r / 7) % 2 ? 1 : -1,
+          ph: Math.random() * 6.28, f: .6 + Math.random() * 1.6, rel: r / R });
+      }
+    }
+  }
+  function drawCloud(t) {
+    ctx.clearRect(0, 0, W, W);
+    const c = W / 2, breathe = 1 + Math.sin(t * .0006) * .025;
+    for (const d of dots) {
+      const ang = d.a + d.dir * t * .00004 * (1.4 - d.rel);
+      const rr = d.r * breathe;
+      const tw = .5 + .5 * Math.sin(t * .002 * d.f + d.ph);
+      const alpha = (1 - d.rel) * (.25 + .75 * tw);
+      ctx.fillStyle = d.rel < .45 ? `rgba(255,${80 + d.rel * 120 | 0},${70 + d.rel * 90 | 0},${alpha})` : `rgba(236,234,245,${alpha * .55})`;
+      ctx.beginPath(); ctx.arc(c + Math.cos(ang) * rr, c + Math.sin(ang) * rr, d.rel < .3 ? 1.5 : 1.15, 0, 6.283); ctx.fill();
+    }
+  }
+
+  // Step highlight cycle (pauses on hover)
+  let active = 0, hovering = false;
+  function setStep(i) { active = i; steps.forEach((s, k) => s.classList.toggle('on', k === i)); }
+  steps.forEach((s, i) => {
+    s.addEventListener('mouseenter', () => { hovering = true; setStep(i); });
+    s.addEventListener('mouseleave', () => { hovering = false; });
   });
+  setInterval(() => { if (visible && !hovering && !reduce) setStep((active + 1) % steps.length); }, 1800);
+
+  let last = 0;
+  function loop(t) {
+    if (!visible) return;
+    const dt = Math.min((t - (last || t)) / 1000, .05); last = t;
+    drawCloud(t);
+    for (const p of pulses) {
+      p.t = (p.t + p.speed * dt) % 1;
+      const pt = p.path.getPointAtLength(p.t * p.len);
+      p.dot.setAttribute('cx', pt.x); p.dot.setAttribute('cy', pt.y);
+      p.dot.setAttribute('opacity', Math.sin(p.t * Math.PI).toFixed(2));
+      if (p.skill) p.skill.classList.toggle('lit', p.t < .18);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function layout() { buildWires(); buildCloud(); if (reduce) drawCloud(0); }
+  layout();
+  new ResizeObserver(layout).observe(grid);
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) flow.classList.add('is-in');
+    const was = visible; visible = e.isIntersecting && !reduce;
+    if (visible && !was) { last = 0; requestAnimationFrame(loop); }
+  }, { threshold: .15 }).observe(flow);
 })();
 
 // ── Language toggle ──
