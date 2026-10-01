@@ -18,7 +18,7 @@
       'header.localTime': 'Local time',
 
       /* ── Hero ── */
-      'hero.eyebrow': 'Personal Studio · Jakarta',
+      'hero.eyebrow': 'Personal Studio · Jakarta, Indonesia',
       'hero.h1.0': 'Driving growth',
       'hero.h1.1': 'through strategy',
       'hero.h1.2': 'and bold vision.',
@@ -428,7 +428,7 @@
       'header.localTime': 'Waktu lokal',
 
       /* ── Hero ── */
-      'hero.eyebrow': 'Personal Studio · Jakarta',
+      'hero.eyebrow': 'Personal Studio · Jakarta, Indonesia',
       'hero.h1.0': 'Mendorong pertumbuhan',
       'hero.h1.1': 'melalui strategi',
       'hero.h1.2': 'dan visi berani.',
