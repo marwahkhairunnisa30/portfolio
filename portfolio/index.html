@@ -473,9 +473,9 @@ img{display:block}
 .flow-list li.lit::before{background:#ff6b5a}
 /* Engine */
 .flow-engine{position:relative;display:flex;flex-direction:column;align-items:center}
-.flow-engine__cloud{position:absolute;left:50%;top:calc(50% - 1rem);width:150%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+.flow-engine__cloud{position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:0}
 .flow-steps{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3.25rem 2.25rem;width:100%;max-width:24rem}
-.flow-step{position:relative;z-index:1;aspect-ratio:1;border-radius:.75rem;padding:1rem;background:rgba(19,19,32,.82);backdrop-filter:blur(2px);border:1px solid rgba(236,234,245,.14);transition:border-color .4s,box-shadow .4s,background .4s;cursor:default}
+.flow-step{position:relative;z-index:1;aspect-ratio:1;border-radius:.75rem;padding:1rem;background:rgba(19,19,32,.94);border:1px solid rgba(236,234,245,.14);transition:border-color .4s,box-shadow .4s,background .4s;cursor:default}
 .flow-step i{display:block;font-style:normal;font-family:var(--mono);font-size:.7rem;color:rgba(236,234,245,.45);margin-bottom:.5rem;transition:color .4s}
 .flow-step b{display:block;font-size:.95rem;font-weight:600;line-height:1.2}
 .flow-step small{display:block;margin-top:.5rem;font-size:.68rem;line-height:1.45;color:rgba(236,234,245,.45)}
@@ -965,8 +965,8 @@ img{display:block}
         </div>
 
         <div class="flow-engine" data-stage="2">
-          <canvas class="flow-engine__cloud" id="flowCloud"></canvas>
           <div class="flow-steps" id="flowSteps">
+            <canvas class="flow-engine__cloud" id="flowCloud"></canvas>
             <div class="flow-step on"><i>01</i><b>Research &amp; qualify</b><small>ICP-first — know the brand before the first message</small></div>
             <div class="flow-step"><i>02</i><b>Outreach &amp; pitch</b><small>Personalized, outcome-based, never generic</small></div>
             <div class="flow-step"><i>03</i><b>Automate with AI</b><small>Scrapers, trackers &amp; tools that scale the work</small></div>
@@ -2184,40 +2184,77 @@ setupRevealObserver();
     });
   }
 
-  // Dotted particle cloud behind the engine
+  // Mini skills constellation orbiting the brand spark
   const cv = document.getElementById('flowCloud'), ctx = cv.getContext('2d');
-  let dots = [], W = 0;
+  const SPARK = new Path2D('M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z');
+  let nodes = [], packets = [], W = 0, stepFlash = 0;
   function buildCloud() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     W = cv.offsetWidth; cv.width = cv.height = W * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    dots = [];
-    const R = W / 2;
-    for (let r = 10; r < R; r += 7) {
-      const n = Math.floor((2 * Math.PI * r) / 7);
-      const keep = Math.pow(1 - r / R, 1.6);
-      for (let k = 0; k < n; k++) {
-        if (Math.random() > keep * 1.15) continue;
-        dots.push({ r: r + (Math.random() - .5) * 3, a: (k / n) * Math.PI * 2 + Math.random() * .2, dir: (r / 7) % 2 ? 1 : -1,
-          ph: Math.random() * 6.28, f: .6 + Math.random() * 1.6, rel: r / R });
-      }
-    }
+    nodes = Array.from({ length: 14 }, (_, i) => ({
+      orbit: W * (.36 + (i % 3) * .045 + Math.random() * .02),
+      a: (i / 14) * Math.PI * 2 + Math.random() * .3,
+      speed: (.00005 + Math.random() * .00004) * (i % 2 ? 1 : -1),
+      size: i % 4 === 0 ? 3 : 1.8 + Math.random() * .8,
+      ph: Math.random() * 6.28
+    }));
+    packets = Array.from({ length: 5 }, () => ({ n: Math.random() * 14 | 0, t: Math.random() }));
   }
-  function drawCloud(t) {
+  function nodePos(n, t) {
+    const a = n.a + n.speed * t;
+    return [W / 2 + Math.cos(a) * n.orbit, W / 2 + Math.sin(a) * n.orbit * .78];
+  }
+  function drawCloud(t, dt = 0) {
+    const c = W / 2;
     ctx.clearRect(0, 0, W, W);
-    const c = W / 2, breathe = 1 + Math.sin(t * .0006) * .025;
-    for (const d of dots) {
-      const ang = d.a + d.dir * t * .00004 * (1.4 - d.rel);
-      const rr = d.r * breathe;
-      const tw = .5 + .5 * Math.sin(t * .002 * d.f + d.ph);
-      const alpha = (1 - d.rel) * (.25 + .75 * tw);
-      ctx.fillStyle = d.rel < .45 ? `rgba(255,${80 + d.rel * 120 | 0},${70 + d.rel * 90 | 0},${alpha})` : `rgba(236,234,245,${alpha * .55})`;
-      ctx.beginPath(); ctx.arc(c + Math.cos(ang) * rr, c + Math.sin(ang) * rr, d.rel < .3 ? 1.5 : 1.15, 0, 6.283); ctx.fill();
-    }
+    const P = nodes.map(n => nodePos(n, t));
+
+    // constellation links (nearest neighbours) + faint spokes to the core
+    ctx.lineWidth = 1;
+    P.forEach(([x, y], i) => {
+      P.forEach(([x2, y2], j) => {
+        if (j <= i) return;
+        const d = Math.hypot(x - x2, y - y2);
+        if (d < W * .26) { ctx.strokeStyle = `rgba(236,234,245,${(1 - d / (W * .26)) * .4})`; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x2, y2); ctx.stroke(); }
+      });
+      ctx.strokeStyle = 'rgba(232,52,43,.08)'; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(c, c); ctx.stroke();
+    });
+
+    // signals travelling from a skill node into the core
+    packets.forEach(p => {
+      p.t += dt * .45;
+      if (p.t >= 1) { p.t = 0; p.n = Math.random() * nodes.length | 0; }
+      const [x, y] = P[p.n], k = p.t * p.t;
+      const px = x + (c - x) * k, py = y + (c - y) * k;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, 7);
+      g.addColorStop(0, `rgba(255,179,164,${1 - p.t * .6})`); g.addColorStop(1, 'rgba(232,52,43,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(px, py, 7, 0, 6.283); ctx.fill();
+    });
+
+    // skill nodes
+    P.forEach(([x, y], i) => {
+      const n = nodes[i], tw = .55 + .45 * Math.sin(t * .0018 + n.ph);
+      ctx.fillStyle = n.size > 2.5 ? `rgba(255,107,90,${tw})` : `rgba(236,234,245,${tw * .8})`;
+      ctx.beginPath(); ctx.arc(x, y, n.size, 0, 6.283); ctx.fill();
+      if (n.size > 2.5) { ctx.strokeStyle = `rgba(255,107,90,${tw * .35})`; ctx.beginPath(); ctx.arc(x, y, n.size + 4, 0, 6.283); ctx.stroke(); }
+    });
+
+    // brand spark — arms shine through the cross gutter between the cards
+    stepFlash = Math.max(0, stepFlash - dt * 1.4);
+    const breathe = 1 + Math.sin(t * .0012) * .04 + stepFlash * .08;
+    const arm = W * .19 * breathe, sc = arm / 22;
+    ctx.save();
+    ctx.translate(c, c); ctx.scale(sc, sc); ctx.translate(-24, -24);
+    const sg = ctx.createRadialGradient(24, 24, 0, 24, 24, 22);
+    sg.addColorStop(0, '#fff'); sg.addColorStop(.12, '#ffb3a4'); sg.addColorStop(.45, '#e8342b'); sg.addColorStop(1, 'rgba(122,23,16,.55)');
+    ctx.shadowColor = '#e8342b'; ctx.shadowBlur = 16 + stepFlash * 22;
+    ctx.fillStyle = sg; ctx.globalAlpha = .9; ctx.fill(SPARK);
+    ctx.restore();
   }
 
   // Step highlight cycle (pauses on hover)
   let active = 0, hovering = false;
-  function setStep(i) { active = i; steps.forEach((s, k) => s.classList.toggle('on', k === i)); }
+  function setStep(i) { active = i; stepFlash = 1; steps.forEach((s, k) => s.classList.toggle('on', k === i)); }
   steps.forEach((s, i) => {
     s.addEventListener('mouseenter', () => { hovering = true; setStep(i); });
     s.addEventListener('mouseleave', () => { hovering = false; });
@@ -2228,7 +2265,7 @@ setupRevealObserver();
   function loop(t) {
     if (!visible) return;
     const dt = Math.min((t - (last || t)) / 1000, .05); last = t;
-    drawCloud(t);
+    drawCloud(t, dt);
     for (const p of pulses) {
       p.t = (p.t + p.speed * dt) % 1;
       const pt = p.path.getPointAtLength(p.t * p.len);
