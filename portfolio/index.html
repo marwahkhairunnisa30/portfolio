@@ -120,6 +120,78 @@ img{display:block}
 .mega-contact-link{display:flex;align-items:center;gap:.75rem;padding:.625rem .875rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);font-size:.875rem;color:rgba(236,234,245,.75);text-decoration:none;transition:background .2s,color .2s}
 .mega-contact-link:hover{background:rgba(236,234,245,.09);color:#eceaf5}
 .mega-contact-link svg{flex-shrink:0;color:rgba(236,234,245,.4)}
+
+/* Nav pills (wireframe: Work | Project | Forte | Connect) */
+.header__nav{gap:.5rem}
+.mega-trigger{padding:.55rem 1.35rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.12);opacity:.85;transition:background .25s,border-color .25s,box-shadow .25s,opacity .2s}
+.mega-trigger:hover{transform:none!important;border-color:rgba(185,43,43,.45)}
+.mega-item.active .mega-trigger{background:linear-gradient(135deg,#e8342b,#b92b2b);border-color:transparent;color:#fff;opacity:1;box-shadow:0 6px 20px rgba(185,43,43,.35)}
+.mega-caret{display:none}
+
+/* Floating card panel */
+.mega-panel{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;box-shadow:none;padding:.5rem 2rem 2rem}
+.mega-panel__inner{max-width:74rem;background:radial-gradient(110% 70% at 100% 0%,rgba(185,43,43,.16),transparent 55%),#131320;border:1px solid rgba(236,234,245,.08);border-radius:1.5rem;box-shadow:0 30px 70px rgba(0,0,0,.65);padding:2rem 2.25rem}
+.mega-tab-content{display:none}
+.mega-tab-content.active{display:block}
+
+/* Left (2 tile columns) | vertical line | right (preview) */
+.work-grid{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);gap:2.25rem;align-items:stretch}
+.work-line{background:linear-gradient(transparent,rgba(236,234,245,.2) 15%,rgba(236,234,245,.2) 85%,transparent)}
+.work-title{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:600;color:#eceaf5;line-height:1.5rem;margin-bottom:1.75rem;letter-spacing:-.01em}
+.work-title svg{width:.9rem;height:.9rem;fill:#c03030;flex-shrink:0}
+.work-title small{margin-left:auto;font-size:.7rem;font-weight:500;color:rgba(236,234,245,.4);letter-spacing:.04em}
+.work-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.work-col-label{display:flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(236,234,245,.5);line-height:1rem;margin-bottom:.75rem}
+.work-col-label::before{content:'';width:.375rem;height:.375rem;border-radius:9999px;background:#b92b2b}
+.work-tile{position:relative;display:flex;align-items:center;gap:.75rem;width:100%;min-height:4.5rem;padding:.875rem 1rem;margin-bottom:.875rem;border-radius:.875rem;border:1px solid rgba(236,234,245,.08);background:#1c1c2a;color:#eceaf5;font:inherit;text-align:left;cursor:pointer;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+.work-tile:hover{border-color:rgba(185,43,43,.4);transform:translateY(-2px)}
+.wt-ico{width:2.125rem;height:2.125rem;border-radius:.625rem;display:grid;place-items:center;flex-shrink:0;background:rgba(236,234,245,.06);color:rgba(236,234,245,.7);transition:background .25s,color .25s}
+.wt-ico svg{width:1rem;height:1rem}
+.wt-txt{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.wt-txt b{font-size:.8125rem;font-weight:500;line-height:1.25}
+.wt-txt small{font-size:.65rem;color:rgba(236,234,245,.42);letter-spacing:.02em}
+.wt-arrow{margin-left:auto;font-size:.8rem;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}
+.work-tile:hover .wt-arrow,.work-tile.active .wt-arrow{opacity:1;transform:none}
+.work-tile.active{background:linear-gradient(135deg,#e8342b 0%,#b92b2b 55%,#7a1710 100%);border-color:transparent;box-shadow:0 12px 30px rgba(185,43,43,.35)}
+.work-tile.active .wt-ico{background:rgba(255,255,255,.18);color:#fff}
+.work-tile.active .wt-txt small{color:rgba(255,255,255,.75)}
+.work-right{padding-top:4.5rem;display:flex;min-width:0}
+
+/* Preview card — tied to the selected tile's red */
+.work-preview{position:relative;flex:1;min-width:0;overflow:hidden;min-height:23rem;border-radius:1.125rem;padding:1.625rem 1.75rem;display:flex;flex-direction:column;color:#eceaf5;background:radial-gradient(90% 70% at 100% 0%,rgba(255,107,90,.22),transparent 60%),linear-gradient(160deg,#7a1710 0%,#2a1220 48%,#1c1c2a 100%);border:1px solid rgba(255,179,164,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.pv-anim{animation:pv-in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes pv-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pv-kicker{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#ffb3a4;margin-bottom:.5rem}
+.pv-story{font-size:.8125rem;line-height:1.6;color:rgba(236,234,245,.78);margin-bottom:1.125rem}
+.pv-nums{display:flex;flex-wrap:wrap}
+.pv-num{padding-right:1.5rem;margin-right:1.5rem;border-right:1px solid rgba(236,234,245,.12)}
+.pv-num:last-child{border:0;margin:0;padding:0}
+.pv-num b{display:block;font-size:1.75rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:#fff}
+.pv-num span{font-size:.625rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.5)}
+.pv-rule{height:1px;background:rgba(255,179,164,.25);margin:1.25rem 0 1rem}
+.pv-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.5);margin-bottom:.7rem}
+.pv-bottom{margin-top:auto;display:flex;flex-direction:column}
+.pv-slider{display:flex;flex-direction:column;gap:.5rem;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pv-track{display:flex;gap:.5rem;width:max-content;animation:pv-marquee 40s linear infinite}
+.pv-track:nth-child(2){animation-direction:reverse;animation-duration:46s}
+.pv-slider:hover .pv-track{animation-play-state:paused}
+.pv-logo{width:4rem;height:2.5rem;flex-shrink:0;background:#eceaf5;border-radius:.5rem;display:grid;place-items:center;padding:.3rem;opacity:.85}
+.pv-logo img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply}
+@keyframes pv-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pv-mods{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.pv-mod{background:rgba(236,234,245,.06);border:1px solid rgba(236,234,245,.1);border-radius:.75rem;padding:.75rem;font-size:.75rem;font-weight:500;line-height:1.35}
+.pv-mod i{display:block;font-style:normal;font-size:.6rem;font-weight:700;color:#ff6b5a;margin-bottom:.35rem}
+.pv-mod small{display:block;font-size:.65rem;font-weight:400;color:rgba(236,234,245,.5);margin-top:.25rem}
+.pv-media{display:flex;gap:.625rem}
+.pv-media img{flex:1;min-width:0;height:5.75rem;object-fit:cover;border-radius:.75rem;border:1px solid rgba(236,234,245,.1)}
+.pv-topics{display:flex;flex-direction:column;gap:.35rem;font-size:.75rem;color:rgba(236,234,245,.8)}
+.pv-topics div{display:flex;gap:.6rem}
+.pv-topics i{font-style:normal;font-weight:700;color:#ff6b5a;min-width:1.1rem}
+.pv-actions{display:flex;justify-content:flex-end;margin-top:.875rem}
+.pv-link{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border-radius:.625rem;background:#eceaf5;color:#131320;font-size:.75rem;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
+.pv-link:hover{background:#fff;transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){.pv-track,.pv-anim{animation:none}}
+
 .header__right{display:flex;align-items:center;gap:.75rem}
 .header__clock{display:none;align-items:center;gap:.75rem;border:1px solid rgba(236,234,245,.12);background:rgba(236,234,245,.04);backdrop-filter:blur(4px);border-radius:.875rem;padding:.5rem .75rem;font-size:.75rem;color:rgba(236,234,245,.7)}
 @media(min-width:768px){.header__clock{display:flex}}
@@ -573,14 +645,14 @@ img{display:block}
       <div class="mega-item" data-panel="work">
         <button class="mega-trigger">Work <span class="mega-caret">▾</span></button>
       </div>
-      <div class="mega-item" data-panel="projects">
-        <button class="mega-trigger">Projects <span class="mega-caret">▾</span></button>
+      <div class="mega-item" data-panel="project">
+        <button class="mega-trigger">Project <span class="mega-caret">▾</span></button>
       </div>
-      <div class="mega-item" data-panel="skills">
-        <button class="mega-trigger">Skills <span class="mega-caret">▾</span></button>
+      <div class="mega-item mega-item--link">
+        <button class="mega-trigger" onclick="closeMegaMenu();scrollToSection('services')">Forte</button>
       </div>
-      <div class="mega-item" data-panel="contact">
-        <button class="mega-trigger">Contact <span class="mega-caret">▾</span></button>
+      <div class="mega-item" data-panel="connect">
+        <button class="mega-trigger">Connect <span class="mega-caret">▾</span></button>
       </div>
     </nav>
     <div class="header__right">
@@ -597,163 +669,88 @@ img{display:block}
       </button>
     </div>
   </div>
-  <!-- Mega-menu panels -->
+  <!-- Mega-menu: unified tabbed panel -->
   <div class="mega-panels" id="megaPanels">
-
-    <!-- Work -->
-    <div class="mega-panel" id="panel-work">
+    <div class="mega-panel" id="megaPanel">
       <div class="mega-panel__inner">
-        <div class="mega-work">
-          <div>
-            <div class="mega-col-header">Current Role</div>
-            <div class="mega-role-name">BD Lead</div>
-            <div class="mega-role-at">AHA Commerce &nbsp;·&nbsp; 2023 – Present</div>
-            <div class="mega-metrics">
-              <div class="mega-metric"><span class="mega-metric__val">55+</span><span class="mega-metric__lbl">Leads closed</span></div>
-              <div class="mega-metric"><span class="mega-metric__val">56%</span><span class="mega-metric__lbl">Conversion lift</span></div>
-              <div class="mega-metric"><span class="mega-metric__val">30%</span><span class="mega-metric__lbl">Pipeline growth</span></div>
+
+        <div class="mega-tab-content active" id="tab-work">
+          <div class="work-grid">
+            <div class="work-left">
+              <div class="work-title"><svg viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>AHA Commerce &nbsp;–&nbsp; BD Lead<small>2023 – Present</small></div>
+              <div class="work-cols">
+                <div class="work-col">
+                  <div class="work-col-label">Expertised</div>
+                  <button class="work-tile active" data-key="personal"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="wt-txt"><b>Personal Achievement</b><small>2023 – 2025</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="team"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="wt-txt"><b>Team Achievement</b><small>2026</small></span><span class="wt-arrow">→</span></button>
+                </div>
+                <div class="work-col">
+                  <div class="work-col-label">Project Manager</div>
+                  <button class="work-tile" data-key="shopee"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span><span class="wt-txt"><b>Shopee Super Summit</b><small>2024 &amp; 2025</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="anniversary"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1M2 21h20M7 8v3M12 8v3M17 8v3M7 4h.01M12 4h.01M17 4h.01"/></svg></span><span class="wt-txt"><b>Company Anniversary</b><small>2024</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="abroad"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><span class="wt-txt"><b>Abroad Culture Building</b><small>2026</small></span><span class="wt-arrow">→</span></button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <div class="mega-col-header">Experience</div>
-            <div class="mega-timeline">
-              <div class="mega-tl-item"><span class="mega-tl-year">2023 – Now</span><span class="mega-tl-role">BD Lead · AHA Commerce</span></div>
-              <div class="mega-tl-item"><span class="mega-tl-year">2022 – 2023</span><span class="mega-tl-role">BD & Marketing · early-stage startups</span></div>
-              <div class="mega-tl-item"><span class="mega-tl-year">2021 – 2022</span><span class="mega-tl-role">Freelance partnerships & content</span></div>
-            </div>
-            <button class="mega-link" onclick="scrollToSection('about');closeMegaMenu()">Full background →</button>
+            <div class="work-line"></div>
+            <div class="work-right"><div class="work-preview" id="workPreview"></div></div>
           </div>
         </div>
+
+        <div class="mega-tab-content" id="tab-project">
+          <div class="work-grid">
+            <div class="work-left">
+              <div class="work-title"><svg viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>Personal Project &nbsp;–&nbsp; Outside of Work<small>Ongoing</small></div>
+              <div class="work-cols">
+                <div class="work-col">
+                  <div class="work-col-label">Built with AI</div>
+                  <button class="work-tile active" data-key="tailored"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg></span><span class="wt-txt"><b>TailoredAI</b><small>BD outreach · 2026</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="affiliate"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg></span><span class="wt-txt"><b>Affiliate Threads</b><small>Content · 2026</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="leads"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span class="wt-txt"><b>Leads Generator</b><small>Research · 2026</small></span><span class="wt-arrow">→</span></button>
+                </div>
+                <div class="work-col">
+                  <div class="work-col-label">Speaking &amp; Showcase</div>
+                  <button class="work-tile" data-key="govokasi"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg></span><span class="wt-txt"><b>Speaker — GoVokasi</b><small>Sep 2026</small></span><span class="wt-arrow">→</span></button><button class="work-tile" data-key="constellation"><span class="wt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l5 8.5M18 8l-5 8.5"/></svg></span><span class="wt-txt"><b>Skills Constellation</b><small>Interactive · 2026</small></span><span class="wt-arrow">→</span></button>
+                </div>
+              </div>
+            </div>
+            <div class="work-line"></div>
+            <div class="work-right"><div class="work-preview" id="projectPreview"></div></div>
+          </div>
+        </div>
+
+        <!-- ── Connect tab ── -->
+        <div class="mega-tab-content" id="tab-connect">
+          <div class="mega-contact">
+            <div>
+              <div class="mega-col-header">Status</div>
+              <div class="mega-status-chip">
+                <span class="mega-status-dot"></span>
+                Open to remote working
+              </div>
+              <div style="font-size:.8rem;color:rgba(236,234,245,.4);max-width:16rem;line-height:1.6">BD roles, freelance partnerships, consulting, and speaker invitations.</div>
+            </div>
+            <div>
+              <div class="mega-col-header">Get in touch</div>
+              <div class="mega-contact-links">
+                <a href="mailto:marwahkhairunnisa30@gmail.com" class="mega-contact-link">
+                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 8.5 6a2 2 0 0 0 3 0L22 7"/></svg>
+                  marwahkhairunnisa30@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="mega-contact-link">
+                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  linkedin.com/in/marwahkhr30
+                </a>
+                <a href="/marwah-cv.pdf" download class="mega-contact-link">
+                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+                  Download CV
+                </a>
+                <button class="mega-contact-link" onclick="openModal();closeMegaMenu()" style="cursor:pointer;background:rgba(185,43,43,.12);border-color:rgba(185,43,43,.2);color:rgba(236,234,245,.85)">
+                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  Send a message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Projects -->
-    <div class="mega-panel" id="panel-projects">
-      <div class="mega-panel__inner">
-        <div class="mega-col-header">Selected Projects</div>
-        <div class="mega-projects-grid">
-          <a href="/projects/bd-funnel-overhaul.html" class="mega-proj-card">
-            <span class="mega-proj-tag">BD Strategy</span>
-            <span class="mega-proj-name">BD Funnel Overhaul</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/personal-brand-acquisitions.html" class="mega-proj-card">
-            <span class="mega-proj-tag">Lead Gen</span>
-            <span class="mega-proj-name">Personal Brand Acquisitions</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/shopee-super-summit.html" class="mega-proj-card">
-            <span class="mega-proj-tag">Event</span>
-            <span class="mega-proj-name">Shopee Super Summit</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/speaker-govokasi.html" class="mega-proj-card">
-            <span class="mega-proj-tag">Speaking</span>
-            <span class="mega-proj-name">Speaker — GoVokasi</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/playbook-maker.html" class="mega-proj-card">
-            <span class="mega-proj-tag">Automation</span>
-            <span class="mega-proj-name">Playbook Maker</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/aha-birthday.html" class="mega-proj-card">
-            <span class="mega-proj-tag">Event</span>
-            <span class="mega-proj-name">AHA Birthday Campaign</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <a href="/projects/aha-thailand.html" class="mega-proj-card">
-            <span class="mega-proj-tag">BD</span>
-            <span class="mega-proj-name">AHA Thailand Expansion</span>
-            <span class="mega-proj-arrow">↗</span>
-          </a>
-          <button class="mega-proj-card" onclick="scrollToSection('works');closeMegaMenu()" style="text-align:left;font:inherit;border-style:dashed;background:transparent">
-            <span class="mega-proj-tag" style="color:rgba(236,234,245,.3)">All projects</span>
-            <span class="mega-proj-name" style="color:rgba(236,234,245,.45)">View full portfolio →</span>
-            <span class="mega-proj-arrow" style="margin-top:auto">↓</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <div class="mega-panel" id="panel-skills">
-      <div class="mega-panel__inner">
-        <div class="mega-skills">
-          <div>
-            <div class="mega-col-header">BD &amp; Growth</div>
-            <div class="mega-skill-list">
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>BD Strategy</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Cold Outreach</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Creator Partnerships</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Negotiation</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Campaign Management</div>
-            </div>
-          </div>
-          <div>
-            <div class="mega-col-header">Automation &amp; AI</div>
-            <div class="mega-skill-list">
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Make.com &amp; n8n</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>AI &amp; LLM Tools</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Apps Script</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Vibe Coding</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>HubSpot / CRM</div>
-            </div>
-          </div>
-          <div>
-            <div class="mega-col-header">Content &amp; Research</div>
-            <div class="mega-skill-list">
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Storytelling</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Copywriting</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Content Strategy</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Market Research</div>
-              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Creator Analytics</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(236,234,245,.06);display:flex;justify-content:flex-end">
-          <a href="/constellation.html" class="mega-link" style="font-size:.8125rem">Explore interactive skills map ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact -->
-    <div class="mega-panel" id="panel-contact">
-      <div class="mega-panel__inner">
-        <div class="mega-contact">
-          <div>
-            <div class="mega-col-header">Status</div>
-            <div class="mega-status-chip">
-              <span class="mega-status-dot"></span>
-              Open to opportunities
-            </div>
-            <div style="font-size:.8rem;color:rgba(236,234,245,.4);max-width:16rem;line-height:1.6">BD roles, freelance partnerships, consulting, and speaker invitations.</div>
-          </div>
-          <div>
-            <div class="mega-col-header">Get in touch</div>
-            <div class="mega-contact-links">
-              <a href="mailto:marwahkhairunnisa30@gmail.com" class="mega-contact-link">
-                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 8.5 6a2 2 0 0 0 3 0L22 7"/></svg>
-                marwahkhairunnisa30@gmail.com
-              </a>
-              <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="mega-contact-link">
-                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                linkedin.com/in/marwahkhr30
-              </a>
-              <a href="/marwah-cv.pdf" download class="mega-contact-link">
-                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
-                Download CV
-              </a>
-              <button class="mega-contact-link" onclick="openModal();closeMegaMenu()" style="cursor:pointer;background:rgba(185,43,43,.12);border-color:rgba(185,43,43,.2);color:rgba(236,234,245,.85)">
-                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                Send a message
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </header>
 
@@ -1135,68 +1132,196 @@ lenis.on('scroll', ({ scroll }) => {
   document.getElementById('siteHeader').classList.toggle('scrolled', scroll > 60);
 });
 
-// ── Mega-menu logic ──
+// ── Mega-menu: unified tabbed panel ──
 (function() {
   const header = document.getElementById('siteHeader');
-  const items = header.querySelectorAll('.mega-item');
-  let activePanel = null;
+  const navItems = header.querySelectorAll('.mega-item[data-panel]');
+  header.querySelectorAll('.mega-item--link').forEach(i => i.addEventListener('mouseenter', () => closePanel(true)));
+  const panel = document.getElementById('megaPanel');
+  let isOpen = false;
   let hideTimer = null;
 
-  function showPanel(panelId) {
-    clearTimeout(hideTimer);
-    if (activePanel && activePanel.id === 'panel-' + panelId) return;
-    hideAllPanels(true);
-    const panel = document.getElementById('panel-' + panelId);
-    if (!panel) return;
-    activePanel = panel;
-    panel.classList.add('open');
-    // activate the trigger
-    items.forEach(i => i.classList.toggle('active', i.dataset.panel === panelId));
-    // animate in
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => panel.classList.add('visible'));
-    });
+  // Preview data — sourced from /projects/*.html and i18n.js
+  const BRANDS = ['Teddie Clubs','in-lite','CA','Waldos','SequeSoon','Douquela','Martin Versa','Gentle Hour','LaRocking','Fantasy','HIA Storyware','Dragon','9Jacket','MAGE','Chronox','Kimbo','FVC+K','Dewdrop','ELMER','Vention','Shopee','Vengoz','Zebra','Cheerilee','Hunt Toys','Reneturos','GoGo Books','Cats & Cuddles','Hypospot','OneShin','Nayara','Skinfood','CUTA','Scholl','Sniff Sniff','Dao Agrico']
+    .map((name, i) => ({ name, img: `/assets/brands/brand_${String(i + 1).padStart(2, '0')}.png` }));
+
+  const PREVIEW = {
+    personal: {
+      kicker: 'Personal Achievement · 2023 – 2025',
+      story: 'Every brand was personally sourced, qualified, pitched, and closed by me — separate from the deals my team closed.',
+      nums: [['55+', 'Brands closed'], ['3', 'Platforms'], ['6', 'Categories']],
+      label: 'Brands I closed', bottom: 'brands',
+      link: '/projects/personal-brand-acquisitions.html'
+    },
+    team: {
+      kicker: 'Team Achievement · 2026',
+      story: 'Built and led a BD team of 8 — designed the acquisition funnel end-to-end, set KPIs, and ran weekly 1-on-1s.',
+      nums: [['47', 'Partnerships / 9 mo'], ['56%', 'Revenue growth'], ['30%', 'Lead → conversion']],
+      label: 'Modul — what I built for the team', bottom: 'mods',
+      mods: [['AI Agentic Scraper', 'Lead sourcing automation'], ['BD Module', 'Team knowledge base'], ['Funnel Tracker', 'Pipeline visibility']],
+      link: '/projects/bd-funnel-overhaul.html'
+    },
+    shopee: {
+      kicker: 'Shopee Super Summit · 2024 & 2025',
+      story: 'Project Lead for AHA Commerce\'s exhibitor booth — owned pre-event planning, on-ground activation, and wrap-up.',
+      nums: [['100+', 'Leads 2024'], ['170+', 'Leads 2025'], ['>50%', 'ICP → 1st meeting']],
+      label: 'Documentation', bottom: 'media',
+      media: ['/projects/assets/shopee-summit-1.webp', '/projects/assets/shopee-summit-2.webp'],
+      link: '/projects/shopee-super-summit.html'
+    },
+    anniversary: {
+      kicker: 'AHA 13th Anniversary · 2024',
+      story: 'Project Lead for the company outing — from concept and vendors to on-day execution, with zero critical issues.',
+      nums: [['110+', 'Attendees'], ['9', 'Committee led'], ['9.46', 'Satisfaction']],
+      label: 'Documentation', bottom: 'media',
+      media: ['/projects/assets/aha-birthday-team.webp'],
+      link: '/projects/aha-birthday.html'
+    },
+    abroad: {
+      kicker: 'AHA Commerce Thailand · 2026',
+      story: 'Led culture adoption for the BD Thailand team — product training, sales strategy, and pipeline management.',
+      nums: [['9', 'People trained'], ['3', 'Sessions'], ['Weekly', 'Review cadence']],
+      label: 'Documentation', bottom: 'media',
+      media: ['/projects/assets/aha-thailand-team.webp'],
+      link: '/projects/aha-thailand.html'
+    },
+    tailored: {
+      kicker: 'TailoredAI · Built with AI · 2026',
+      story: 'Personalized BD outreach generator — every first message tailored to the brand, never generic.',
+      nums: [['AI', 'Powered'], ['BD', 'Outreach'], ['Live', 'On Vercel']],
+      label: 'Use case', bottom: 'mods',
+      mods: [['Research', 'Context on the brand'], ['Personalize', 'Tailored angle'], ['Send-ready', 'First outreach draft']],
+      link: 'https://bdtailored-ai.vercel.app', cta: 'Try it ↗', ext: true
+    },
+    affiliate: {
+      kicker: 'Affiliate Threads · Built with AI · 2026',
+      story: 'Shopee affiliate content that doesn\'t read like an ad — threads that sound like a real recommendation.',
+      nums: [['AI', 'Powered'], ['Shopee', 'Affiliate'], ['Live', 'On Vercel']],
+      label: 'Use case', bottom: 'mods',
+      mods: [['Product', 'Pick an item'], ['Generate', 'Thread copy'], ['Post', 'Natural, not salesy']],
+      link: 'https://shopee-thread-generator.vercel.app/', cta: 'Try it ↗', ext: true
+    },
+    leads: {
+      kicker: 'Leads Generator · Built with AI · 2026',
+      story: 'Brand & recruiter research toolkit — find the right people and context before the first message.',
+      nums: [['2', 'Modes'], ['Brand', 'Research'], ['Recruiter', 'Research']],
+      label: 'Use case', bottom: 'mods',
+      mods: [['Brands', 'Prospect research'], ['Recruiters', 'Job hunt research'], ['Context', 'Before outreach']],
+      link: '/leads-generator.html', cta: 'Open tool ↗'
+    },
+    govokasi: {
+      kicker: 'Speaker · GoVokasi × Maxwell Leadership · Sep 2026',
+      story: 'Guest speaker for #LetsGoPRO Community Talks — "Beyond Your Degree: Building a Career Outside Your Background".',
+      nums: [['14', 'Slides'], ['Public', 'Audience'], ['Online', 'Format']],
+      label: 'What I covered', bottom: 'topics',
+      topics: ['Career ≠ a straight line', 'Your degree vs your skills', 'Transferable skills as career currency', 'Proof of work', 'The bridge role strategy'],
+      link: '/projects/speaker-govokasi.html'
+    },
+    constellation: {
+      kicker: 'Skills Constellation · Interactive Viz · 2026',
+      story: 'Not a list. A live map of 14 skills across BD, content, and tech — and how they connect.',
+      nums: [['14', 'Skills'], ['3', 'Clusters'], ['Live', 'Interactive']],
+      label: 'Clusters', bottom: 'mods',
+      mods: [['BD & Growth', 'Strategy, outreach, deals'], ['Automation & AI', 'Tools & workflows'], ['Content & Research', 'Story & insight']],
+      link: '/constellation.html', cta: 'Explore map ↗'
+    }
+  };
+
+  function brandSlider() {
+    const rows = [BRANDS.slice(0, 18), BRANDS.slice(18)];
+    return '<div class="pv-slider">' + rows.map(r =>
+      '<div class="pv-track">' + [...r, ...r].map(b => `<div class="pv-logo"><img src="${b.img}" alt="${b.name}" loading="lazy"></div>`).join('') + '</div>'
+    ).join('') + '</div>';
   }
 
-  function hideAllPanels(immediate) {
-    clearTimeout(hideTimer);
-    const doHide = () => {
-      document.querySelectorAll('.mega-panel.open').forEach(p => {
-        p.classList.remove('visible');
-        setTimeout(() => { p.classList.remove('open'); }, 200);
-      });
-      items.forEach(i => i.classList.remove('active'));
-      activePanel = null;
+  function renderPreview(el, key) {
+    const d = PREVIEW[key];
+    const nums = d.nums.map(([v, l]) => `<div class="pv-num"><b>${v}</b><span>${l}</span></div>`).join('');
+    const bodies = {
+      brands: () => brandSlider(),
+      mods: () => '<div class="pv-mods">' + d.mods.map(([t, s], i) => `<div class="pv-mod"><i>0${i + 1}</i>${t}<small>${s}</small></div>`).join('') + '</div>',
+      media: () => '<div class="pv-media">' + d.media.map(m => `<img src="${m}" alt="" loading="lazy">`).join('') + '</div>',
+      topics: () => '<div class="pv-topics">' + d.topics.map((t, i) => `<div><i>0${i + 1}</i>${t}</div>`).join('') + '</div>'
     };
-    if (immediate) { doHide(); } else { hideTimer = setTimeout(doHide, 120); }
+    const target = d.ext ? ' target="_blank" rel="noopener"' : '';
+    el.innerHTML = `
+      <div class="pv-top pv-anim">
+        <div class="pv-kicker">${d.kicker}</div>
+        <p class="pv-story">${d.story}</p>
+        <div class="pv-nums">${nums}</div>
+      </div>
+      <div class="pv-rule"></div>
+      <div class="pv-bottom pv-anim">
+        <div class="pv-label">${d.label}</div>
+        ${bodies[d.bottom]()}
+        <div class="pv-actions"><a class="pv-link" href="${d.link}"${target}>${d.cta || 'See details ↗'}</a></div>
+      </div>`;
   }
 
-  items.forEach(item => {
-    item.addEventListener('mouseenter', () => showPanel(item.dataset.panel));
+  document.querySelectorAll('.mega-tab-content').forEach(tabEl => {
+    const preview = tabEl.querySelector('.work-preview');
+    if (!preview) return;
+    const tiles = tabEl.querySelectorAll('.work-tile');
+    renderPreview(preview, tabEl.querySelector('.work-tile.active').dataset.key);
+    tiles.forEach(btn => {
+      const select = () => {
+        if (btn.classList.contains('active')) return;
+        tiles.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPreview(preview, btn.dataset.key);
+      };
+      btn.addEventListener('mouseenter', select);
+      btn.addEventListener('click', select);
+    });
   });
 
-  // Keep open when hovering panel itself
-  const panelsWrap = document.getElementById('megaPanels');
-  panelsWrap.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-  panelsWrap.addEventListener('mouseleave', () => hideAllPanels(false));
-  header.addEventListener('mouseleave', () => hideAllPanels(false));
+  function activateTab(tabKey) {
+    document.querySelectorAll('.mega-tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tabKey));
+  }
 
-  // Touch/click fallback
-  items.forEach(item => {
-    item.querySelector('.mega-trigger').addEventListener('click', (e) => {
-      const panelId = item.dataset.panel;
-      if (activePanel && activePanel.id === 'panel-' + panelId) {
-        hideAllPanels(true);
+  // Show / hide the unified panel
+  function openPanel(tabKey) {
+    clearTimeout(hideTimer);
+    activateTab(tabKey);
+    navItems.forEach(i => i.classList.toggle('active', i.dataset.panel === tabKey));
+    if (!isOpen) {
+      panel.classList.add('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('visible')));
+      isOpen = true;
+    }
+  }
+
+  function closePanel(immediate) {
+    clearTimeout(hideTimer);
+    const doClose = () => {
+      panel.classList.remove('visible');
+      setTimeout(() => { panel.classList.remove('open'); }, 200);
+      navItems.forEach(i => i.classList.remove('active'));
+      isOpen = false;
+    };
+    if (immediate) doClose(); else hideTimer = setTimeout(doClose, 120);
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('mouseenter', () => openPanel(item.dataset.panel));
+    item.querySelector('.mega-trigger').addEventListener('click', () => {
+      const activeItem = [...navItems].find(i => i.classList.contains('active'));
+      if (isOpen && activeItem?.dataset.panel === item.dataset.panel) {
+        closePanel(true);
       } else {
-        showPanel(panelId);
+        openPanel(item.dataset.panel);
       }
     });
   });
 
-  // Close on Escape
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') hideAllPanels(true); });
+  const panelsWrap = document.getElementById('megaPanels');
+  panelsWrap.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  panelsWrap.addEventListener('mouseleave', () => closePanel(false));
+  header.addEventListener('mouseleave', () => closePanel(false));
 
-  window.closeMegaMenu = () => hideAllPanels(true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(true); });
+
+  window.closeMegaMenu = () => closePanel(true);
 })();
 
 let scrollEnabled = true;
@@ -2025,7 +2150,6 @@ document.addEventListener('langchange', () => {
   // Rebuild dynamic sections
   document.getElementById('portfolioGrid').innerHTML = '';
   buildPortfolio();
-  document.getElementById('servicesList').innerHTML = '';
   buildServices();
   document.getElementById('statsGrid').innerHTML = '';
   buildStats();
