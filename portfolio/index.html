@@ -17,6 +17,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased}
 body{background:#0b0b10;color:#eceaf5;font-family:'Onest',sans-serif;overflow-x:hidden}
+html{overflow-x:clip}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 ul{list-style:none}
@@ -214,11 +215,6 @@ img{display:block}
 .header__clock-time{min-width:3.5rem;font-variant-numeric:tabular-nums;font-weight:500;color:#eceaf5}
 .header__clock-sep{color:rgba(236,234,245,.3)}
 .header__clock-date{font-weight:500}
-.header__menu-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(236,234,245,.12);background:rgba(236,234,245,.04);backdrop-filter:blur(4px);border-radius:.875rem;padding:.5rem 1rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:#eceaf5;transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
-@media(min-width:1024px){.header__menu-btn{display:none}}
-.header__menu-btn:hover{background:rgba(236,234,245,.1);transform:scale(1.05)}
-.header__menu-label{display:none}
-@media(min-width:640px){.header__menu-label{display:inline}}
 
 /* ── Hero ── */
 .hero{position:relative;isolation:isolate;overflow:hidden;border-radius:0 0 2rem 2rem;background:#0c0c14}
@@ -467,7 +463,7 @@ img{display:block}
 .flow__foot a b{width:1.375rem;height:1.375rem;border-radius:9999px;display:grid;place-items:center;background:rgba(236,234,245,.1);font-weight:400;transition:background .25s,transform .25s}
 .flow__foot a:hover b{background:#c03030;transform:translateX(3px)}
 /* Forte light card (experiment — mirrors the Let's talk card) */
-.forte-card{background:#eceaf5;color:#131320;border-radius:1.25rem;padding:2.5rem 1.5rem}
+.forte-card{background:#eceaf5;color:#131320;border-radius:1.25rem;padding:2.5rem 1.5rem;overflow:hidden}
 @media(min-width:768px){.forte-card{padding:4rem 4.5rem}}
 .forte-card .eyebrow--dark{color:rgba(19,19,32,.6)}
 .forte-card .eyebrow--dark .dot{background:#e8342b}
@@ -544,26 +540,6 @@ img{display:block}
 .footer__watermark{position:absolute;inset-inline:0;bottom:-1.5rem;z-index:0;text-align:center;pointer-events:none;user-select:none;font-weight:700;line-height:1;font-size:13rem;color:rgba(236,234,245,.025)}
 
 /* ── NavMenu ── */
-.nav-menu{position:fixed;inset:0;z-index:115;display:flex;flex-direction:column;background:#060609;color:#eceaf5;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
-.nav-menu.open{opacity:1;pointer-events:auto}
-.nav-menu__top{display:flex;align-items:center;justify-content:space-between;padding:1.25rem}
-@media(min-width:640px){.nav-menu__top{padding:1.5rem 2rem}}
-.nav-menu__brand{display:flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:600}
-.nav-menu__close{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(236,234,245,.12);border-radius:.875rem;padding:.5rem 1rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:rgba(236,234,245,.6);transition:border-color .2s,color .2s}
-.nav-menu__close:hover{border-color:rgba(236,234,245,.35);color:#eceaf5}
-.nav-menu__nav{flex:1;display:flex;flex-direction:column;justify-content:center;padding-inline:1.25rem}
-@media(min-width:640px){.nav-menu__nav{padding-inline:2rem}}
-.nav-menu__list{display:flex;flex-direction:column;gap:.25rem}
-.nav-menu__item{display:flex;gap:1rem;padding-block:.5rem;text-align:left;font-size:2.25rem;font-weight:600;letter-spacing:-.02em;width:100%;transform:translateY(1rem);opacity:0;transition:all .5s ease-out}
-@media(min-width:640px){.nav-menu__item{font-size:3.75rem}}
-.nav-menu.open .nav-menu__item{transform:translateY(0);opacity:1}
-.nav-menu__idx{font-size:1rem;font-weight:400;color:rgba(236,234,245,.25);transition:color .3s}
-.nav-menu__label{color:rgba(236,234,245,.6);transition:color .3s}
-@media(hover:hover){.nav-menu__item:hover .nav-menu__idx{color:#b92b2b}.nav-menu__item:hover .nav-menu__label{color:#eceaf5}}
-.nav-menu__bottom{display:flex;flex-direction:column;gap:.75rem;border-top:1px solid rgba(236,234,245,.08);padding:1.5rem 1.25rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.025em;color:rgba(236,234,245,.4)}
-@media(min-width:640px){.nav-menu__bottom{flex-direction:row;justify-content:space-between;padding-inline:2rem}}
-.nav-menu__project-btn{color:rgba(236,234,245,.6);text-transform:uppercase;letter-spacing:.025em;font-size:.75rem;font-weight:500;transition:color .2s}
-@media(hover:hover){.nav-menu__project-btn:hover{text-decoration:underline;color:#eceaf5}}
 
 /* ── Modal ── */
 .modal-backdrop{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-end;justify-content:center;padding:1rem;background:rgba(6,6,9,.6);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .35s}
@@ -594,41 +570,56 @@ img{display:block}
 
 /* ── Mobile overrides (< 480px) ── */
 @media(max-width:479px){
-  /* Hero */
-  .hero__content{padding-top:5rem;padding-bottom:3rem}
+  .hero__content{padding-top:8rem;padding-bottom:3rem}
   .hero__h1{font-size:1.875rem}
-
-  /* Partners: 2-col grid instead of 4 on narrow screens */
   .hero__partners-grid{grid-template-columns:repeat(2,1fr)}
-
-  /* Services: tighter heading + show desc on mobile via wrap layout */
-  .services__h2{font-size:1.875rem;margin-bottom:2rem}
-  .services__link{flex-wrap:wrap;row-gap:.375rem;padding-block:1.25rem}
-  .services__title{font-size:1.25rem;flex:1}
-  .services__desc{display:block;width:100%;padding-left:calc(1.75rem + 1rem);margin-top:.125rem;font-size:.8125rem}
-
-
-
-  /* Footer */
   .footer__cols{padding-block:2.5rem;gap:2rem}
-
-  /* Nav menu: smaller items so full list fits without scrolling */
-  .nav-menu__item{font-size:1.75rem}
-  .nav-menu__nav{padding-inline:1.25rem}
-
-  /* About */
-  .about__h2{font-size:1.375rem}
-  .about__inner{padding:4rem 1.25rem}
-
-
-  /* Services description (mobile, from the wrap layout above) */
-  .services__desc{max-width:100%}
+  .about__h2{font-size:1.25rem}
+  .about__inner{padding:3.5rem 1.25rem;gap:2rem}
 }
 
 /* ── Small-tablet (480px–639px): services description inline ── */
 @media(min-width:480px) and (max-width:639px){
   .services__title{font-size:1.375rem}
   .services__desc{display:block}
+}
+/* ── Mobile: nav pills under the brand, panels as scrollable sheets ── */
+@media(max-width:1023px){
+  .header__inner{flex-wrap:wrap;row-gap:.75rem;padding:1rem 1rem .75rem}
+  .header__nav{display:flex;order:3;width:100%;justify-content:center;gap:.375rem}
+  .mega-trigger{padding:.45rem .85rem;font-size:.8rem;border-radius:.625rem}
+  .mega-panel{padding:.25rem .75rem 1rem}
+  .mega-panel__inner{padding:1.25rem 1.125rem;border-radius:1.125rem;max-height:calc(100dvh - 7.5rem);overflow-y:auto;overscroll-behavior:contain}
+  .work-grid{grid-template-columns:1fr;gap:1.25rem}
+  .work-line{display:none}
+  .work-right{padding-top:0}
+  .work-title{font-size:.9rem;margin-bottom:1rem;flex-wrap:wrap}
+  .work-cols{gap:.625rem}
+  .work-tile{min-height:3.75rem;padding:.625rem .7rem;margin-bottom:.625rem;gap:.5rem}
+  .wt-ico{width:1.75rem;height:1.75rem}
+  .wt-txt b{font-size:.75rem}
+  .wt-arrow{display:none}
+  .work-preview{min-height:0;padding:1.25rem 1.125rem}
+  .pv-head{flex-wrap:wrap;gap:.625rem}
+  .pv-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+  .pv-num{padding:0;margin:0;border:0}
+  .pv-num b{font-size:1.3rem}
+  .pv-num span{font-size:.55rem;line-height:1.3;display:block;margin-top:.15rem}
+  .pv-mods{grid-template-columns:1fr}
+  .pv-media img{height:7rem}
+  .pv-logo{width:4rem;height:4rem}
+  .cx-h{font-size:1.5rem}
+  .cx-chip{font-size:.75rem;padding:.45rem .8rem}
+  .hero__content{padding-top:8.5rem}
+  .about__globe-block{min-height:11rem}
+  .about__globe-icon{left:0;font-size:7rem}
+  .forte-card{padding:2rem 1.125rem}
+  .flow__grid{grid-template-columns:minmax(0,1fr)}
+  .flow__heads{display:none}
+  .flow-steps,.forte-card .flow-steps{max-width:100%;gap:1.75rem 1rem}
+  .flow-card{min-width:0}
+  .flow-acts li span{min-width:4.5rem}
+  .flow__foot{justify-content:flex-start}
 }
 </style>
 </head>
@@ -682,15 +673,11 @@ img{display:block}
         <span class="header__clock-sep">&bull;</span>
         <span class="header__clock-date" id="clockDate">5 Sep, 2026</span>
       </div>
-      <button class="header__menu-btn" onclick="openNav()" aria-label="Open navigation menu">
-        <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <span class="header__menu-label" data-i18n="header.menu">Menu</span>
-      </button>
     </div>
   </div>
   <!-- Mega-menu: unified tabbed panel -->
   <div class="mega-panels" id="megaPanels">
-    <div class="mega-panel" id="megaPanel">
+    <div class="mega-panel" id="megaPanel" data-lenis-prevent>
       <div class="mega-panel__inner">
 
         <div class="mega-tab-content active" id="tab-work">
@@ -986,29 +973,6 @@ img{display:block}
 </footer>
 
 <!-- Nav Menu -->
-<div class="nav-menu" id="navMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <div class="shell nav-menu__top">
-    <div class="nav-menu__brand">
-      <svg width="1.25rem" height="1.25rem" viewBox="0 0 48 48" fill="#c03030" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-      Marwah K
-    </div>
-    <button class="nav-menu__close" onclick="closeNav()" aria-label="Close navigation menu">
-      <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4 4 20"/></svg>
-      <span data-i18n="navmenu.close">Close</span>
-    </button>
-  </div>
-  <nav class="nav-menu__nav" aria-label="Main navigation">
-    <ul class="nav-menu__list" id="navMenuList"></ul>
-  </nav>
-  <div class="nav-menu__bottom">
-    <span><span data-i18n="navmenu.localTime">Local time —</span> <span id="navMenuTime">9:41am</span></span>
-    <div style="display:flex;gap:.75rem;align-items:center">
-      <a href="/marwah-cv.pdf" download="Marwah K - CV.pdf" class="nav-menu__project-btn" style="text-decoration:none" data-i18n="navmenu.downloadCV">Download CV &darr;</a>
-      <button class="nav-menu__project-btn" onclick="closeNav();setTimeout(openModal,300)" data-i18n="navmenu.getInTouch">Get in touch &rarr;</button>
-    </div>
-  </div>
-</div>
-
 <!-- Request Modal -->
 <div class="modal-backdrop" id="requestModal" role="dialog" aria-modal="true" aria-label="Get in touch">
   <div class="modal-panel" onclick="event.stopPropagation()">
@@ -1247,7 +1211,7 @@ lenis.on('scroll', ({ scroll }) => {
   }
 
   navItems.forEach(item => {
-    item.addEventListener('mouseenter', () => openPanel(item.dataset.panel));
+    item.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') openPanel(item.dataset.panel); });
     item.querySelector('.mega-trigger').addEventListener('click', () => {
       const activeItem = [...navItems].find(i => i.classList.contains('active'));
       if (isOpen && activeItem?.dataset.panel === item.dataset.panel) {
@@ -1258,6 +1222,7 @@ lenis.on('scroll', ({ scroll }) => {
     });
   });
 
+  document.addEventListener('click', e => { if (isOpen && !header.contains(e.target)) closePanel(true); });
   const panelsWrap = document.getElementById('megaPanels');
   panelsWrap.addEventListener('mouseenter', () => clearTimeout(hideTimer));
   panelsWrap.addEventListener('mouseleave', () => closePanel(false));
@@ -1319,8 +1284,6 @@ function updateClock() {
   const dateStr = d.getDate() + ' ' + months[d.getMonth()] + ', ' + d.getFullYear();
   document.getElementById('clockTime').textContent = timeStr;
   document.getElementById('clockDate').textContent = dateStr;
-  const navTime = document.getElementById('navMenuTime');
-  if (navTime) navTime.textContent = timeStr;
 }
 updateClock();
 setInterval(updateClock, 1000);
@@ -1491,47 +1454,6 @@ function setupCreateBand() {
   }, { threshold: 0.2 });
   if (items[0]) observer.observe(items[0]);
 }
-
-// ── Nav Menu ──
-function buildNavMenu() {
-  const navItems = [
-    { label:I18n.t('nav.home'), target:'home' },
-    { label:I18n.t('nav.skills'), target:'services' },
-    { label:I18n.t('nav.about'), target:'about' },
-    { label:I18n.t('nav.contact'), target:'contact' }
-  ];
-  const list = document.getElementById('navMenuList');
-  navItems.forEach((item, i) => {
-    const li = document.createElement('li');
-    const btn = document.createElement('button');
-    btn.className = 'nav-menu__item';
-    btn.style.transitionDelay = (i * 45 + 80) + 'ms';
-    btn.innerHTML = `<span class="nav-menu__idx">0${i+1}</span><span class="nav-menu__label">${item.label}</span>`;
-    btn.addEventListener('click', () => {
-      closeNav();
-      if (item.target === 'contact') {
-        setTimeout(openModal, 300);
-      } else {
-        setTimeout(() => scrollToSection(item.target), 300);
-      }
-    });
-    li.appendChild(btn);
-    list.appendChild(li);
-  });
-}
-buildNavMenu();
-
-window.openNav = function() {
-  document.getElementById('navMenu').classList.add('open');
-  stopScroll();
-  document.addEventListener('keydown', navEscHandler);
-};
-window.closeNav = function() {
-  document.getElementById('navMenu').classList.remove('open');
-  startScroll();
-  document.removeEventListener('keydown', navEscHandler);
-};
-function navEscHandler(e) { if (e.key === 'Escape') closeNav(); }
 
 // ── Request Modal ──
 window.openModal = function() {
@@ -1849,21 +1771,6 @@ setupRevealObserver();
   }, { threshold: .15 }).observe(flow);
 })();
 
-// ── Language toggle ──
-
-// ── Lang change handler ──
-document.addEventListener('langchange', () => {
-  // Rebuild dynamic sections
-  document.getElementById('navMenuList').innerHTML = '';
-  buildNavMenu();
-  // Update clock immediately (month name may change)
-  updateClock();
-  // Rebuild about text
-  document.getElementById('aboutH2').innerHTML = '';
-  buildAboutH2();
-  // Re-render hero card
-  renderCard(0);
-});
 </script>
 </body>
 </html>
