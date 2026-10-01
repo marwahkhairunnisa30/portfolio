@@ -192,7 +192,10 @@ img{display:block}
 .cx-chip{padding:.55rem .95rem;border-radius:9999px;background:#1c1c2a;border:1px solid rgba(236,234,245,.08);font-size:.8rem;color:rgba(236,234,245,.85)}
 .cx-h{font-size:1.875rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin:.375rem 0 1.5rem;color:#fff}
 .cx-h em{font-style:normal;color:#ffb3a4}
-.cx-cta{align-self:flex-start;display:inline-flex;align-items:center;gap:.75rem;padding:.75rem .875rem .75rem 1.25rem;border:0;border-radius:.875rem;background:#eceaf5;color:#131320;font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.cx-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.cx-link{background:none;border:0;padding:0;font:inherit;font-size:.8125rem;color:rgba(236,234,245,.7);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cx-link:hover{color:#fff}
+.cx-cta{align-self:flex-start;display:inline-flex;text-decoration:none;align-items:center;gap:.75rem;padding:.75rem .875rem .75rem 1.25rem;border:0;border-radius:.875rem;background:#eceaf5;color:#131320;font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:transform .25s,box-shadow .25s}
 .cx-cta b{width:1.75rem;height:1.75rem;border-radius:9999px;display:grid;place-items:center;background:linear-gradient(135deg,#e8342b,#b92b2b);color:#fff;font-weight:400;transition:transform .25s}
 .cx-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
 .cx-cta:hover b{transform:translateX(3px)}
@@ -539,11 +542,6 @@ img{display:block}
 .footer__inner{position:relative;z-index:10;padding:3.5rem 1.25rem 2rem}
 @media(min-width:640px){.footer__inner{padding-inline:2rem}}
 @media(min-width:1024px){.footer__inner{padding-top:3.5rem}}
-.footer__cta{display:flex;flex-direction:column;gap:2rem;border-bottom:1px solid rgba(236,234,245,.08);padding-bottom:2rem}
-@media(min-width:1024px){.footer__cta{flex-direction:row;align-items:flex-end;justify-content:space-between}}
-.footer__cta-h2{max-width:16ch;font-size:2.25rem;font-weight:600;letter-spacing:-.02em}
-@media(min-width:640px){.footer__cta-h2{font-size:3rem}}
-@media(min-width:768px){.footer__cta-h2{font-size:3.75rem}}
 .footer__cols{display:grid;grid-template-columns:1fr;gap:3rem;padding-block:4rem}
 @media(min-width:768px){.footer__cols{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.footer__cols{grid-template-columns:repeat(4,1fr)}}
@@ -553,6 +551,21 @@ img{display:block}
 .footer__link{display:block;font-size:.875rem;padding:.25rem 0}
 .footer__link span{display:inline-flex;opacity:.6;transition:opacity .35s cubic-bezier(.2,.8,.2,1),transform .35s cubic-bezier(.2,.8,.2,1)}
 @media(hover:hover){.footer__link:hover span{opacity:1;transform:translateX(4px)}}
+.talk-card{background:#eceaf5;color:#131320;border-radius:1.25rem;padding:3rem 1.75rem;margin-bottom:2rem}
+@media(min-width:768px){.talk-card{padding:5rem 6rem}}
+.talk-card__eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;letter-spacing:.06em;color:rgba(19,19,32,.6);margin-bottom:1.5rem}
+.talk-card__h2{font-size:2.5rem;font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:2.25rem}
+@media(min-width:640px){.talk-card__h2{font-size:4rem}}
+@media(min-width:1024px){.talk-card__h2{font-size:5.25rem}}
+.talk-card__h2 span{color:rgba(19,19,32,.42)}
+.talk-card__h2 i{font-style:normal;color:#e8342b}
+.talk-card__actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem}
+.talk-card__btn{display:inline-flex;align-items:center;gap:.75rem;padding:1rem 1.375rem;border-radius:.625rem;background:linear-gradient(135deg,#e8342b,#b92b2b);color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;font-weight:600;letter-spacing:.04em;text-decoration:none;box-shadow:0 10px 24px rgba(185,43,43,.28);transition:transform .25s,box-shadow .25s}
+.talk-card__btn b{font-weight:400;transition:transform .25s}
+.talk-card__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(185,43,43,.38)}
+.talk-card__btn:hover b{transform:translateX(4px)}
+.talk-card__ghost{background:none;border:0;padding:0;font:inherit;font-size:.875rem;color:rgba(19,19,32,.6);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.talk-card__ghost:hover{color:#b92b2b}
 .footer__legal{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid rgba(236,234,245,.08);padding-top:2rem;font-size:.75rem;color:rgba(236,234,245,.4)}
 @media(min-width:640px){.footer__legal{flex-direction:row}}
 .footer__legal-links{display:flex;gap:1.5rem}
@@ -635,7 +648,6 @@ img{display:block}
   .stats__label{font-size:.8125rem}
 
   /* Footer */
-  .footer__cta-h2{font-size:1.875rem}
   .footer__cols{padding-block:2.5rem;gap:2rem}
 
   /* Nav menu: smaller items so full list fits without scrolling */
@@ -782,7 +794,10 @@ img{display:block}
               <div class="work-preview cx-card">
                 <div class="pv-kicker">Get in touch</div>
                 <h3 class="cx-h">Have a growth challenge?<br><em>Let's talk.</em></h3>
-                <button class="cx-cta" onclick="openModal();closeMegaMenu()">Send a message <b>→</b></button>
+                <div class="cx-actions">
+                  <a class="cx-cta" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book a call <b>→</b></a>
+                  <button class="cx-link" onclick="openModal();closeMegaMenu()">or send a message</button>
+                </div>
                 <div class="pv-rule"></div>
                 <div class="pv-label">Or find me on</div>
                 <div class="cx-icons">
@@ -1037,19 +1052,13 @@ img{display:block}
 <!-- Footer -->
 <footer class="footer">
   <div class="shell footer__inner">
-    <div class="footer__cta">
-      <h2 class="footer__cta-h2" id="footerH2">
-        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="footer.h2.0">Have a growth challenge?</span></span>
-        <span class="line-wrap"><span class="line-inner" data-reveal-line data-i18n="footer.h2.1">Let's talk.</span></span>
-      </h2>
-      <button class="pill pill--light pill--arrow" onclick="openModal()">
-        <span class="pill__inner">
-          <span data-i18n="footer.cta">Get in touch</span>
-          <span class="pill__badge">
-            <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </span>
-      </button>
+    <div class="talk-card" data-reveal>
+      <div class="talk-card__eyebrow">LET'S TALK</div>
+      <h2 class="talk-card__h2"><span>Got a brand to grow?</span><br>Let's map the win<i>.</i></h2>
+      <div class="talk-card__actions">
+        <a class="talk-card__btn" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">BOOK A CALL <b>→</b></a>
+        <button class="talk-card__ghost" onclick="openModal()">or send a message</button>
+      </div>
     </div>
     <div class="footer__legal" style="padding-top:1.5rem;border-top:none">
       <span data-i18n="footer.legal">&copy; 2026 Marwah Khairunnisa. All rights reserved.</span>
