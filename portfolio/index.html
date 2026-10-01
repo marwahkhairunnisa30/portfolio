@@ -112,15 +112,9 @@ img{display:block}
 .mega-skill-dot{width:.375rem;height:.375rem;border-radius:9999px;flex-shrink:0}
 
 /* Contact panel */
-.mega-contact{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start}
-.mega-status-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;border-radius:9999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);font-size:.75rem;font-weight:600;color:rgba(34,197,94,.9);margin-bottom:1.25rem}
+.mega-status-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .95rem;border-radius:9999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.22);font-size:.8rem;font-weight:600;color:rgba(74,222,128,.95);margin-bottom:1rem}
 .mega-status-dot{width:.4375rem;height:.4375rem;border-radius:9999px;background:rgba(34,197,94,.9);animation:pulse-green 2s infinite}
 @keyframes pulse-green{0%,100%{opacity:1}50%{opacity:.4}}
-.mega-contact-links{display:flex;flex-direction:column;gap:.5rem}
-.mega-contact-link{display:flex;align-items:center;gap:.75rem;padding:.625rem .875rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);font-size:.875rem;color:rgba(236,234,245,.75);text-decoration:none;transition:background .2s,color .2s}
-.mega-contact-link:hover{background:rgba(236,234,245,.09);color:#eceaf5}
-.mega-contact-link svg{flex-shrink:0;color:rgba(236,234,245,.4)}
-
 /* Nav pills (wireframe: Work | Project | Forte | Connect) */
 .header__nav{gap:.5rem}
 .mega-trigger{padding:.55rem 1.35rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.12);opacity:.85;transition:background .25s,border-color .25s,box-shadow .25s,opacity .2s}
@@ -192,6 +186,22 @@ img{display:block}
 .pv-link:hover{background:#fff;transform:translateY(-1px)}
 @media (prefers-reduced-motion:reduce){.pv-track,.pv-anim{animation:none}}
 
+/* Connect tab */
+.cx-sub{font-size:.875rem;line-height:1.6;color:rgba(236,234,245,.6);max-width:24rem;margin:-.25rem 0 1.75rem}
+.cx-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.cx-chip{padding:.55rem .95rem;border-radius:9999px;background:#1c1c2a;border:1px solid rgba(236,234,245,.08);font-size:.8rem;color:rgba(236,234,245,.85)}
+.cx-h{font-size:1.875rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin:.375rem 0 1.5rem;color:#fff}
+.cx-h em{font-style:normal;color:#ffb3a4}
+.cx-cta{align-self:flex-start;display:inline-flex;align-items:center;gap:.75rem;padding:.75rem .875rem .75rem 1.25rem;border:0;border-radius:.875rem;background:#eceaf5;color:#131320;font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.cx-cta b{width:1.75rem;height:1.75rem;border-radius:9999px;display:grid;place-items:center;background:linear-gradient(135deg,#e8342b,#b92b2b);color:#fff;font-weight:400;transition:transform .25s}
+.cx-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.cx-cta:hover b{transform:translateX(3px)}
+.cx-card .pv-rule{margin-top:auto}
+.cx-icons{display:flex;gap:.625rem}
+.cx-ico{position:relative;width:3.25rem;height:3.25rem;border-radius:.875rem;display:grid;place-items:center;background:rgba(236,234,245,.08);border:1px solid rgba(236,234,245,.14);color:#eceaf5;transition:background .25s,color .25s,transform .25s}
+.cx-ico:hover{background:#eceaf5;color:#b92b2b;transform:translateY(-3px)}
+.cx-ico::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + .5rem);transform:translate(-50%,4px);padding:.3rem .6rem;border-radius:.4rem;background:#131320;border:1px solid rgba(236,234,245,.12);font-size:.65rem;font-weight:600;white-space:nowrap;color:#eceaf5;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.cx-ico:hover::after{opacity:1;transform:translate(-50%,0)}
 .header__right{display:flex;align-items:center;gap:.75rem}
 .header__clock{display:none;align-items:center;gap:.75rem;border:1px solid rgba(236,234,245,.12);background:rgba(236,234,245,.04);backdrop-filter:blur(4px);border-radius:.875rem;padding:.5rem .75rem;font-size:.75rem;color:rgba(236,234,245,.7)}
 @media(min-width:768px){.header__clock{display:flex}}
@@ -441,6 +451,7 @@ img{display:block}
 @media(min-width:640px){.flow-intro h2{font-size:3rem}}
 .flow-intro h2 em{font-style:normal;color:#c03030}
 .flow-intro p{font-size:.875rem;line-height:1.6;color:rgba(236,234,245,.55);max-width:26rem}
+@media(min-width:1024px){.flow-intro p{justify-self:end;text-align:right}}
 .flow{--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
 .flow__heads{display:grid;grid-template-columns:1fr;gap:.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(236,234,245,.1);margin-bottom:2.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:rgba(236,234,245,.6)}
 .flow__grid{position:relative;display:grid;grid-template-columns:1fr;gap:2rem}
@@ -753,34 +764,38 @@ img{display:block}
 
         <!-- ── Connect tab ── -->
         <div class="mega-tab-content" id="tab-connect">
-          <div class="mega-contact">
-            <div>
-              <div class="mega-col-header">Status</div>
-              <div class="mega-status-chip">
-                <span class="mega-status-dot"></span>
-                Open to remote working
+          <div class="work-grid">
+            <div class="work-left">
+              <div class="work-title"><svg viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>Let's work together<small>Jakarta · GMT+7</small></div>
+              <div class="mega-status-chip"><span class="mega-status-dot"></span>Open to remote working</div>
+              <p class="cx-sub">Based in Jakarta, working with brands and teams anywhere — async-friendly, outcome-first.</p>
+              <div class="work-col-label">Open to</div>
+              <div class="cx-chips">
+                <span class="cx-chip">BD roles</span>
+                <span class="cx-chip">Freelance partnerships</span>
+                <span class="cx-chip">Consulting</span>
+                <span class="cx-chip">Speaker invitations</span>
               </div>
-              <div style="font-size:.8rem;color:rgba(236,234,245,.4);max-width:16rem;line-height:1.6">BD roles, freelance partnerships, consulting, and speaker invitations.</div>
             </div>
-            <div>
-              <div class="mega-col-header">Get in touch</div>
-              <div class="mega-contact-links">
-                <a href="mailto:marwahkhairunnisa30@gmail.com" class="mega-contact-link">
-                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 8.5 6a2 2 0 0 0 3 0L22 7"/></svg>
-                  marwahkhairunnisa30@gmail.com
-                </a>
-                <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="mega-contact-link">
-                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                  linkedin.com/in/marwahkhr30
-                </a>
-                <a href="/marwah-cv.pdf" download class="mega-contact-link">
-                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
-                  Download CV
-                </a>
-                <button class="mega-contact-link" onclick="openModal();closeMegaMenu()" style="cursor:pointer;background:rgba(185,43,43,.12);border-color:rgba(185,43,43,.2);color:rgba(236,234,245,.85)">
-                  <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                  Send a message
-                </button>
+            <div class="work-line"></div>
+            <div class="work-right">
+              <div class="work-preview cx-card">
+                <div class="pv-kicker">Get in touch</div>
+                <h3 class="cx-h">Have a growth challenge?<br><em>Let's talk.</em></h3>
+                <button class="cx-cta" onclick="openModal();closeMegaMenu()">Send a message <b>→</b></button>
+                <div class="pv-rule"></div>
+                <div class="pv-label">Or find me on</div>
+                <div class="cx-icons">
+                  <a class="cx-ico" href="mailto:marwahkhairunnisa30@gmail.com" data-tip="Email" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 8.5 6a2 2 0 0 0 3 0L22 7"/></svg>
+                  </a>
+                  <a class="cx-ico" href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" data-tip="LinkedIn" aria-label="LinkedIn">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                  </a>
+                  <a class="cx-ico" href="/marwah-cv.pdf" download="Marwah K - CV.pdf" data-tip="Download CV" aria-label="Download CV">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1265,8 +1280,8 @@ lenis.on('scroll', ({ scroll }) => {
 
   document.querySelectorAll('.mega-tab-content').forEach(tabEl => {
     const preview = tabEl.querySelector('.work-preview');
-    if (!preview) return;
     const tiles = tabEl.querySelectorAll('.work-tile');
+    if (!preview || !tiles.length) return;
     renderPreview(preview, tabEl.querySelector('.work-tile.active').dataset.key);
     tiles.forEach(btn => {
       const select = () => {
