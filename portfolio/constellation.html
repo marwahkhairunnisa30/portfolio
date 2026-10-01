@@ -193,6 +193,14 @@
     color: var(--muted2); display: flex; align-items: center; gap: 8px;
   }
   .side-divider::before, .side-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .signal-item, .result-item { position: relative; cursor: pointer; transition: background .25s, border-color .25s, color .25s, opacity .25s; }
+  .side-panel.is-tracing .signal-item:not(.is-on), .side-panel.is-tracing .result-item:not(.is-on) { opacity: .35; }
+  .signal-item.is-on { background: rgba(232,52,43,.14); border-color: rgba(232,52,43,.55); color: #eceaf5; }
+  .signal-item.is-on .signal-item__dot { background: #ff6b5a; box-shadow: 0 0 8px #e8342b; }
+  .signal-item.is-on::after { content: ''; position: absolute; left: 100%; top: 50%; width: 17px; height: 1.5px; background: linear-gradient(90deg, #e8342b, #ff6b5a); }
+  .result-item.is-on { background: rgba(232,52,43,.2); border-color: rgba(255,107,90,.7); color: #fff; box-shadow: 0 0 18px rgba(232,52,43,.25); }
+  .result-item.is-on .result-item__check { color: #ff6b5a; }
+  .result-item.is-on::before { content: ''; position: absolute; right: 100%; top: 50%; width: 17px; height: 1.5px; background: linear-gradient(90deg, #ff6b5a, #e8342b); }
   @media (max-width: 768px) {
     .stage { grid-template-columns: 1fr; }
     .side-panel { display: none; }
@@ -217,14 +225,14 @@
   <!-- Signals In (left panel) -->
   <div class="side-panel side-panel--left">
     <div class="side-label">Signals In</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Incoming lead / cold prospect</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Partner or brand inquiry</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Market gap identified</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Campaign brief received</div>
+    <div class="signal-item" data-sig="0"><span class="signal-item__dot"></span>Incoming lead / cold prospect</div>
+    <div class="signal-item" data-sig="1"><span class="signal-item__dot"></span>Partner or brand inquiry</div>
+    <div class="signal-item" data-sig="2"><span class="signal-item__dot"></span>Market gap identified</div>
+    <div class="signal-item" data-sig="3"><span class="signal-item__dot"></span>Campaign brief received</div>
     <div class="side-divider">Process</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Research &amp; qualification</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Outreach &amp; pitch crafted</div>
-    <div class="signal-item"><span class="signal-item__dot"></span>Negotiation &amp; closing</div>
+    <div class="signal-item" data-sig="4"><span class="signal-item__dot"></span>Research &amp; qualification</div>
+    <div class="signal-item" data-sig="5"><span class="signal-item__dot"></span>Outreach &amp; pitch crafted</div>
+    <div class="signal-item" data-sig="6"><span class="signal-item__dot"></span>Negotiation &amp; closing</div>
   </div>
 
   <!-- Canvas (center) -->
@@ -250,14 +258,14 @@
   <!-- Results (right panel) -->
   <div class="side-panel side-panel--right">
     <div class="side-label side-label--right">Results</div>
-    <div class="result-item"><span class="result-item__check">✓</span>Pipeline built, deals closed</div>
-    <div class="result-item"><span class="result-item__check">✓</span>Partnership signed</div>
-    <div class="result-item"><span class="result-item__check">✓</span>Automation deployed</div>
-    <div class="result-item"><span class="result-item__check">✓</span>Campaign delivered</div>
+    <div class="result-item" data-res="0"><span class="result-item__check">✓</span>Pipeline built, deals closed</div>
+    <div class="result-item" data-res="1"><span class="result-item__check">✓</span>Partnership signed</div>
+    <div class="result-item" data-res="2"><span class="result-item__check">✓</span>Automation deployed</div>
+    <div class="result-item" data-res="3"><span class="result-item__check">✓</span>Campaign delivered</div>
     <div class="side-divider">Impact</div>
-    <div class="result-item"><span class="result-item__check">✓</span>55+ leads closed</div>
-    <div class="result-item"><span class="result-item__check">✓</span>56% conversion lift</div>
-    <div class="result-item"><span class="result-item__check">✓</span>30% pipeline growth</div>
+    <div class="result-item" data-res="4"><span class="result-item__check">✓</span>55+ leads closed</div>
+    <div class="result-item" data-res="5"><span class="result-item__check">✓</span>56% conversion lift</div>
+    <div class="result-item" data-res="6"><span class="result-item__check">✓</span>30% pipeline growth</div>
   </div>
 
 </div>
@@ -299,6 +307,17 @@ const EDGES = [
   ['analytics','campaigns'], ['storytelling','research'],
 ];
 
+// Signal (left) → skills (stars) → results (right)
+const TRACES = [
+  { skills: ['research', 'outreach', 'bd', 'automation'], results: [0, 2, 4] },   // Incoming lead / cold prospect
+  { skills: ['partnerships', 'negotiation', 'bd'],        results: [1, 4] },      // Partner or brand inquiry
+  { skills: ['research', 'analytics', 'strategy'],        results: [0, 6] },      // Market gap identified
+  { skills: ['campaigns', 'storytelling', 'copy', 'hooks'], results: [3] },       // Campaign brief received
+  { skills: ['research', 'analytics', 'ai'],              results: [0, 6] },      // Research & qualification
+  { skills: ['outreach', 'copy', 'hooks', 'ai'],          results: [5] },         // Outreach & pitch crafted
+  { skills: ['negotiation', 'bd', 'partnerships'],        results: [1, 4] },      // Negotiation & closing
+];
+
 // ─── Canvas setup ─────────────────────────────────────────────────────────────
 const canvas = document.getElementById('c');
 const ctx    = canvas.getContext('2d');
@@ -323,6 +342,7 @@ let dragNode = null, dragOffX = 0, dragOffY = 0;
 let dragDist = 0, dragStart = null;
 let lastPulseSpawn = 0;
 let t = 0;
+let trace = null; // { sigs:[idx], skills:Set, results:[idx] }
 
 function initNodes() {
   nodes = NODES.map(n => ({
@@ -582,6 +602,67 @@ function drawEdge(ax, ay, bx, by, alpha) {
   ctx.stroke();
 }
 
+// ─── Signal → star → result tracing ───────────────────────────────────────────
+const sigEls = [...document.querySelectorAll('[data-sig]')];
+const resEls = [...document.querySelectorAll('[data-res]')];
+const panels = document.querySelectorAll('.side-panel');
+
+function setTrace(next) {
+  trace = next;
+  sigEls.forEach((el, i) => el.classList.toggle('is-on', !!trace && trace.sigs.includes(i)));
+  resEls.forEach((el, i) => el.classList.toggle('is-on', !!trace && trace.results.includes(i)));
+  panels.forEach(p => p.classList.toggle('is-tracing', !!trace));
+  if (trace) { hideTip(); focusedNode = null; }
+}
+sigEls.forEach((el, i) => {
+  el.addEventListener('mouseenter', () => setTrace({ sigs: [i], skills: new Set(TRACES[i].skills), results: TRACES[i].results }));
+  el.addEventListener('mouseleave', () => setTrace(null));
+});
+resEls.forEach((el, r) => {
+  el.addEventListener('mouseenter', () => {
+    const sigs = TRACES.map((tr, i) => tr.results.includes(r) ? i : -1).filter(i => i >= 0);
+    setTrace({ sigs, skills: new Set(sigs.flatMap(i => TRACES[i].skills)), results: [r] });
+  });
+  el.addEventListener('mouseleave', () => setTrace(null));
+});
+
+function elY(el) {
+  const a = el.getBoundingClientRect(), c = canvas.getBoundingClientRect();
+  return a.top + a.height / 2 - c.top;
+}
+function bez(x0, y0, x1, y1, k) {
+  const mx = (x0 + x1) / 2, u = 1 - k;
+  return [u*u*u*x0 + 3*u*u*k*mx + 3*u*k*k*mx + k*k*k*x1, u*u*u*y0 + 3*u*u*k*y0 + 3*u*k*k*y1 + k*k*k*y1];
+}
+function traceWire(x0, y0, x1, y1, seed) {
+  const mx = (x0 + x1) / 2;
+  const g = ctx.createLinearGradient(x0, 0, x1, 0);
+  g.addColorStop(0, 'rgba(232,52,43,.85)'); g.addColorStop(1, 'rgba(255,107,90,.85)');
+  ctx.save();
+  ctx.beginPath(); ctx.moveTo(x0, y0); ctx.bezierCurveTo(mx, y0, mx, y1, x1, y1);
+  ctx.strokeStyle = 'rgba(232,52,43,.18)'; ctx.lineWidth = 6; ctx.stroke();   // glow
+  ctx.strokeStyle = g; ctx.lineWidth = 1.4;
+  ctx.setLineDash([2, 6]); ctx.lineDashOffset = -(t * 0.05); ctx.stroke();
+  ctx.restore();
+  // travelling pulse
+  const k = ((t * 0.0006) + seed) % 1;
+  const [px, py] = bez(x0, y0, x1, y1, k);
+  const pg = ctx.createRadialGradient(px, py, 0, px, py, 10);
+  pg.addColorStop(0, 'rgba(255,179,164,.95)'); pg.addColorStop(1, 'rgba(232,52,43,0)');
+  ctx.beginPath(); ctx.arc(px, py, 10, 0, Math.PI * 2); ctx.fillStyle = pg; ctx.fill();
+}
+function drawTrace(nodeMap) {
+  const stars = [...trace.skills].map(id => nodeMap[id]).filter(Boolean);
+  trace.sigs.forEach((si, a) => {
+    const y0 = elY(sigEls[si]);
+    stars.forEach((n, b) => traceWire(0, y0, n.x - n.size - 2, n.y, (a * 0.37 + b * 0.21) % 1));
+  });
+  trace.results.forEach((ri, a) => {
+    const y1 = elY(resEls[ri]);
+    stars.forEach((n, b) => traceWire(n.x + n.size + 2, n.y, W, y1, (a * 0.29 + b * 0.17 + .5) % 1));
+  });
+}
+
 // ─── Main loop ────────────────────────────────────────────────────────────────
 function frame() {
   requestAnimationFrame(frame);
@@ -626,9 +707,11 @@ function frame() {
   });
 
   // hover
-  hoveredNode = dragNode ? null : findNearest(mouse.x, mouse.y);
+  hoveredNode = (dragNode || trace) ? null : findNearest(mouse.x, mouse.y);
 
-  if (hoveredNode) {
+  if (trace) {
+    hideTip();
+  } else if (hoveredNode) {
     canvas.style.cursor = 'grab';
     showTip(hoveredNode);
     trySpawnEdgePulses(hoveredNode);
@@ -665,7 +748,8 @@ function frame() {
     const a = nodeMap[aId], b = nodeMap[bId];
     if (!a || !b) return;
     const hl    = hlEdges.has(`${aId}-${bId}`);
-    const alpha = focusedNode ? (hl ? 0.5 : 0.02) : (hl ? 0.38 : 0.07);
+    const inTrace = trace && trace.skills.has(aId) && trace.skills.has(bId);
+    const alpha = trace ? (inTrace ? 0.45 : 0.03) : focusedNode ? (hl ? 0.5 : 0.02) : (hl ? 0.38 : 0.07);
     drawEdge(a.x, a.y, b.x, b.y, alpha);
   });
 
@@ -691,8 +775,11 @@ function frame() {
     ctx.fillStyle = `rgba(${rgb},${pa})`; ctx.fill();
   }
 
+  if (trace) drawTrace(nodeMap);
+
   // nodes
   nodes.forEach(n => {
+    if (trace) { drawNode(n, trace.skills.has(n.id), trace.skills.has(n.id) ? 1 : 0.15); return; }
     const isHL = hlSource && (
       hlSource.id === n.id ||
       EDGES.some(([a, b]) => (a === hlSource.id || b === hlSource.id) && (a === n.id || b === n.id))
