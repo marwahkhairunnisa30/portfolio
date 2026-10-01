@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="/i18n.js"></script>
+<script src="/i18n.js?v=20261002"></script>
 <style>
   :root {
     --bg: #0b0b10;
@@ -259,7 +259,6 @@
   </a>
   <span class="nav__sep">/</span>
   <span class="nav__cur" data-i18n="fi.cur">FI Calculator</span>
-  <div id="langToggle" style="margin-left:auto"></div>
 </nav>
 
 <div class="wrap">
@@ -539,7 +538,6 @@
 
   calculate();
 
-  document.getElementById('langToggle').appendChild(I18n.createToggle());
   document.addEventListener('langchange', () => { I18n.applyI18n(); calculate(); });
 </script>
 </body>

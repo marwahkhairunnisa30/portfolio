@@ -39,9 +39,9 @@
 
       /* ── About ── */
       'about.eyebrow': 'About Me',
-      'about.distributed': 'Based in Jakarta, building partnerships across markets.',
-      'about.main': 'Operations-oriented BD Lead combining pipeline management, CRM optimization, and workflow automation ',
-      'about.muted': 'to boost conversion efficiency — with experience in team leadership, KPI design, and bridging sales strategy with execution.',
+      'about.distributed': 'Jakarta, Indonesia · remote-ready.',
+      'about.main': 'Commercial strategy, engineered with precision. ',
+      'about.muted': '55+ brand partnerships, an eight-person team built and led, and AI systems that turn effort into leverage.',
       'about.findOnline': 'Find me online',
       'about.getInTouch': 'Get in touch',
 
@@ -826,7 +826,7 @@
 
   /* ── Core ── */
   let _lang = 'en';
-  try { _lang = localStorage.getItem('portfolio_lang') || 'en'; } catch (e) {}
+  try { localStorage.removeItem('portfolio_lang'); } catch (e) {}
 
   function t(key, params) {
     const dict = T[_lang] || T.en;
@@ -853,40 +853,9 @@
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       var v = t(el.dataset.i18nAria); if (v) el.setAttribute('aria-label', v);
     });
-    /* sync toggle buttons */
-    document.querySelectorAll('.i18n-btn').forEach(function (btn) {
-      btn.classList.toggle('i18n-btn--active', btn.dataset.lang === _lang);
-    });
   }
 
-  function setLang(lang) {
-    if (!T[lang]) return;
-    _lang = lang;
-    try { localStorage.setItem('portfolio_lang', lang); } catch (e) {}
-    applyI18n();
-    document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
-  }
-
-  function createToggle() {
-    var wrap = document.createElement('div');
-    wrap.className = 'i18n-toggle';
-    wrap.innerHTML =
-      '<button class="i18n-btn' + (_lang === 'en' ? ' i18n-btn--active' : '') + '" data-lang="en" onclick="I18n.setLang(\'en\')">&#127468;&#127463; EN</button>' +
-      '<button class="i18n-btn' + (_lang === 'id' ? ' i18n-btn--active' : '') + '" data-lang="id" onclick="I18n.setLang(\'id\')">&#127470;&#127465; ID</button>';
-    return wrap;
-  }
-
-  window.I18n = { t: t, getLang: function () { return _lang; }, setLang: setLang, applyI18n: applyI18n, createToggle: createToggle };
-
-  /* ── Inject CSS ── */
-  var css = document.createElement('style');
-  css.textContent = [
-    '.i18n-toggle{display:inline-flex;align-items:center;gap:.125rem;border:1px solid rgba(236,234,245,.12);background:rgba(236,234,245,.04);backdrop-filter:blur(4px);border-radius:.875rem;padding:.25rem .375rem;}',
-    '.i18n-btn{padding:.2rem .5rem;border-radius:.625rem;color:rgba(236,234,245,.4);cursor:pointer;border:none;background:none;font:inherit;font-size:.6875rem;font-weight:600;letter-spacing:.03em;transition:background .2s,color .2s;line-height:1.4;white-space:nowrap;}',
-    '.i18n-btn--active{background:rgba(236,234,245,.12);color:#eceaf5;}',
-    '.i18n-btn:hover:not(.i18n-btn--active){color:rgba(236,234,245,.65);}'
-  ].join('');
-  document.head.appendChild(css);
+  window.I18n = { t: t, getLang: function () { return _lang; }, applyI18n: applyI18n };
 
   /* ── Apply on ready ── */
   if (document.readyState === 'loading') {
