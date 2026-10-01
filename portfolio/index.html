@@ -556,7 +556,7 @@ img{display:block}
 .talk-card__eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;letter-spacing:.06em;color:rgba(19,19,32,.6);margin-bottom:1.5rem}
 .talk-card__h2{font-size:2.5rem;font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:2.25rem}
 @media(min-width:640px){.talk-card__h2{font-size:4rem}}
-@media(min-width:1024px){.talk-card__h2{font-size:5.25rem}}
+@media(min-width:1024px){.talk-card__h2{font-size:clamp(2.75rem,calc((100vw - 16rem) / 16.5),4.5rem)}}
 .talk-card__h2 span{color:rgba(19,19,32,.42)}
 .talk-card__h2 i{font-style:normal;color:#e8342b}
 .talk-card__actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem}
@@ -793,7 +793,7 @@ img{display:block}
             <div class="work-right">
               <div class="work-preview cx-card">
                 <div class="pv-kicker">Get in touch</div>
-                <h3 class="cx-h">Have a growth challenge?<br><em>Let's talk.</em></h3>
+                <h3 class="cx-h">Hiring, building, or brainstorming?<br><em>Let's talk.</em></h3>
                 <div class="cx-actions">
                   <a class="cx-cta" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book a call <b>→</b></a>
                   <button class="cx-link" onclick="openModal();closeMegaMenu()">or send a message</button>
@@ -1054,7 +1054,7 @@ img{display:block}
   <div class="shell footer__inner">
     <div class="talk-card" data-reveal>
       <div class="talk-card__eyebrow">LET'S TALK</div>
-      <h2 class="talk-card__h2"><span>Got a brand to grow?</span><br>Let's map the win<i>.</i></h2>
+      <h2 class="talk-card__h2"><span>Hiring, building, or brainstorming?</span><br>Let's talk it through<i>.</i></h2>
       <div class="talk-card__actions">
         <a class="talk-card__btn" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">BOOK A CALL <b>→</b></a>
         <button class="talk-card__ghost" onclick="openModal()">or send a message</button>
