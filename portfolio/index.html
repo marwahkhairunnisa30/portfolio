@@ -53,17 +53,73 @@ img{display:block}
 .loader__counter{color:rgba(236,234,245,.8);font-variant-numeric:tabular-nums}
 
 /* ── Header ── */
-.header{position:absolute;inset-inline:0;top:0;z-index:50;opacity:0;transform:translateY(-14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.header{position:fixed;inset-inline:0;top:0;z-index:50;opacity:0;transform:translateY(-14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),background .3s,border-color .3s,backdrop-filter .3s}
 .header.revealed{opacity:1;transform:translateY(0)}
+.header.scrolled{background:rgba(6,6,9,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(236,234,245,.07)}
 .header__inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.25rem}
 @media(min-width:640px){.header__inner{padding:2rem}}
 .header__brand{display:flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:600;letter-spacing:-.01em;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .header__brand:hover{transform:scale(1.04)}
-.header__nav{display:none;gap:2rem;font-size:.875rem;font-weight:500}
+.header__nav{display:none;gap:0;font-size:.875rem;font-weight:500;align-items:center}
 @media(min-width:1024px){.header__nav{display:flex}}
 .header__nav button{opacity:.75;color:#eceaf5;transition:opacity .35s cubic-bezier(.2,.8,.2,1),transform .35s cubic-bezier(.2,.8,.2,1)}
 .header__nav button:hover{opacity:1;transform:translateY(-2px)}
 .header__nav button .caret{font-size:.75rem;opacity:.6;margin-left:.25rem}
+
+/* ── Mega Menu ── */
+.mega-item{position:relative}
+.mega-trigger{display:flex;align-items:center;gap:.3rem;padding:.5rem .875rem;border-radius:.5rem;font-size:.875rem;font-weight:500;color:#eceaf5;opacity:.75;background:none;border:none;cursor:pointer;font-family:inherit;transition:opacity .2s,background .2s;white-space:nowrap}
+.mega-trigger:hover,.mega-item.active .mega-trigger{opacity:1;background:rgba(236,234,245,.08)}
+.mega-caret{font-size:.65rem;opacity:.55;transition:transform .2s}
+.mega-item.active .mega-caret{transform:rotate(180deg)}
+.mega-panels{position:absolute;left:0;right:0;top:100%;pointer-events:none;z-index:40}
+.mega-panel{display:none;opacity:0;transform:translateY(-6px);transition:opacity .18s ease-out,transform .18s ease-out;background:rgba(8,8,14,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(236,234,245,.08);box-shadow:0 24px 48px rgba(0,0,0,.55);padding:2rem 2rem 2.25rem;pointer-events:auto}
+.mega-panel.open{display:block}
+.mega-panel.visible{opacity:1;transform:translateY(0)}
+.mega-panel__inner{max-width:88rem;margin-inline:auto;padding-inline:0}
+.mega-col-header{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.35);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.mega-col-header::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.08)}
+
+/* Work panel */
+.mega-work{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.mega-role-name{font-size:1.25rem;font-weight:600;color:#eceaf5;margin-bottom:.25rem}
+.mega-role-at{font-size:.8125rem;color:rgba(236,234,245,.5);margin-bottom:1.25rem}
+.mega-metrics{display:flex;gap:1.5rem;flex-wrap:wrap}
+.mega-metric{display:flex;flex-direction:column;gap:.125rem}
+.mega-metric__val{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:#eceaf5}
+.mega-metric__lbl{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:rgba(236,234,245,.4)}
+.mega-timeline{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.25rem}
+.mega-tl-item{display:flex;align-items:baseline;gap:.875rem;font-size:.8125rem}
+.mega-tl-year{font-size:.7rem;font-weight:600;letter-spacing:.04em;color:rgba(236,234,245,.35);min-width:5.5rem;flex-shrink:0}
+.mega-tl-role{color:rgba(236,234,245,.75)}
+.mega-link{background:none;border:none;cursor:pointer;font:inherit;font-size:.8125rem;color:rgba(236,234,245,.45);padding:0;display:inline-flex;align-items:center;gap:.35rem;transition:color .2s}
+.mega-link:hover{color:#eceaf5}
+
+/* Projects panel */
+.mega-projects-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+.mega-proj-card{display:flex;flex-direction:column;gap:.375rem;padding:.875rem;border-radius:.875rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);cursor:pointer;transition:background .2s,border-color .2s;text-decoration:none;color:inherit}
+.mega-proj-card:hover{background:rgba(236,234,245,.08);border-color:rgba(236,234,245,.14)}
+.mega-proj-tag{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#b92b2b}
+.mega-proj-name{font-size:.875rem;font-weight:500;color:#eceaf5;line-height:1.3}
+.mega-proj-arrow{margin-top:auto;font-size:.75rem;color:rgba(236,234,245,.3);align-self:flex-end;transition:color .2s,transform .2s}
+.mega-proj-card:hover .mega-proj-arrow{color:rgba(236,234,245,.7);transform:translate(2px,-2px)}
+
+/* Skills panel */
+.mega-skills{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.mega-skill-list{display:flex;flex-direction:column;gap:.5rem}
+.mega-skill-pill{display:flex;align-items:center;gap:.625rem;padding:.5rem .75rem;border-radius:.625rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.06);font-size:.8125rem;color:rgba(236,234,245,.75);transition:background .2s,color .2s}
+.mega-skill-pill:hover{background:rgba(236,234,245,.08);color:#eceaf5}
+.mega-skill-dot{width:.375rem;height:.375rem;border-radius:9999px;flex-shrink:0}
+
+/* Contact panel */
+.mega-contact{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start}
+.mega-status-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;border-radius:9999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);font-size:.75rem;font-weight:600;color:rgba(34,197,94,.9);margin-bottom:1.25rem}
+.mega-status-dot{width:.4375rem;height:.4375rem;border-radius:9999px;background:rgba(34,197,94,.9);animation:pulse-green 2s infinite}
+@keyframes pulse-green{0%,100%{opacity:1}50%{opacity:.4}}
+.mega-contact-links{display:flex;flex-direction:column;gap:.5rem}
+.mega-contact-link{display:flex;align-items:center;gap:.75rem;padding:.625rem .875rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);font-size:.875rem;color:rgba(236,234,245,.75);text-decoration:none;transition:background .2s,color .2s}
+.mega-contact-link:hover{background:rgba(236,234,245,.09);color:#eceaf5}
+.mega-contact-link svg{flex-shrink:0;color:rgba(236,234,245,.4)}
 .header__right{display:flex;align-items:center;gap:.75rem}
 .header__clock{display:none;align-items:center;gap:.75rem;border:1px solid rgba(236,234,245,.12);background:rgba(236,234,245,.04);backdrop-filter:blur(4px);border-radius:.875rem;padding:.5rem .75rem;font-size:.75rem;color:rgba(236,234,245,.7)}
 @media(min-width:768px){.header__clock{display:flex}}
@@ -306,6 +362,38 @@ img{display:block}
 @media(min-width:640px){.services__arrow{width:3rem;height:3rem}}
 @media(hover:hover){.services__link:hover .services__arrow{transform:translateX(5px)}}
 
+/* ── Skills Cards ── */
+.skills-cats{display:flex;flex-direction:column;gap:2.5rem;margin-top:2rem}
+.skills-cat__header{display:flex;align-items:center;gap:.875rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.35);margin-bottom:1.25rem}
+.skills-cat__header-icon{width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:.5rem;background:rgba(236,234,245,.06);border:1px solid rgba(236,234,245,.08);flex-shrink:0}
+.skills-cat__header::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.07)}
+.skills-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem}
+@media(min-width:768px){.skills-cards{grid-template-columns:repeat(4,1fr)}}
+.skill-card{padding:1.125rem;border-radius:1rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);display:flex;flex-direction:column;gap:.625rem;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}
+.skill-card.revealed{opacity:1;transform:translateY(0)}
+@media(hover:hover){.skill-card:hover{background:rgba(236,234,245,.07);border-color:rgba(236,234,245,.12)}}
+.skill-card__icon{font-size:1.25rem;line-height:1}
+.skill-card__name{font-size:.9375rem;font-weight:500;color:#eceaf5}
+.skill-card__desc{font-size:.75rem;color:rgba(236,234,245,.45);line-height:1.55}
+
+/* ── Connecting All ── */
+.connecting-all{margin-top:3.5rem;padding:2rem;border-radius:1.5rem;background:rgba(236,234,245,.02);border:1px solid rgba(236,234,245,.07)}
+.connecting-all__header{display:flex;align-items:center;justify-content:center;gap:.875rem;margin-bottom:2rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(236,234,245,.3)}
+.connecting-all__header::before,.connecting-all__header::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.07)}
+.connecting-all__grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start}
+@media(max-width:767px){.connecting-all__grid{grid-template-columns:1fr;gap:1rem}}
+.connecting-all__col-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.3);margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem}
+.connecting-all__col-label::after{content:'';flex:1;height:1px;background:rgba(236,234,245,.06)}
+.signal-card{display:flex;align-items:center;gap:.625rem;padding:.625rem .75rem;border-radius:.75rem;background:rgba(236,234,245,.04);border:1px solid rgba(236,234,245,.07);font-size:.8rem;color:rgba(236,234,245,.65);margin-bottom:.5rem}
+.signal-card__dot{width:.375rem;height:.375rem;border-radius:9999px;background:rgba(236,234,245,.3);flex-shrink:0}
+.result-card{display:flex;align-items:center;justify-content:flex-end;gap:.625rem;padding:.625rem .75rem;border-radius:.75rem;background:rgba(185,43,43,.08);border:1px solid rgba(185,43,43,.15);font-size:.8rem;color:rgba(236,234,245,.7);margin-bottom:.5rem}
+.result-card__check{color:#b92b2b;font-size:.8125rem;flex-shrink:0}
+.connecting-all__center{display:flex;flex-direction:column;align-items:center;gap:.875rem;padding:1rem;min-width:10rem}
+.connecting-all__engine{width:3.5rem;height:3.5rem;border-radius:50%;background:linear-gradient(135deg,#b92b2b,#7a1710);display:grid;place-items:center;box-shadow:0 0 32px rgba(185,43,43,.3)}
+.connecting-all__label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(236,234,245,.4);text-align:center}
+.connecting-all__explore{font-size:.75rem;color:rgba(236,234,245,.45);text-decoration:none;border:1px solid rgba(236,234,245,.1);border-radius:9999px;padding:.375rem .875rem;transition:color .2s,border-color .2s}
+.connecting-all__explore:hover{color:#eceaf5;border-color:rgba(236,234,245,.3)}
+
 /* ── Stats ── */
 .stats-section{background:#0b0b10}
 .stats-section__inner{padding:0 1.25rem 2.5rem}
@@ -482,11 +570,18 @@ img{display:block}
       Marwah K
     </button>
     <nav class="header__nav" aria-label="Primary navigation">
-      <button onclick="scrollToSection('home')" aria-current="page" data-i18n="nav.home">Home</button>
-      <button onclick="scrollToSection('works')" data-i18n="nav.work">Work</button>
-      <button onclick="scrollToSection('services')"><span data-i18n="nav.skills">Skills</span><span class="caret">&#9662;</span></button>
-      <button onclick="scrollToSection('about')" data-i18n="nav.about">About</button>
-      <button onclick="openModal()" data-i18n="nav.contact">Contact</button>
+      <div class="mega-item" data-panel="work">
+        <button class="mega-trigger">Work <span class="mega-caret">▾</span></button>
+      </div>
+      <div class="mega-item" data-panel="projects">
+        <button class="mega-trigger">Projects <span class="mega-caret">▾</span></button>
+      </div>
+      <div class="mega-item" data-panel="skills">
+        <button class="mega-trigger">Skills <span class="mega-caret">▾</span></button>
+      </div>
+      <div class="mega-item" data-panel="contact">
+        <button class="mega-trigger">Contact <span class="mega-caret">▾</span></button>
+      </div>
     </nav>
     <div class="header__right">
       <div class="header__clock">
@@ -501,6 +596,164 @@ img{display:block}
         <span class="header__menu-label" data-i18n="header.menu">Menu</span>
       </button>
     </div>
+  </div>
+  <!-- Mega-menu panels -->
+  <div class="mega-panels" id="megaPanels">
+
+    <!-- Work -->
+    <div class="mega-panel" id="panel-work">
+      <div class="mega-panel__inner">
+        <div class="mega-work">
+          <div>
+            <div class="mega-col-header">Current Role</div>
+            <div class="mega-role-name">BD Lead</div>
+            <div class="mega-role-at">AHA Commerce &nbsp;·&nbsp; 2023 – Present</div>
+            <div class="mega-metrics">
+              <div class="mega-metric"><span class="mega-metric__val">55+</span><span class="mega-metric__lbl">Leads closed</span></div>
+              <div class="mega-metric"><span class="mega-metric__val">56%</span><span class="mega-metric__lbl">Conversion lift</span></div>
+              <div class="mega-metric"><span class="mega-metric__val">30%</span><span class="mega-metric__lbl">Pipeline growth</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="mega-col-header">Experience</div>
+            <div class="mega-timeline">
+              <div class="mega-tl-item"><span class="mega-tl-year">2023 – Now</span><span class="mega-tl-role">BD Lead · AHA Commerce</span></div>
+              <div class="mega-tl-item"><span class="mega-tl-year">2022 – 2023</span><span class="mega-tl-role">BD & Marketing · early-stage startups</span></div>
+              <div class="mega-tl-item"><span class="mega-tl-year">2021 – 2022</span><span class="mega-tl-role">Freelance partnerships & content</span></div>
+            </div>
+            <button class="mega-link" onclick="scrollToSection('about');closeMegaMenu()">Full background →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="mega-panel" id="panel-projects">
+      <div class="mega-panel__inner">
+        <div class="mega-col-header">Selected Projects</div>
+        <div class="mega-projects-grid">
+          <a href="/projects/bd-funnel-overhaul.html" class="mega-proj-card">
+            <span class="mega-proj-tag">BD Strategy</span>
+            <span class="mega-proj-name">BD Funnel Overhaul</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/personal-brand-acquisitions.html" class="mega-proj-card">
+            <span class="mega-proj-tag">Lead Gen</span>
+            <span class="mega-proj-name">Personal Brand Acquisitions</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/shopee-super-summit.html" class="mega-proj-card">
+            <span class="mega-proj-tag">Event</span>
+            <span class="mega-proj-name">Shopee Super Summit</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/speaker-govokasi.html" class="mega-proj-card">
+            <span class="mega-proj-tag">Speaking</span>
+            <span class="mega-proj-name">Speaker — GoVokasi</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/playbook-maker.html" class="mega-proj-card">
+            <span class="mega-proj-tag">Automation</span>
+            <span class="mega-proj-name">Playbook Maker</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/aha-birthday.html" class="mega-proj-card">
+            <span class="mega-proj-tag">Event</span>
+            <span class="mega-proj-name">AHA Birthday Campaign</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <a href="/projects/aha-thailand.html" class="mega-proj-card">
+            <span class="mega-proj-tag">BD</span>
+            <span class="mega-proj-name">AHA Thailand Expansion</span>
+            <span class="mega-proj-arrow">↗</span>
+          </a>
+          <button class="mega-proj-card" onclick="scrollToSection('works');closeMegaMenu()" style="text-align:left;font:inherit;border-style:dashed;background:transparent">
+            <span class="mega-proj-tag" style="color:rgba(236,234,245,.3)">All projects</span>
+            <span class="mega-proj-name" style="color:rgba(236,234,245,.45)">View full portfolio →</span>
+            <span class="mega-proj-arrow" style="margin-top:auto">↓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="mega-panel" id="panel-skills">
+      <div class="mega-panel__inner">
+        <div class="mega-skills">
+          <div>
+            <div class="mega-col-header">BD &amp; Growth</div>
+            <div class="mega-skill-list">
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>BD Strategy</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Cold Outreach</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Creator Partnerships</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Negotiation</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#c03030"></span>Campaign Management</div>
+            </div>
+          </div>
+          <div>
+            <div class="mega-col-header">Automation &amp; AI</div>
+            <div class="mega-skill-list">
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Make.com &amp; n8n</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>AI &amp; LLM Tools</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Apps Script</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>Vibe Coding</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ff6b5a"></span>HubSpot / CRM</div>
+            </div>
+          </div>
+          <div>
+            <div class="mega-col-header">Content &amp; Research</div>
+            <div class="mega-skill-list">
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Storytelling</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Copywriting</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Content Strategy</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Market Research</div>
+              <div class="mega-skill-pill"><span class="mega-skill-dot" style="background:#ffb3a4"></span>Creator Analytics</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(236,234,245,.06);display:flex;justify-content:flex-end">
+          <a href="/constellation.html" class="mega-link" style="font-size:.8125rem">Explore interactive skills map ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="mega-panel" id="panel-contact">
+      <div class="mega-panel__inner">
+        <div class="mega-contact">
+          <div>
+            <div class="mega-col-header">Status</div>
+            <div class="mega-status-chip">
+              <span class="mega-status-dot"></span>
+              Open to opportunities
+            </div>
+            <div style="font-size:.8rem;color:rgba(236,234,245,.4);max-width:16rem;line-height:1.6">BD roles, freelance partnerships, consulting, and speaker invitations.</div>
+          </div>
+          <div>
+            <div class="mega-col-header">Get in touch</div>
+            <div class="mega-contact-links">
+              <a href="mailto:marwahkhairunnisa30@gmail.com" class="mega-contact-link">
+                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 8.5 6a2 2 0 0 0 3 0L22 7"/></svg>
+                marwahkhairunnisa30@gmail.com
+              </a>
+              <a href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener" class="mega-contact-link">
+                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                linkedin.com/in/marwahkhr30
+              </a>
+              <a href="/marwah-cv.pdf" download class="mega-contact-link">
+                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+                Download CV
+              </a>
+              <button class="mega-contact-link" onclick="openModal();closeMegaMenu()" style="cursor:pointer;background:rgba(185,43,43,.12);border-color:rgba(185,43,43,.2);color:rgba(236,234,245,.85)">
+                <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                Send a message
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </header>
 
@@ -647,17 +900,101 @@ img{display:block}
       <span class="dot"></span>
       <span data-i18n="services.eyebrow">Core Capabilities</span>
     </div>
-    <ul id="servicesList" style="margin-top:1.25rem"></ul>
-    <div style="margin-top:2rem;display:flex;justify-content:flex-end" data-reveal>
-      <a href="/constellation.html" class="pill pill--outline pill--arrow">
-        <span class="pill__inner">
-          <span data-i18n="services.exploreAll">Explore all 14 skills</span>
-          <span class="pill__badge">
-            <svg class="arrow-up-right" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </span>
-      </a>
+
+    <div class="skills-cats">
+      <!-- Category 1 -->
+      <div>
+        <div class="skills-cat__header">
+          <div class="skills-cat__header-icon">
+            <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          For BD &amp; Growth
+        </div>
+        <div class="skills-cards" id="skillsCatBD">
+          <div class="skill-card">
+            <div class="skill-card__icon">📈</div>
+            <div class="skill-card__name">BD Strategy</div>
+            <div class="skill-card__desc">Pipeline building, partner acquisition, and commercial growth at scale.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">📩</div>
+            <div class="skill-card__name">Cold Outreach</div>
+            <div class="skill-card__desc">Writing pitches that actually get replies — human, credible, worth responding to.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">🤝</div>
+            <div class="skill-card__name">Creator Partnerships</div>
+            <div class="skill-card__desc">Structuring and closing brand × creator deals end-to-end.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">⚖️</div>
+            <div class="skill-card__name">Negotiation</div>
+            <div class="skill-card__desc">Getting to yes without leaving value on the table.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category 2 -->
+      <div>
+        <div class="skills-cat__header">
+          <div class="skills-cat__header-icon">
+            <svg width=".875rem" height=".875rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          For Automation &amp; Ops
+        </div>
+        <div class="skills-cards" id="skillsCatOps">
+          <div class="skill-card">
+            <div class="skill-card__icon">🤖</div>
+            <div class="skill-card__name">AI &amp; LLM Tools</div>
+            <div class="skill-card__desc">Building with and prompting LLMs to solve problems that used to need a team.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">⚡</div>
+            <div class="skill-card__name">Workflow Automation</div>
+            <div class="skill-card__desc">Systemizing with Make.com, n8n, Apps Script so humans focus on what needs them.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">🔬</div>
+            <div class="skill-card__name">Market Research</div>
+            <div class="skill-card__desc">Finding signal before committing — who, what, and whether it's worth pursuing.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__icon">✍️</div>
+            <div class="skill-card__name">Content Strategy</div>
+            <div class="skill-card__desc">Deciding what to say, to whom, and why it matters right now.</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Connecting It All -->
+    <div class="connecting-all" data-reveal>
+      <div class="connecting-all__header">Connecting It All</div>
+      <div class="connecting-all__grid">
+        <div>
+          <div class="connecting-all__col-label">Signals In</div>
+          <div class="signal-card"><span class="signal-card__dot"></span>Incoming lead / cold prospect</div>
+          <div class="signal-card"><span class="signal-card__dot"></span>Partner / brand inquiry</div>
+          <div class="signal-card"><span class="signal-card__dot"></span>Market gap identified</div>
+          <div class="signal-card"><span class="signal-card__dot"></span>Campaign brief received</div>
+        </div>
+        <div class="connecting-all__center">
+          <div class="connecting-all__engine">
+            <svg width="1.25rem" height="1.25rem" viewBox="0 0 48 48" fill="#fff" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
+          </div>
+          <div class="connecting-all__label">Skills &amp;<br>Tools Engine</div>
+          <a href="/constellation.html" class="connecting-all__explore">Explore map ↗</a>
+        </div>
+        <div>
+          <div class="connecting-all__col-label" style="justify-content:flex-end">Results</div>
+          <div class="result-card"><span class="result-card__check">✓</span>Pipeline built &amp; deals closed</div>
+          <div class="result-card"><span class="result-card__check">✓</span>Partnership signed</div>
+          <div class="result-card"><span class="result-card__check">✓</span>Automation deployed</div>
+          <div class="result-card"><span class="result-card__check">✓</span>Campaign delivered</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -792,6 +1129,75 @@ window.scrollTo(0, 0);
 const lenis = new Lenis({ smoothWheel: true });
 function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
+
+// ── Sticky header on scroll ──
+lenis.on('scroll', ({ scroll }) => {
+  document.getElementById('siteHeader').classList.toggle('scrolled', scroll > 60);
+});
+
+// ── Mega-menu logic ──
+(function() {
+  const header = document.getElementById('siteHeader');
+  const items = header.querySelectorAll('.mega-item');
+  let activePanel = null;
+  let hideTimer = null;
+
+  function showPanel(panelId) {
+    clearTimeout(hideTimer);
+    if (activePanel && activePanel.id === 'panel-' + panelId) return;
+    hideAllPanels(true);
+    const panel = document.getElementById('panel-' + panelId);
+    if (!panel) return;
+    activePanel = panel;
+    panel.classList.add('open');
+    // activate the trigger
+    items.forEach(i => i.classList.toggle('active', i.dataset.panel === panelId));
+    // animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => panel.classList.add('visible'));
+    });
+  }
+
+  function hideAllPanels(immediate) {
+    clearTimeout(hideTimer);
+    const doHide = () => {
+      document.querySelectorAll('.mega-panel.open').forEach(p => {
+        p.classList.remove('visible');
+        setTimeout(() => { p.classList.remove('open'); }, 200);
+      });
+      items.forEach(i => i.classList.remove('active'));
+      activePanel = null;
+    };
+    if (immediate) { doHide(); } else { hideTimer = setTimeout(doHide, 120); }
+  }
+
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => showPanel(item.dataset.panel));
+  });
+
+  // Keep open when hovering panel itself
+  const panelsWrap = document.getElementById('megaPanels');
+  panelsWrap.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  panelsWrap.addEventListener('mouseleave', () => hideAllPanels(false));
+  header.addEventListener('mouseleave', () => hideAllPanels(false));
+
+  // Touch/click fallback
+  items.forEach(item => {
+    item.querySelector('.mega-trigger').addEventListener('click', (e) => {
+      const panelId = item.dataset.panel;
+      if (activePanel && activePanel.id === 'panel-' + panelId) {
+        hideAllPanels(true);
+      } else {
+        showPanel(panelId);
+      }
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') hideAllPanels(true); });
+
+  window.closeMegaMenu = () => hideAllPanels(true);
+})();
 
 let scrollEnabled = true;
 function stopScroll() {
@@ -1341,33 +1747,7 @@ void main(){
 
 // ── Services / Skills ──
 function buildServices() {
-  const servicesData = [
-    { title:I18n.t('services.0.title'), desc:I18n.t('services.0.desc'), link:'/projects/personal-brand-acquisitions.html' },
-    { title:I18n.t('services.1.title'), desc:I18n.t('services.1.desc') },
-    { title:I18n.t('services.2.title'), desc:I18n.t('services.2.desc'), link:'https://bdtailored-ai.vercel.app', external:true },
-    { title:I18n.t('services.3.title'), desc:I18n.t('services.3.desc') }
-  ];
-  const list = document.getElementById('servicesList');
-  servicesData.forEach((s, i) => {
-    const li = document.createElement('li');
-    li.className = 'services__item';
-    li.style.transitionDelay = (i * 80) + 'ms';
-    const tag = s.link ? 'a' : 'div';
-    const attrs = s.link ? `href="${s.link}"${s.external ? ' target="_blank" rel="noopener noreferrer"' : ''}` : '';
-    li.innerHTML = `<${tag} class="services__link" ${attrs}>
-      <span class="services__idx">0${i+1}</span>
-      <h3 class="services__title">${s.title}</h3>
-      <p class="services__desc">${s.desc}</p>
-      <span class="services__arrow"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </${tag}>`;
-    list.appendChild(li);
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); }
-    });
-  }, { threshold: 0.1 });
-  list.querySelectorAll('.services__item').forEach(el => observer.observe(el));
+  // Skills section is now static HTML — nothing to build dynamically
 }
 
 // ── Stats ──
@@ -1619,6 +1999,23 @@ buildPortfolio();
 buildServices();
 buildStats();
 setupRevealObserver();
+
+// ── Skill cards reveal ──
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('.skill-card');
+        cards.forEach((c, i) => setTimeout(() => c.classList.add('revealed'), i * 80));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  ['skillsCatBD', 'skillsCatOps'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+})();
 
 // ── Language toggle ──
 document.getElementById('headerLangToggle').appendChild(I18n.createToggle());

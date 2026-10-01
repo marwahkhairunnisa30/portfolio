@@ -128,6 +128,76 @@
     .corner { bottom: 16px; left: 16px; }
     .hint { display: none; }
   }
+
+  /* ── 3-column layout ── */
+  .stage {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    grid-template-rows: 1fr;
+  }
+  .canvas-wrap {
+    position: relative;
+    overflow: hidden;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: default; }
+  .side-panel {
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px;
+    overflow: hidden;
+    border-top: none;
+  }
+  .side-panel--left { grid-column: 1; border-right: 1px solid var(--border); }
+  .side-panel--right { grid-column: 3; border-left: 1px solid var(--border); }
+  .side-label {
+    font-size: .6rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted2);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .side-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .side-label--right::before { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .side-label--right::after { display: none; }
+  .signal-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(236,234,245,.03);
+    border: 1px solid var(--border);
+    margin-bottom: 6px;
+    font-size: .73rem; color: rgba(236,234,245,.6);
+    line-height: 1.4;
+  }
+  .signal-item__dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(236,234,245,.3); margin-top: 4px; flex-shrink: 0;
+  }
+  .result-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(185,43,43,.06);
+    border: 1px solid rgba(185,43,43,.15);
+    margin-bottom: 6px;
+    font-size: .73rem; color: rgba(236,234,245,.65);
+    line-height: 1.4;
+  }
+  .result-item__check { color: #b92b2b; font-size: .75rem; margin-top: 1px; flex-shrink: 0; }
+  .side-divider {
+    margin: 14px 0; font-size: .6rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted2); display: flex; align-items: center; gap: 8px;
+  }
+  .side-divider::before, .side-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  @media (max-width: 768px) {
+    .stage { grid-template-columns: 1fr; }
+    .side-panel { display: none; }
+    .canvas-wrap { grid-column: 1; }
+  }
 </style>
 </head>
 <body>
@@ -143,25 +213,53 @@
 </nav>
 
 <div class="stage">
-  <canvas id="c"></canvas>
 
-  <div class="corner">
-    <div class="corner__title">Marwah Khairunnisa</div>
-    <div class="corner__sub" data-i18n="const.corner.sub">BD · Content · Tech · Research</div>
+  <!-- Signals In (left panel) -->
+  <div class="side-panel side-panel--left">
+    <div class="side-label">Signals In</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Incoming lead / cold prospect</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Partner or brand inquiry</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Market gap identified</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Campaign brief received</div>
+    <div class="side-divider">Process</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Research &amp; qualification</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Outreach &amp; pitch crafted</div>
+    <div class="signal-item"><span class="signal-item__dot"></span>Negotiation &amp; closing</div>
   </div>
 
-  <div class="hint" data-i18n-html="const.hint">
-    Hover to explore<br>
-    Drag to rearrange<br>
-    Click to focus
+  <!-- Canvas (center) -->
+  <div class="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div class="corner">
+      <div class="corner__title">Marwah Khairunnisa</div>
+      <div class="corner__sub" data-i18n="const.corner.sub">BD · Content · Tech · Research</div>
+    </div>
+    <div class="hint" data-i18n-html="const.hint">
+      Hover to explore<br>
+      Drag to rearrange<br>
+      Click to focus
+    </div>
+    <div class="legend" id="legend"></div>
+    <div id="tip">
+      <div class="tip-cluster" id="tipCluster"></div>
+      <div class="tip-label" id="tipLabel"></div>
+      <div class="tip-desc" id="tipDesc"></div>
+    </div>
   </div>
 
-  <div class="legend" id="legend"></div>
-  <div id="tip">
-    <div class="tip-cluster" id="tipCluster"></div>
-    <div class="tip-label" id="tipLabel"></div>
-    <div class="tip-desc" id="tipDesc"></div>
+  <!-- Results (right panel) -->
+  <div class="side-panel side-panel--right">
+    <div class="side-label side-label--right">Results</div>
+    <div class="result-item"><span class="result-item__check">✓</span>Pipeline built, deals closed</div>
+    <div class="result-item"><span class="result-item__check">✓</span>Partnership signed</div>
+    <div class="result-item"><span class="result-item__check">✓</span>Automation deployed</div>
+    <div class="result-item"><span class="result-item__check">✓</span>Campaign delivered</div>
+    <div class="side-divider">Impact</div>
+    <div class="result-item"><span class="result-item__check">✓</span>55+ leads closed</div>
+    <div class="result-item"><span class="result-item__check">✓</span>56% conversion lift</div>
+    <div class="result-item"><span class="result-item__check">✓</span>30% pipeline growth</div>
   </div>
+
 </div>
 
 <script>
