@@ -88,7 +88,7 @@ function page(p, i) {
   <div class="wrap nav__in">
     <a href="/" class="nav__brand">${MARK}<span>Marwah K</span></a>
     <div class="nav__right">
-      <a href="/#projects">← Back to portfolio</a>
+      <a href="/">← Back to portfolio</a>
       <a class="btn btn--gold" href="${WA}" target="_blank" rel="noopener">Let's talk</a>
     </div>
   </div>
