@@ -61,7 +61,6 @@ button{font:inherit}
 .nav__links a:not(.btn){color:var(--sage)}
 .nav__links a:not(.btn):hover{color:var(--cream)}
 .nav__links .btn{padding:9px 14px;font-size:14px}
-@media(max-width:640px){.nav__links a:not(.btn){display:none}}
 
 /* Hero */
 .hero{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(40px,5vw,80px);align-items:center}
@@ -111,11 +110,33 @@ button{font:inherit}
 .about__copy{display:flex;flex-direction:column;gap:36px;min-width:0}
 .about__big{margin:0;font-size:clamp(26px,3vw,40px);font-weight:500;line-height:1.15;letter-spacing:-.03em}
 .about__copy .lede{max-width:600px;line-height:1.65}
-.row2{display:flex;gap:2px;flex-wrap:wrap}
 
 /* Experience */
 .exp{display:flex;flex-wrap:wrap;gap:2px;background:var(--seam);outline:1px solid var(--seam)}
 .exp__list{flex:1 1 360px;min-width:0;background:var(--bg);padding:24px;display:flex;flex-direction:column;gap:28px}
+.egroups,.egrp{display:flex;flex-direction:column;gap:2px}
+.egrp__hd{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 4px;cursor:pointer}
+.egrp__hd:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.egrp__hd[aria-disabled=true]{cursor:default}
+.egrp__hd .kick{color:var(--sage)}
+.egrp__hd[aria-disabled=true] .kick{color:var(--lichen)}
+.egrp__hd[aria-disabled=true] .kick::before{background:var(--fern)}
+.egrp__hd small{font-family:var(--mono);font-size:11px;color:var(--lichen)}
+.exp__free{margin-top:auto;font-family:var(--mono);font-size:11px;color:var(--lichen)}
+.exp__multi{flex:1;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:24px}
+.exp__co{flex:1;display:flex;flex-direction:column;gap:2px;background:var(--seam);border:1px solid var(--seam)}
+.exp__co a{flex:1;position:relative;overflow:hidden;background:var(--bg);color:var(--cream);padding:22px clamp(18px,2.4vw,28px);display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:20px;opacity:0;animation:mkFadeIn 550ms var(--ease) forwards;transition:background .25s}
+.exp__co a:hover{background:var(--moss);color:var(--cream)}
+.exp__co .yy{position:absolute;right:-.02em;top:50%;transform:translateY(-50%);font-size:110px;font-weight:500;letter-spacing:-.07em;line-height:1;color:var(--deep);pointer-events:none}
+.exp__co .ic{width:44px;height:44px;background:var(--moss);display:flex;align-items:center;justify-content:center;position:relative}
+.exp__co .ic svg{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter}
+.exp__co .tx{display:flex;flex-direction:column;gap:6px;min-width:0;position:relative}
+.exp__co .tx>span:first-child{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.exp__co .tx b{font-size:20px;font-weight:500;letter-spacing:-.025em;line-height:1.15}
+.exp__co .tx small{font-family:var(--mono);font-size:11px;color:var(--sage)}
+.exp__co .tx>span:last-child{font-size:14px;line-height:1.5;color:var(--sage);text-wrap:pretty}
+.exp__co .go{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:square;position:relative}
+.exp__viz[hidden],.exp__body[hidden],.exp__multi[hidden]{display:none}
 .exp__group{display:flex;flex-direction:column;gap:12px}
 .exp__items{display:flex;flex-direction:column;gap:2px}
 .ebtn{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) 16px;align-items:center;gap:16px;padding:16px 18px;background:var(--moss);color:var(--cream);transition:background .25s,color .25s}
@@ -256,29 +277,11 @@ button{font:inherit}
 .contact p{margin:0;font-size:17px;line-height:1.6;color:var(--fern)}
 .btn--ink{background:var(--bg);color:var(--cream)!important;padding:18px 24px;font-size:16px}
 .btn--ink:hover{background:var(--moss);color:var(--gold)!important}
-.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(23%,(900px - 100%)*999,49%),1fr));gap:2px;background:var(--bone);border-top:1px solid var(--bg)}
-.links a{background:var(--cream);padding:22px 16px 22px 0;display:flex;flex-direction:column;gap:8px;transition:background .2s}
-.links a:hover{background:var(--bone)}
-.links small{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--fern)}
-.links b{font-size:16px;font-weight:500;overflow-wrap:anywhere}
-.msg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px;border-top:1px solid var(--bone);padding-top:40px}
-.msg__intro{display:flex;flex-direction:column;gap:12px}
-.msg__intro b{font-size:24px;font-weight:500;letter-spacing:-.03em}
-.msg form{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.msg label{display:flex;flex-direction:column;gap:6px;background:#E6DFD1;padding:14px 16px}
-.msg label.full{grid-column:1/-1}
-.msg label span{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--fern)}
-.msg input,.msg textarea{all:unset;font-size:16px;color:var(--bg);width:100%}
-.msg textarea{min-height:96px;resize:vertical;white-space:pre-wrap}
-.msg input::placeholder,.msg textarea::placeholder{color:#8F978E}
-.msg label:focus-within{outline:2px solid var(--bg);outline-offset:-2px}
-.msg__ft{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:14px}
-.msg__ft span{font-family:var(--mono);font-size:12px;color:var(--fern)}
-.msg button{border:0;cursor:pointer}
-.msg button:disabled{opacity:.6;cursor:default}
-@media(max-width:560px){.msg form{grid-template-columns:1fr}}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--bone);font-family:var(--mono);font-size:12px;color:var(--fern)}
 .foot div{display:flex;align-items:center;gap:10px}
+.foot__ico{gap:8px!important}
+.foot__ico a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--cream)!important;transition:background .2s}
+.foot__ico a:hover{background:var(--gold);color:var(--bg)!important}
 
 @media(prefers-reduced-motion:reduce){
   .mq__track{animation:none}
@@ -299,7 +302,7 @@ button{font:inherit}
       <a href="#projects">Projects</a>
       <a href="#forte">Forte</a>
       <a href="#services">Services</a>
-      <a class="btn btn--gold" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book 15 min</a>
+      <a class="btn btn--gold" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8">Book 15 min</a>
     </div>
   </div>
 </nav>
@@ -355,10 +358,6 @@ button{font:inherit}
     <span class="idx" data-reveal>01 — About</span>
     <p class="about__big" data-reveal>Growth. Efficient. Obsessed.</p>
     <p class="lede" data-reveal data-d="80">I help brands and teams grow, from closing deals and making sense of data to automating the work that slows them down.</p>
-    <div class="row2" data-reveal data-d="160">
-      <a class="btn btn--moss btn--sm" href="/marwah-cv.pdf" download="Marwah K - CV.pdf">Download CV ↓</a>
-      <a class="btn btn--moss btn--sm" href="https://linkedin.com/in/marwahkhr30" target="_blank" rel="noopener">LinkedIn ↗</a>
-    </div>
   </div>
 </section>
 
@@ -368,12 +367,16 @@ button{font:inherit}
     <div data-reveal style="display:flex;flex-direction:column;gap:16px"><span class="idx">02 — Experience</span><h2 class="h2">Work that compounds.</h2></div>
     <div class="exp" data-reveal>
       <div class="exp__list">
-        <div class="exp__group"><span class="kick">Expertised</span><div class="exp__items" id="expA"></div></div>
-        <div class="exp__group"><span class="kick">Company project</span><div class="exp__items" id="expB"></div></div>
+        <div class="egroups" id="expGroups"></div>
+        <span class="exp__free">Freelance: [add engagements]</span>
       </div>
       <div class="exp__detail">
-        <div class="exp__viz"><canvas id="expCanvas" class="fill" aria-hidden="true" style="pointer-events:none"></canvas></div>
-        <div class="exp__body">
+        <div class="exp__viz" id="expViz"><canvas id="expCanvas" class="fill" aria-hidden="true" style="pointer-events:none"></canvas></div>
+        <div class="exp__multi" id="expMulti" hidden>
+          <div class="exp__meta"><b>Company Project</b><span id="expCoCount"></span></div>
+          <div class="exp__co" id="expCo"></div>
+        </div>
+        <div class="exp__body" id="expBody">
           <span class="exp__yy" id="expYY" aria-hidden="true"></span>
           <div class="exp__meta"><b id="expTag"></b><span id="expY"></span></div>
           <div class="exp__content" id="expContent" aria-live="polite">
@@ -396,7 +399,7 @@ button{font:inherit}
   <div class="pgroup">
     <span class="kick">Built with AI</span>
     <div class="pgrid">
-      <a class="pcard pcard--feat" href="https://bdtailored-ai.vercel.app" target="_blank" rel="noopener" data-reveal>
+      <a class="pcard pcard--feat" href="https://bdtailored-ai.vercel.app" data-reveal>
         <span class="pcard__n" aria-hidden="true">01</span>
         <span class="pcard__k">Featured · BD outreach</span>
         <div class="pcard__t">
@@ -455,30 +458,15 @@ button{font:inherit}
       </div>
       <div>
         <p>I reply within one business day.</p>
-        <a class="btn btn--ink" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book 15 minutes →</a>
+        <a class="btn btn--ink" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8">Book 15 minutes →</a>
       </div>
     </div>
-    <div class="links" id="connect"></div>
-
-    <div class="msg" data-reveal>
-      <div class="msg__intro">
-        <b>Or leave a message.</b>
-        <p>Tell me what you’re working on. It lands straight in my inbox.</p>
-      </div>
-      <form id="msgForm" novalidate>
-        <label><span>Name</span><input type="text" name="name" required autocomplete="name" placeholder="Your name"></label>
-        <label><span>Email</span><input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
-        <label class="full"><span>Message</span><textarea name="message" required rows="4" placeholder="Your project, role or idea"></textarea></label>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-        <div class="msg__ft">
-          <span id="msgStatus" role="status"></span>
-          <button type="submit" class="btn btn--ink" id="msgBtn">Send message →</button>
-        </div>
-      </form>
-    </div>
-
     <footer class="foot">
       <div><svg viewBox="0 0 100 100" width="20" aria-hidden="true"><rect width="100" height="100" fill="#121B16"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#EEE8DC" stroke-width="12"/><rect width="100" height="16" fill="#121B16"/></svg><span>© 2026 Marwah Khairunnisa</span></div>
+      <div class="foot__ico">
+        <a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="20" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter"><path d="M3 5 H21 V19 H3 Z M3 6 L12 13 L21 6"/></svg></a>
+        <a href="https://linkedin.com/in/marwahkha" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="20" style="fill:currentColor"><path d="M4 9 H8 V20 H4 Z M6 3.5 C7.3 3.5 8.2 4.4 8.2 5.6 C8.2 6.8 7.3 7.7 6 7.7 C4.7 7.7 3.8 6.8 3.8 5.6 C3.8 4.4 4.7 3.5 6 3.5 Z M10 9 H13.8 V10.7 C14.4 9.7 15.7 8.8 17.5 8.8 C20.3 8.8 21 10.6 21 13.3 V20 H17 V14.1 C17 12.8 16.7 11.9 15.4 11.9 C14.1 11.9 14 13 14 14.1 V20 H10 Z"/></svg></a>
+      </div>
       <span>Jakarta · GMT+7 · open to remote</span>
     </footer>
   </div>
@@ -488,7 +476,6 @@ button{font:inherit}
 (() => {
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const ext = h => /^https?:/.test(h) ? ' target="_blank" rel="noopener"' : '';
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const DPR = () => Math.min(window.devicePixelRatio || 1, 2);
 const C = { bg: '#121B16', seam: '#2E3B33', moss: '#1F2B24', fern: '#4E5A51', lichen: '#6F7A70', sage: '#A9B0A6', cream: '#EEE8DC', gold: '#C9B48A' };
@@ -509,8 +496,8 @@ const LINK = {
 const QUESTIONS = ['Why aren’t my leads replying?', 'Which number should I actually watch?', 'Can this task run itself?', 'How do I handle this objection?', 'Who checks the AI’s work?', 'Where is my pipeline leaking?', 'How do I train a new market team?'];
 const I = { user: 'M12 12 C14.2 12 16 10.2 16 8 C16 5.8 14.2 4 12 4 C9.8 4 8 5.8 8 8 C8 10.2 9.8 12 12 12 Z M4 21 C4 17 7.6 15 12 15 C16.4 15 20 17 20 21', team: 'M9 11 C10.7 11 12 9.7 12 8 C12 6.3 10.7 5 9 5 C7.3 5 6 6.3 6 8 C6 9.7 7.3 11 9 11 Z M3 20 C3 16.5 5.7 14.5 9 14.5 C12.3 14.5 15 16.5 15 20 M15.5 5.3 C17 5.7 18 6.8 18 8.2 C18 9.6 17 10.7 15.5 11.1 M17.5 14.7 C19.6 15.3 21 17 21 20', summit: 'M4 21 V9 L12 4 L20 9 V21 M9 21 V14 H15 V21 M3 21 H21', cake: 'M4 21 H20 M5 21 V13 H19 V21 M5 16.5 C7 18 9 18 12 16.5 C15 15 17 15 19 16.5 M8 13 V10 M12 13 V10 M16 13 V10', globe: 'M12 21 C17 21 21 17 21 12 C21 7 17 3 12 3 C7 3 3 7 3 12 C3 17 7 21 12 21 Z M3 12 H21 M12 3 C9 6.5 9 17.5 12 21 C15 17.5 15 6.5 12 3' };
 const EXP = [
-  [{ t: 'Personal achievement', y: '2023 – 2025', yy: '23', icon: I.user, tag: 'Personal achievement', href: LINK.brands, d: '55+ brands personally sourced, pitched and closed across Shopee, TikTok Shop and Tokopedia.' },
-   { t: 'Team achievement', y: '2026', yy: '26', icon: I.team, tag: 'Team achievement', href: LINK.team, d: 'Built and led a BD team of 8 — 47 brand partnerships in 9 months, 30% lead-to-conversion lift.' }],
+  [{ t: 'Personal Achievement', y: '2023 – 2025', yy: '23', icon: I.user, tag: 'Personal achievement', href: LINK.brands, d: '55+ brands personally sourced, pitched and closed across Shopee, TikTok Shop and Tokopedia.' },
+   { t: 'Team Achievement', y: '2026', yy: '26', icon: I.team, tag: 'Team achievement', href: LINK.team, d: 'Built and led a BD team of 8 — 47 brand partnerships in 9 months, 30% lead-to-conversion lift.' }],
   [{ t: 'Shopee Super Summit', y: '2024 & 2025', yy: '25', icon: I.summit, tag: 'Company project', href: LINK.summit, d: 'Led AHA’s exhibitor booth — 270+ leads over two years, >50% of ICP leads to a first meeting.' },
    { t: 'Company Anniversary', y: '2024', yy: '24', icon: I.cake, tag: 'Company project', href: LINK.birthday, d: 'Project Lead for the 13th anniversary outing — 110+ attendees, 9.46/10 satisfaction.' },
    { t: 'Abroad Culture Building', y: '2026', yy: '26', icon: I.globe, tag: 'Company project', href: LINK.thailand, d: 'Onboarded 9 Thailand BD members to AHA’s operating framework in 3 sessions.' }]
@@ -527,9 +514,9 @@ const FORTE = [
 const SERVICES = [
   { n: '01', t: 'B2B Sales System', short: 'Lead generation & pipeline', d: 'Find, reach and convert the right brands: ICP-first research, personalised outreach, and a pipeline you can actually see.',
     pkgs: [
-      { t: 'Basic', p: 'IDR 12M', dur: '3–4 weeks', items: ['Who to sell to, and why', 'Scripts that get replies', 'An answer for every no'] },
-      { t: 'Standard', p: 'IDR 20M', dur: '5–6 weeks', items: ['Everything in Basic', 'New BDs productive in weeks', 'KPIs that pay for results'] },
-      { t: 'Advanced', p: 'IDR 30M', dur: '8–10 weeks', items: ['Everything in Standard', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
+      { t: 'Basic', p: 'IDR X M', dur: '3–4 weeks', items: ['Who to sell to, and why', 'Scripts that get replies', 'An answer for every no'] },
+      { t: 'Standard', p: 'IDR XX M', dur: '5–6 weeks', items: ['Everything in Basic', 'New BDs productive in weeks', 'KPIs that pay for results'] },
+      { t: 'Advanced', p: 'IDR XX M', dur: '8–10 weeks', items: ['Everything in Standard', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
     ] },
   { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: ['Business consulting', 'Marketplace consulting', 'Brainstorming sessions', 'Business set-up', 'Workflow automations', 'Brand guidelines'], anim: 'Options → decision' },
   { n: '03', t: 'Data Analysis', short: 'Dashboards & decisions', d: 'Turn scattered numbers into decisions, with clean analysis, dashboards your team will actually open, and the right tools behind them.', subs: ['Analysis packages', 'Dashboards', 'Tool set-up'], anim: 'Noise → signal' },
@@ -537,22 +524,15 @@ const SERVICES = [
   { n: '05', t: 'Virtual Assistant', short: 'Workflow automations', d: 'Reliable remote support that runs on systems, not reminders. Repetitive work gets automated so it stops slipping.', subs: ['Workflow automations', 'Remote operations support'], anim: 'Runs on systems, not reminders' }
 ];
 const ROLES = ['AI Trainer', 'Data Annotator', 'Data Analyst', 'BD / SDR', 'Virtual Assistant', 'Account Manager', 'Project Manager'];
-const CONNECT = [
-  { l: 'Email', v: 'marwahkhairunnisa30@gmail.com', href: 'mailto:marwahkhairunnisa30@gmail.com' },
-  { l: 'WhatsApp', v: '+62 851 5534 3042', href: 'https://wa.me/6285155343042' },
-  { l: 'LinkedIn', v: 'linkedin.com/in/marwahkhr30', href: 'https://linkedin.com/in/marwahkhr30' },
-  { l: 'CV', v: 'Download PDF ↓', href: '/marwah-cv.pdf', dl: 'Marwah K - CV.pdf' }
-];
 
 /* ── Static renders ── */
 const qset = hidden => `<div class="mq__set"${hidden ? ' aria-hidden="true"' : ''}>${QUESTIONS.map(q => `<span><span class="sq"></span>“${esc(q)}”</span>`).join('')}</div>`;
 $('#mq').innerHTML = qset(false) + qset(true);
 
-const pcard = p => `<a class="pcard" href="${p.href}"${ext(p.href)} data-reveal data-d="${p.d}"><span class="pcard__n" aria-hidden="true">${p.n}</span><span class="pcard__k">${esc(p.k)}</span><div class="pcard__t"><b>${esc(p.t)}</b><span>${esc(p.y)} ↗</span></div></a>`;
+const pcard = p => `<a class="pcard" href="${p.href}" data-reveal data-d="${p.d}"><span class="pcard__n" aria-hidden="true">${p.n}</span><span class="pcard__k">${esc(p.k)}</span><div class="pcard__t"><b>${esc(p.t)}</b><span>${esc(p.y)} ↗</span></div></a>`;
 $('#projAI').innerHTML = PROJ_AI.map(pcard).join('');
 $('#projStage').innerHTML = PROJ_STAGE.map(pcard).join('');
 $('#roles').innerHTML = ROLES.map(r => `<span>${esc(r)}</span>`).join('');
-$('#connect').innerHTML = CONNECT.map(c => `<a href="${c.href}"${ext(c.href)}${c.dl ? ` download="${c.dl}"` : ''}><small>${c.l}</small><b>${esc(c.v)}</b></a>`).join('');
 
 /* ── Hero word rotator ── */
 let wi = 0;
@@ -561,29 +541,50 @@ if (!reduce) setInterval(() => { wi = (wi + 1) % 4; $('#words').style.transform 
 /* ── Experience ── */
 const exp = { g: 0, i: 0, timer: 0, reset: true };
 const EXP_DUR = 5200;
-const ebtn = (x, g, i) => `<button class="ebtn" data-g="${g}" data-i="${i}" type="button"><span class="ebtn__ic"><svg viewBox="0 0 24 24" width="20" aria-hidden="true"><path d="${x.icon}"/></svg></span><span class="ebtn__tx"><b>${esc(x.t)}</b><small>${esc(x.y)}</small></span><svg class="ebtn__ar" viewBox="0 0 24 24" width="16" aria-hidden="true"><path d="M3 12 H20 M14 6 L20 12 L14 18"/></svg><span class="ebtn__prog"></span></button>`;
-$('#expA').innerHTML = EXP[0].map((x, i) => ebtn(x, 0, i)).join('');
-$('#expB').innerHTML = EXP[1].map((x, i) => ebtn(x, 1, i)).join('');
-document.querySelectorAll('.ebtn').forEach(b => b.addEventListener('click', () => { exp.g = +b.dataset.g; exp.i = +b.dataset.i; expPlay(); }));
+// Left list: three "Expertised" groups. Only the BD Lead group has rows (Personal, Team, and one
+// "Company Project" row that stands in for the whole company group); the other two are "Soon".
+exp.og = 0;
+const ebtn = (x, on, attrs) => `<button class="ebtn${on ? ' on' : ''}" type="button" ${attrs} aria-pressed="${on}"><span class="ebtn__ic"><svg viewBox="0 0 24 24" width="20" aria-hidden="true"><path d="${x.icon}"/></svg></span><span class="ebtn__tx"><b>${esc(x.t)}</b><small>${esc(x.y)}</small></span><svg class="ebtn__ar" viewBox="0 0 24 24" width="16" aria-hidden="true"><path d="M3 12 H20 M14 6 L20 12 L14 18"/></svg><span class="ebtn__prog" data-prog="${on}"></span></button>`;
+const EXP_GROUPS = ['Expertised — Business Development Lead', 'Expertised — Brand Guidelines', 'Expertised — Workflow Automations'];
+function renderExpList() {
+  const inCo = exp.g === 1;
+  const rows = EXP[0].map((x, b) => ebtn(x, !inCo && b === exp.i, `data-g="0" data-i="${b}"`)).join('')
+    + ebtn({ t: 'Company Project', y: EXP[1].length + ' projects', icon: I.summit }, inCo, 'data-g="1" data-i="0"');
+  $('#expGroups').innerHTML = EXP_GROUPS.map((t, i) => {
+    const has = i === 0, open = has && exp.og === i;
+    return `<div class="egrp"><button type="button" class="egrp__hd" data-og="${i}"${has ? ` aria-expanded="${open}"` : ' aria-disabled="true"'}><span class="kick">${esc(t)}</span><small>${has ? (exp.og === 0 ? '−' : '+') : 'Soon'}</small></button>${open ? rows : ''}</div>`;
+  }).join('');
+}
+$('#expGroups').addEventListener('click', e => {
+  const row = e.target.closest('.ebtn');
+  if (row) { exp.g = +row.dataset.g; exp.i = +row.dataset.i; expPlay(); return; }
+  const hd = e.target.closest('.egrp__hd');
+  if (hd && hd.dataset.og === '0') { exp.og = exp.og === 0 ? -1 : 0; renderExpList(); }
+});
 
 function expPlay() {
   clearTimeout(exp.timer);
   exp.reset = true;
-  const cur = EXP[exp.g][exp.i];
+  const inCo = exp.g === 1, cur = EXP[exp.g][exp.i];
+  renderExpList();
+  const wasMulti = !$('#expMulti').hidden;
+  $('#expViz').hidden = inCo; $('#expBody').hidden = inCo; $('#expMulti').hidden = !inCo;
+  if (inCo && !wasMulti) {
+    $('#expCoCount').textContent = String(EXP[1].length).padStart(2, '0') + ' projects';
+    $('#expCo').innerHTML = EXP[1].map((x, k) => `<a href="${x.href}" style="animation-delay:${k * 110}ms"><span class="yy" aria-hidden="true">${x.yy}</span><span class="ic"><svg viewBox="0 0 24 24" width="20" aria-hidden="true"><path d="${x.icon}"/></svg></span><span class="tx"><span><b>${esc(x.t)}</b><small>${esc(x.y)}</small></span><span>${esc(x.d)}</span></span><svg class="go" viewBox="0 0 24 24" width="18" aria-hidden="true"><path d="M7 17 L17 7 M9 7 H17 V15"/></svg></a>`).join('');
+  }
   $('#expYY').textContent = cur.yy; $('#expTag').textContent = cur.tag; $('#expY').textContent = cur.y;
   $('#expT').textContent = cur.t; $('#expD').textContent = cur.d; $('#expHref').href = cur.href;
   const c = $('#expContent');
   if (c.animate) c.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 650, easing: 'cubic-bezier(.2,.7,.2,1)' });
-  document.querySelectorAll('.ebtn').forEach(b => {
-    const on = +b.dataset.g === exp.g && +b.dataset.i === exp.i;
-    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
-    const pr = b.querySelector('.ebtn__prog');
-    pr.getAnimations && pr.getAnimations().forEach(a => a.cancel());
-    if (on && !reduce && pr.animate) pr.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: EXP_DUR, easing: 'linear', fill: 'forwards' });
+  document.querySelectorAll('[data-prog="true"]').forEach(pr => {
+    if (!reduce && pr.animate) pr.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: EXP_DUR, easing: 'linear', fill: 'forwards' });
   });
   if (reduce) return;
+  // Cycle: Personal → Team → Company Project → Personal …
+  const sizes = [2, 1];
   exp.timer = setTimeout(() => {
-    if (exp.i + 1 < EXP[exp.g].length) exp.i++; else { exp.g = (exp.g + 1) % 2; exp.i = 0; }
+    if (exp.i + 1 < sizes[exp.g]) exp.i++; else { exp.g = (exp.g + 1) % 2; exp.i = 0; }
     expPlay();
   }, EXP_DUR);
 }
@@ -610,6 +611,7 @@ function startExp() {
   };
   const draw = now => {
     const W = S.W, H = S.H, dt = Math.min(0.033, (now - (last || now)) / 1000); last = now;
+    if (W < 40 || H < 40 || exp.g === 1) { requestAnimationFrame(draw); return; }
     const g = exp.g, ei = exp.i, k = g + ':' + ei;
     if (k !== key || exp.reset) {
       const sameGroup = key.split(':')[0] === String(g) && !exp.reset;
@@ -634,7 +636,7 @@ function startExp() {
     ctx.beginPath(); ctx.moveTo(cx, py + 2); ctx.lineTo(cx - 20, py + 26); ctx.lineTo(cx + 20, py + 26); ctx.closePath(); ctx.fillStyle = C.seam; ctx.fill();
     ctx.save(); ctx.translate(cx, py); ctx.rotate(th);
     ctx.fillStyle = C.cream; ctx.fillRect(-L / 2, -3, L, 3);
-    for (let t = -L / 2; t <= L / 2; t += L / 12) { ctx.fillStyle = C.fern; ctx.fillRect(t, 1, 1, 4); }
+    for (let q = 0, t = -L / 2; q <= 12; q++, t = -L / 2 + q * L / 12) { ctx.fillStyle = C.fern; ctx.fillRect(t, 1, 1, 4); }
     stack.forEach((b, idx) => {
       const x = -arm - B / 2, y = -3 - (idx + 1) * (B + 3) + b.y, active = b.n === ei;
       ctx.fillStyle = active ? C.cream : C.seam; ctx.fillRect(x, y, B, B);
@@ -715,7 +717,7 @@ function startFunnel() {
 
 /* ── Forte ── */
 const forte = { i: 0, s: 0 };
-$("#forteGrid").innerHTML = FORTE.map((c, i) => `<div class="fcol" data-i="${i}"><span class="fcol__bar"></span><div class="fcol__hd"><span>${String(i + 1).padStart(2, '0')}</span><b>${esc(c.t)}</b></div><div class="fcol__sk"><small>Skills</small>${c.skills.map(k => `<span>${esc(k)}</span>`).join('')}</div><a class="fcol__out" href="${c.href}"${ext(c.href)}><span><span>Outcome</span><span>↗</span></span><span>${c.out.map(l => `<span>${esc(l)}</span>`).join('')}</span></a></div>`).join('');
+$("#forteGrid").innerHTML = FORTE.map((c, i) => `<div class="fcol" data-i="${i}"><span class="fcol__bar"></span><div class="fcol__hd"><span>${String(i + 1).padStart(2, '0')}</span><b>${esc(c.t)}</b></div><div class="fcol__sk"><small>Skills</small>${c.skills.map(k => `<span>${esc(k)}</span>`).join('')}</div><a class="fcol__out" href="${c.href}"><span><span>Outcome</span><span>↗</span></span><span>${c.out.map(l => `<span>${esc(l)}</span>`).join('')}</span></a></div>`).join('');
 const fcols = [...document.querySelectorAll('.fcol')];
 function forteRender() {
   fcols.forEach((el, i) => {
@@ -739,7 +741,7 @@ $('#svcPanes').innerHTML = SERVICES.map((s, i) => `<div class="spane" role="tabp
   ${s.subs ? `<div class="subs">${s.subs.map(x => `<div>${check}${esc(x)}</div>`).join('')}</div>` : ''}
   ${s.anim ? `<div class="anim"><canvas class="fill" data-svc-anim="${s.n}" aria-hidden="true"></canvas><span><span class="hud__dot pulse"></span>${esc(s.anim)}</span></div>` : ''}
   ${s.pkgs ? `<div class="pkgs"><div class="pkgs__hd"><span>Packages</span><span>Per project</span></div><div class="pkgs__grid">${s.pkgs.map(k => `<div class="pkg${k.hi ? ' pkg--hi' : ''}"><div class="pkg__hd"><b>${k.t}</b><span>${k.p}</span></div><small>${k.dur}</small>${k.items.map(x => `<span>${esc(x)}</span>`).join('')}</div>`).join('')}</div></div>` : ''}
-  <div class="spane__ft"><span>Not sure which fits? Start with a 15-minute call.</span><a class="btn btn--gold btn--sm" href="${CAL}" target="_blank" rel="noopener">Book 15 minutes →</a></div>
+  <div class="spane__ft"><span>Not sure which fits? Start with a 15-minute call.</span><a class="btn btn--gold btn--sm" href="${CAL}">Book 15 minutes →</a></div>
 </div>`).join('');
 function svcRender() {
   document.querySelectorAll('.sbtn').forEach((b, i) => { b.classList.toggle('on', i === svc); b.setAttribute('aria-selected', i === svc); });
@@ -827,22 +829,6 @@ function setupReveal() {
     io.observe(el);
   });
 }
-
-/* ── Contact form → Formspree ── */
-const form = $('#msgForm'), status = $('#msgStatus'), btn = $('#msgBtn');
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!form.checkValidity()) { status.textContent = 'Please add your name, a valid email and a message.'; form.reportValidity(); return; }
-  btn.disabled = true; btn.textContent = 'Sending…'; status.textContent = '';
-  try {
-    const res = await fetch('https://formspree.io/f/meaognzz', { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-    if (!res.ok) throw new Error(res.status);
-    form.reset(); status.textContent = 'Sent. I’ll reply within one business day.'; btn.textContent = 'Sent ✓';
-    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send message →'; }, 4000);
-  } catch {
-    status.textContent = 'Couldn’t send. Try again or email me directly.'; btn.disabled = false; btn.textContent = 'Send message →';
-  }
-});
 
 expPlay();
 startExp();
