@@ -79,13 +79,18 @@ RULES:
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Owner-Token');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed.' });
 
   if (!process.env.ANTHROPIC_API_KEY) {
     return res.status(500).json({ error: 'Server configuration error.' });
+  }
+
+  // Each call bills the Anthropic key, so when OWNER_TOKEN is set only the owner can generate.
+  if (process.env.OWNER_TOKEN && req.headers['x-owner-token'] !== process.env.OWNER_TOKEN) {
+    return res.status(401).json({ error: 'Owner token required.' });
   }
 
   const { mode, ...fields } = req.body || {};
@@ -96,24 +101,24 @@ module.exports = async function handler(req, res) {
 
   let userMessage;
   if (mode === 'sales') {
-    const { category, platform, size, location, context } = fields;
-    if (!category || !platform) {
-      return res.status(400).json({ error: 'Category and platform are required.' });
+    const { category, brand, platform, size, location, context } = fields;
+    if (!category && !brand) {
+      return res.status(400).json({ error: 'Category or brand is required.' });
     }
     userMessage = `Find leads for:
-Category: ${category}
-Platform: ${platform}
+Category: ${category || `brands similar to ${brand}`}
+Platform: ${platform || 'any'}
 Brand size: ${size || 'any'}
 Location: ${location || 'Indonesia'}
 ${context ? `Context: ${context}` : ''}`;
   } else {
     const { role, industry, company_size, work_type, location } = fields;
-    if (!role || !industry) {
-      return res.status(400).json({ error: 'Role and industry are required.' });
+    if (!role) {
+      return res.status(400).json({ error: 'Role is required.' });
     }
     userMessage = `Find recruiter leads for:
 Target role: ${role}
-Industry: ${industry}
+Industry: ${industry || 'any'}
 Company size: ${company_size || 'any'}
 Work type: ${work_type || 'any'}
 Location: ${location || 'Jakarta'}`;

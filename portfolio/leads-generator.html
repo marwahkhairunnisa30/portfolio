@@ -78,6 +78,18 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 .gcard:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.05)}
 .gcard .gi{flex-shrink:0;font-size:.875rem;line-height:1}
 .gcard .gn{font-size:.775rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* AI lookalike leads (POST /api/leads) */
+.res-actions{display:flex;gap:.375rem;flex-shrink:0}
+.ai-btn{border-color:rgba(192,48,48,.45);color:var(--text)}
+.ai-btn:disabled{opacity:.5;cursor:default}
+.ai-box{margin-top:.875rem;max-height:46vh;overflow:auto;display:flex;flex-direction:column;gap:5px}
+.ai-note{font-size:.7rem;color:var(--text-faint);line-height:1.5}
+.ai-err{font-size:.775rem;color:#e07a7a}
+.lead{display:grid;grid-template-columns:1fr auto;gap:.25rem .75rem;padding:.625rem .75rem;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem}
+.lead b{font-size:.8125rem;font-weight:600}
+.lead .score{font-size:.7rem;font-weight:700;color:var(--accent);align-self:start}
+.lead .meta,.lead .why{grid-column:1/-1;font-size:.72rem;color:var(--text-dim);line-height:1.45}
+.lead .why{color:var(--text-faint)}
 .watermark{position:fixed;bottom:.875rem;left:0;right:0;text-align:center;font-size:.625rem;color:rgba(236,234,245,.18);pointer-events:none;z-index:100;letter-spacing:.02em}
 </style>
 </head>
@@ -300,12 +312,16 @@ function generate(){
       <div class="res-name">${title}</div>
       <div class="res-count">${urls.length} links</div>
     </div>
+    <div class="res-actions">
+    <button class="open-all ai-btn" id="aiBtn" onclick="aiLeads()">✦ AI leads</button>
     <button class="open-all" onclick='openAll(${uj})'>
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       ${I18n.t('leads.openAll')}
     </button>
+    </div>
   </div>
-  <div class="res-grid ${cols}">${flatHtml}</div>`;
+  <div class="res-grid ${cols}">${flatHtml}</div>
+  <div class="ai-box" id="aiBox"></div>`;
 
   document.getElementById('emptyState').style.display='none';
   document.getElementById('resultsInner').style.display='block';
@@ -315,6 +331,33 @@ function generate(){
 function showEmpty(){
   document.getElementById('emptyState').style.display='flex';
   document.getElementById('resultsInner').style.display='none';
+}
+
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function ownerToken(){try{return localStorage.getItem('leadsOwnerToken')||''}catch{return''}}
+async function aiLeads(retry){
+  const box=document.getElementById('aiBox'),btn=document.getElementById('aiBtn');
+  const body=mode==='sales'
+    ?{mode,brand:document.getElementById('s-brand').value.trim(),platform:chip('chips-platform')==='all'?'':chip('chips-platform'),location:chip('chips-market')}
+    :{mode,role:document.getElementById('j-role').value.trim(),work_type:chip('chips-worktype')==='all'?'':chip('chips-worktype'),location:chip('chips-loc')};
+  btn.disabled=true;btn.textContent='✦ Generating…';box.innerHTML='<div class="ai-note">Asking Claude for lookalike leads — about 10–20 seconds.</div>';
+  try{
+    const res=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json','X-Owner-Token':ownerToken()},body:JSON.stringify(body)});
+    if(res.status===401&&!retry){
+      const t=prompt('AI leads are owner-only. Enter your owner token:');
+      if(t){try{localStorage.setItem('leadsOwnerToken',t.trim())}catch{}return aiLeads(true);}
+      throw new Error('Owner token required.');
+    }
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(data.error||'Request failed.');
+    const leads=data.leads||[];
+    box.innerHTML=`<div class="ai-note">${esc(data.search_summary)} · Simulated demo data, not real contacts.</div>`+leads.map(l=>mode==='sales'
+      ?`<div class="lead"><b>${esc(l.brand)}</b><span class="score">${esc(l.match_score)}</span><span class="meta">${esc(l.category)} · ${esc(l.platform)} · ${esc(l.followers)} · ${esc(l.size_signal)} · ${esc(l.decision_maker)}</span><span class="why">${esc(l.match_reason)}</span></div>`
+      :`<div class="lead"><b>${esc(l.company)} — ${esc(l.open_role)}</b><span class="score">${esc(l.match_score)}</span><span class="meta">${esc(l.industry)} · ${esc(l.company_size)} · ${esc(l.work_type)} · ${esc(l.location)} · ${esc(l.recruiter_title)}</span><span class="why">${esc(l.match_reason)}</span></div>`).join('');
+  }catch(e){
+    if(String(e.message).startsWith('Owner'))try{localStorage.removeItem('leadsOwnerToken')}catch{}
+    box.innerHTML=`<div class="ai-err">${esc(e.message)}</div>`;
+  }finally{btn.disabled=false;btn.textContent='✦ AI leads';}
 }
 
 function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
