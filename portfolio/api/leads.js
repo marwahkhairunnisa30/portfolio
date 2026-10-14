@@ -1,4 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const ownerOk = require('./_owner');
 
 const SALES_PROMPT = `You are a BD leads research assistant specializing in Indonesian e-commerce and brand ecosystem.
 
@@ -88,8 +89,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Server configuration error.' });
   }
 
-  // Each call bills the Anthropic key, so when OWNER_TOKEN is set only the owner can generate.
-  if (process.env.OWNER_TOKEN && req.headers['x-owner-token'] !== process.env.OWNER_TOKEN) {
+  if (!ownerOk(req)) {
     return res.status(401).json({ error: 'Owner token required.' });
   }
 

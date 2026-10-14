@@ -11,8 +11,8 @@ try {
   });
 } catch {}
 
-const handler = require('./api/leads');
-const PORT = 3000;
+const ROUTES = { '/api/leads': require('./api/leads'), '/api/write': require('./api/write') };
+const PORT = process.env.PORT || 3000;
 
 const MIME = {
   '.html': 'text/html',
@@ -21,10 +21,14 @@ const MIME = {
   '.png': 'image/png',
   '.ico': 'image/x-icon',
   '.svg': 'image/svg+xml',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.pdf': 'application/pdf',
 };
 
 const server = http.createServer(async (req, res) => {
-  if (req.method === 'POST' && req.url === '/api/leads') {
+  const handler = ROUTES[req.url.split('?')[0]];
+  if (req.method === 'POST' && handler) {
     // Polyfill Vercel-style res methods for plain Node.js
     res.status = (code) => { res.statusCode = code; return res; };
     res.json = (data) => {
