@@ -11,7 +11,7 @@ try {
   });
 } catch {}
 
-const ROUTES = { '/api/leads': require('./api/leads'), '/api/write': require('./api/write') };
+const ROUTES = { '/api/leads': require('./api/leads') };
 const PORT = process.env.PORT || 3000;
 
 const MIME = {

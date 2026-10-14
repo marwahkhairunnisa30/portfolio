@@ -1,4 +1,4 @@
-// POST to one of the portfolio's AI endpoints. They're owner-gated (OWNER_TOKEN), so on a 401
+// POST to the portfolio AI endpoint (/api/leads). It is owner-gated (OWNER_TOKEN), so on a 401
 // ask once for the token, remember it in this browser, and retry.
 window.mkApi = async function mkApi(path, body, retried) {
   let token = '';
