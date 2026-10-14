@@ -3,367 +3,242 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BD Research Toolkit — Marwah K</title>
+<title>Leads Generator — Marwah K</title>
+<meta name="description" content="Type a brand or a role. Get a full set of targeted Google searches — decision makers, stores, contacts, openings." />
+<meta name="theme-color" content="#121B16" />
+<link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="/i18n.js?v=20261002"></script>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mk/site.css">
 <style>
-:root{
-  --bg:#0b0b10;--card:#141421;--card2:#1b1b2b;
-  --border:rgba(255,255,255,.1);--border-dim:rgba(255,255,255,.065);
-  --text:#eceaf5;--text-dim:rgba(236,234,245,.55);--text-faint:rgba(236,234,245,.3);
-  --accent:#c03030;--accent-glow:rgba(192,48,48,.15);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Onest',sans-serif}
-body{display:flex;flex-direction:column}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
-
-.nav{display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;border-bottom:1px solid var(--border-dim);flex-shrink:0}
-.nav__back{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;color:var(--text-dim);transition:color .2s}
-.nav__back:hover{color:var(--text)}
-.nav__brand{display:flex;align-items:center;gap:.375rem;font-size:.8125rem;font-weight:600;color:var(--text-faint)}
-
-.page{flex:1;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 2rem}
-
-.title-block{width:100%;max-width:920px;margin-bottom:1.125rem}
-.title-block h1{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.25rem}
-.title-block p{font-size:.8125rem;color:var(--text-dim)}
-
-/* Card */
-.split-card{width:100%;max-width:920px;background:var(--card);border:1px solid var(--border);border-radius:1.125rem;display:grid;grid-template-columns:340px 1fr;overflow:hidden}
-
-/* Form panel */
-.form-panel{border-right:1px solid var(--border-dim);padding:1.25rem;display:flex;flex-direction:column;gap:1rem}
-
-.mode-toggle{display:flex;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.1875rem;gap:.125rem}
-.mode-btn{flex:1;padding:.375rem .75rem;border-radius:.375rem;font-size:.8rem;font-weight:500;color:var(--text-dim);transition:all .2s;text-align:center}
-.mode-btn.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px var(--accent-glow)}
-
-.field{display:flex;flex-direction:column;gap:.35rem}
-.flabel{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim)}
-.flabel span{color:var(--accent)}
-.inp{background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;padding:.5625rem .75rem;font-size:.875rem;font-family:inherit;color:var(--text);transition:border-color .2s;width:100%}
-.inp:focus{outline:none;border-color:rgba(192,48,48,.4)}
-.inp::placeholder{color:var(--text-faint)}
-
-.chips{display:flex;flex-wrap:wrap;gap:.3rem}
-.chip{padding:.25rem .7rem;border:1px solid var(--border-dim);border-radius:9999px;font-size:.775rem;font-weight:500;color:var(--text-dim);background:transparent;transition:all .15s;cursor:pointer}
-.chip:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
-.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
-
-/* Results panel */
-.results-panel{padding:1.25rem;display:flex;flex-direction:column;overflow:hidden}
-
-/* Empty */
-.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-faint);text-align:center}
-.empty-icon{font-size:1.25rem;opacity:.3;margin-bottom:.125rem}
-.empty p{font-size:.8125rem;line-height:1.5}
-
-/* Results */
-.res-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;gap:.5rem}
-.res-name{font-size:.9375rem;font-weight:600}
-.res-count{font-size:.7rem;color:var(--text-faint);margin-top:.125rem}
-.open-all{display:flex;align-items:center;gap:.3rem;padding:.3125rem .6875rem;border:1px solid var(--border);border-radius:.4375rem;font-size:.75rem;font-weight:500;color:var(--text-dim);transition:all .15s;white-space:nowrap;flex-shrink:0}
-.open-all:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow)}
-
-/* Fixed-column grid — all cards same width */
-.res-grid{display:grid;gap:5px}
-.res-grid.g4{grid-template-columns:repeat(4,1fr)}
-.res-grid.g3{grid-template-columns:repeat(3,1fr)}
-.gsep{grid-column:1/-1;height:1px;background:var(--border-dim);margin:1px 0}
-.gcard{display:flex;align-items:center;gap:7px;padding:0 10px;height:44px;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem;text-decoration:none;transition:all .15s;overflow:hidden;min-width:0}
-.gcard:hover{border-color:rgba(192,48,48,.3);background:rgba(192,48,48,.05)}
-.gcard .gi{flex-shrink:0;font-size:.875rem;line-height:1}
-.gcard .gn{font-size:.775rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* AI lookalike leads (POST /api/leads) */
-.res-actions{display:flex;gap:.375rem;flex-shrink:0}
-.ai-btn{border-color:rgba(192,48,48,.45);color:var(--text)}
-.ai-btn:disabled{opacity:.5;cursor:default}
-.ai-box{margin-top:.875rem;max-height:46vh;overflow:auto;display:flex;flex-direction:column;gap:5px}
-.ai-note{font-size:.7rem;color:var(--text-faint);line-height:1.5}
-.ai-err{font-size:.775rem;color:#e07a7a}
-.lead{display:grid;grid-template-columns:1fr auto;gap:.25rem .75rem;padding:.625rem .75rem;background:var(--card2);border:1px solid var(--border-dim);border-radius:.5rem}
-.lead b{font-size:.8125rem;font-weight:600}
-.lead .score{font-size:.7rem;font-weight:700;color:var(--accent);align-self:start}
-.lead .meta,.lead .why{grid-column:1/-1;font-size:.72rem;color:var(--text-dim);line-height:1.45}
-.lead .why{color:var(--text-faint)}
-.watermark{position:fixed;bottom:.875rem;left:0;right:0;text-align:center;font-size:.625rem;color:rgba(236,234,245,.18);pointer-events:none;z-index:100;letter-spacing:.02em}
+.tool__form{flex:1 1 400px}
+.tool__out{flex:1.2 1 440px;min-height:580px}
+.modes{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--seam)}
+.modes button{border:0;border-bottom:2px solid transparent;cursor:pointer;text-align:left;padding:18px clamp(20px,2.4vw,28px) 16px;background:var(--bg);color:var(--sage);display:flex;flex-direction:column;gap:4px}
+.modes button:hover{color:var(--cream)}
+.modes button span{font-family:var(--mono);font-size:11px;color:var(--lichen)}
+.modes button b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.modes button[aria-pressed=true]{background:var(--moss);color:var(--cream);border-bottom-color:var(--gold)}
+.modes button[aria-pressed=true] span{color:var(--gold)}
+.seg button{padding:10px 14px;font-size:14px}
+.bar__act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.res a{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px clamp(16px,2vw,24px);border-bottom:1px solid var(--seam);transition:background .2s}
+.res a:hover{background:var(--moss);color:var(--cream)}
+.res .n,.res .ar{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.res .tx{display:flex;flex-direction:column;gap:4px;min-width:0}
+.res .tx b{font-size:15px;font-weight:600}
+.res .tx span{font-family:var(--mono);font-size:11px;color:var(--lichen);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai{border-top:2px solid var(--gold);padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:2px}
+.ai__note{font-family:var(--mono);font-size:11px;color:var(--lichen);padding-bottom:12px;line-height:1.5}
+.ai__err{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.lead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:14px 16px;background:var(--bg)}
+.lead b{font-size:15px;font-weight:600}
+.lead .sc{font-family:var(--mono);font-size:12px;color:var(--bg);background:var(--gold);padding:2px 6px;align-self:start}
+.lead .meta{grid-column:1/-1;font-size:13px;color:var(--sage);line-height:1.45}
+.lead .why{grid-column:1/-1;font-family:var(--mono);font-size:11px;color:var(--lichen);line-height:1.5}
 </style>
 </head>
 <body>
-
 <nav class="nav">
-  <a href="javascript:history.back()" class="nav__back">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    <span data-i18n="topbar.back">Back</span>
-  </a>
-  <div style="display:flex;align-items:center;gap:.75rem">
-    <div class="nav__brand">
-      <svg width="12" height="12" viewBox="0 0 48 48" fill="#c03030"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>
-      <span data-i18n="leads.brand">Personal toolkit</span>
+  <div class="wrap nav__in">
+    <div class="nav__left">
+      <a href="/" class="nav__brand"><svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg><span>Marwah K</span></a>
+      <span class="nav__crumb">Leads Generator</span>
     </div>
+    <div class="nav__right"><a href="/#projects">← Back to portfolio</a></div>
   </div>
 </nav>
 
-<div class="page">
-
-  <div class="title-block">
-    <h1 data-i18n="leads.title">BD Research Toolkit</h1>
-    <p data-i18n="leads.desc">Generate Google search links for a brand or role — open in one click.</p>
+<header class="wrap tool-hd">
+  <div class="fade">
+    <div class="eyebrow"><span class="sq"></span><b>Built with AI · Research</b></div>
+    <h1>Leads Generator</h1>
+    <p>Type a brand or a role. Get a full set of targeted Google searches — decision makers, stores, contacts, openings — one click each.</p>
   </div>
+</header>
 
-  <div class="split-card">
-
-    <!-- Form -->
-    <div class="form-panel">
-      <div class="mode-toggle">
-        <button class="mode-btn active" onclick="setMode('sales')" id="btn-sales" data-i18n="leads.mode.sales">BD / Sales</button>
-        <button class="mode-btn" onclick="setMode('job')" id="btn-job" data-i18n="leads.mode.job">Job Hunt</button>
+<section class="wrap tool">
+  <div class="tool__grid">
+    <form class="tool__form" id="form" novalidate>
+      <div class="modes" id="modes">
+        <button type="button" data-m="bd" aria-pressed="true"><span>01</span><b>BD / Sales</b></button>
+        <button type="button" data-m="job" aria-pressed="false"><span>02</span><b>Job hunt</b></button>
       </div>
-
-      <div id="fields-sales">
-        <div class="field" style="margin-bottom:.875rem">
-          <label class="flabel" for="s-brand"><span data-i18n="leads.s.brand.label">Brand name</span> <span>*</span></label>
-          <input class="inp" id="s-brand" data-i18n-placeholder="leads.s.brand.ph" placeholder="e.g. 27AN.ID, Somethinc" autocomplete="off" oninput="debouncedGenerate()" />
-        </div>
-        <div class="field" style="margin-bottom:.6875rem">
-          <div class="flabel" data-i18n="leads.s.market.label">Market</div>
-          <div class="chips" id="chips-market">
-            <button class="chip active" data-value="Indonesia" onclick="pick(this,'chips-market')">Indonesia</button>
-            <button class="chip" data-value="SE Asia" onclick="pick(this,'chips-market')">SE Asia</button>
-            <button class="chip" data-value="Global" onclick="pick(this,'chips-market')">Global</button>
-          </div>
-        </div>
-        <div class="field">
-          <div class="flabel" data-i18n="leads.s.platform.label">Platform</div>
-          <div class="chips" id="chips-platform">
-            <button class="chip active" data-value="all" data-i18n="leads.all" onclick="pick(this,'chips-platform')">All</button>
-            <button class="chip" data-value="Shopee" onclick="pick(this,'chips-platform')">Shopee</button>
-            <button class="chip" data-value="Tokopedia" onclick="pick(this,'chips-platform')">Tokopedia</button>
-            <button class="chip" data-value="Instagram" onclick="pick(this,'chips-platform')">Instagram</button>
-            <button class="chip" data-value="TikTok" onclick="pick(this,'chips-platform')">TikTok</button>
-          </div>
-        </div>
+      <div class="blk">
+        <label class="k" for="target" id="targetLabel">Brand name *</label>
+        <input class="big" id="target" autocomplete="off" placeholder="e.g. Erigo">
       </div>
+      <div id="groups"></div>
+      <div class="blk blk--end">
+        <span class="k k--dim" id="preview">Fill the target to preview</span>
+        <button type="submit" class="btn btn--gold go" id="go" data-ready="false"><span id="goLabel">Generate search links</span><span>→</span></button>
+        <span class="err" id="err" role="alert"></span>
+      </div>
+    </form>
 
-      <div id="fields-job" style="display:none">
-        <div class="field" style="margin-bottom:.875rem">
-          <label class="flabel" for="j-role"><span data-i18n="leads.j.role.label">Target role</span> <span>*</span></label>
-          <input class="inp" id="j-role" data-i18n-placeholder="leads.j.role.ph" placeholder="e.g. BD Manager, Marketing Lead" autocomplete="off" oninput="debouncedGenerate()" />
-        </div>
-        <div class="field" style="margin-bottom:.6875rem">
-          <div class="flabel" data-i18n="leads.j.worktype.label">Work type</div>
-          <div class="chips" id="chips-worktype">
-            <button class="chip active" data-value="Remote" onclick="pick(this,'chips-worktype')">Remote</button>
-            <button class="chip" data-value="Hybrid" onclick="pick(this,'chips-worktype')">Hybrid</button>
-            <button class="chip" data-value="WFO" onclick="pick(this,'chips-worktype')">WFO</button>
-            <button class="chip" data-value="all" data-i18n="leads.all" onclick="pick(this,'chips-worktype')">All</button>
-          </div>
-        </div>
-        <div class="field">
-          <div class="flabel" data-i18n="leads.j.loc.label">Location</div>
-          <div class="chips" id="chips-loc">
-            <button class="chip active" data-value="Indonesia" onclick="pick(this,'chips-loc')">Indonesia</button>
-            <button class="chip" data-value="Jakarta" onclick="pick(this,'chips-loc')">Jakarta</button>
-            <button class="chip" data-value="SE Asia" onclick="pick(this,'chips-loc')">SE Asia</button>
-            <button class="chip" data-value="Global" onclick="pick(this,'chips-loc')">Global</button>
-          </div>
-        </div>
+    <div class="tool__out">
+      <div class="bar">
+        <span><span class="dot"></span><span id="status">Idle · waiting for a target</span></span>
+        <span class="bar__act" id="acts" hidden>
+          <button type="button" class="ghost" id="aiBtn" title="Simulated lookalike leads from Claude">✦ AI leads</button>
+          <button type="button" class="ghost" id="copyAll">Copy all</button>
+          <button type="button" class="solid" id="openTop">Open top 3 ↗</button>
+        </span>
+      </div>
+      <div class="stage" id="stage"><canvas id="cv" aria-hidden="true"></canvas><span id="hint">Type a target on the left to start the scan</span></div>
+      <div id="outWrap" hidden>
+        <div class="res" id="out" aria-live="polite"></div>
+        <div class="ai" id="ai" hidden aria-live="polite"></div>
       </div>
     </div>
-
-    <!-- Results -->
-    <div class="results-panel">
-      <div class="empty" id="emptyState">
-        <div class="empty-icon">✦</div>
-        <p data-i18n="leads.empty">Fill in the form on the left to start researching</p>
-      </div>
-      <div id="resultsInner" style="display:none"></div>
-    </div>
-
   </div>
-</div>
+</section>
 
+<footer class="foot"><div class="wrap"><span>© 2026 Marwah Khairunnisa · Personal toolkit</span><a href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk →</a></div></footer>
+
+<script src="/assets/mk/ai.js"></script>
 <script>
-let mode='sales', timer=null;
+(() => {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SEA = '(Singapore OR Malaysia OR Thailand OR Vietnam OR Philippines)';
+const geo = v => v === 'SE Asia' ? SEA : v === 'Global' ? '' : v;
+const SITES = { Shopee: 'shopee.co.id', Tokopedia: 'tokopedia.com', Instagram: 'instagram.com', TikTok: 'tiktok.com' };
+const f = { mode: 'bd', brand: '', role: '', market: 'Indonesia', platform: 'All', work: 'Remote', loc: 'Indonesia' };
+const GROUPS = {
+  bd: [['market', 'Market', ['Indonesia', 'SE Asia', 'Global']], ['platform', 'Platform', ['All', 'Shopee', 'Tokopedia', 'Instagram', 'TikTok']]],
+  job: [['work', 'Work type', ['Remote', 'Hybrid', 'WFO', 'All']], ['loc', 'Location', ['Indonesia', 'Jakarta', 'SE Asia', 'Global']]]
+};
+const FEED = ['site:linkedin.com/in', 'site:shopee.co.id', 'official website', '"kerjasama"', 'site:linkedin.com/jobs', '"hiring"', 'site:glints.com', 'competitors', 'site:tokopedia.com', '"brand manager"'];
+let busy = false, out = [], timer;
 
-function setMode(m){
-  mode=m;
-  document.getElementById('btn-sales').classList.toggle('active',m==='sales');
-  document.getElementById('btn-job').classList.toggle('active',m==='job');
-  document.getElementById('fields-sales').style.display=m==='sales'?'block':'none';
-  document.getElementById('fields-job').style.display=m==='job'?'block':'none';
-  showEmpty();
-}
-
-function pick(el,id){
-  document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  generate();
-}
-
-function chip(id){
-  const a=document.querySelector(`#${id} .chip.active`);
-  if(!a)return'';
-  return a.dataset.value||a.textContent.trim();
-}
-
-function debouncedGenerate(){clearTimeout(timer);timer=setTimeout(generate,280);}
-function encode(q){return encodeURIComponent(q);}
-
-function salesLinks(brand,market,platform){
-  const loc=market&&market!=='Global'?` ${market}`:'';
-  const roles='(Founder OR CEO OR Director OR "Head of Business" OR "Marketing Manager" OR "Ecommerce Manager")';
-  const b=brand;
-
-  // Fixed row layout per user spec
-  const topRow=[
-    {l:'Web',    i:'🌐', u:`https://www.google.com/search?q=${encode(b+' official site')}`},
-    {l:'Maps',   i:'📍', u:`https://www.google.com/maps?q=${encode(b)}`},
-    {l:'People', i:'💼', u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ AND ('+b+') AND '+roles+loc)}`},
-    {l:'Company',i:'🏢', u:`https://www.google.com/search?q=${encode('site:linkedin.com/company/ '+b)}`},
-  ];
-
-  let midRow=[
-    {l:'Instagram',i:'📸',u:`https://www.google.com/search?q=${encode('site:instagram.com '+b)}`},
-    {l:'Facebook', i:'👥',u:`https://www.google.com/search?q=${encode('site:facebook.com '+b)}`},
-    {l:'X',        i:'✕', u:`https://www.google.com/search?q=${encode('site:x.com '+b)}`},
-    {l:'Threads',  i:'🧵',u:`https://www.google.com/search?q=${encode('site:threads.net '+b)}`},
-  ];
-
-  let botRow=[
-    {l:'Shopee',   i:'🛒',u:`https://www.google.com/search?q=${encode('site:shopee.co.id '+b)}`},
-    {l:'TikTok',   i:'🎵',u:`https://www.google.com/search?q=${encode('site:tiktok.com '+b)}`},
-    {l:'Tokopedia',i:'🛍️',u:`https://www.google.com/search?q=${encode('site:tokopedia.com '+b)}`},
-  ];
-
-  // Platform filter
-  if(platform&&platform!=='all'){
-    if(platform==='Instagram'){midRow=midRow.filter(x=>x.l==='Instagram');botRow=[];}
-    else if(platform==='TikTok'){midRow=[];botRow=botRow.filter(x=>x.l==='TikTok');}
-    else if(platform==='Shopee'){midRow=[];botRow=botRow.filter(x=>x.l==='Shopee');}
-    else if(platform==='Tokopedia'){midRow=[];botRow=botRow.filter(x=>x.l==='Tokopedia');}
+function build() {
+  const q = [];
+  if (f.mode === 'bd') {
+    const b = '"' + f.brand.trim() + '"', g = geo(f.market);
+    q.push(['Decision makers', 'site:linkedin.com/in ' + b + ' (marketing OR ecommerce OR partnership OR "brand manager") ' + g]);
+    q.push(['Official website', b + ' official website ' + g]);
+    q.push(['Partnership contact', b + ' email (partnership OR business OR collaboration OR kerjasama)']);
+    q.push(['Company page', 'site:linkedin.com/company ' + b]);
+    (f.platform === 'All' ? Object.keys(SITES) : [f.platform]).forEach(p => q.push([p + ' store', 'site:' + SITES[p] + ' ' + b]));
+    q.push(['Recent news', b + ' (launch OR expansion OR funding OR campaign) 2026']);
+    q.push(['Competitors', b + ' competitors OR alternatives ' + g]);
+  } else {
+    const r = '"' + f.role.trim() + '"', g = geo(f.loc), w = f.work === 'All' ? '' : f.work;
+    q.push(['LinkedIn jobs', 'site:linkedin.com/jobs ' + r + ' ' + w + ' ' + g]);
+    q.push(['Hiring posts', 'site:linkedin.com/posts "hiring" ' + r + ' ' + g]);
+    q.push(['Recruiters', 'site:linkedin.com/in recruiter ' + r + ' ' + g]);
+    if (f.loc === 'Indonesia' || f.loc === 'Jakarta') { q.push(['JobStreet', 'site:jobstreet.co.id ' + r + ' ' + f.loc]); q.push(['Glints', 'site:glints.com ' + r + ' ' + f.loc]); q.push(['Kalibrr', 'site:kalibrr.com ' + r]); }
+    if (f.work === 'Remote' || f.loc === 'Global') q.push(['Remote boards', r + ' remote (site:weworkremotely.com OR site:remoteok.com OR site:wellfound.com)']);
+    q.push(['Careers pages', r + ' (careers OR "join our team") ' + w + ' ' + g]);
   }
-
-  const rows=[{items:topRow}];
-  if(midRow.length) rows.push({items:midRow});
-  if(botRow.length) rows.push({items:botRow});
-  return rows;
+  return q.map(([label, s]) => { const text = s.replace(/\s+/g, ' ').trim(); return { label, text, href: 'https://www.google.com/search?q=' + encodeURIComponent(text) }; });
 }
 
-function jobLinks(role,worktype,loc){
-  const wt=worktype&&worktype!=='all'?` ${worktype}`:'';
-  const l=loc&&loc!=='Global'?` ${loc}`:'';
-  const q=role+wt+l;
-  const rec='(Recruiter OR "Talent Acquisition" OR "People & Culture" OR "HR Manager")';
-
-  // Fixed row layout per user spec
-  return[
-    {items:[
-      {l:'LinkedIn',   i:'💼',u:`https://www.google.com/search?q=${encode('site:linkedin.com/jobs/ '+q)}`},
-      {l:'Glints',     i:'🎯',u:`https://www.google.com/search?q=${encode('site:glints.com '+q)}`},
-      {l:'Kalibrr',    i:'📌',u:`https://www.google.com/search?q=${encode('site:kalibrr.com '+q)}`},
-    ]},
-    {items:[
-      {l:'Jobstreet',  i:'📄',u:`https://www.google.com/search?q=${encode('site:jobstreet.co.id '+q)}`},
-      {l:'Indeed',     i:'🔍',u:`https://www.google.com/search?q=${encode('site:id.indeed.com '+q)}`},
-      {l:'Google Jobs',i:'🌐',u:`https://www.google.com/search?q=${encode(q+' lowongan kerja')}`},
-    ]},
-    {items:[
-      {l:'Recruiter',  i:'🤝',u:`https://www.google.com/search?q=${encode('site:linkedin.com/in/ '+rec+(l?l:''))}`},
-      {l:'Hiring Post',i:'📢',u:`https://www.google.com/search?q=${encode('"hiring" "'+role+'"'+wt+l+' site:linkedin.com')}`},
-      {l:'X Hiring',   i:'✕', u:`https://www.google.com/search?q=${encode('site:x.com "hiring" "'+role+'"'+wt)}`},
-    ]},
-  ];
+const target = () => (f.mode === 'bd' ? f.brand : f.role).trim();
+function drawGroups() {
+  $('#groups').innerHTML = GROUPS[f.mode].map(([k, label, opts]) => `<div class="blk"><span class="k">${label}</span><div class="seg" data-k="${k}">${opts.map(o => `<button type="button" aria-pressed="${f[k] === o}">${esc(o)}</button>`).join('')}</div></div>`).join('');
 }
+$('#groups').addEventListener('click', e => {
+  const b = e.target.closest('button'), box = b && b.closest('[data-k]'); if (!box) return;
+  f[box.dataset.k] = b.textContent; box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); sync();
+});
+$('#modes').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b || f.mode === b.dataset.m) return;
+  f.mode = b.dataset.m; out = []; $('#err').textContent = '';
+  $('#modes').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const bd = f.mode === 'bd';
+  $('#targetLabel').textContent = bd ? 'Brand name *' : 'Target role *';
+  $('#target').placeholder = bd ? 'e.g. Erigo' : 'e.g. Business Development';
+  $('#target').value = bd ? f.brand : f.role;
+  drawGroups(); sync();
+});
+$('#target').addEventListener('input', e => { f[f.mode === 'bd' ? 'brand' : 'role'] = e.target.value; $('#err').textContent = ''; sync(); });
 
-function generate(){
-  let rows,title;
-  if(mode==='sales'){
-    const brand=document.getElementById('s-brand').value.trim();
-    if(!brand){showEmpty();return;}
-    rows=salesLinks(brand,chip('chips-market'),chip('chips-platform'));
-    title=brand;
-  }else{
-    const role=document.getElementById('j-role').value.trim();
-    if(!role){showEmpty();return;}
-    rows=jobLinks(role,chip('chips-worktype'),chip('chips-loc'));
-    title=role;
-  }
-  const urls=rows.flatMap(r=>r.items.map(i=>i.u));
-  const uj=JSON.stringify(urls);
-
-  const cols=mode==='sales'?'g4':'g3';
-  const flatHtml=rows.map((r,ri)=>
-    (ri>0?'<div class="gsep"></div>':'')+
-    r.items.map(it=>
-      `<a class="gcard" href="${it.u}" target="_blank" rel="noopener noreferrer">
-        <span class="gi">${it.i}</span>
-        <span class="gn">${it.l}</span>
-      </a>`
-    ).join('')
-  ).join('');
-
-  const html=`<div class="res-hdr">
-    <div>
-      <div class="res-name">${title}</div>
-      <div class="res-count">${urls.length} links</div>
-    </div>
-    <div class="res-actions">
-    <button class="open-all ai-btn" id="aiBtn" onclick="aiLeads()">✦ AI leads</button>
-    <button class="open-all" onclick='openAll(${uj})'>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      ${I18n.t('leads.openAll')}
-    </button>
-    </div>
-  </div>
-  <div class="res-grid ${cols}">${flatHtml}</div>
-  <div class="ai-box" id="aiBox"></div>`;
-
-  document.getElementById('emptyState').style.display='none';
-  document.getElementById('resultsInner').style.display='block';
-  document.getElementById('resultsInner').innerHTML=html;
+function sync() {
+  const t = target(), has = out.length > 0 && !busy;
+  $('#preview').textContent = t ? build().length + ' searches will be generated' : 'Fill the target to preview';
+  $('#go').dataset.ready = String(!!t);
+  $('#goLabel').textContent = busy ? 'Scanning…' : 'Generate search links';
+  $('#status').textContent = busy ? 'Scanning · ' + t : has ? String(out.length).padStart(2, '0') + ' searches · ' + t : 'Idle · waiting for a target';
+  $('#hint').textContent = busy ? 'Building targeted searches…' : 'Type a target on the left to start the scan';
+  $('#stage').hidden = has; $('#outWrap').hidden = !has; $('#acts').hidden = !has;
+  if (!has) $('#ai').hidden = true;
 }
+drawGroups(); sync();
 
-function showEmpty(){
-  document.getElementById('emptyState').style.display='flex';
-  document.getElementById('resultsInner').style.display='none';
-}
+$('#form').addEventListener('submit', e => {
+  e.preventDefault();
+  if (busy) return;
+  if (!target()) { $('#err').textContent = f.mode === 'bd' ? 'Add a brand name first.' : 'Add a target role first.'; $('#target').focus(); return; }
+  busy = true; out = []; $('#err').textContent = ''; sync();
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    out = build(); busy = false;
+    $('#out').innerHTML = out.map((m, i) => `<a href="${m.href}" target="_blank" rel="noopener" class="anim-in" style="animation-delay:${i * 60}ms"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="tx"><b>${esc(m.label)}</b><span>${esc(m.text)}</span></span><span class="ar">↗</span></a>`).join('');
+    sync();
+  }, reduce ? 0 : 1100);
+});
 
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function ownerToken(){try{return localStorage.getItem('leadsOwnerToken')||''}catch{return''}}
-async function aiLeads(retry){
-  const box=document.getElementById('aiBox'),btn=document.getElementById('aiBtn');
-  const body=mode==='sales'
-    ?{mode,brand:document.getElementById('s-brand').value.trim(),platform:chip('chips-platform')==='all'?'':chip('chips-platform'),location:chip('chips-market')}
-    :{mode,role:document.getElementById('j-role').value.trim(),work_type:chip('chips-worktype')==='all'?'':chip('chips-worktype'),location:chip('chips-loc')};
-  btn.disabled=true;btn.textContent='✦ Generating…';box.innerHTML='<div class="ai-note">Asking Claude for lookalike leads — about 10–20 seconds.</div>';
-  try{
-    const res=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json','X-Owner-Token':ownerToken()},body:JSON.stringify(body)});
-    if(res.status===401&&!retry){
-      const t=prompt('AI leads are owner-only. Enter your owner token:');
-      if(t){try{localStorage.setItem('leadsOwnerToken',t.trim())}catch{}return aiLeads(true);}
-      throw new Error('Owner token required.');
+$('#copyAll').addEventListener('click', e => {
+  navigator.clipboard && navigator.clipboard.writeText(out.map(o => o.label + ': ' + o.href).join('\n')).catch(() => {});
+  const b = e.currentTarget; b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy all'; }, 1500);
+});
+$('#openTop').addEventListener('click', () => out.slice(0, 3).forEach(o => window.open(o.href, '_blank', 'noopener')));
+
+// AI lookalike leads via /api/leads (Claude, owner-gated). Data is simulated for demo purposes.
+$('#aiBtn').addEventListener('click', async () => {
+  const btn = $('#aiBtn'), box = $('#ai');
+  const body = f.mode === 'bd'
+    ? { mode: 'sales', brand: f.brand.trim(), platform: f.platform === 'All' ? '' : f.platform, location: f.market }
+    : { mode: 'job', role: f.role.trim(), work_type: f.work === 'All' ? '' : f.work, location: f.loc };
+  btn.disabled = true; btn.textContent = '✦ Generating…'; box.hidden = false;
+  box.innerHTML = '<div class="ai__note">Asking Claude for lookalike leads — about 10–20 seconds.</div>';
+  try {
+    const data = await mkApi('/api/leads', body);
+    const sales = body.mode === 'sales';
+    box.innerHTML = `<div class="ai__note">✦ ${esc(data.search_summary)} · Simulated demo data, not real contacts.</div>` + (data.leads || []).map(l => sales
+      ? `<div class="lead"><b>${esc(l.brand)}</b><span class="sc">${esc(l.match_score)}</span><span class="meta">${esc(l.category)} · ${esc(l.platform)} · ${esc(l.followers)} · ${esc(l.size_signal)} · ${esc(l.decision_maker)}</span><span class="why">${esc(l.match_reason)}</span></div>`
+      : `<div class="lead"><b>${esc(l.company)} — ${esc(l.open_role)}</b><span class="sc">${esc(l.match_score)}</span><span class="meta">${esc(l.industry)} · ${esc(l.company_size)} · ${esc(l.work_type)} · ${esc(l.location)} · ${esc(l.recruiter_title)}</span><span class="why">${esc(l.match_reason)}</span></div>`).join('');
+  } catch (err) {
+    box.innerHTML = `<div class="ai__err">${esc(err.message)}</div>`;
+  } finally { btn.disabled = false; btn.textContent = '✦ AI leads'; }
+});
+
+// Motion: radar sweep that pings targets and logs queries in a live feed
+const cv = $('#cv'), t0 = performance.now();
+function paint(now) {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (W && H && !$('#stage').hidden) {
+    const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
+    const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
+    const t = (now - t0) / 1000, T = reduce ? 1 : t * (busy ? 3 : 1), wide = W > 560, cx = wide ? W * 0.38 : W / 2, cy = H / 2 - 30, R = Math.min(wide ? W * 0.3 : W * 0.4, H * 0.36);
+    x.strokeStyle = '#1F2B24'; for (let k = 1; k <= 4; k++) { x.beginPath(); x.arc(cx, cy, R * k / 4, 0, Math.PI * 2); x.stroke(); }
+    x.beginPath(); x.moveTo(cx - R, cy); x.lineTo(cx + R, cy); x.moveTo(cx, cy - R); x.lineTo(cx, cy + R); x.stroke();
+    const ang = T * 0.9;
+    for (let s = 0; s < 30; s++) { const a = ang - s * 0.025; x.strokeStyle = 'rgba(201,180,138,' + (0.55 * (1 - s / 30)) + ')'; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); x.stroke(); }
+    for (let i = 0; i < 18; i++) {
+      const a = (i * 2.399) % (Math.PI * 2), r = R * (0.22 + ((i * 0.618) % 1) * 0.74), px = cx + Math.cos(a) * r, py = cy + Math.sin(a) * r;
+      const dd = ((ang - a) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2), glow = Math.max(0, 1 - dd / 2.6), hot = i % 3 === 0;
+      x.fillStyle = hot ? 'rgba(201,180,138,' + (0.2 + glow * 0.8) + ')' : 'rgba(111,122,112,' + (0.15 + glow * 0.6) + ')';
+      const z = hot ? 6 + glow * 4 : 4; x.fillRect(px - z / 2, py - z / 2, z, z);
+      if (hot && glow > 0.85) { const k = 1 - glow; x.strokeStyle = 'rgba(201,180,138,' + (1 - k * 6) + ')'; x.strokeRect(px - 8 - k * 40, py - 8 - k * 40, 16 + k * 80, 16 + k * 80); }
     }
-    const data=await res.json().catch(()=>({}));
-    if(!res.ok)throw new Error(data.error||'Request failed.');
-    const leads=data.leads||[];
-    box.innerHTML=`<div class="ai-note">${esc(data.search_summary)} · Simulated demo data, not real contacts.</div>`+leads.map(l=>mode==='sales'
-      ?`<div class="lead"><b>${esc(l.brand)}</b><span class="score">${esc(l.match_score)}</span><span class="meta">${esc(l.category)} · ${esc(l.platform)} · ${esc(l.followers)} · ${esc(l.size_signal)} · ${esc(l.decision_maker)}</span><span class="why">${esc(l.match_reason)}</span></div>`
-      :`<div class="lead"><b>${esc(l.company)} — ${esc(l.open_role)}</b><span class="score">${esc(l.match_score)}</span><span class="meta">${esc(l.industry)} · ${esc(l.company_size)} · ${esc(l.work_type)} · ${esc(l.location)} · ${esc(l.recruiter_title)}</span><span class="why">${esc(l.match_reason)}</span></div>`).join('');
-  }catch(e){
-    if(String(e.message).startsWith('Owner'))try{localStorage.removeItem('leadsOwnerToken')}catch{}
-    box.innerHTML=`<div class="ai-err">${esc(e.message)}</div>`;
-  }finally{btn.disabled=false;btn.textContent='✦ AI leads';}
+    x.fillStyle = '#EEE8DC'; x.fillRect(cx - 6, cy - 6, 12, 12);
+    const tgt = target() || (f.mode === 'bd' ? 'brand' : 'role');
+    x.font = '500 11px "IBM Plex Mono", monospace'; x.fillStyle = '#EEE8DC'; x.textAlign = 'center'; x.textBaseline = 'top'; x.fillText(tgt.length > 22 ? tgt.slice(0, 21) + '…' : tgt, cx, cy + 12);
+    if (wide) {
+      const fx = W * 0.72, fy = cy - R, rows = 9, step = Math.floor(T * 1.4);
+      x.textAlign = 'left'; x.fillStyle = '#6F7A70'; x.fillText('query feed', fx, fy - 4);
+      for (let k = 0; k < rows; k++) { const idx = step - k; if (idx < 0) continue; const al = 1 - k / rows; x.fillStyle = k === 0 ? 'rgba(201,180,138,1)' : 'rgba(169,176,166,' + al * 0.8 + ')'; x.fillText((k === 0 ? '› ' : '  ') + FEED[idx % FEED.length], fx, fy + 18 + k * 20); }
+    }
+  }
+  requestAnimationFrame(paint);
 }
-
-function openAll(urls){urls.forEach((u,i)=>setTimeout(()=>window.open(u,'_blank'),i*150));}
-document.addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
-document.addEventListener('langchange',()=>{I18n.applyI18n();generate();});
+requestAnimationFrame(paint);
+})();
 </script>
-<div class="watermark">© 2026 Marwah Khairunnisa. All rights reserved.</div>
 </body>
 </html>
