@@ -242,7 +242,8 @@ button{font:inherit}
 .subs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:0 24px;border-top:1px solid var(--seam)}
 .subs div{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--seam);font-size:15px}
 .subs svg{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:square;flex:none}
-.anim{flex:1;min-height:200px;position:relative;background:var(--bg);outline:1px solid var(--seam);overflow:hidden}
+.anim{flex:none;height:200px;margin-top:auto;position:relative;background:var(--bg);outline:1px solid var(--seam);overflow:hidden}
+.anim + .spane__ft{margin-top:0}
 .anim span{position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--sage)}
 .pkgs{flex:1;display:flex;flex-direction:column;gap:12px}
 .pkgs__hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -522,9 +523,9 @@ const SERVICES = [
       { t: 'Build', p: 'IDR XX M', dur: '5–6 weeks', items: ['Everything in Diagnose', 'New BDs productive in weeks', 'KPIs that pay for results'] },
       { t: 'Optimize', p: 'IDR XX M', dur: '8–10 weeks', items: ['Everything in Build', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
     ] },
-  { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: ['Business consulting', 'Marketplace consulting', 'Brainstorming sessions', 'Business set-up', 'Workflow automations', 'Brand guidelines'], anim: 'Options → decision' },
-  { n: '03', t: 'Data Analysis', short: 'Dashboards & decisions', d: 'Turn scattered numbers into decisions, with clean analysis, dashboards your team will actually open, and the right tools behind them.', subs: ['Analysis packages', 'Dashboards', 'Tool set-up'], anim: 'Noise → signal' },
-  { n: '04', t: 'AI Trainer', short: 'Data annotation', d: 'Careful, consistent human judgement for AI models, with clear guidelines and reliable throughput.', subs: ['Data annotation', 'Quality review'], anim: 'Label · review · repeat' },
+  { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: ['Branding Strategist', 'Marketplace Consulting', 'Workflow Automations', 'Brainstorming Sessions'], anim: 'Options → decision' },
+  { n: '03', t: 'Data Analysis', short: 'Dashboards & decisions', d: 'Turn scattered numbers into decisions, with clean analysis, dashboards your team will actually open, and the right tools behind them.', subs: ['Analysis & Insight Extractions', 'Dashboard Optimizations'], anim: 'Noise → signal' },
+  { n: '04', t: 'AI Trainer', short: 'Data annotation', d: 'Careful, consistent human judgement for AI models, with clear guidelines and reliable throughput.', subs: ['Data Annotation', 'Prompt Engineering'], anim: 'Label · review · repeat' },
   { n: '05', t: 'Virtual Assistant', short: 'Workflow automations', d: 'Reliable remote support that runs on systems, not reminders. Repetitive work gets automated so it stops slipping.', subs: ['Workflow automations', 'Remote operations support'], anim: 'Runs on systems, not reminders' }
 ];
 const ROLES = ['AI Trainer', 'Data Annotator', 'Data Analyst', 'BD / SDR', 'Virtual Assistant', 'Account Manager', 'Project Manager'];
