@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TailoredAI — Marwah K</title>
+<meta name="description" content="One brief in, three outreach drafts out — each one written for the brand in front of you." />
+<meta name="theme-color" content="#121B16" />
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mk/site.css">
+<style>
+.msgs{display:flex;flex-direction:column;gap:2px;background:var(--seam)}
+.msg{background:var(--ink);padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;gap:14px}
+.msg__hd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.msg__hd>span{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.msg__n{font-family:var(--mono);font-size:11px;color:var(--bg);background:var(--gold);padding:4px 7px}
+.msg__l{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.msg__c{font-family:var(--mono);font-size:11px;color:var(--lichen)}
+.msg__s{font-size:15px;font-weight:600;padding-bottom:12px;border-bottom:1px solid var(--seam)}
+.msg p{margin:0;font-size:15px;line-height:1.65;color:var(--bone);white-space:pre-wrap;text-wrap:pretty;max-width:620px;padding:14px 16px;background:var(--moss)}
+.msg--email p{padding:0;background:transparent}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav__in">
+    <div class="nav__left">
+      <a href="/" class="nav__brand"><svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg><span>Marwah K</span></a>
+      <span class="nav__crumb">TailoredAI</span>
+    </div>
+    <div class="nav__right"><a href="/#projects">← Back to portfolio</a></div>
+  </div>
+</nav>
+
+<header class="wrap tool-hd">
+  <div class="fade">
+    <div class="eyebrow"><span class="sq"></span><b>Built with AI · BD outreach</b></div>
+    <h1>TailoredAI</h1>
+    <p>One brief in, three outreach drafts out — each one written for the brand in front of you. Never a template blast.</p>
+  </div>
+  <div class="seg seg--mono" data-seg="lang" aria-label="Output language"></div>
+</header>
+
+<section class="wrap tool">
+  <div class="tool__grid">
+    <form class="tool__form" id="form" novalidate>
+      <div class="blk">
+        <span class="k"><i>01</i>Target brand</span>
+        <input class="big" id="brand" placeholder="Brand name, e.g. Erigo" autocomplete="off" aria-label="Target brand">
+        <div class="seg" data-seg="platform" aria-label="Platform"></div>
+        <div class="blk--grid" style="display:grid;gap:12px">
+          <label class="f"><span class="k k--dim">Industry</span><select class="inp" id="industry"></select></label>
+          <label class="f"><span class="k k--dim">Contact name · optional</span><input class="inp" id="contact" placeholder="e.g. Dina"></label>
+        </div>
+      </div>
+      <div class="blk">
+        <span class="k"><i>02</i>Approach</span>
+        <div class="cards" id="approach"></div>
+      </div>
+      <div class="blk blk--grid">
+        <label class="f"><span class="k"><i>03</i>Goal</span><select class="inp" id="goal"></select></label>
+        <div class="f" style="display:flex;flex-direction:column;gap:6px"><span class="k">Tone</span><div class="seg seg--fill" data-seg="tone"></div></div>
+      </div>
+      <div class="blk blk--grid">
+        <label class="f"><span class="k"><i>04</i>Your name</span><input class="inp" id="name" placeholder="Marwah"></label>
+        <label class="f"><span class="k">Company / team</span><input class="inp" id="company" placeholder="AHA Commerce"></label>
+      </div>
+      <div class="blk blk--end">
+        <button type="submit" class="btn btn--gold go" id="go" data-ready="false"><span id="goLabel">Generate 3 drafts</span><span>→</span></button>
+        <span class="err" id="err" role="alert"></span>
+      </div>
+    </form>
+
+    <div class="tool__out">
+      <div class="bar"><span><span class="dot"></span><span id="status">Idle · waiting for a brief</span></span><span id="chip"></span></div>
+      <div class="stage" id="stage"><canvas id="cv" aria-hidden="true"></canvas><span id="hint">Generic in, tailored out — add a brand to start</span></div>
+      <div class="msgs" id="out" hidden aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Marwah Khairunnisa · Personal project</span><a href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk →</a></div></footer>
+
+<script src="/assets/mk/ai.js"></script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const OPTS = {
+  lang: ['ID', 'EN'],
+  platform: ['Shopee', 'Tokopedia', 'TikTok Shop', 'Lazada', 'Instagram', 'Other'],
+  tone: ['Formal', 'Semi-formal', 'Casual']
+};
+const INDUSTRIES = ['Fashion', 'F&B', 'Beauty', 'Sports', 'Electronics', 'Other'];
+const GOALS = ['Brand partnership', 'Event collaboration', 'Brand activation', 'Reseller program', 'Other'];
+const APPROACH = [{ t: 'Personal', d: 'To an individual — warm, peer-to-peer' }, { t: 'Brand', d: 'To the brand — collaborative, friendly' }, { t: 'Company', d: 'To the team — formal, outcome-focused' }];
+const CH = ['WhatsApp', 'Email', 'WhatsApp · day 3'];
+const f = { lang: 'ID', platform: 'Shopee', tone: 'Semi-formal', approach: 'Brand' };
+let busy = false, hasOut = false;
+
+// Segmented controls
+document.querySelectorAll('[data-seg]').forEach(box => {
+  const k = box.dataset.seg;
+  box.innerHTML = OPTS[k].map(t => `<button type="button" aria-pressed="${f[k] === t}">${esc(t)}</button>`).join('');
+  box.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; f[k] = b.textContent; box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); sync(); });
+});
+$('#industry').innerHTML = INDUSTRIES.map(o => `<option>${esc(o)}</option>`).join('');
+$('#goal').innerHTML = GOALS.map(o => `<option>${esc(o)}</option>`).join('');
+const ap = $('#approach');
+ap.innerHTML = APPROACH.map(a => `<button type="button" data-t="${a.t}" aria-pressed="${f.approach === a.t}"><b>${a.t}</b><span>${a.d}</span></button>`).join('');
+ap.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; f.approach = b.dataset.t; ap.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+['brand', 'industry', 'goal', 'contact', 'name', 'company'].forEach(id => $('#' + id).addEventListener('input', sync));
+
+const brand = () => $('#brand').value.trim();
+function sync() {
+  $('#go').dataset.ready = String(!!brand());
+  $('#chip').textContent = f.platform + ' · ' + f.tone;
+  $('#status').textContent = busy ? 'Tailoring · ' + brand() : hasOut ? 'Ready · ' + brand() : 'Idle · waiting for a brief';
+  $('#goLabel').textContent = busy ? 'Tailoring your messages…' : 'Generate 3 drafts';
+  $('#hint').textContent = busy ? 'Weaving ' + brand() + ' into every line…' : 'Generic in, tailored out — add a brand to start';
+  $('#stage').hidden = hasOut && !busy; $('#out').hidden = !hasOut || busy;
+}
+sync();
+
+$('#form').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (busy) return;
+  if (!brand()) { $('#err').textContent = 'Add a brand name first.'; $('#brand').focus(); return; }
+  busy = true; hasOut = false; $('#err').textContent = ''; $('#go').disabled = true; sync();
+  try {
+    const { items } = await mkApi('/api/write', { kind: 'tailored', ...f, brand: brand(), industry: $('#industry').value, goal: $('#goal').value, contact: $('#contact').value, name: $('#name').value, company: $('#company').value });
+    render(items.slice(0, 3)); hasOut = true;
+  } catch (err) { $('#err').textContent = err.message; }
+  busy = false; $('#go').disabled = false; sync();
+});
+
+function render(items) {
+  $('#out').innerHTML = items.map((m, i) => {
+    const copy = (m.subject ? 'Subject: ' + m.subject + '\n\n' : '') + (m.text || '');
+    return `<div class="msg anim-in${i === 1 ? ' msg--email' : ''}" style="animation-delay:${i * 120}ms">
+      <div class="msg__hd"><span><span class="msg__n">${String(i + 1).padStart(2, '0')}</span><span class="msg__l">${esc(m.label)}</span><span class="msg__c">${CH[i] || ''}</span></span><button type="button" class="ghost" data-copy="${esc(copy)}">Copy</button></div>
+      ${m.subject ? `<div class="msg__s">Subject: ${esc(m.subject)}</div>` : ''}
+      <p>${esc(m.text)}</p>
+    </div>`;
+  }).join('');
+}
+$('#out').addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  navigator.clipboard && navigator.clipboard.writeText(b.dataset.copy).catch(() => {});
+  b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy'; }, 1500);
+});
+
+// Motion: generic drafts flow in, pass a "tailoring loom" of brief tags, exit as gold tailored messages
+const cv = $('#cv'); let parts = [], acc = 0, last = performance.now();
+const t0 = last;
+function paint(now) {
+  const dt = Math.min(.05, (now - last) / 1000), t = (now - t0) / 1000; last = now;
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (W && H && !$('#stage').hidden) {
+    const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
+    const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
+    const sp = busy ? 2.6 : 1, gx = W * 0.5, top = 70, bot = H - 90, cy = (top + bot) / 2;
+    const tags = [brand() || 'Brand', f.platform, $('#industry').value, f.approach, f.tone, $('#goal').value];
+    x.strokeStyle = '#2E3B33'; x.strokeRect(gx - 70.5, top + .5, 140, bot - top);
+    tags.forEach((tg, i) => {
+      const y = top + 20 + i * ((bot - top - 40) / (tags.length - 1)), on = Math.floor(t * 1.2 * sp) % tags.length === i;
+      x.font = '500 11px "IBM Plex Mono", monospace'; x.textAlign = 'center'; x.textBaseline = 'middle';
+      const tw = Math.min(124, x.measureText(tg).width + 16);
+      x.fillStyle = on ? '#C9B48A' : '#1F2B24'; x.fillRect(gx - tw / 2, y - 11, tw, 22);
+      x.fillStyle = on ? '#121B16' : '#A9B0A6'; x.fillText(tg.length > 16 ? tg.slice(0, 15) + '…' : tg, gx, y);
+    });
+    if (!reduce) { acc += dt * sp * 2.2; while (acc > 1) { acc -= 1; parts.push({ x: -20, y: top + 10 + Math.random() * (bot - top - 20), v: 70 + Math.random() * 50 }); } }
+    else if (!parts.length) for (let i = 0; i < 10; i++) parts.push({ x: i * W / 10, y: top + 20 + (i * 37) % (bot - top - 40), v: 0 });
+    parts = parts.filter(p => p.x < W + 30);
+    parts.forEach(p => {
+      p.x += p.v * dt * sp;
+      const past = p.x > gx + 70, inside = p.x > gx - 70 && !past;
+      const ty = past ? cy + (p.y - cy) * 0.35 : p.y; p.dy = p.dy == null ? p.y : p.dy; p.dy += (ty - p.dy) * 0.06;
+      if (inside) return;
+      const w = past ? 22 : 16, h = past ? 14 : 10;
+      x.fillStyle = past ? '#C9B48A' : '#2E3B33'; x.fillRect(p.x - w / 2, p.dy - h / 2, w, h);
+      if (past) { x.fillStyle = '#121B16'; x.fillRect(p.x - 7, p.dy - 2, 14, 1.5); x.fillRect(p.x - 7, p.dy + 1.5, 9, 1.5); }
+      else { x.strokeStyle = '#4E5A51'; x.beginPath(); x.moveTo(p.x - 8, p.dy - 5); x.lineTo(p.x, p.dy + 1); x.lineTo(p.x + 8, p.dy - 5); x.stroke(); }
+    });
+    x.font = '500 11px "IBM Plex Mono", monospace'; x.textBaseline = 'alphabetic';
+    x.fillStyle = '#6F7A70'; x.textAlign = 'left'; x.fillText('generic', 16, top - 22);
+    x.textAlign = 'right'; x.fillStyle = '#C9B48A'; x.fillText('tailored', W - 16, top - 22);
+    x.textAlign = 'center'; x.fillStyle = '#A9B0A6'; x.fillText('your brief', gx, top - 22);
+  }
+  requestAnimationFrame(paint);
+}
+requestAnimationFrame(paint);
+})();
+</script>
+</body>
+</html>

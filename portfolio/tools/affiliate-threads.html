@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Affiliate Threads — Marwah K</title>
+<meta name="description" content="Shopee affiliate threads that read like a real story, not an ad." />
+<meta name="theme-color" content="#121B16" />
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mk/site.css">
+<style>
+.cards--types{grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))}
+.more{width:100%;border:0;background:none;cursor:pointer;padding:16px clamp(20px,2.4vw,28px);display:flex;justify-content:space-between;color:var(--sage);font-family:var(--mono);font-size:12px}
+.more:hover{color:var(--cream)}
+.more-box{padding:0 clamp(20px,2.4vw,28px) 20px;display:flex;flex-direction:column;gap:12px}
+.thread{padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column}
+.tw{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px}
+.tw__av{display:flex;flex-direction:column;align-items:center}
+.tw__av i{flex:1;width:2px;background:var(--seam);margin:6px 0}
+.tw:last-child .tw__av i{background:transparent}
+.tw__b{display:flex;flex-direction:column;gap:8px;padding-bottom:24px;min-width:0}
+.tw__hd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tw__hd>span{display:flex;gap:8px;align-items:baseline;font-size:14px}
+.tw__hd small{font-family:var(--mono);font-size:11px;color:var(--lichen)}
+.tw__hd button{border:0;background:none;color:var(--sage);cursor:pointer;padding:0;font-family:var(--mono);font-size:11px}
+.tw__hd button:hover{color:var(--gold)}
+.tw p{margin:0;font-size:15px;line-height:1.6;white-space:pre-wrap;text-wrap:pretty;overflow-wrap:anywhere}
+.tw__len{font-family:var(--mono);font-size:11px;color:var(--fern)}
+.tw__len.over{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav__in">
+    <div class="nav__left">
+      <a href="/" class="nav__brand"><svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg><span>Marwah K</span></a>
+      <span class="nav__crumb">Affiliate Threads</span>
+    </div>
+    <div class="nav__right"><a href="/#projects">← Back to portfolio</a></div>
+  </div>
+</nav>
+
+<header class="wrap tool-hd">
+  <div class="fade">
+    <div class="eyebrow"><span class="sq"></span><b>Built with AI · Content</b></div>
+    <h1>Affiliate Threads</h1>
+    <p>Shopee affiliate threads that read like a real story, not an ad. Write the idea, pick a format, get the thread.</p>
+  </div>
+  <div class="seg seg--mono" data-seg="lang" aria-label="Output language"></div>
+</header>
+
+<section class="wrap tool">
+  <div class="tool__grid">
+    <form class="tool__form" id="form" novalidate>
+      <div class="blk">
+        <span class="k" style="display:flex;justify-content:space-between"><span><i>01</i><span data-t="idea"></span></span><span id="ideaCount">0 / 20+</span></span>
+        <textarea class="big" id="idea" rows="4" aria-label="Idea"></textarea>
+      </div>
+      <div class="blk">
+        <span class="k"><i>02</i><span data-t="format"></span></span>
+        <div class="cards cards--types" id="types"></div>
+      </div>
+      <div class="blk blk--grid">
+        <label class="f"><span class="k"><i>03</i>Hook</span><select class="inp" id="hook"></select></label>
+        <div style="display:flex;flex-direction:column;gap:6px"><span class="k">Tweets</span><div class="seg seg--fill seg--mono" data-seg="count"></div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span class="k">CTA</span><div class="seg seg--fill" data-seg="cta"></div></div>
+      </div>
+      <div style="border-bottom:1px solid var(--seam)">
+        <button type="button" class="more" id="moreBtn" aria-expanded="false"><span data-t="more"></span><span id="moreIcon">+</span></button>
+        <div class="more-box" id="moreBox" hidden>
+          <textarea class="inp" id="product" rows="3" style="resize:vertical;line-height:1.5"></textarea>
+          <input class="inp" id="extra">
+        </div>
+      </div>
+      <div class="blk blk--end">
+        <button type="submit" class="btn btn--gold go" id="go" data-ready="false"><span id="goLabel"></span><span>→</span></button>
+        <span class="err" id="err" role="alert"></span>
+      </div>
+    </form>
+
+    <div class="tool__out">
+      <div class="bar"><span><span class="dot"></span><span id="status"></span></span><button type="button" class="ghost" id="copyAll" hidden>Copy thread</button></div>
+      <div class="stage" id="stage"><canvas id="cv" aria-hidden="true"></canvas><span id="hint"></span></div>
+      <div class="thread" id="out" hidden aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Marwah Khairunnisa · Personal project</span><a href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk →</a></div></footer>
+
+<script src="/assets/mk/ai.js"></script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MARK = '<svg viewBox="0 0 100 100" width="40" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg>';
+const TYPES = [
+  { t: 'Testimoni', d: { ID: 'Review jujur dari pengalaman pribadi', EN: 'Honest review from personal use' } },
+  { t: 'Create curiosity', d: { ID: 'Bikin penasaran, reveal belakangan', EN: 'Tease first, reveal later' } },
+  { t: 'Cerita pengalaman', d: { ID: 'Personal journey, produk jadi solusi', EN: 'Personal story, product as the fix' } },
+  { t: 'Ketemu barang baru', d: { ID: 'Discovery story, excited tapi genuine', EN: 'Discovery, excited but genuine' } },
+  { t: 'Barang viral', d: { ID: 'Honest take soal barang yang lagi hype', EN: 'Honest take on a hyped item' } },
+  { t: 'Tips kehidupan', d: { ID: 'Tips/hack, produk sebagai enabler', EN: 'A life hack, product as enabler' } }
+];
+const HOOKS = ['Auto', 'Confession', 'Number', 'Controversy', 'Before / After', 'Curiosity gap', 'Relatability', 'Discovery', 'Social proof', 'Plot twist', 'Question'];
+const COPY = {
+  ID: { idea: 'Ide / cerita awal', ideaPh: 'Baru pindah kos, kamarnya sempit banget. Akhirnya nemu rak lipat ini dan…', format: 'Format konten', productPh: 'Deskripsi produk utama — copas dari halaman Shopee', extraPh: 'Produk complementary, mis. kotak penyimpanan kain', more: 'Detail produk · opsional', go: 'Generate thread', busy: 'Menulis thread…', hint: 'Tulis idemu, pilih format, lalu generate', min: 'Ide minimal 20 karakter.' },
+  EN: { idea: 'Idea / starting story', ideaPh: 'Just moved into a tiny room. Then I found this folding rack and…', format: 'Content format', productPh: 'Main product description — paste from the Shopee page', extraPh: 'Complementary product, e.g. fabric storage box', more: 'Product details · optional', go: 'Generate thread', busy: 'Writing the thread…', hint: 'Write your idea, pick a format, then generate', min: 'Idea needs at least 20 characters.' }
+};
+const OPTS = { lang: ['ID', 'EN'], count: ['3', '5', '7', '10'], cta: ['Link di bio', 'Inline link'] };
+const f = { lang: 'ID', type: 'Testimoni', count: '5', cta: 'Link di bio' };
+let busy = false, out = [];
+
+document.querySelectorAll('[data-seg]').forEach(box => {
+  const k = box.dataset.seg;
+  box.innerHTML = OPTS[k].map(t => `<button type="button" aria-pressed="${f[k] === t}">${esc(t)}</button>`).join('');
+  box.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; f[k] = b.textContent; box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); sync(); });
+});
+$('#hook').innerHTML = HOOKS.map(h => `<option>${esc(h)}</option>`).join('');
+const types = $('#types');
+function drawTypes() { types.innerHTML = TYPES.map(x => `<button type="button" data-t="${esc(x.t)}" aria-pressed="${f.type === x.t}"><b>${esc(x.t)}</b><span>${esc(x.d[f.lang])}</span></button>`).join(''); }
+types.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; f.type = b.dataset.t; types.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); sync(); });
+$('#moreBtn').addEventListener('click', () => { const open = $('#moreBox').hidden; $('#moreBox').hidden = !open; $('#moreIcon').textContent = open ? '−' : '+'; $('#moreBtn').setAttribute('aria-expanded', open); });
+$('#idea').addEventListener('input', sync);
+
+let lang;
+function sync() {
+  const c = COPY[f.lang], L = $('#idea').value.trim().length;
+  if (lang !== f.lang) {
+    lang = f.lang; drawTypes();
+    document.querySelectorAll('[data-t]').forEach(el => { if (c[el.dataset.t]) el.textContent = c[el.dataset.t]; });
+    $('#idea').placeholder = c.ideaPh; $('#product').placeholder = c.productPh; $('#extra').placeholder = c.extraPh;
+  }
+  $('#ideaCount').textContent = L + ' / 20+'; $('#ideaCount').style.color = L >= 20 ? 'var(--gold)' : 'var(--lichen)';
+  $('#go').dataset.ready = String(L >= 20);
+  $('#goLabel').textContent = busy ? c.busy : c.go;
+  $('#hint').textContent = busy ? c.busy : c.hint;
+  $('#status').textContent = busy ? 'Drafting · ' + f.type : out.length ? out.length + ' tweets · ' + f.type : 'Preview · ' + f.count + ' tweets';
+  const has = out.length > 0 && !busy;
+  $('#stage').hidden = has; $('#out').hidden = !has; $('#copyAll').hidden = !has;
+}
+sync();
+
+$('#form').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (busy) return;
+  const c = COPY[f.lang];
+  if ($('#idea').value.trim().length < 20) { $('#err').textContent = c.min; $('#idea').focus(); return; }
+  busy = true; out = []; $('#err').textContent = ''; $('#go').disabled = true; sync();
+  try {
+    const { items } = await mkApi('/api/write', { kind: 'threads', ...f, hook: $('#hook').value, idea: $('#idea').value, product: $('#product').value, extra: $('#extra').value });
+    out = items.map(t => typeof t === 'string' ? t : (t.text || '')).filter(Boolean);
+    render();
+  } catch (err) { $('#err').textContent = err.message === 'Owner token required.' ? err.message : (f.lang === 'ID' ? 'Gagal generate — coba lagi.' : err.message); }
+  busy = false; $('#go').disabled = false; sync();
+});
+
+function render() {
+  const n = out.length;
+  $('#out').innerHTML = out.map((tx, i) => `<div class="tw anim-in" style="animation-delay:${i * 100}ms">
+    <div class="tw__av">${MARK}<i></i></div>
+    <div class="tw__b">
+      <div class="tw__hd"><span><b>You</b><small>${i + 1}/${n}</small></span><button type="button" data-i="${i}">Copy</button></div>
+      <p>${esc(tx)}</p>
+      <span class="tw__len${tx.length > 280 ? ' over' : ''}">${tx.length} / 280</span>
+    </div>
+  </div>`).join('');
+}
+const flash = (b, t) => { const o = b.textContent; b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = o; }, 1500); };
+const copy = t => navigator.clipboard && navigator.clipboard.writeText(t).catch(() => {});
+$('#out').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (!b) return; copy(out[+b.dataset.i]); flash(b); });
+$('#copyAll').addEventListener('click', e => { copy(out.join('\n\n')); flash(e.currentTarget); });
+
+// Motion: a thread being drafted line by line
+const cv = $('#cv'), t0 = performance.now();
+function paint(now) {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (W && H && !$('#stage').hidden) {
+    const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
+    const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
+    const t = (now - t0) / 1000, n = Math.min(5, +f.count), T = reduce ? 4 : t * (busy ? 2.4 : 1);
+    const cw = Math.min(400, W - 64), cx = (W - cw) / 2, rowH = Math.min(92, (H - 120) / n), top = Math.max(28, (H - rowH * n) / 2 - 24);
+    const cyc = (T * 0.2) % 1, active = Math.floor(cyc * (n + 1)), local = (cyc * (n + 1)) % 1;
+    for (let i = 0; i < n; i++) {
+      const y = top + i * rowH, done = i < active, cur = i === active;
+      x.fillStyle = done || cur ? '#EEE8DC' : '#1F2B24'; x.fillRect(cx, y, 32, 32);
+      if (i < n - 1) { x.fillStyle = done ? '#C9B48A' : '#1F2B24'; x.fillRect(cx + 15, y + 38, 2, rowH - 44); }
+      x.font = '500 11px "IBM Plex Mono", monospace'; x.fillStyle = done || cur ? '#C9B48A' : '#4E5A51'; x.textBaseline = 'top'; x.textAlign = 'left'; x.fillText((i + 1) + '/' + n, cx + 48, y + 2);
+      [0.95, 0.82, 0.5].forEach((L, k) => {
+        const full = (cw - 48) * L, w = done ? full : cur ? Math.max(0, Math.min(full, (local * 3 - k) * full)) : 0;
+        x.fillStyle = '#1A241F'; x.fillRect(cx + 48, y + 20 + k * 13, full, 6);
+        x.fillStyle = cur ? '#4E5A51' : '#2E3B33'; x.fillRect(cx + 48, y + 20 + k * 13, w, 6);
+        if (cur && w > 0 && w < full) { x.fillStyle = '#C9B48A'; x.fillRect(cx + 50 + w, y + 17 + k * 13, 2, 12); }
+      });
+    }
+  }
+  requestAnimationFrame(paint);
+}
+requestAnimationFrame(paint);
+})();
+</script>
+</body>
+</html>
