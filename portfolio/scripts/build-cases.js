@@ -17,11 +17,12 @@ const PROJECTS = [
     cta: 'Want to see what I can close for your team?' },
   { id: 'bd-funnel-overhaul', tab: 'BD Team Leadership', eyebrow: 'Strategy & leadership · 2024', title: 'BD Team Leadership', role: 'BD Lead · Team of 8',
     summary: 'Built and led a BD team of 8 at AHA Commerce — designed the acquisition funnel end-to-end, set KPIs, ran weekly 1-on-1s, and drove 47 brand partnerships across Shopee, TikTok Shop & Tokopedia in 9 months.',
-    stats: [{ v: '47+', l: 'Brand partnerships in 9 months' }, { v: '56%', l: 'Revenue growth driven' }, { v: '30%', l: 'Lead-to-conversion lift' }],
+    stats: [{ v: '47+', l: 'Brand partnerships in 9 months' }, { v: '8', l: 'BD people led as one team' }, { v: '30%', l: 'Lead-to-conversion lift' }],
     tags: ['Team Leadership', 'BD Strategy', 'Funnel Design', 'KPI Management', 'AI & Automation'],
-    challenge: 'No structured acquisition process, inconsistent close achievement — my mandate: build a repeatable system a team of 8 could run at scale.',
+    challenge: 'Fragmented process and inconsistent closes to a unified BD engine — built to standardize execution, improve conversion, and scale what works.',
+    challengeMotion: true,
     didLabel: 'What I made for the team', did: [{ t: 'AI Agentic Scraper', d: 'AppleScript automation that sources and enriches leads so the team can sell.' }, { t: 'BD Module', d: 'Internal knowledge base — product, pitch and process in one place for the team.' }, { t: 'Funnel Tracker', d: 'Pipeline dashboard so every stage and every owner is visible to the whole team.' }],
-    procLabel: 'The process — 7-stage acquisition funnel', proc: ['Prospecting & Research', 'Outreach & Engagement', 'Pipeline Management', 'Meeting & Proposal', 'Negotiation & Closing', 'Onboarding & Handover', 'Growth & Retention'],
+    procLabel: 'How I lead — 7 steps', proc: ['Diagnose\nthe team', 'Set one\ndirection', 'Define\nroles & KPIs', 'Build the\nplaybook', 'Coach\nevery week', 'Review\nthe numbers', 'Grow the\nnext leads'],
     galleryLabel: 'BD Wikipedia', gallery: [{ src: '/assets/bd-wiki-home.png', cap: 'Module overview' }, { src: '/assets/bd-wiki-sales.png', cap: 'Sales strategy module' }],
     cta: 'Want to scale your BD team?' },
   { id: 'shopee-super-summit', tab: 'Shopee Super Summit', eyebrow: 'AHA Commerce · 2024 & 2025', title: 'Shopee Super Summit', role: 'Project Lead',
@@ -135,7 +136,8 @@ ${p.brands ? `
 ` : ''}${p.challenge ? `
 <section class="wrap case-sec challenge">
   <span class="label">The challenge</span>
-  <p>${esc(p.challenge)}</p>
+  <p>${esc(p.challenge)}</p>${p.challengeMotion ? `
+  <div class="ch-motion"><canvas aria-label="Eight scattered team members align into one five-stage funnel that closes on repeat" role="img"></canvas></div>` : ''}
 </section>
 ` : ''}
 <section class="wrap case-sec sec-col">
@@ -170,7 +172,7 @@ ${p.outcomes ? `
 <section class="wrap case-sec sec-col">
   <div class="sec-hd"><h2 class="h2">${esc(p.galleryLabel)}</h2><span>${g.length} image${g.length > 1 ? 's' : ''}</span></div>
   <div class="gallery">${g.map((x, k) => `
-    <figure><div><img src="${x.src}" alt="${esc(x.cap)}" loading="lazy"></div><figcaption><span>${esc(x.cap)}</span><span>${pad(k)} / ${String(g.length).padStart(2, '0')}</span></figcaption></figure>`).join('')}
+    <figure><div class="frame"><div><img src="${x.src}" alt="${esc(x.cap)}" loading="lazy"></div></div><figcaption><span>${esc(x.cap)}</span><span>${pad(k)} / ${String(g.length).padStart(2, '0')}</span></figcaption></figure>`).join('')}
   </div>
 </section>
 ` : ''}

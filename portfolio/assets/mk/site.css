@@ -74,6 +74,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .case-sec{padding-top:clamp(56px,7vw,96px)}
 .challenge{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px}
 .label{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--lichen)}
+.ch-motion{grid-column:1/-1;position:relative;height:clamp(240px,26vw,320px);background:var(--ink);border:1px solid var(--seam)}
+.ch-motion canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .challenge p{margin:0;grid-column:span 2;font-size:clamp(24px,2.6vw,36px);line-height:1.2;letter-spacing:-.03em;font-weight:500;text-wrap:pretty;max-width:900px}
 @media(max-width:640px){.challenge p{grid-column:auto}}
 .sec-col{display:flex;flex-direction:column;gap:32px}
@@ -94,7 +96,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .proc div{padding:18px 16px 18px 0;display:flex;flex-direction:column;gap:28px;border-bottom:1px solid var(--seam)}
 .proc .n{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--lichen)}
 .proc .n::before{content:"";width:8px;height:8px;background:var(--gold);margin-top:-23px}
-.proc b{font-size:16px;font-weight:500;line-height:1.3;letter-spacing:-.01em;padding-right:8px}
+.proc b{font-size:16px;font-weight:500;line-height:1.3;letter-spacing:-.01em;padding-right:8px;white-space:pre-line}
 .outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,4vw,64px)}
 .outcomes ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;grid-column:span 2}
 @media(max-width:720px){.outcomes ol{grid-column:auto}}
@@ -110,7 +112,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .deck>span:last-child{font-family:var(--mono);font-size:14px;color:var(--gold)}
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
 .gallery figure{margin:0;display:flex;flex-direction:column;gap:12px}
-.gallery figure>div{background:var(--ink);border:1px solid var(--seam);overflow:hidden}
+.gallery .frame{background:var(--moss);border:1px solid var(--seam);padding:clamp(16px,2.4vw,32px);transition:border-color .3s ease}
+.gallery .frame:hover{border-color:var(--gold)}
+.gallery .frame>div{overflow:hidden;border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.35);filter:grayscale(1) brightness(.5);transition:filter .4s ease}
+.gallery .frame:hover>div{filter:none}
 .gallery img{width:100%;height:auto}
 .gallery figcaption{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12px;color:var(--sage)}
 .gallery figcaption span:last-child{color:var(--lichen)}

@@ -31,3 +31,43 @@
   requestAnimationFrame(() => paint(0));
   if (reduce) new ResizeObserver(() => paint(0)).observe(cv);
 })();
+
+// Challenge motion (BD Team Leadership): eight scattered people align into one funnel that closes on repeat.
+(() => {
+  const cv = document.querySelector('.ch-motion canvas'); if (!cv) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
+  const stages = ['Prospect', 'Outreach', 'Pipeline', 'Proposal', 'Close'];
+  const paint = t => {
+    const W = cv.clientWidth, H = cv.clientHeight;
+    if (W && H) {
+      const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d) || cv.height !== Math.round(H * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
+      const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
+      const C = 9, ph = (t % C) / C;
+      const k = ph < .3 ? 0 : ph < .5 ? ease((ph - .3) / .2) : ph < .92 ? 1 : 1 - ease((ph - .92) / .08);
+      const pad = 32, sx = pad + 90, ex = W - pad, sy = H / 2;
+      x.font = '500 11px "IBM Plex Mono", monospace'; x.textBaseline = 'middle';
+      x.globalAlpha = k; x.strokeStyle = '#2E3B33'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex, sy); x.stroke();
+      // On narrow screens alternate stage labels above/below the line so they don't collide.
+      const tight = (ex - sx) / (stages.length - 1) < 72;
+      stages.forEach((s, i) => { const px = sx + (ex - sx) * i / (stages.length - 1); x.fillStyle = i === 4 ? '#C9B48A' : '#4E5A51'; x.fillRect(px - 4, sy - 4, 8, 8); x.fillStyle = '#6F7A70'; x.textAlign = i === 4 && tight ? 'right' : 'center'; x.fillText(s, i === 4 && tight ? px + 4 : px, tight && i % 2 ? sy - 22 : sy + 26); });
+      x.globalAlpha = 1;
+      for (let i = 0; i < 8; i++) {
+        const seed = i * 1.7, wx = pad + 40 + ((i * 0.37 + 0.13) % 1) * (W - 2 * pad - 80) + Math.sin(t * .9 + seed) * 26, wy = 28 + ((i * 0.61 + 0.2) % 1) * (H - 56) + Math.cos(t * .7 + seed) * 18;
+        const lx = pad + 20, ly = sy - 70 + i * 20;
+        const px = wx + (lx - wx) * k, py = wy + (ly - wy) * k;
+        x.fillStyle = k > .9 ? '#EEE8DC' : '#6F7A70'; x.fillRect(px - 5, py - 5, 10, 10);
+        if (k > .9) { x.strokeStyle = 'rgba(78,90,81,.6)'; x.beginPath(); x.moveTo(px + 6, py); x.quadraticCurveTo(sx - 20, py, sx, sy); x.stroke(); }
+        if (k < .2) { x.fillStyle = 'rgba(111,122,112,.7)'; x.textAlign = 'left'; x.fillText(['?', '—', '×', '?', '—', '×', '?', '—'][i], px + 10, py); }
+      }
+      if (k > .95) {
+        for (let j = 0; j < 6; j++) { const q = (t * .35 + j / 6) % 1, px = sx + (ex - sx) * q; x.fillStyle = q > .96 ? '#EEE8DC' : '#C9B48A'; x.fillRect(px - 3, sy - 3, 6, 6); }
+        x.fillStyle = '#C9B48A'; x.textAlign = 'right'; x.fillText('closes on repeat', ex, tight ? sy - 52 : sy - 26);
+      } else if (k < .2) { x.fillStyle = '#6F7A70'; x.textAlign = 'left'; x.fillText('8 people · no shared process', pad, 18); }
+    }
+    if (!reduce) requestAnimationFrame(now => paint(now / 1000));
+  };
+  // Reduced motion: hold the aligned end state (t = 6s into the 9s cycle).
+  requestAnimationFrame(() => paint(reduce ? 6 : 0));
+  if (reduce) new ResizeObserver(() => paint(6)).observe(cv);
+})();
