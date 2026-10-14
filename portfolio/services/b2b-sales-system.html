@@ -34,11 +34,14 @@ button{font:inherit}
 
 /* Nav */
 .nav{position:sticky;top:0;z-index:10;background:rgba(18,27,22,.97);border-bottom:1px solid var(--seam)}
-.nav .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .nav__brand{display:flex;align-items:center;gap:12px}
 .nav__brand b{font-size:15px;font-weight:500;letter-spacing:-.01em}
-.nav__brand span{font-family:var(--mono);font-size:12px;color:var(--sage)}
-.nav a{color:var(--gold);font-size:14px}
+.nav__right{display:flex;gap:20px;align-items:center;font-size:14px}
+.nav__right a:not(.nav__cta){color:var(--sage)}
+.nav__right a:not(.nav__cta):hover{color:var(--cream)}
+.nav__cta{background:var(--gold);color:var(--bg)!important;padding:9px 14px;font-weight:600;transition:background .2s}
+.nav__cta:hover{background:var(--cream)}
 
 /* Hero */
 .hero{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(40px,5vw,72px);align-items:center}
@@ -160,8 +163,11 @@ button{font:inherit}
 .contact__btns{display:flex;gap:2px;flex-wrap:wrap}
 .b-ink{background:var(--bg);color:var(--cream)}.b-ink:hover{background:var(--seam);color:var(--cream)}
 .b-bone{background:var(--bone);color:var(--bg);font-weight:500}.b-bone:hover{background:var(--gold);color:var(--bg)}
-.contact__ft{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--bg);padding-top:20px;font-family:var(--mono);font-size:12px;color:var(--fern)}
-.contact__ft span:first-child{display:flex;align-items:center;gap:10px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--bone);font-family:var(--mono);font-size:12px;color:var(--fern)}
+.foot div{display:flex;align-items:center;gap:10px}
+.foot__ico{gap:8px!important}
+.foot__ico a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--cream)!important;transition:background .2s}
+.foot__ico a:hover{background:var(--gold);color:var(--bg)!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important}}
 </style>
 </head>
@@ -170,11 +176,14 @@ button{font:inherit}
 
 <nav class="nav">
   <div class="wrap">
-    <div class="nav__brand">
-      <svg viewBox="0 0 100 100" width="26" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg>
-      <b>Marwah K</b><span>/ B2B Sales System</span>
+    <a href="/" class="nav__brand">
+      <svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg>
+      <b>Marwah K</b>
+    </a>
+    <div class="nav__right">
+      <a href="/">← Back to portfolio</a>
+      <a class="nav__cta" href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk</a>
     </div>
-    <a href="#packages">Packages →</a>
   </div>
 </nav>
 
@@ -268,10 +277,14 @@ button{font:inherit}
         </div>
       </div>
     </div>
-    <div class="contact__ft">
-      <span><svg viewBox="0 0 100 100" width="20" aria-hidden="true"><rect width="100" height="100" fill="#121B16"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#EEE8DC" stroke-width="10"/><rect width="100" height="16" fill="#121B16"/></svg>Marwah K · Jakarta</span>
-      <span>Process · Pipeline · Custom web apps · Automation</span>
-    </div>
+    <footer class="foot">
+      <div><svg viewBox="0 0 100 100" width="20" aria-hidden="true"><rect width="100" height="100" fill="#121B16"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#EEE8DC" stroke-width="12"/><rect width="100" height="16" fill="#121B16"/></svg><span>© 2026 Marwah Khairunnisa</span></div>
+      <div class="foot__ico">
+        <a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="20" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter"><path d="M3 5 H21 V19 H3 Z M3 6 L12 13 L21 6"/></svg></a>
+        <a href="https://linkedin.com/in/marwahkha" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="20" style="fill:currentColor"><path d="M4 9 H8 V20 H4 Z M6 3.5 C7.3 3.5 8.2 4.4 8.2 5.6 C8.2 6.8 7.3 7.7 6 7.7 C4.7 7.7 3.8 6.8 3.8 5.6 C3.8 4.4 4.7 3.5 6 3.5 Z M10 9 H13.8 V10.7 C14.4 9.7 15.7 8.8 17.5 8.8 C20.3 8.8 21 10.6 21 13.3 V20 H17 V14.1 C17 12.8 16.7 11.9 15.4 11.9 C14.1 11.9 14 13 14 14.1 V20 H10 Z"/></svg></a>
+      </div>
+      <span>Jakarta · GMT+7 · open to remote</span>
+    </footer>
   </div>
 </section>
 
