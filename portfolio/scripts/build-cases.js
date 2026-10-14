@@ -8,7 +8,9 @@ const PROJECTS = [
   { id: 'personal-brand-acquisitions', tab: 'Brand Acquisitions', eyebrow: 'Individual contributor · 2023 – 2024', title: 'Personal Brand Acquisitions', role: 'BD · Individual contributor',
     summary: 'Every brand here was personally sourced, qualified, pitched, and closed by me — not the team. Proof I can sell, not just lead people who sell.',
     note: 'Separate from the 47 brand partnerships my team closed under my leadership — that’s a different story.',
-    stats: [{ v: '55+', l: 'Brands personally closed' }, { v: '3', l: 'Platforms — Shopee, TikTok Shop, Tokopedia' }, { v: '6', l: 'Categories — fashion, F&B, sports, beauty & more' }],
+    stats: [{ v: '55+', l: 'Brands personally closed' }, { v: '3', l: 'Platforms — Shopee, TikTok Shop, Tokopedia' }, { v: '120+', l: 'Storefronts managed across marketplaces' }],
+    // Logo files are /projects/assets/brands/01.png … in this order.
+    brands: ['Teddie Clubs', 'in-lite', 'CA', 'Waldos', 'Hijacket', 'Mage', 'Segersnow', 'Jacquelle', 'Martin Versa', 'Gentle Hour', 'Chronox', 'Kimbo', 'Larocking', 'Fantasy', 'HIA Everywear', 'Dragon', 'FVCK', 'Dewdrop', 'Elmer', 'Vention', 'Superego', 'Vengoz', 'Nayara', 'Skinfood', 'Zebra', 'Cheerilee', 'Hunt4Toys', 'Reneturos Group', 'Cuta', 'Scholl', 'Gulali Books', 'Cots & Cuddles', 'Hypospot', 'Oneskin', 'Sniff Sniff', 'Dua Kelinci'],
     tags: ['B2B Sales', 'Lead Generation', 'Outreach', 'Negotiation', 'Closing'],
     didLabel: 'What closed these deals', did: [{ t: 'Personalised outreach', d: 'Every first message written for the brand in front of me — never a template blast.' }, { t: 'ICP-first qualification', d: 'Know the brand before the first message, and walk away early from poor fits.' }, { t: 'Outcome-based pitch', d: 'Lead with what the brand gets from the partnership, not with what we do.' }],
     procLabel: 'My closing process', proc: ['Prospect', 'Outreach', 'Qualify', 'Propose', 'Negotiate', 'Onboard', 'Retain'],
@@ -65,6 +67,16 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const pad = i => String(i + 1).padStart(2, '0');
 const MARK = '<svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg>';
 
+// Two logo rows scrolling in opposite directions; each row is duplicated so the loop is seamless.
+function brandRows(brands) {
+  const all = brands.map((name, k) => ({ name, src: A + 'brands/' + pad(k) + '.png' })), half = Math.ceil(all.length / 2);
+  return [all.slice(0, half), all.slice(half)].map((row, k) => {
+    const tile = (b, hidden) => `<div class="logo"${hidden ? ' aria-hidden="true"' : ''} title="${esc(b.name)}"><img src="${b.src}" alt="${hidden ? '' : esc(b.name)}" decoding="async" width="80" height="80"></div>`;
+    return `
+      <div class="logos__row"><div class="logos__track" style="animation-duration:${k ? '25.6s' : '22.4s'};animation-direction:${k ? 'reverse' : 'normal'}">${row.map(b => tile(b)).join('')}${row.map(b => tile(b, true)).join('')}</div></div>`;
+  }).join('');
+}
+
 function page(p, i) {
   const n = PROJECTS.length, prev = PROJECTS[(i - 1 + n) % n], next = PROJECTS[(i + 1) % n];
   const g = p.gallery || [];
@@ -114,7 +126,13 @@ function page(p, i) {
     <div><b>${esc(s.v)}</b><span>${esc(s.l)}</span></div>`).join('')}
   </div>
 </section>
-${p.challenge ? `
+${p.brands ? `
+<section class="wrap case-sec sec-col" style="gap:28px">
+  <h2 class="h2">Brands I closed</h2>
+  <div class="logos" aria-label="${p.brands.length} of the brands I closed">${brandRows(p.brands)}
+  </div>
+</section>
+` : ''}${p.challenge ? `
 <section class="wrap case-sec challenge">
   <span class="label">The challenge</span>
   <p>${esc(p.challenge)}</p>
