@@ -256,6 +256,8 @@ button{font:inherit}
 .pkg small{font-family:var(--mono);font-size:11px;color:var(--lichen);margin-top:-8px}
 .pkg>span{font-size:14px;line-height:1.45;padding-top:8px;border-top:1px solid var(--seam)}
 .pkg--hi{background:var(--gold);color:var(--bg)}
+a.pkg:hover{color:var(--cream);outline-color:var(--gold)}
+a.pkg--hi:hover{color:var(--bg)}
 .pkg--hi small{color:var(--seam)}
 .pkg--hi>span{border-top-color:rgba(18,27,22,.2)}
 .spane__ft{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--seam);padding-top:20px}
@@ -514,9 +516,9 @@ const FORTE = [
 const SERVICES = [
   { n: '01', t: 'B2B Sales System', short: 'Lead generation & pipeline', d: 'Find, reach and convert the right brands: ICP-first research, personalised outreach, and a pipeline you can actually see.',
     pkgs: [
-      { t: 'Basic', p: 'IDR X M', dur: '3–4 weeks', items: ['Who to sell to, and why', 'Scripts that get replies', 'An answer for every no'] },
-      { t: 'Standard', p: 'IDR XX M', dur: '5–6 weeks', items: ['Everything in Basic', 'New BDs productive in weeks', 'KPIs that pay for results'] },
-      { t: 'Advanced', p: 'IDR XX M', dur: '8–10 weeks', items: ['Everything in Standard', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
+      { t: 'Diagnose', p: 'IDR X M', dur: '3–4 weeks', items: ['Who to sell to, and why', 'Scripts that get replies', 'An answer for every no'] },
+      { t: 'Build', p: 'IDR XX M', dur: '5–6 weeks', items: ['Everything in Diagnose', 'New BDs productive in weeks', 'KPIs that pay for results'] },
+      { t: 'Optimize', p: 'IDR XX M', dur: '8–10 weeks', items: ['Everything in Build', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
     ] },
   { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: ['Business consulting', 'Marketplace consulting', 'Brainstorming sessions', 'Business set-up', 'Workflow automations', 'Brand guidelines'], anim: 'Options → decision' },
   { n: '03', t: 'Data Analysis', short: 'Dashboards & decisions', d: 'Turn scattered numbers into decisions, with clean analysis, dashboards your team will actually open, and the right tools behind them.', subs: ['Analysis packages', 'Dashboards', 'Tool set-up'], anim: 'Noise → signal' },
@@ -740,7 +742,7 @@ $('#svcPanes').innerHTML = SERVICES.map((s, i) => `<div class="spane" role="tabp
   <div class="spane__hd"><span class="idx">${s.n} / 05</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>
   ${s.subs ? `<div class="subs">${s.subs.map(x => `<div>${check}${esc(x)}</div>`).join('')}</div>` : ''}
   ${s.anim ? `<div class="anim"><canvas class="fill" data-svc-anim="${s.n}" aria-hidden="true"></canvas><span><span class="hud__dot pulse"></span>${esc(s.anim)}</span></div>` : ''}
-  ${s.pkgs ? `<div class="pkgs"><div class="pkgs__hd"><span>Packages</span><span>Per project</span></div><div class="pkgs__grid">${s.pkgs.map(k => `<div class="pkg${k.hi ? ' pkg--hi' : ''}"><div class="pkg__hd"><b>${k.t}</b><span>${k.p}</span></div><small>${k.dur}</small>${k.items.map(x => `<span>${esc(x)}</span>`).join('')}</div>`).join('')}</div></div>` : ''}
+  ${s.pkgs ? `<div class="pkgs"><div class="pkgs__hd"><span>Packages</span><span>Per project</span></div><div class="pkgs__grid">${s.pkgs.map(k => `<a href="/services/b2b-sales-system.html" class="pkg${k.hi ? ' pkg--hi' : ''}"><div class="pkg__hd"><b>${k.t}</b><span>${k.p}</span></div><small>${k.dur}</small>${k.items.map(x => `<span>${esc(x)}</span>`).join('')}</a>`).join('')}</div></div>` : ''}
   <div class="spane__ft"><span>Not sure which fits? Start with a 15-minute call.</span><a class="btn btn--gold btn--sm" href="${CAL}">Book 15 minutes →</a></div>
 </div>`).join('');
 function svcRender() {
