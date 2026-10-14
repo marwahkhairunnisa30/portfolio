@@ -37,7 +37,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* Nav */
 .nav{border-bottom:1px solid var(--seam)}
-.nav--sticky{position:sticky;top:0;z-index:20;background:rgba(18,27,22,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav--sticky{position:sticky;top:0;z-index:20;background:rgba(18,27,22,.97)}
 .nav__in{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .nav__left{display:flex;align-items:center;gap:12px;font-size:14px}
 .nav__brand{display:flex;align-items:center;gap:12px}
@@ -185,7 +185,7 @@ label.f{display:flex;flex-direction:column;gap:6px}
 @keyframes mkMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .logos{display:flex;flex-direction:column;gap:10px;overflow:hidden;border:1px solid var(--seam);padding:20px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .logos__row{display:flex;width:max-content}
-.logos__track{display:flex;gap:10px;padding-right:10px;animation:mkMarquee 22.4s linear infinite}
+.logos__track{display:flex;gap:10px;padding-right:10px;animation:mkMarquee 22.4s linear infinite;will-change:transform}
 .logos__track:hover{animation-play-state:paused}
 .logo{flex:none;width:80px;height:80px;overflow:hidden;background:var(--moss);border:1px solid var(--seam);filter:grayscale(1) brightness(.42) contrast(1.15);transition:filter .3s ease,border-color .3s ease}
 .logo:hover{filter:none;border-color:var(--gold)}

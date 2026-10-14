@@ -13,8 +13,9 @@
   };
   layout(); new ResizeObserver(layout).observe(grid);
   if (!cv) return;
+  let seen = true; new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(cv);
   const paint = t => {
-    const d = Math.min(window.devicePixelRatio || 1, 2), W = cv.clientWidth, H = cv.clientHeight;
+    const d = Math.min(window.devicePixelRatio || 1, 2), W = seen ? cv.clientWidth : 0, H = seen ? cv.clientHeight : 0;
     if (W && H) {
       if (cv.width !== Math.round(W * d) || cv.height !== Math.round(H * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
       const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
@@ -38,8 +39,9 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
   const stages = ['Prospect', 'Outreach', 'Pipeline', 'Proposal', 'Close'];
+  let seen = true; new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(cv);
   const paint = t => {
-    const W = cv.clientWidth, H = cv.clientHeight;
+    const W = seen ? cv.clientWidth : 0, H = seen ? cv.clientHeight : 0;
     if (W && H) {
       const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d) || cv.height !== Math.round(H * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
       const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);

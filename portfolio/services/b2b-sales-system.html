@@ -33,7 +33,7 @@ button{font:inherit}
 .btn{padding:16px 22px;font-size:15px;font-weight:600;transition:background .2s,color .2s}
 
 /* Nav */
-.nav{position:sticky;top:0;z-index:10;background:rgba(18,27,22,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--seam)}
+.nav{position:sticky;top:0;z-index:10;background:rgba(18,27,22,.97);border-bottom:1px solid var(--seam)}
 .nav .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav__brand{display:flex;align-items:center;gap:12px}
 .nav__brand b{font-size:15px;font-weight:500;letter-spacing:-.01em}
@@ -392,7 +392,7 @@ const C = names.map((n, i) => ({ id: i, name: n, owner: owners[i % 5], next: nex
 const notes = [[1, 'follow up?'], [7, 'who owns this?'], [13, 'last contact: ?'], [20, 'in someone’s inbox']];
 
 function resize() {
-  const r = wrap.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  const r = wrap.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
   cv.width = r.width * dpr; cv.height = r.height * dpr;
   ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   W = r.width; H = r.height;
@@ -520,8 +520,9 @@ function draw() {
   }
   ctx.globalAlpha = 1;
 }
-let last = performance.now();
-const tick = now => { const dt = Math.min(40, now - last); last = now; update(dt); draw(); requestAnimationFrame(tick); };
+let last = performance.now(), seen = true;
+new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(wrap);
+const tick = now => { const dt = Math.min(40, now - last); last = now; if (seen) { update(dt); draw(); } requestAnimationFrame(tick); };
 requestAnimationFrame(tick);
 })();
 </script>

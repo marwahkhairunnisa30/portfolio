@@ -125,9 +125,10 @@ ui(true);
 setInterval(() => { if (!st.pinned && !st.hover) { st.sel = (st.sel + 1) % SVC.length; ui(true); } }, 5200);
 
 const cv = $('#cv'), t0 = performance.now();
-let nodes = [], pulses = [], stars = null;
+let nodes = [], pulses = [], stars = null, seen = true;
+new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(cv);
 function frame(now) {
-  const W = cv.clientWidth, H = cv.clientHeight;
+  const W = seen ? cv.clientWidth : 0, H = seen ? cv.clientHeight : 0;
   if (W && H) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); stars = null; }

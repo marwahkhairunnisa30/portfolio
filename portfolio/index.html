@@ -53,7 +53,7 @@ button{font:inherit}
 .btn--sm{padding:14px 18px;font-size:14px}
 
 /* Nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(18,27,22,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--seam)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(18,27,22,.96);border-bottom:1px solid var(--seam)}
 .nav__in{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav__brand{display:flex;align-items:center;gap:12px}
 .nav__brand span{font-size:15px;font-weight:500;letter-spacing:-.01em}
@@ -97,7 +97,7 @@ button{font:inherit}
 .mq__head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 0 12px;font-family:var(--mono);font-size:12px;color:var(--lichen)}
 .mq__head a{color:var(--gold)}.mq__head a:hover{color:var(--cream)}
 .mq{border-top:1px solid var(--seam);border-bottom:1px solid var(--seam);overflow:hidden;padding:22px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.mq__track{display:flex;width:max-content;animation:mkMarquee 60s linear infinite}
+.mq__track{display:flex;width:max-content;animation:mkMarquee 60s linear infinite;will-change:transform}
 .mq__track:hover{animation-play-state:paused}
 .mq__set{display:flex;align-items:center;gap:48px;padding-right:48px;white-space:nowrap}
 .mq__set span{display:flex;align-items:center;gap:20px;font-size:clamp(22px,2.4vw,32px);font-weight:500;letter-spacing:-.03em}
@@ -480,6 +480,8 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const DPR = () => Math.min(window.devicePixelRatio || 1, 2);
+// Canvas loops skip drawing while their element is off screen, so only what you can see costs frames.
+const onScreen = el => { const s = { v: true }; new IntersectionObserver(([e]) => { s.v = e.isIntersecting; }, { rootMargin: '100px' }).observe(el); return s; };
 const C = { bg: '#121B16', seam: '#2E3B33', moss: '#1F2B24', fern: '#4E5A51', lichen: '#6F7A70', sage: '#A9B0A6', cream: '#EEE8DC', gold: '#C9B48A' };
 
 /* ── Content ── */
@@ -600,7 +602,7 @@ function fitCanvas(cv, cb) {
 
 // Counterweight: one block per year of the active group; the MK seal slides to balance them.
 function startExp() {
-  const cv = $('#expCanvas'), S = fitCanvas(cv), ctx = S.ctx;
+  const cv = $('#expCanvas'), S = fitCanvas(cv), ctx = S.ctx, seen = onScreen(cv);
   const YRS = [['23–25', '26'], ['24–25', '24', '26']];
   let th = 0, om = 0, cw = 0.2, stack = [], queue = [], qt = 0, key = '', last = 0;
   const seal = (x, y, s) => {
@@ -613,7 +615,7 @@ function startExp() {
   };
   const draw = now => {
     const W = S.W, H = S.H, dt = Math.min(0.033, (now - (last || now)) / 1000); last = now;
-    if (W < 40 || H < 40 || exp.g === 1) { requestAnimationFrame(draw); return; }
+    if (!seen.v || W < 40 || H < 40 || exp.g === 1) { requestAnimationFrame(draw); return; }
     const g = exp.g, ei = exp.i, k = g + ':' + ei;
     if (k !== key || exp.reset) {
       const sameGroup = key.split(':')[0] === String(g) && !exp.reset;
@@ -658,6 +660,7 @@ function startExp() {
 /* ── Hero pipeline funnel ── */
 function startFunnel() {
   const cv = $('#funnel'), hud = $('#hud'), S = fitCanvas(cv), ctx = S.ctx;
+  const seen = onScreen(cv);
   const cEls = [...hud.querySelectorAll('[data-c]')], clock = hud.querySelector('[data-clock]'), ticker = hud.querySelector('[data-ticker]');
   const cnt = [0, 0, 0, 0], flash = [0, 0, 0], lines = [];
   let P = [], closed = 0, wallA = 1, hold = 0, spawn = 0, last = 0;
@@ -672,6 +675,7 @@ function startFunnel() {
   const make = () => { const r = Math.random(); return { x: -4, lane: Math.random() * 2 - 1, ph: Math.random() * 6, v: 70 + Math.random() * 50, fail: r < .3 ? 0 : r < .52 ? 1 : r < .64 ? 2 : 3, st: 'flow', a: 1, vy: 0, tr: [] }; };
   const draw = now => {
     const W = S.W, H = S.H, dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+    if (!seen.v) { requestAnimationFrame(draw); return; }
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = C.moss; ctx.fillRect(Math.round(W * 0.25), 0, 1, H); ctx.fillRect(Math.round(W * 0.5), 0, 1, H); ctx.fillRect(Math.round(W * 0.75), 0, 1, H);
     ctx.beginPath();
@@ -710,7 +714,7 @@ function startFunnel() {
       const sz = gold ? c - 3 : 4.5; ctx.fillStyle = 'rgba(' + col + ',' + A + ')'; ctx.fillRect(p.x - sz / 2, p.y - sz / 2, sz, sz);
     }
     cEls.forEach((el, k) => { const v = String(cnt[k]); if (el.textContent !== v) el.textContent = v; });
-    clock.textContent = stamp();
+    const st = stamp(); if (clock.textContent !== st) clock.textContent = st;
     requestAnimationFrame(draw);
   };
   if (reduce) return;
@@ -801,9 +805,10 @@ function startSvcAnim() {
     }
   };
   const t0 = performance.now();
+  const seen = onScreen($('#svcPanes'));
   const loop = now => {
     const t = reduce ? 0 : (now - t0) / 1000, idx = String(svc + 1).padStart(2, '0');
-    const cv = document.querySelector('canvas[data-svc-anim="' + idx + '"]');
+    const cv = seen.v && document.querySelector('canvas[data-svc-anim="' + idx + '"]');
     if (cv && draw[idx]) {
       const W = cv.clientWidth, H = cv.clientHeight, d = DPR();
       if (W && H) {
