@@ -243,7 +243,6 @@ button{font:inherit}
 .subs a{color:var(--cream)}
 .subs a:hover{color:var(--gold)}
 .subs__go{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--gold)}
-.subs svg{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:square;flex:none}
 .anim{flex:none;height:200px;margin-top:auto;position:relative;background:var(--bg);outline:1px solid var(--seam);overflow:hidden}
 .anim + .spane__ft{margin-top:0}
 .anim span{position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--sage)}
@@ -741,12 +740,11 @@ if (!reduce) setInterval(() => { if (forte.s >= 3) { forte.s = 0; forte.i = (for
 
 /* ── Services ── */
 let svc = 0;
-const check = '<svg viewBox="0 0 24 24" width="16" aria-hidden="true"><path d="M4 12 L10 18 L20 6"/></svg>';
 const CAL = 'https://calendar.app.google/3UR6RuZJCrFbpQkV8';
 $('#svcNav').innerHTML = SERVICES.map((s, i) => `<button class="sbtn" type="button" role="tab" id="svc-tab-${i}" aria-controls="svc-pane-${i}" data-i="${i}"><span>${s.n}</span><span><b>${esc(s.t)}</b><small>${esc(s.short)}</small></span><i></i></button>`).join('');
 $('#svcPanes').innerHTML = SERVICES.map((s, i) => `<div class="spane" role="tabpanel" id="svc-pane-${i}" aria-labelledby="svc-tab-${i}">
   <div class="spane__hd"><span class="idx">${s.n} / 05</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>
-  ${s.subs ? `<div class="subs">${s.subs.map(x => x.href ? `<a href="${x.href}">${check}${esc(x.t)}<span class="subs__go">View →</span></a>` : `<div>${check}${esc(x)}</div>`).join('')}</div>` : ''}
+  ${s.subs ? `<div class="subs">${s.subs.map(x => x.href ? `<a href="${x.href}">${esc(x.t)}<span class="subs__go">View →</span></a>` : `<div>${esc(x)}</div>`).join('')}</div>` : ''}
   ${s.anim ? `<div class="anim"><canvas class="fill" data-svc-anim="${s.n}" aria-hidden="true"></canvas><span><span class="hud__dot pulse"></span>${esc(s.anim)}</span></div>` : ''}
   ${s.pkgs ? `<div class="pkgs"><div class="pkgs__hd"><span>Packages</span><span>Per project</span></div><div class="pkgs__grid">${s.pkgs.map(k => `<a href="/services/b2b-sales-system.html" class="pkg${k.hi ? ' pkg--hi' : ''}"><div class="pkg__hd"><b>${k.t}</b><span>${k.p}</span></div><small>${k.dur}</small>${k.items.map(x => `<span>${esc(x)}</span>`).join('')}</a>`).join('')}</div></div>` : ''}
   <div class="spane__ft"><span>Not sure which fits? Start with a 15-minute call.</span><a class="btn btn--gold btn--sm" href="${CAL}">Book 15 minutes →</a></div>
