@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketplace Consulting — Marwah K</title>
+<meta name="description" content="A thinking partner for brands on four marketplaces. Find the leak. Fix that first." />
+<meta name="theme-color" content="#121B16" />
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121B16;--deep:#0B110E;--moss:#1F2B24;--seam:#2E3B33;--fern:#4E5A51;--lichen:#6F7A70;--sage:#A9B0A6;--bone:#DAD3C5;--cream:#EEE8DC;--gold:#C9B48A;--ease:cubic-bezier(.2,.7,.2,1);--mono:'IBM Plex Mono',monospace;--pad:clamp(20px,5vw,64px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:'Onest',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--cream);text-decoration:none}
+a:hover{color:var(--gold)}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@keyframes mkFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes mkfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page{min-height:100vh;overflow-x:clip}
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.sec{padding-top:clamp(64px,9vw,128px);padding-bottom:clamp(64px,9vw,128px)}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px}
+.idx{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--gold)}
+.h2{margin:0;font-weight:500;font-size:clamp(40px,4.4vw,56px);line-height:1.02;letter-spacing:-.04em;text-wrap:balance}
+.lede{margin:0;font-size:16px;line-height:1.6;color:var(--sage);max-width:30em}
+.cap{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.big{font-size:24px;line-height:1.25;font-weight:600;letter-spacing:-.015em}
+.hint{padding:12px 24px;font-size:13px;line-height:1.45;color:var(--lichen)}
+.btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:16px 24px;font-size:16px;font-weight:500;transition:background .2s,color .2s}
+.col{display:flex;flex-direction:column;gap:24px;min-width:0}
+
+/* Nav (shared with other service pages) */
+.nav{position:sticky;top:0;z-index:10;background:rgba(18,27,22,.97);border-bottom:1px solid var(--seam)}
+.nav .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.nav__brand{display:flex;align-items:center;gap:12px}
+.nav__brand b{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.nav__right{display:flex;gap:20px;align-items:center;font-size:14px}
+.nav__right a:not(.nav__cta){color:var(--sage)}
+.nav__right a:not(.nav__cta):hover{color:var(--cream)}
+.nav__cta{background:var(--gold);color:var(--bg)!important;padding:9px 14px;font-weight:600;transition:background .2s}
+.nav__cta:hover{background:var(--cream)}
+
+/* Hero: funnel leak */
+.hero{padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px);align-items:center}
+.hero .col{animation:mkFadeIn 700ms var(--ease) both}
+.hero .cap{display:flex;align-items:center;gap:12px;color:var(--gold)}
+.hero .cap i{width:8px;height:8px;background:var(--gold);display:block}
+.hero h1{margin:0;font-weight:500;font-size:clamp(40px,4.4vw,56px);line-height:1.02;letter-spacing:-.04em;text-wrap:balance}
+.hero h1 span,.gold{color:var(--gold)}
+.hero p{max-width:28em}
+.fun{background:var(--moss);display:flex;flex-direction:column;min-width:0;animation:mkFadeIn 900ms var(--ease) 200ms both}
+.fun__ch{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--bg);border-bottom:2px solid var(--bg)}
+.fun__ch button{border:0;cursor:pointer;padding:14px 8px;font-size:13px;font-weight:500;white-space:nowrap;background:var(--moss);color:var(--sage);transition:background .25s,color .25s}
+.fun__ch button[aria-pressed=true]{background:var(--cream);color:var(--bg)}
+.fun__stage{padding-top:16px}
+.fun__row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:0 8px;text-align:center}
+.fun__row>span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;white-space:nowrap;color:var(--sage);transition:color .3s}
+.fun__row>span b{font-family:var(--mono);font-weight:400;color:var(--lichen);transition:color .3s}
+.fun__row>span.leak,.fun__row>span.leak b{color:var(--gold);font-weight:600}
+.fun canvas{display:block;width:100%;height:280px}
+.fun__drop{padding-bottom:16px}
+.fun__drop>span>i{font-style:normal;font-family:var(--mono);font-weight:500;padding:4px 8px;color:var(--lichen);transition:background .3s,color .3s}
+.fun__drop>span:first-child>i{color:var(--cream)}
+.fun__drop>span.leak>i{background:var(--gold);color:var(--bg)}
+.fun__out{display:flex;flex-wrap:wrap;gap:2px;background:var(--bg);border-top:2px solid var(--bg)}
+.fun__out>div{flex:1 1 220px;min-width:0;padding:16px 24px;display:flex;flex-direction:column;gap:6px;background:var(--moss)}
+.fun__out .cap{color:var(--lichen)}
+.fun__out>div:last-child{flex-basis:260px;background:var(--gold);color:var(--bg)}
+.fun__out>div:last-child .cap{color:var(--bg)}
+.fun__out .big{animation:mkfade .4s ease-out}
+.fun .hint{border-top:2px solid var(--bg)}
+
+/* 01 Problem: lever board */
+.problem{background:var(--cream);color:var(--bg)}
+.problem .split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.problem .idx,.problem .lede{color:var(--fern)}
+.plist{display:flex;flex-direction:column;border-top:2px solid var(--bg);margin-top:16px}
+.plist div{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--bone)}
+.plist span:first-child{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--fern)}
+.plist span:last-child{font-size:clamp(20px,2vw,24px);line-height:1.25;font-weight:600;letter-spacing:-.015em}
+.board{background:var(--bg);color:var(--cream);display:flex;flex-direction:column;min-width:0}
+.board__hd{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 24px;border-bottom:2px solid var(--moss)}
+.board__hd>span{color:var(--sage)}
+.seg{display:inline-flex;background:var(--moss);padding:4px;gap:4px}
+.seg button{white-space:nowrap;border:0;cursor:pointer;padding:10px 14px;font-size:13px;font-weight:500;background:transparent;color:var(--sage)}
+.seg button.all[aria-pressed=true]{background:var(--cream);color:var(--bg)}
+.seg button.right[aria-pressed=true]{background:var(--gold);color:var(--bg)}
+.levers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--bg);padding:2px}
+.lever{border:0;cursor:pointer;background:var(--bg);padding:20px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:16px;transition:background .3s;color:var(--lichen)}
+.lever i{position:relative;width:24px;height:72px;display:block}
+.lever i::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:4px;background:var(--seam)}
+.lever i::after{content:"";position:absolute;left:0;width:24px;height:24px;top:48px;background:var(--fern);transition:top .35s cubic-bezier(.3,1.4,.5,1),background .3s}
+.lever span{font-size:13px;font-weight:500;text-align:center;transition:color .3s}
+.lever.on{background:var(--moss);color:var(--cream)}
+.lever.on i::after{top:0;background:var(--cream)}
+.meters{padding:24px;display:flex;flex-direction:column;gap:16px;border-top:2px solid var(--moss)}
+.meter{display:grid;grid-template-columns:96px minmax(0,1fr) 56px;gap:16px;align-items:center}
+.meter .cap{color:var(--lichen)}
+.meter>div{height:12px;background:var(--moss);position:relative}
+.meter>div>i{position:absolute;left:0;top:0;bottom:0;transition:width .5s ease}
+.meter>span:last-child{font-family:var(--mono);font-size:13px;font-weight:500;text-align:right}
+.verdict{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:20px 24px;background:var(--moss)}
+.verdict .big{animation:mkfade .35s ease-out}
+.verdict>div{display:flex;align-items:baseline;gap:8px}
+.verdict .cap{color:var(--lichen)}
+.verdict b{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--gold)}
+
+/* 02 Decide: accordion */
+.decide{background:var(--moss)}
+.decide .sec{display:flex;flex-direction:column;gap:48px}
+.decide__hd{display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-end;justify-content:space-between}
+.decide__hd>div{display:flex;flex-direction:column;gap:20px;flex:1 1 560px;min-width:0}
+.decide__hd p{flex:0 1 400px}
+.acc{display:flex;gap:2px;background:var(--bg);border:2px solid var(--bg)}
+.acc button{border:0;cursor:pointer;text-align:left;min-height:460px;min-width:0;flex:1 1 0%;transition:flex .55s var(--ease),background .35s;background:var(--moss);color:var(--bg);padding:clamp(20px,2.4vw,32px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;overflow:hidden}
+.acc button>b{font-family:var(--mono);font-size:22px;line-height:1.3;font-weight:500;color:var(--gold)}
+.acc__v{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;color:var(--sage)}
+.acc__open{display:none;flex-direction:column;gap:24px;animation:mkfade .45s .15s ease-out both;min-width:280px}
+.acc__open h3{margin:0;font-weight:500;font-size:clamp(28px,3vw,40px);line-height:1.08;letter-spacing:-.03em;text-wrap:balance}
+.acc__open>div{display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid var(--bg)}
+.acc button.on{flex:4 1 0%;background:var(--gold)}
+.acc button.on>b{color:var(--bg)}
+.acc button.on .acc__v{display:none}
+.acc button.on .acc__open{display:flex}
+
+/* 03 How: gantt */
+.how .split{align-items:stretch}
+.phase{margin-top:auto;background:var(--moss);padding:32px;display:flex;flex-direction:column;gap:16px;animation:mkfade .4s ease-out;border-top:4px solid var(--gold)}
+.phase__top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.phase__top b{font-family:var(--mono);font-size:22px;line-height:1.3;font-weight:500;color:var(--gold)}
+.phase__top span{color:var(--lichen);white-space:nowrap}
+.phase h3{margin:0;font-weight:500;font-size:40px;line-height:1.08;letter-spacing:-.03em}
+.phase p{margin:0;font-size:16px;line-height:1.6;color:var(--sage)}
+.phase__out{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--seam)}
+.phase__out .cap{color:var(--lichen)}
+.phase__out span:last-child{font-size:16px;font-weight:600}
+.gantt{background:var(--moss);display:flex;flex-direction:column;overflow-x:auto;min-width:0}
+.gantt__in{min-width:520px;display:flex;flex-direction:column;flex:1}
+.gantt__hd{display:grid;grid-template-columns:132px minmax(0,1fr);border-bottom:2px solid var(--bg)}
+.gantt__hd>span{padding:16px 24px;color:var(--lichen)}
+.gantt__hd>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.gantt__hd>div span{padding:16px 12px;color:var(--sage);border-left:1px solid var(--seam)}
+.gantt__rows{position:relative;flex:1;display:flex;flex-direction:column}
+.grow{border:0;cursor:pointer;text-align:left;flex:1;min-height:72px;display:grid;grid-template-columns:132px minmax(0,1fr);align-items:center;background:var(--moss);border-bottom:1px solid var(--seam);color:var(--sage);padding:0;transition:background .3s}
+.grow>span:first-child{padding:0 24px;display:flex;align-items:baseline;gap:10px;font-size:16px}
+.grow>span:first-child b{font-family:var(--mono);font-size:13px;font-weight:400;color:var(--lichen)}
+.grow>span:last-child{position:relative;height:100%;display:block;background-image:linear-gradient(90deg,var(--seam) 1px,transparent 1px);background-size:25% 100%}
+.grow i{position:absolute;top:50%;height:28px;margin-top:-14px;background:var(--bg);transition:background .35s}
+.grow.on{background:var(--seam);color:var(--cream);font-weight:600}
+.grow.on b{color:var(--gold)}
+.grow.on i{background:var(--gold)}
+.playhead{position:absolute;top:0;bottom:0;left:132px;right:0;pointer-events:none}
+.playhead i{position:absolute;top:0;bottom:0;width:2px;background:var(--cream);transition:left .7s cubic-bezier(.5,0,.2,1)}
+.playhead i::before{content:"";position:absolute;top:-6px;left:-5px;width:12px;height:12px;background:var(--cream)}
+
+/* 04 Package */
+.pkg{background:var(--cream);color:var(--bg)}
+.pkg .split{align-items:stretch}
+.pkg .idx,.pkg .lede{color:var(--fern)}
+.pkg .lede{max-width:28em}
+.price{margin-top:auto;background:var(--bg);color:var(--cream);padding:32px;display:flex;flex-direction:column;gap:24px}
+.price>div{display:flex;flex-direction:column;gap:8px}
+.price>div:first-child span:nth-child(1){color:var(--gold);font-weight:500}
+.price>div:first-child span:nth-child(2){font-family:var(--mono);font-size:22px;font-weight:500;line-height:1.3}
+.price>div:first-child span:nth-child(3){color:var(--sage)}
+.price>div:nth-child(2){gap:6px;padding-top:20px;border-top:1px solid var(--seam)}
+.price>div:nth-child(2) .cap{color:var(--lichen)}
+.price>div:nth-child(2) span:last-child{font-size:16px;line-height:1.6}
+.b-gold{background:var(--gold);color:var(--bg)}.b-gold:hover{background:var(--cream);color:var(--bg)}
+.phases{display:flex;flex-direction:column;gap:2px;background:var(--bone);border:2px solid var(--bone);min-width:0}
+.ph{flex:1;padding:24px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;background:var(--cream);color:var(--bg);transition:background .35s,color .35s}
+.ph>b{font-family:var(--mono);font-size:22px;line-height:1.3;font-weight:500;color:var(--fern)}
+.ph>div{display:flex;flex-direction:column;gap:16px}
+.ph .cap{color:var(--fern);display:block;margin-bottom:6px}
+.ph h3{margin:0;font-weight:600;font-size:24px;line-height:1.25;letter-spacing:-.015em}
+.ph ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.ph li{font-size:13px;font-weight:500;padding:8px 12px;white-space:nowrap;border:1px solid var(--sage)}
+.ph.on{background:var(--bg);color:var(--cream)}
+.ph.on>b,.ph.on .cap{color:var(--gold)}
+.ph.on li{border-color:var(--fern)}
+.pnote{background:var(--cream);padding:16px 32px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.pnote .cap{color:var(--cream);background:var(--fern);padding:4px 8px}
+.pnote p{margin:0;font-size:13px;line-height:1.45;color:var(--fern)}
+
+/* Closing + footer (footer shared with other service pages) */
+.close{background:var(--gold);color:var(--bg)}
+.close .sec{padding-top:clamp(80px,10vw,128px);padding-bottom:clamp(80px,10vw,128px);display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-end;justify-content:space-between}
+.close h2{margin:0;font-weight:500;font-size:clamp(48px,7vw,88px);line-height:.96;letter-spacing:-.05em;flex:1 1 640px}
+.close .col{flex:0 1 380px}
+.close p{margin:0;font-size:16px;line-height:1.6}
+.close__btns{display:flex;gap:4px;flex-wrap:wrap}
+.b-ink{background:var(--bg);color:var(--cream)}.b-ink:hover{background:var(--moss);color:var(--cream)}
+.b-line{border:1px solid var(--bg);color:var(--bg);padding:15px 23px}.b-line:hover{background:var(--bg);color:var(--cream)}
+.footer{background:var(--cream);color:var(--bg)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:28px;padding-bottom:28px;font-family:var(--mono);font-size:12px;color:var(--fern)}
+.foot div{display:flex;align-items:center;gap:10px}
+.foot__ico{gap:8px!important}
+.foot__ico a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--cream)!important;transition:background .2s}
+.foot__ico a:hover{background:var(--gold);color:var(--bg)!important}
+
+@media(max-width:860px){.split,.problem .split{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:820px){.acc{flex-direction:column}.acc button{min-height:0}.acc__v{writing-mode:horizontal-tb;transform:none;white-space:normal}.acc__open{min-width:0}}
+@media(max-width:560px){.fun__row>span{font-size:11px}.fun__ch button{font-size:12px;padding:12px 4px}.lever span{font-size:12px}.meter{grid-template-columns:72px minmax(0,1fr) 48px;gap:12px}.ph li{white-space:normal}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="/" class="nav__brand">
+      <svg viewBox="0 0 100 100" width="28" aria-hidden="true"><rect width="100" height="100" fill="#EEE8DC"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#121B16" stroke-width="10"/><rect width="100" height="16" fill="#EEE8DC"/></svg>
+      <b>Marwah K</b>
+    </a>
+    <div class="nav__right">
+      <a href="/">← Back to portfolio</a>
+      <a class="nav__cta" href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="wrap split hero">
+  <div class="col">
+    <span class="cap"><i></i>Consulting · Marketplace</span>
+    <h1>Grow on marketplaces <span>without guessing where to push.</span></h1>
+    <p class="lede">A thinking partner for brands on four marketplaces.<br><span style="color:var(--cream)">Find the leak. Fix that first.</span></p>
+  </div>
+  <div class="fun">
+    <div class="fun__ch" id="chans" role="group" aria-label="Marketplace"></div>
+    <div class="fun__stage">
+      <div class="fun__row" id="stages"></div>
+      <canvas id="funnel" role="img" aria-label="Shoppers flowing through five funnel stages; the ones lost at the leak are highlighted"></canvas>
+      <div class="fun__row fun__drop" id="drops"></div>
+    </div>
+    <div class="fun__out">
+      <div><span class="cap">Leak at</span><span class="big" id="leakName"></span></div>
+      <div><span class="cap">Fix first</span><span class="big" id="fixText"></span></div>
+    </div>
+    <div class="hint">Each square is a shopper. Gold ones are lost at the leak. Figures are illustrative.</div>
+  </div>
+</header>
+
+<!-- 01 PROBLEM -->
+<section class="problem" id="problem">
+  <div class="wrap sec split">
+    <div class="col" data-reveal>
+      <span class="idx">01 — The problem</span>
+      <h2 class="h2">Pulling every lever won't fix a store that leaks.</h2>
+      <p class="lede">Vouchers, ads, live, affiliates, flash sales. Most brands run them all at once. The problem isn't effort. It's order.</p>
+      <div class="plist">
+        <div><span>01</span><span>Every campaign. Few profitable.</span></div>
+        <div><span>02</span><span>More ad spend, unclear return.</span></div>
+        <div><span>03</span><span>Every channel run the same.</span></div>
+      </div>
+    </div>
+    <div class="board" data-reveal>
+      <div class="board__hd">
+        <span class="mono">Lever board · leak: cart → order</span>
+        <div class="seg" role="group" aria-label="Presets">
+          <button type="button" class="all" id="pullAll">Pull every lever</button>
+          <button type="button" class="right" id="pullRight">Diagnose first</button>
+        </div>
+      </div>
+      <div class="levers" id="levers"></div>
+      <div class="meters">
+        <div class="meter"><span class="cap">Spend</span><div><i id="spendBar" style="background:var(--sage)"></i></div><span id="spend"></span></div>
+        <div class="meter"><span class="cap">Orders</span><div><i id="liftBar" style="background:var(--cream)"></i></div><span id="lift"></span></div>
+      </div>
+      <div class="verdict"><span class="big" id="verdict"></span><div><span class="cap">Return</span><b id="roi"></b></div></div>
+      <div class="hint">Tap a lever to pull or release it. Figures are illustrative.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WHAT WE DECIDE -->
+<section class="decide" id="decide">
+  <div class="wrap sec">
+    <div class="decide__hd" data-reveal>
+      <div><span class="idx">02 — What we decide together</span><h2 class="h2">Five questions behind every growing store.</h2></div>
+      <p class="lede">I help you read the store and decide. <span style="color:var(--cream)">Your team or your enabler runs it.</span></p>
+    </div>
+    <div class="acc" id="acc" data-reveal></div>
+  </div>
+</section>
+
+<!-- 03 HOW WE WORK -->
+<section class="how" id="how">
+  <div class="wrap sec split">
+    <div class="col" data-reveal>
+      <span class="idx">03 — How we work</span>
+      <h2 class="h2">Five moves, from data to direction.</h2>
+      <div class="phase" id="phase" aria-live="polite"></div>
+    </div>
+    <div class="gantt" data-reveal>
+      <div class="gantt__in">
+        <div class="gantt__hd mono"><span>Phase</span><div><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span></div></div>
+        <div class="gantt__rows" id="gantt"><div class="playhead"><i id="playhead"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PACKAGE -->
+<section class="pkg" id="packages">
+  <div class="wrap sec split">
+    <div class="col" data-reveal>
+      <span class="idx">04 — The engagement</span>
+      <h2 class="h2">One project. <span style="color:var(--fern)">One plan your team can run.</span></h2>
+      <p class="lede">No retainer, no lock-in. Three phases, one fixed price, and you walk away knowing exactly what to do next.</p>
+      <div class="price">
+        <div><span class="mono">Marketplace Growth Diagnostic</span><span>IDR X M / project</span><span class="mono">3–4 weeks · Fixed scope · One-off</span></div>
+        <div><span class="cap">Best for</span><span>Brands whose sales have plateaued, or who are entering a new marketplace.</span></div>
+        <a class="btn b-gold" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Start the diagnostic →</a>
+      </div>
+    </div>
+    <div class="phases" data-reveal>
+      <div id="phs" style="display:contents"></div>
+      <div class="pnote"><span class="cap">Note</span><p>Advisory only. Store operation, ads management, live streaming and content production stay with your team or partners. Requires read access to store and ads data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="close" id="contact">
+  <div class="wrap sec">
+    <h2 data-reveal>Stop pushing every lever. Push the right one.</h2>
+    <div class="col" data-reveal>
+      <p>Bring last month's store numbers. In 15 minutes we'll know where to look first.</p>
+      <div class="close__btns">
+        <a class="btn b-ink" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book 15 minutes →</a>
+        <a class="btn b-line" href="/#consulting">Back to Consulting</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="footer">
+  <footer class="wrap foot">
+    <div><svg viewBox="0 0 100 100" width="20" aria-hidden="true"><rect width="100" height="100" fill="#121B16"/><path d="M18 104 V20 L38 50 L58 20 V104 M58 50 L82 14 M60.5 40 L84 104" fill="none" stroke="#EEE8DC" stroke-width="12"/><rect width="100" height="16" fill="#121B16"/></svg><span>© 2026 Marwah Khairunnisa</span></div>
+    <div class="foot__ico">
+      <a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="20" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter"><path d="M3 5 H21 V19 H3 Z M3 6 L12 13 L21 6"/></svg></a>
+      <a href="https://linkedin.com/in/marwahkha" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="20" style="fill:currentColor"><path d="M4 9 H8 V20 H4 Z M6 3.5 C7.3 3.5 8.2 4.4 8.2 5.6 C8.2 6.8 7.3 7.7 6 7.7 C4.7 7.7 3.8 6.8 3.8 5.6 C3.8 4.4 4.7 3.5 6 3.5 Z M10 9 H13.8 V10.7 C14.4 9.7 15.7 8.8 17.5 8.8 C20.3 8.8 21 10.6 21 13.3 V20 H17 V14.1 C17 12.8 16.7 11.9 15.4 11.9 C14.1 11.9 14 13 14 14.1 V20 H10 Z"/></svg></a>
+    </div>
+    <span>Jakarta · GMT+7 · open to remote</span>
+  </footer>
+</div>
+
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const n2 = i => String(i + 1).padStart(2, '0');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Run fn only while el is on screen and the tab is visible.
+const visible = el => { const st = { on: false }; new IntersectionObserver(([e]) => { st.on = e.isIntersecting; }, { rootMargin: '100px' }).observe(el); return () => st.on && !document.hidden; };
+
+/* ── Hero: funnel leak per marketplace ── */
+const CHANS = [
+  { name: 'Shopee', pass: [58, 52, 30, 56], leak: 2, fix: 'Checkout friction' },
+  { name: 'TikTok Shop', pass: [22, 68, 53, 38], leak: 0, fix: 'Hook & creative' },
+  { name: 'Tokopedia', pass: [55, 33, 67, 58], leak: 1, fix: 'Product page' },
+  { name: 'Lazada', pass: [60, 57, 59, 20], leak: 3, fix: 'Repeat CRM' }
+];
+const STAGES = ['Impressions', 'Visits', 'Add to cart', 'Orders', 'Repeat'];
+let ch = 0, userPicked = false;
+$('#chans').innerHTML = CHANS.map((c, i) => `<button type="button" data-i="${i}">${esc(c.name)}</button>`).join('');
+function renderChan() {
+  const c = CHANS[ch];
+  $$('#chans button').forEach((b, i) => b.setAttribute('aria-pressed', i === ch));
+  $('#stages').innerHTML = STAGES.map((s, i) => `<span class="${i === c.leak + 1 ? 'leak' : ''}"><b>${n2(i)}</b>${s}</span>`).join('');
+  $('#drops').innerHTML = STAGES.map((_, i) => `<span class="${i === c.leak + 1 ? 'leak' : ''}"><i>${i === 0 ? '100%' : '−' + (100 - c.pass[i - 1]) + '%'}</i></span>`).join('');
+  for (const id of ['leakName', 'fixText']) { const el = $('#' + id); el.style.animation = 'none'; el.offsetWidth; el.style.animation = ''; }
+  $('#leakName').textContent = STAGES[c.leak] + ' → ' + STAGES[c.leak + 1];
+  $('#fixText').textContent = c.fix;
+}
+$('#chans').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; userPicked = true; ch = +b.dataset.i; renderChan(); });
+renderChan();
+
+const cv = $('#funnel'), funOn = visible(cv);
+let parts = [], cur = CHANS[0].pass.slice();
+function drawFunnel() {
+  const dpr = window.devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+  const c = CHANS[ch];
+  for (let i = 0; i < 4; i++) cur[i] += (c.pass[i] - cur[i]) * 0.06;
+  const pad = 8, colW = (W - pad * 2) / 5, gx = k => pad + colW * (k + 0.5);
+  const cum = [1]; for (let i = 0; i < 4; i++) cum.push(cum[i] * cur[i] / 100);
+  const cy = H * 0.42, maxHalf = H * 0.36;
+  const half = x => { const k = (x - gx(0)) / colW; if (k <= 0) return maxHalf; if (k >= 4) return maxHalf * Math.max(0.05, Math.pow(cum[4], 0.55)); const a = Math.floor(k), t = k - a; const e0 = t < 0.4 ? 0 : (t - 0.4) / 0.6, ease = e0 * e0 * (3 - 2 * e0); return maxHalf * Math.max(0.05, Math.pow(cum[a] + (cum[a + 1] - cum[a]) * ease, 0.55)); };
+  ctx.fillStyle = '#2E3B33';
+  for (let k = 0; k < 5; k++) ctx.fillRect(Math.round(gx(k)), 4, 1, H - 8);
+  ctx.fillStyle = '#C9B48A'; ctx.fillRect(Math.round(gx(c.leak + 1)) - 1, 4, 2, H - 8);
+  for (let n = 0; n < 3; n++) parts.push({ x: pad, o: Math.random() * 2 - 1, gate: 1, drop: 0, vy: 0, y: 0, a: 1, leak: 0, s: 0.9 + Math.random() * 0.5 });
+  const sp = W / 420, next = [];
+  for (const p of parts) {
+    if (!p.drop) {
+      p.x += 1.6 * sp * p.s;
+      if (p.gate <= 4 && p.x >= gx(p.gate)) {
+        if (Math.random() * 100 > cur[p.gate - 1]) { p.drop = 1; p.leak = p.gate - 1 === c.leak; p.y = cy + p.o * half(p.x - 1); p.vy = 0.3; }
+        p.gate++;
+      }
+      if (p.x > W) continue;
+      if (!p.drop) { p.y = cy + p.o * half(p.x); ctx.fillStyle = '#EEE8DC'; ctx.globalAlpha = 0.85; ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3); }
+    } else {
+      p.vy += 0.12; p.y += p.vy; p.x += 0.4 * sp; p.a -= p.leak ? 0.012 : 0.03;
+      if (p.a <= 0 || p.y > H) continue;
+      ctx.globalAlpha = p.a; ctx.fillStyle = p.leak ? '#C9B48A' : '#4E5A51';
+      const s = p.leak ? 4 : 3; ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+    }
+    next.push(p);
+  }
+  ctx.globalAlpha = 1; parts = next;
+}
+(function loop() { if (funOn()) drawFunnel(); requestAnimationFrame(loop); })();
+if (!REDUCED) setInterval(() => { if (!userPicked && funOn()) { ch = (ch + 1) % 4; renderChan(); } }, 5200);
+
+/* ── 01 Lever board ── */
+// [name, cost, order lift, part of the "diagnose first" fix]
+const LEVERS = [
+  ['Vouchers', 14, 2, 0], ['Paid ads', 18, 3, 0], ['Live selling', 12, 2, 0], ['Affiliate & KOL', 14, 2, 0],
+  ['Flash sale', 12, 2, 0], ['Free shipping', 10, 14, 1], ['Bundles', 8, 12, 1], ['Mega sale', 12, 4, 0]
+];
+let on = LEVERS.map(() => 1);
+$('#levers').innerHTML = LEVERS.map((l, i) => `<button type="button" class="lever" data-i="${i}"><i></i><span>${esc(l[0])}</span></button>`).join('');
+function renderLevers() {
+  const spend = LEVERS.reduce((a, l, i) => a + (on[i] ? l[1] : 0), 0), lift = LEVERS.reduce((a, l, i) => a + (on[i] ? l[2] : 0), 0);
+  const allOn = on.every(Boolean), onlyRight = LEVERS.every((l, i) => !!on[i] === !!l[3]), roi = spend ? lift / spend : 0;
+  $$('.lever').forEach((b, i) => { b.classList.toggle('on', !!on[i]); b.setAttribute('aria-pressed', !!on[i]); });
+  $('#pullAll').setAttribute('aria-pressed', allOn); $('#pullRight').setAttribute('aria-pressed', onlyRight);
+  $('#spend').textContent = 'Rp ' + spend; $('#spendBar').style.width = spend + '%';
+  $('#lift').textContent = '+' + lift; $('#liftBar').style.width = Math.round(lift / 41 * 100) + '%';
+  $('#roi').textContent = '×' + roi.toFixed(1);
+  const v = !spend ? 'Nothing pulled. Nothing moves.' : allOn ? 'Busy. Thin return.' : onlyRight ? 'Two levers. 3× return.' : roi > 0.8 ? 'Getting sharper.' : 'Still spread thin.';
+  if ($('#verdict').textContent !== v) { const el = $('#verdict'); el.style.animation = 'none'; el.offsetWidth; el.style.animation = ''; el.textContent = v; }
+}
+$('#levers').addEventListener('click', e => { const b = e.target.closest('.lever'); if (!b) return; on[+b.dataset.i] ^= 1; renderLevers(); });
+$('#pullAll').addEventListener('click', () => { on = LEVERS.map(() => 1); renderLevers(); });
+$('#pullRight').addEventListener('click', () => { on = LEVERS.map(l => l[3]); renderLevers(); });
+renderLevers();
+
+/* ── 02 Five questions (accordion) ── */
+const QS = [
+  ['Where does the store leak?', 'The one funnel stage costing you the most orders.'],
+  ['Which SKUs deserve the push?', 'A hero, traffic and margin role for every product.'],
+  ['Which marketplace does what?', 'A clear role per channel: scale, profit, test or defend.'],
+  ['Which campaigns are worth joining?', 'A margin-safe calendar for mega sales and paydays.'],
+  ['What should the team do first?', 'A ranked 90-day plan with owners and targets.']
+];
+$('#acc').innerHTML = QS.map((r, i) => `<button type="button" data-i="${i}"><b>${n2(i)}</b><span class="acc__v big">${esc(r[0])}</span><div class="acc__open"><h3>${esc(r[0])}</h3><div><span class="cap">What you walk away with</span><span class="big">${esc(r[1])}</span></div></div></button>`).join('');
+const setQ = i => $$('#acc button').forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-expanded', k === i); });
+$$('#acc button').forEach(b => { const i = +b.dataset.i; b.addEventListener('click', () => setQ(i)); b.addEventListener('mouseenter', () => setQ(i)); });
+setQ(0);
+
+/* ── 03 Five moves (gantt) ── */
+// [title, detail, output, start week, end week, label]
+const PHASES = [
+  ['Read', 'Pull 90 days of store, ads and campaign data.', 'Data room', 0, 0.7, 'Week 1'],
+  ['Diagnose', 'Find the leak, by funnel stage, SKU and channel.', 'Leak map', 0.5, 1.8, 'Week 1–2'],
+  ['Prioritize', 'Rank the fixes by impact, effort and margin.', 'Ranked fixes', 1.6, 2.5, 'Week 2–3'],
+  ['Plan', 'Turn the ranking into a 90-day plan with owners and targets.', '90-day plan', 2.3, 3.3, 'Week 3'],
+  ['Review', 'Check the numbers, adjust the plan, repeat.', 'Review call', 3.1, 4, 'Week 4']
+];
+let ph = -1, phHold = false;
+$('#gantt').insertAdjacentHTML('afterbegin', PHASES.map((g, i) => `<button type="button" class="grow" data-i="${i}"><span><b>${n2(i)}</b>${esc(g[0])}</span><span><i style="left:${g[3] / 4 * 100}%;width:${(g[4] - g[3]) / 4 * 100}%"></i></span></button>`).join(''));
+function setPh(i) {
+  if (i === ph) return; ph = i; const g = PHASES[i];
+  $$('.grow').forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-pressed', k === i); });
+  $('#playhead').style.left = ((g[3] + g[4]) / 2 / 4 * 100) + '%';
+  $('#phase').outerHTML = `<div class="phase" id="phase" aria-live="polite"><div class="phase__top"><b>${n2(i)}</b><span class="mono">${g[5]}</span></div><h3>${esc(g[0])}</h3><p>${esc(g[1])}</p><div class="phase__out"><span class="cap">You get</span><span>${esc(g[2])}</span></div></div>`;
+}
+$$('.grow').forEach(b => { const i = +b.dataset.i; const pick = () => { phHold = true; setPh(i); }; b.addEventListener('click', pick); b.addEventListener('mouseenter', pick); });
+setPh(0);
+const ganttOn = visible($('#gantt'));
+if (!REDUCED) setInterval(() => { if (!phHold && ganttOn()) setPh((ph + 1) % 5); }, 2600);
+
+/* ── 04 Package phases ── */
+const PK = [
+  ['Diagnose', 'Find where the store leaks.', ['Funnel leaks', 'Channel roles', 'Benchmark']],
+  ['Evaluate', 'Cut what burns margin.', ['SKU roles', 'Promo ROI', 'Campaign margin']],
+  ['Next plan', 'Leave with a 90-day plan.', ['90-day plan', 'Owners & targets', 'Handover']]
+];
+$('#phs').innerHTML = PK.map((r, i) => `<div class="ph${i === 0 ? ' on' : ''}" data-i="${i}"><b>${n2(i)}</b><div><div><span class="cap">${r[0]}</span><h3>${esc(r[1])}</h3></div><ul>${r[2].map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></div>`).join('');
+$$('.ph').forEach(el => el.addEventListener('mouseenter', () => $$('.ph').forEach(p => p.classList.toggle('on', p === el))));
+
+/* ── Reveal (fade-up) ── */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; e.target.style.opacity = '1'; e.target.style.transform = 'none'; io.unobserve(e.target);
+}), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+$$('[data-reveal]').forEach(el => {
+  if (el.getBoundingClientRect().top < window.innerHeight) return;
+  el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1)';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
