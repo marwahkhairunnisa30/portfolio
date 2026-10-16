@@ -239,7 +239,10 @@ button{font:inherit}
 .spane__hd h3{margin:0;font-size:clamp(30px,3.4vw,44px);font-weight:500;letter-spacing:-.04em;line-height:1.02}
 .spane__hd p{margin:0;font-size:17px;line-height:1.6;color:var(--sage);max-width:620px}
 .subs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:0 24px;border-top:1px solid var(--seam)}
-.subs div{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--seam);font-size:15px}
+.subs div,.subs a{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--seam);font-size:15px}
+.subs a{color:var(--cream)}
+.subs a:hover{color:var(--gold)}
+.subs__go{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--gold)}
 .subs svg{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:square;flex:none}
 .anim{flex:none;height:200px;margin-top:auto;position:relative;background:var(--bg);outline:1px solid var(--seam);overflow:hidden}
 .anim + .spane__ft{margin-top:0}
@@ -521,7 +524,7 @@ const SERVICES = [
       { t: 'Build', p: 'IDR XX M', dur: '5–6 weeks', items: ['Everything in Diagnose', 'New BDs productive in weeks', 'KPIs that pay for results'] },
       { t: 'Optimize', p: 'IDR XX M', dur: '8–10 weeks', items: ['Everything in Build', 'A pipeline that runs itself', 'Coached until the team closes'], hi: true }
     ] },
-  { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: ['Branding Strategist', 'Marketplace Consulting', 'Workflow Automations', 'Brainstorming Sessions'], anim: 'Options → decision' },
+  { n: '02', t: 'Consulting', short: 'Business, marketplace & set-up', d: 'A thinking partner for growth decisions, from setting up a business to tightening marketplace performance and the workflows behind it.', subs: [{ t: 'Branding Strategist', href: '/services/branding-strategist.html' }, 'Marketplace Consulting', 'Workflow Automations', 'Brainstorming Sessions'], anim: 'Options → decision' },
   { n: '03', t: 'Data Analysis', short: 'Dashboards & decisions', d: 'Turn scattered numbers into decisions, with clean analysis, dashboards your team will actually open, and the right tools behind them.', subs: ['Analysis & Insight Extractions', 'Dashboard Optimizations'], anim: 'Noise → signal' },
   { n: '04', t: 'AI Trainer', short: 'Data annotation', d: 'Careful, consistent human judgement for AI models, with clear guidelines and reliable throughput.', subs: ['Data Annotation', 'Prompt Engineering'], anim: 'Label · review · repeat' },
   { n: '05', t: 'Virtual Assistant', short: 'Workflow automations', d: 'Reliable remote support that runs on systems, not reminders. Repetitive work gets automated so it stops slipping.', subs: ['Workflow automations', 'Remote operations support'], anim: 'Runs on systems, not reminders' }
@@ -743,7 +746,7 @@ const CAL = 'https://calendar.app.google/3UR6RuZJCrFbpQkV8';
 $('#svcNav').innerHTML = SERVICES.map((s, i) => `<button class="sbtn" type="button" role="tab" id="svc-tab-${i}" aria-controls="svc-pane-${i}" data-i="${i}"><span>${s.n}</span><span><b>${esc(s.t)}</b><small>${esc(s.short)}</small></span><i></i></button>`).join('');
 $('#svcPanes').innerHTML = SERVICES.map((s, i) => `<div class="spane" role="tabpanel" id="svc-pane-${i}" aria-labelledby="svc-tab-${i}">
   <div class="spane__hd"><span class="idx">${s.n} / 05</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>
-  ${s.subs ? `<div class="subs">${s.subs.map(x => `<div>${check}${esc(x)}</div>`).join('')}</div>` : ''}
+  ${s.subs ? `<div class="subs">${s.subs.map(x => x.href ? `<a href="${x.href}">${check}${esc(x.t)}<span class="subs__go">View →</span></a>` : `<div>${check}${esc(x)}</div>`).join('')}</div>` : ''}
   ${s.anim ? `<div class="anim"><canvas class="fill" data-svc-anim="${s.n}" aria-hidden="true"></canvas><span><span class="hud__dot pulse"></span>${esc(s.anim)}</span></div>` : ''}
   ${s.pkgs ? `<div class="pkgs"><div class="pkgs__hd"><span>Packages</span><span>Per project</span></div><div class="pkgs__grid">${s.pkgs.map(k => `<a href="/services/b2b-sales-system.html" class="pkg${k.hi ? ' pkg--hi' : ''}"><div class="pkg__hd"><b>${k.t}</b><span>${k.p}</span></div><small>${k.dur}</small>${k.items.map(x => `<span>${esc(x)}</span>`).join('')}</a>`).join('')}</div></div>` : ''}
   <div class="spane__ft"><span>Not sure which fits? Start with a 15-minute call.</span><a class="btn btn--gold btn--sm" href="${CAL}">Book 15 minutes →</a></div>
@@ -753,7 +756,15 @@ function svcRender() {
   document.querySelectorAll('.spane').forEach((p, i) => { p.classList.toggle('on', i === svc); p.setAttribute('aria-hidden', i !== svc); });
 }
 document.querySelectorAll('.sbtn').forEach(b => b.addEventListener('click', () => { svc = +b.dataset.i; svcRender(); }));
+// Deep link from service pages: /#consulting opens that tab.
+function svcFromHash() {
+  const i = SERVICES.findIndex(s => '#' + s.t.toLowerCase().replace(/\s+/g, '-') === location.hash);
+  if (i < 0) return;
+  svc = i; svcRender(); $('#services').scrollIntoView();
+}
 svcRender();
+svcFromHash();
+window.addEventListener('hashchange', svcFromHash);
 
 function startSvcAnim() {
   const draw = {
