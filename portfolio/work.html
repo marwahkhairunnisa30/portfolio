@@ -48,6 +48,8 @@ a{color:inherit;text-decoration:none}
 .grp__head h2{margin:0;font-size:clamp(44px,5.6vw,88px);font-weight:600;letter-spacing:-0.065em;line-height:.9}
 .grp__head p{margin:0;max-width:40ch;font-size:16px;line-height:1.55;color:var(--sky);text-wrap:pretty}
 .grp__head .mono{color:var(--mid)}
+.grp__go{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--yellow);color:var(--blue);font-size:14px;font-weight:600;white-space:nowrap;transition:background 200ms var(--ez)}
+.grp__go:hover{background:var(--off)}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
 .card{position:relative;min-height:260px;border-radius:28px;padding:clamp(22px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:var(--blue);transition:transform 300ms var(--ez),background 200ms var(--ez)}
 a.card:hover{transform:translateY(-6px)}
@@ -114,6 +116,7 @@ a.card--yellow:hover{background:var(--off)}
     <span class="mono">01 — Full-time</span>
     <h2>AHA Commerce</h2>
     <p>BD Lead. Sourcing and closing brand partners across Shopee, TikTok Shop and Tokopedia, then building the team and the system that does it at scale.</p>
+    <a class="grp__go" href="/full-time.html">See Full-time →</a>
   </div>
   <div class="cards">
     <a class="card" href="/projects/personal-brand-acquisitions.html">
@@ -148,9 +151,14 @@ a.card--yellow:hover{background:var(--off)}
     <span class="mono">02 — Freelance</span>
     <h2>Freelance</h2>
     <p>Remote and async, 10–14 hours a week: B2B sales systems, branding and marketplace consulting, data analysis, AI training and virtual assistance.</p>
+    <a class="grp__go" href="/freelance.html">See Freelance →</a>
   </div>
   <div class="cards">
-    <a class="card card--yellow card--wide" href="/services/b2b-sales-system.html">
+    <a class="card card--yellow card--wide" href="/freelance.html">
+      <div class="card__top"><span class="mono">Latest work · Brand &amp; portfolio</span><span class="arr">↗</span></div>
+      <div><h3>Personal brands, built end to end</h3><p>A brand system and portfolio site for two finance professionals, from guideline to a live site.</p></div>
+    </a>
+    <a class="card card--wide" href="/services/b2b-sales-system.html">
       <div class="card__top"><span class="mono">Service · 01</span><span class="arr">↗</span></div>
       <div><h3>B2B Sales System</h3><p>ICP-first research, personalised outreach and a pipeline you can actually see. Diagnose, Build or Optimize.</p></div>
     </a>
@@ -170,6 +178,7 @@ a.card--yellow:hover{background:var(--off)}
     <span class="mono">03 — Voice</span>
     <h2>Voice</h2>
     <p>Talks and sessions on careers, sales and building with AI.</p>
+    <a class="grp__go" href="/projects/speaker-govokasi.html">See the talk →</a>
   </div>
   <div class="cards">
     <a class="card card--mid card--wide" href="/projects/speaker-govokasi.html">
@@ -184,6 +193,7 @@ a.card--yellow:hover{background:var(--off)}
     <span class="mono">04 — Built with AI</span>
     <h2>Built with AI</h2>
     <p>Small, useful tools for sales and content work, designed and shipped end to end.</p>
+    <a class="grp__go" href="/built-with-ai.html">See Built with AI →</a>
   </div>
   <div class="cards">
     <a class="card card--yellow" href="https://bdtailored-ai.vercel.app" target="_blank" rel="noopener">
