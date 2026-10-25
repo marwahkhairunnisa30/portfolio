@@ -46,8 +46,14 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Serve static files
-  const urlPath = req.url.split('?')[0];
-  const filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
+  // Mirrors Vercel cleanUrls: /full-time serves full-time.html, /full-time.html redirects to /full-time.
+  const urlPath = decodeURIComponent(req.url.split('?')[0]);
+  if (urlPath.endsWith('.html')) {
+    res.writeHead(308, { Location: urlPath.slice(0, -5).replace(/\/index$/, '/') || '/' });
+    res.end(); return;
+  }
+  let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
+  if (!path.extname(filePath) && fs.existsSync(filePath + '.html')) filePath += '.html';
 
   fs.readFile(filePath, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }
@@ -59,5 +65,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n  Local server running`);
-  console.log(`  http://localhost:${PORT}/leads-generator.html\n`);
+  console.log(`  http://localhost:${PORT}/leads-generator\n`);
 });

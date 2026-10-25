@@ -182,10 +182,10 @@ ${p.outcomes ? `
     <a class="btn btn--ink" href="${WA}" target="_blank" rel="noopener">Let's talk →</a>
   </div>
   <div class="pn">
-    <a href="/projects/${prev.id}.html"><small>← Previous</small><b>${esc(prev.tab)}</b></a>
-    <a href="/projects/${next.id}.html"><small>Next →</small><b>${esc(next.tab)}</b></a>
+    <a href="/projects/${prev.id}"><small>← Previous</small><b>${esc(prev.tab)}</b></a>
+    <a href="/projects/${next.id}"><small>Next →</small><b>${esc(next.tab)}</b></a>
   </div>
-  <div class="case-foot"><span>© 2026 Marwah Khairunnisa</span><a href="/constellation.html">Skills Constellation →</a></div>
+  <div class="case-foot"><span>© 2026 Marwah Khairunnisa</span><a href="/constellation">Skills Constellation →</a></div>
 </section>
 </main>
 <script src="/assets/mk/case.js" defer></script>
