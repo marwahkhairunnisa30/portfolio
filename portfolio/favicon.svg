@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <!-- MK monogram (brand guideline mk1finals p.12/14): 12×12 grid, stroke 9/120, square caps, miter joins, Lime data point ø14.
-       Transparent background; switches to the Reverse version on dark browser UI. -->
-  <style>.ink{stroke:#052D8F}.ring{stroke:#052D8F}@media (prefers-color-scheme:dark){.ink{stroke:#F7F9FC}.ring{stroke:none}}</style>
-  <g transform="translate(60 60) scale(1.12) translate(-61.5 -57)" fill="none" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter">
-    <polyline class="ink" points="16,96 16,24 40,64 64,24 64,96"/>
-    <line class="ink" x1="82" y1="24" x2="82" y2="96"/>
-    <polyline class="ink" points="104,24 82,64 104,96"/>
-    <circle class="ring" cx="104" cy="24" r="7" fill="#E9F958" stroke-width="1.2"/>
+  <!-- Same mark as the TailoredAI favicon: Reverse MK monogram on a Cobalt rounded square, Lime data point -->
+  <rect width="120" height="120" rx="28" fill="#052D8F"/>
+  <g fill="none" stroke="#F7F9FC" stroke-width="9" stroke-linecap="square">
+    <polyline points="22,92 22,30 42,62 62,30 62,92"/>
+    <line x1="78" y1="30" x2="78" y2="92"/>
+    <polyline points="96,30 78,62 96,92"/>
   </g>
+  <circle cx="96" cy="30" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"/>
 </svg>
