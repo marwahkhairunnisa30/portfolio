@@ -6,9 +6,9 @@
 <title>Marwah K – Portfolio</title>
 <meta name="description" content="Marwah Khairunnisa — growth through strategy, partnerships, AI workflows and data. BD, consulting, data analysis and AI training. Based in Jakarta, open to remote.">
 <meta name="theme-color" content="#F7F9FC">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
@@ -161,7 +161,7 @@ body.ready .hero-l1{transform:none}
         <div style="display:flex;justify-content:space-between;align-items:flex-start"><span class="mono">PROJECT ↗</span><span aria-hidden="true" style="font-size:clamp(100px,14vw,180px);font-weight:600;letter-spacing:-0.07em;line-height:.8;color:transparent;-webkit-text-stroke:1.5px #052D8F">04</span></div>
         <span style="font-size:clamp(44px,5.4vw,80px);font-weight:600;letter-spacing:-0.06em;line-height:.9">Built with AI</span>
       </a>
-      <a class="allwork" href="/work" style="flex:none;width:min(60vw,240px);aspect-ratio:1;border-radius:50%;border:1.5px solid #4990E8;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#F7F9FC;margin-right:clamp(20px,4vw,48px);transition:background 200ms cubic-bezier(.2,0,0,1)">All work →</a>
+      <a class="allwork" id="playForte" href="#forte" style="flex:none;width:min(60vw,240px);aspect-ratio:1;border-radius:50%;border:1.5px solid #4990E8;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#F7F9FC;margin-right:clamp(20px,4vw,48px);transition:background 200ms cubic-bezier(.2,0,0,1)">Play Forte ▶</a>
     </div>
   </div>
 </section>
@@ -408,6 +408,8 @@ function tGo(k, scroll) {
 function fStop() {
   clearInterval(F.iv); F.sel = 0; F.start = false; F.fk = -1; E.fPlay.hidden = false; setTk(0); E.fName.textContent = '';
 }
+// "Play Forte" in the Work track jumps to Forte and starts the five-skills run.
+$('playForte').addEventListener('click', e => { e.preventDefault(); if (!F.start) E.fPlay.click(); else tGo(F.sel, true); });
 E.fPlay.addEventListener('click', () => {
   F.start = true; F.at = performance.now(); E.fPlay.hidden = true; tGo(0, true);
   clearInterval(F.iv);
