@@ -4,8 +4,23 @@
     {
       "name": "portfolio",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3030"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3030"
+      ],
       "port": 3030
+    },
+    {
+      "name": "portfolio-clean",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "server.js"
+      ],
+      "port": 3031,
+      "env": {
+        "PORT": "3031"
+      }
     }
   ]
 }
