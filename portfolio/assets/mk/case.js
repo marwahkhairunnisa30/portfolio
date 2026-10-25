@@ -23,7 +23,7 @@
       for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
         const v = Math.sin(i * 0.32 - j * 0.18 - t * 1.4) * 0.5 + 0.5, h = ((i * 73856093) ^ (j * 19349663)) % 97;
         const hot = v > 0.93 && h % 5 === 0, sz = hot ? s : s * (0.5 + v * 0.5);
-        x.fillStyle = hot ? '#C9B48A' : v > 0.7 ? '#2E3B33' : '#1A241F';
+        x.fillStyle = hot ? '#E9F958' : v > 0.7 ? '#1C2E63' : '#0B1D4D';
         x.fillRect(i * gap + (s - sz) / 2 + 6, j * gap + (s - sz) / 2 + 6, sz, sz);
       }
     }
@@ -48,24 +48,24 @@
       const C = 9, ph = (t % C) / C;
       const k = ph < .3 ? 0 : ph < .5 ? ease((ph - .3) / .2) : ph < .92 ? 1 : 1 - ease((ph - .92) / .08);
       const pad = 32, sx = pad + 90, ex = W - pad, sy = H / 2;
-      x.font = '500 11px "IBM Plex Mono", monospace'; x.textBaseline = 'middle';
-      x.globalAlpha = k; x.strokeStyle = '#2E3B33'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex, sy); x.stroke();
+      x.font = '500 11px "Geist Mono", monospace'; x.textBaseline = 'middle';
+      x.globalAlpha = k; x.strokeStyle = '#1C2E63'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex, sy); x.stroke();
       // On narrow screens alternate stage labels above/below the line so they don't collide.
       const tight = (ex - sx) / (stages.length - 1) < 72;
-      stages.forEach((s, i) => { const px = sx + (ex - sx) * i / (stages.length - 1); x.fillStyle = i === 4 ? '#C9B48A' : '#4E5A51'; x.fillRect(px - 4, sy - 4, 8, 8); x.fillStyle = '#6F7A70'; x.textAlign = i === 4 && tight ? 'right' : 'center'; x.fillText(s, i === 4 && tight ? px + 4 : px, tight && i % 2 ? sy - 22 : sy + 26); });
+      stages.forEach((s, i) => { const px = sx + (ex - sx) * i / (stages.length - 1); x.fillStyle = i === 4 ? '#E9F958' : '#2A4A9A'; x.fillRect(px - 4, sy - 4, 8, 8); x.fillStyle = '#4990E8'; x.textAlign = i === 4 && tight ? 'right' : 'center'; x.fillText(s, i === 4 && tight ? px + 4 : px, tight && i % 2 ? sy - 22 : sy + 26); });
       x.globalAlpha = 1;
       for (let i = 0; i < 8; i++) {
         const seed = i * 1.7, wx = pad + 40 + ((i * 0.37 + 0.13) % 1) * (W - 2 * pad - 80) + Math.sin(t * .9 + seed) * 26, wy = 28 + ((i * 0.61 + 0.2) % 1) * (H - 56) + Math.cos(t * .7 + seed) * 18;
         const lx = pad + 20, ly = sy - 70 + i * 20;
         const px = wx + (lx - wx) * k, py = wy + (ly - wy) * k;
-        x.fillStyle = k > .9 ? '#EEE8DC' : '#6F7A70'; x.fillRect(px - 5, py - 5, 10, 10);
-        if (k > .9) { x.strokeStyle = 'rgba(78,90,81,.6)'; x.beginPath(); x.moveTo(px + 6, py); x.quadraticCurveTo(sx - 20, py, sx, sy); x.stroke(); }
-        if (k < .2) { x.fillStyle = 'rgba(111,122,112,.7)'; x.textAlign = 'left'; x.fillText(['?', '—', '×', '?', '—', '×', '?', '—'][i], px + 10, py); }
+        x.fillStyle = k > .9 ? '#F7F9FC' : '#4990E8'; x.fillRect(px - 5, py - 5, 10, 10);
+        if (k > .9) { x.strokeStyle = 'rgba(42,74,154,.6)'; x.beginPath(); x.moveTo(px + 6, py); x.quadraticCurveTo(sx - 20, py, sx, sy); x.stroke(); }
+        if (k < .2) { x.fillStyle = 'rgba(73,144,232,.7)'; x.textAlign = 'left'; x.fillText(['?', '—', '×', '?', '—', '×', '?', '—'][i], px + 10, py); }
       }
       if (k > .95) {
-        for (let j = 0; j < 6; j++) { const q = (t * .35 + j / 6) % 1, px = sx + (ex - sx) * q; x.fillStyle = q > .96 ? '#EEE8DC' : '#C9B48A'; x.fillRect(px - 3, sy - 3, 6, 6); }
-        x.fillStyle = '#C9B48A'; x.textAlign = 'right'; x.fillText('closes on repeat', ex, tight ? sy - 52 : sy - 26);
-      } else if (k < .2) { x.fillStyle = '#6F7A70'; x.textAlign = 'left'; x.fillText('8 people · no shared process', pad, 18); }
+        for (let j = 0; j < 6; j++) { const q = (t * .35 + j / 6) % 1, px = sx + (ex - sx) * q; x.fillStyle = q > .96 ? '#F7F9FC' : '#E9F958'; x.fillRect(px - 3, sy - 3, 6, 6); }
+        x.fillStyle = '#E9F958'; x.textAlign = 'right'; x.fillText('closes on repeat', ex, tight ? sy - 52 : sy - 26);
+      } else if (k < .2) { x.fillStyle = '#4990E8'; x.textAlign = 'left'; x.fillText('8 people · no shared process', pad, 18); }
     }
     if (!reduce) requestAnimationFrame(now => paint(now / 1000));
   };

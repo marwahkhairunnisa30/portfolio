@@ -1,12 +1,12 @@
 /* Shared styles for MK v3 subpages (case studies + tools). Homepage keeps its own inline CSS. */
 :root{
-  --bg:#121B16;--ink:#0E1511;--deep:#1A241F;--moss:#1F2B24;--moss2:#26332B;--seam:#2E3B33;
-  --fern:#4E5A51;--lichen:#6F7A70;--sage:#A9B0A6;--bone:#DAD3C5;--cream:#EEE8DC;--gold:#C9B48A;
-  --pad:clamp(20px,5vw,64px);--ease:cubic-bezier(.2,.7,.2,1);--mono:'IBM Plex Mono',monospace;
+  --bg:#081433;--ink:#050E26;--deep:#0B1D4D;--moss:#0B1D4D;--moss2:#0F2660;--seam:#1C2E63;
+  --fern:#2A4A9A;--lichen:#4990E8;--sage:#C1E5FB;--bone:#D5DDEA;--cream:#F7F9FC;--gold:#E9F958;
+  --pad:clamp(20px,5vw,64px);--ease:cubic-bezier(.2,0,0,1);--mono:'Geist Mono',monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
-body{margin:0;background:var(--bg);color:var(--cream);font-family:'Onest',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
 a{color:var(--cream);text-decoration:none}
 a:hover{color:var(--gold)}
 img{display:block}
@@ -37,7 +37,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* Nav */
 .nav{border-bottom:1px solid var(--seam)}
-.nav--sticky{position:sticky;top:0;z-index:20;background:rgba(18,27,22,.97)}
+.nav--sticky{position:sticky;top:0;z-index:20;background:rgba(8,20,51,.97)}
 .nav__in{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .nav__left{display:flex;align-items:center;gap:12px;font-size:14px}
 .nav__brand{display:flex;align-items:center;gap:12px}
@@ -191,3 +191,25 @@ label.f{display:flex;flex-direction:column;gap:6px}
 .logo:hover{filter:none;border-color:var(--gold)}
 .logo img{width:100%;height:100%;object-fit:cover}
 @media(prefers-reduced-motion:reduce){.logos__track{animation:none!important}.logos{overflow-x:auto}}
+
+/* ── Brand v4 shapes: cards 24–28px, inputs/chips 12px, buttons & tags pill ── */
+:root{--blue:#052D8F;--r-card:24px;--r-chip:12px}
+body{letter-spacing:-.005em}
+.btn{border-radius:999px;min-height:44px}
+.btn--gold:hover{background:var(--cream)}
+.nav--sticky{background:rgba(8,20,51,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav__brand span{font-size:18px;font-weight:600;letter-spacing:-.05em}
+.case-hero h1,.tool-hd h1{font-weight:600;letter-spacing:-.06em}
+.h2,.cta h2,.challenge p,.deck b,.stats b{font-weight:600;letter-spacing:-.05em}
+.eyebrow b,.label,.deck small{font-family:var(--mono);letter-spacing:.1em}
+.sq{border-radius:50%}
+.role,.tags span{border-radius:999px}
+.stats,.did,.tool__grid,.cards,.logos,.deck,.cta,.ch-motion{border-radius:var(--r-card);overflow:hidden}
+.gallery .frame{border-radius:var(--r-card)}
+.gallery .frame>div{border-radius:var(--r-chip)}
+.logo{border-radius:var(--r-chip)}
+.inp,.seg button,.ghost,.solid{border-radius:var(--r-chip)}
+.cta{background:var(--gold);color:var(--blue)}
+.cta .btn--ink{background:var(--blue);color:var(--cream)}
+.cta .btn--ink:hover{background:var(--bg)}
+.proc .n::before{border-radius:50%}
