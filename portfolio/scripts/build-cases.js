@@ -99,6 +99,7 @@ function page(p, i) {
 <link rel="stylesheet" href="/assets/mk/site.css">
 </head>
 <body>
+<script src="/assets/mk/mk-preloader.js"></script>
 <nav class="nav nav--sticky">
   <div class="wrap nav__in">
     <a href="/" class="nav__brand">${MARK}<span>Marwah K</span></a>
