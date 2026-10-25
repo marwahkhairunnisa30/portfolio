@@ -2,7 +2,10 @@
    Usage: put <script src="mk-preloader.js"></script> right after <body> in index.html. */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  try { if (sessionStorage.getItem('mk-pre')) return; sessionStorage.setItem('mk-pre', '1'); } catch (e) {}
+  // Show on the first page of a session and on every reload; skip in-site link navigation.
+  var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  var reload = nav ? nav.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+  try { if (sessionStorage.getItem('mk-pre') && !reload) return; sessionStorage.setItem('mk-pre', '1'); } catch (e) {}
   if (!document.querySelector('link[href*="Geist+Mono"]')) {
     var f = document.createElement('link'); f.rel = 'stylesheet';
     f.href = 'https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap';
