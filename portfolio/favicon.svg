@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- MK monogram, full-colour version (brand guideline mk1finals p.12/14): 12×12 grid, stroke 9/120, square caps, miter joins, Lime data point ø14 -->
+  <rect width="120" height="120" rx="26" fill="#F7F9FC"/>
+  <g transform="translate(60 60) scale(.84) translate(-61.5 -57)">
+    <polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="#052D8F" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter"/><line x1="82" y1="24" x2="82" y2="96" stroke="#052D8F" stroke-width="9" stroke-linecap="square"/><polyline points="104,24 82,64 104,96" fill="none" stroke="#052D8F" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter"/>
+    <circle cx="104" cy="24" r="7" fill="#E9F958" stroke="#052D8F" stroke-width="1.2"/>
+  </g>
+</svg>
