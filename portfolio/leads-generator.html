@@ -1,245 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leads Generator — Marwah K</title>
-<meta name="description" content="Type a brand or a role. Get a full set of targeted Google searches — decision makers, stores, contacts, openings." />
-<meta name="theme-color" content="#081433" />
+<meta name="description" content="Type a brand or a role. Get a full set of targeted Google searches: decision makers, stores, contacts, openings.">
+<meta name="theme-color" content="#081433">
 <link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/mk/site.css">
-<style>
-.tool__form{flex:1 1 400px}
-.tool__out{flex:1.2 1 440px;min-height:580px}
-.modes{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--seam)}
-.modes button{border:0;border-bottom:2px solid transparent;cursor:pointer;text-align:left;padding:18px clamp(20px,2.4vw,28px) 16px;background:var(--bg);color:var(--sage);display:flex;flex-direction:column;gap:4px}
-.modes button:hover{color:var(--cream)}
-.modes button span{font-family:var(--mono);font-size:11px;color:var(--lichen)}
-.modes button b{font-size:17px;font-weight:600;letter-spacing:-.01em}
-.modes button[aria-pressed=true]{background:var(--moss);color:var(--cream);border-bottom-color:var(--gold)}
-.modes button[aria-pressed=true] span{color:var(--gold)}
-.seg button{padding:10px 14px;font-size:14px}
-.bar__act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.res a{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px clamp(16px,2vw,24px);border-bottom:1px solid var(--seam);transition:background .2s}
-.res a:hover{background:var(--moss);color:var(--cream)}
-.res .n,.res .ar{font-family:var(--mono);font-size:12px;color:var(--gold)}
-.res .tx{display:flex;flex-direction:column;gap:4px;min-width:0}
-.res .tx b{font-size:15px;font-weight:600}
-.res .tx span{font-family:var(--mono);font-size:11px;color:var(--lichen);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ai{border-top:2px solid var(--gold);padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:2px}
-.ai__note{font-family:var(--mono);font-size:11px;color:var(--lichen);padding-bottom:12px;line-height:1.5}
-.ai__err{font-family:var(--mono);font-size:12px;color:var(--gold)}
-.lead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:14px 16px;background:var(--bg)}
-.lead b{font-size:15px;font-weight:600}
-.lead .sc{font-family:var(--mono);font-size:12px;color:var(--bg);background:var(--gold);padding:2px 6px;align-self:start}
-.lead .meta{grid-column:1/-1;font-size:13px;color:var(--sage);line-height:1.45}
-.lead .why{grid-column:1/-1;font-family:var(--mono);font-size:11px;color:var(--lichen);line-height:1.5}
-</style>
+
+<script>window.__resources = {};</script>
+<script src="/assets/dc/support.js"></script>
 </head>
 <body>
-<nav class="nav nav--sticky">
-  <div class="wrap nav__in">
-    <div class="nav__left">
-      <a href="/" class="nav__brand"><svg viewBox="0 0 120 120" width="32" aria-hidden="true"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"/></svg><span>Marwah K</span></a>
-      <span class="nav__crumb">Leads Generator</span>
+
+<x-dc>
+<helmet><script src="/assets/mk/mk-cursor.js"></script><script src="/assets/dc/mk-chrome.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&amp;family=Geist+Mono:wght@400..600&amp;display=swap"><style>html{scroll-behavior:smooth}body{margin:0;background:#081433}a{color:inherit;text-decoration:none}a:hover{color:inherit}input,select,button{font:inherit}input::placeholder{color:rgba(193,229,251,.42)}select option{color:#081433}@keyframes mkpulse{0%,100%{opacity:1}50%{opacity:.35}}@keyframes mkblink{0%,100%{opacity:1}50%{opacity:0}}@keyframes tarise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}@keyframes tarup{from{transform:translateY(110%)}to{transform:none}}@keyframes tafade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}@keyframes tapop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:none}}@keyframes tascan{from{transform:translateY(-100%)}to{transform:translateY(900%)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style></helmet>
+<div style="background:#081433;color:#F7F9FC;font-family:'Geist',sans-serif;overflow-x:clip">
+
+  <header data-mk-header="" style="position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px clamp(20px,4vw,48px);color:#F7F9FC;border:1px solid transparent;border-radius:0;transition:color 250ms cubic-bezier(.2,0,0,1),top 400ms cubic-bezier(.2,0,0,1),left 400ms cubic-bezier(.2,0,0,1),right 400ms cubic-bezier(.2,0,0,1),padding 400ms cubic-bezier(.2,0,0,1),border-radius 400ms cubic-bezier(.2,0,0,1),background 300ms cubic-bezier(.2,0,0,1),border-color 300ms cubic-bezier(.2,0,0,1),box-shadow 300ms cubic-bezier(.2,0,0,1);pointer-events:none">
+    <a href="/" style="display:flex;align-items:center;gap:10px;pointer-events:auto;flex:none">
+      <svg sc-camel-view-box="0 0 120 120" style="width:40px;height:40px;flex:none"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"></line><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"></circle></svg>
+      <span style="font-size:22px;font-weight:600;letter-spacing:-0.05em;white-space:nowrap">Marwah K</span>
+    </a>
+    <nav style="display:flex;gap:clamp(14px,2vw,28px);font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;margin-right:190px;overflow-x:auto;scrollbar-width:none;pointer-events:auto;max-width:calc(100vw - 420px)">
+      <a href="#brief" style="white-space:nowrap">01 TRY IT</a>
+      <a href="#connect" style="white-space:nowrap">02 CONNECT</a>
+    </nav>
+  </header>
+  <a data-mk-book="" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" style="position:fixed;top:14px;right:clamp(20px,4vw,48px);z-index:41;background:#E9F958;color:#052D8F;border-radius:999px;padding:12px 18px;min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;white-space:nowrap;transition:top 400ms cubic-bezier(.2,0,0,1),right 400ms cubic-bezier(.2,0,0,1),background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:#F7F9FC;color:#052D8F"><span style="width:7px;height:7px;border-radius:50%;background:#052D8F;animation:mkblink 1.2s steps(1) infinite"></span>Book 15 min</a>
+
+  <section data-screen-label="Hero" style="box-sizing:border-box;min-height:min(86vh,820px);padding:clamp(120px,16vh,170px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2)) clamp(40px,6vh,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:end;gap:clamp(32px,5vw,72px);background:#052D8F;color:#F7F9FC">
+    <div style="display:flex;flex-direction:column;gap:clamp(16px,2.6vh,24px);min-width:0">
+      <span style="display:flex;align-items:center;gap:10px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#E9F958;white-space:nowrap;animation:tafade 700ms cubic-bezier(.2,0,0,1) both"><span style="width:8px;height:8px;border-radius:50%;background:#E9F958;animation:mkpulse 1.6s ease-in-out infinite"></span>BUILT WITH AI · RESEARCH</span>
+      <h1 style="margin:0;font-size:clamp(60px,min(8.4vw,14vh),150px);font-weight:600;letter-spacing:-0.075em;line-height:.86;display:flex;flex-direction:column"><span style="display:block;overflow:hidden;padding-bottom:.06em"><span style="display:block;animation:tarup 900ms cubic-bezier(.2,0,0,1) both">Leads</span></span><span style="display:block;overflow:hidden;padding-bottom:.06em"><span style="display:block;color:#E9F958;animation:tarup 900ms 140ms cubic-bezier(.2,0,0,1) both">Generator</span></span></h1>
+      <p style="margin:0;max-width:480px;font-size:clamp(17px,1.4vw,21px);line-height:1.4;color:#C1E5FB;text-wrap:pretty;animation:tafade 700ms 380ms cubic-bezier(.2,0,0,1) both">Type a brand or a role. Get a full set of targeted Google searches: decision makers, stores, contacts, openings. <span style="color:#F7F9FC">One click each.</span></p>
     </div>
-    <div class="nav__right"><a href="/">← Back to portfolio</a></div>
-  </div>
-</nav>
+    <div style="display:flex;flex-direction:column;border-radius:28px;background:#081433;overflow:hidden;min-width:0;animation:tafade 900ms 300ms cubic-bezier(.2,0,0,1) both">
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:16px 22px;border-bottom:1px solid rgba(193,229,251,.16);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;color:#C1E5FB"><span>ONE TARGET, EVERY ANGLE</span><span style="color:#E9F958">LIVE</span></div>
+      <div style="position:relative;min-height:clamp(260px,34vh,320px);padding:22px">{{ demo }}</div>
+    </div>
+  </section>
 
-<header class="wrap tool-hd">
-  <div class="fade">
-    <div class="eyebrow"><span class="sq"></span><b>Built with AI · Research</b></div>
-    <h1>Leads Generator</h1>
-    <p>Type a brand or a role. Get a full set of targeted Google searches — decision makers, stores, contacts, openings — one click each.</p>
-  </div>
-</header>
+  <section id="brief" data-screen-label="Workspace" style="box-sizing:border-box;padding:clamp(48px,8vh,96px) max(clamp(16px,4vw,48px),calc((100% - 1280px) / 2));display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:clamp(16px,2.4vw,32px);align-items:start;background:#081433">
 
-<section class="wrap tool">
-  <div class="tool__grid">
-    <form class="tool__form" id="form" novalidate>
-      <div class="modes" id="modes">
-        <button type="button" data-m="bd" aria-pressed="true"><span>01</span><b>BD / Sales</b></button>
-        <button type="button" data-m="job" aria-pressed="false"><span>02</span><b>Job hunt</b></button>
+    <form sc-camel-on-submit="{{ generate }}" style="display:flex;flex-direction:column;min-width:0">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding-bottom:32px;border-bottom:1px solid rgba(193,229,251,.16)">
+        <sc-for list="{{ modes }}" as="c" hint-placeholder-count="2">
+          <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;padding:22px;border-radius:12px;border:1px solid #E9F958;background:#E9F958;color:#052D8F;cursor:pointer"><span style="font-family:'Geist Mono',monospace;font-size:13px">{{ c.n }}</span><span style="font-size:24px;font-weight:600;letter-spacing:-0.045em">{{ c.label }}</span><span style="font-size:15px;line-height:1.4">{{ c.desc }}</span></button></sc-if>
+          <sc-if value="{{ c.off }}" hint-placeholder-val="{{ true }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;padding:22px;border-radius:12px;border:1px solid rgba(193,229,251,.2);background:transparent;color:#F7F9FC;cursor:pointer;transition:border-color 200ms cubic-bezier(.2,0,0,1)" style-hover="border-color:rgba(193,229,251,.5)"><span style="font-family:'Geist Mono',monospace;font-size:13px;color:#E9F958">{{ c.n }}</span><span style="font-size:24px;font-weight:600;letter-spacing:-0.045em">{{ c.label }}</span><span style="font-size:15px;line-height:1.4;color:#C1E5FB">{{ c.desc }}</span></button></sc-if>
+        </sc-for>
       </div>
-      <div class="blk">
-        <label class="k" for="target" id="targetLabel">Brand name *</label>
-        <input class="big" id="target" autocomplete="off" placeholder="e.g. Erigo">
+
+      <sc-if value="{{ isBD }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 0;border-bottom:1px solid rgba(193,229,251,.16)">
+          <span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#E9F958">01</span><span style="color:#C1E5FB">Brand name *</span></span>
+          <input value="{{ brand }}" sc-camel-on-change="{{ setBrand }}" placeholder="Brand name" style="box-sizing:border-box;width:100%;padding:4px 0 16px;border:0;border-bottom:1px solid rgba(193,229,251,.28);background:transparent;color:#F7F9FC;font-size:clamp(36px,4.2vw,60px);font-weight:600;letter-spacing:-0.05em;outline:none">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 0;border-bottom:1px solid rgba(193,229,251,.16)">
+          <span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#E9F958">02</span><span style="color:#C1E5FB">Who to reach</span></span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ roles }}" as="c" hint-placeholder-count="4">
+              <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:#E9F958;color:#052D8F;font-weight:600;cursor:pointer;font-size:16px;white-space:nowrap">{{ c.label }}</button></sc-if>
+              <sc-if value="{{ c.off }}" hint-placeholder-val="{{ true }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:rgba(193,229,251,.08);color:#F7F9FC;font-weight:500;cursor:pointer;font-size:16px;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(193,229,251,.16)">{{ c.label }}</button></sc-if>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isJob }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 0;border-bottom:1px solid rgba(193,229,251,.16)">
+          <span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#E9F958">01</span><span style="color:#C1E5FB">Role *</span></span>
+          <input value="{{ role }}" sc-camel-on-change="{{ setRole }}" placeholder="Role, e.g. BD Manager" style="box-sizing:border-box;width:100%;padding:4px 0 16px;border:0;border-bottom:1px solid rgba(193,229,251,.28);background:transparent;color:#F7F9FC;font-size:clamp(36px,4.2vw,60px);font-weight:600;letter-spacing:-0.05em;outline:none">
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px 24px;padding:32px 0;border-bottom:1px solid rgba(193,229,251,.16)">
+          <div style="display:flex;flex-direction:column;gap:20px;min-width:0"><span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#E9F958">02</span><span style="color:#C1E5FB">Level</span></span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ levels }}" as="c" hint-placeholder-count="4">
+              <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:#E9F958;color:#052D8F;font-weight:600;cursor:pointer;font-size:16px;white-space:nowrap">{{ c.label }}</button></sc-if>
+              <sc-if value="{{ c.off }}" hint-placeholder-val="{{ true }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:rgba(193,229,251,.08);color:#F7F9FC;font-weight:500;cursor:pointer;font-size:16px;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(193,229,251,.16)">{{ c.label }}</button></sc-if>
+            </sc-for>
+          </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;min-width:0"><span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#C1E5FB">Work mode</span></span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ workModes }}" as="c" hint-placeholder-count="4">
+              <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:#E9F958;color:#052D8F;font-weight:600;cursor:pointer;font-size:16px;white-space:nowrap">{{ c.label }}</button></sc-if>
+              <sc-if value="{{ c.off }}" hint-placeholder-val="{{ true }}"><button type="button" sc-camel-on-click="{{ c.pick }}" style="min-height:48px;padding:0 18px;border-radius:12px;border:0;background:rgba(193,229,251,.08);color:#F7F9FC;font-weight:500;cursor:pointer;font-size:16px;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(193,229,251,.16)">{{ c.label }}</button></sc-if>
+            </sc-for>
+          </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding:32px 0;border-bottom:1px solid rgba(193,229,251,.16)">
+        <span style="display:flex;gap:16px;font-family:'Geist Mono',monospace;font-size:14px"><span style="color:#E9F958">03</span><span style="color:#C1E5FB">City · optional</span></span>
+        <input value="{{ city }}" sc-camel-on-change="{{ setCity }}" placeholder="e.g. Jakarta" style="box-sizing:border-box;width:100%;min-height:56px;padding:0 18px;border-radius:12px;border:1px solid rgba(193,229,251,.2);background:rgba(193,229,251,.06);color:#F7F9FC;font-size:17px;outline-color:#E9F958">
       </div>
-      <div id="groups"></div>
-      <div class="blk blk--end">
-        <span class="k k--dim" id="preview">Fill the target to preview</span>
-        <button type="submit" class="btn btn--gold go" id="go" data-ready="false"><span id="goLabel">Generate search links</span><span>→</span></button>
-        <span class="err" id="err" role="alert"></span>
+
+      <div style="padding-top:32px">
+        <sc-if value="{{ canGo }}" hint-placeholder-val="{{ false }}"><button type="submit" style="width:100%;min-height:72px;padding:0 32px;border-radius:12px;border:0;background:#E9F958;color:#052D8F;font-size:22px;font-weight:600;letter-spacing:-0.03em;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:#F7F9FC"><span>{{ ctaLabel }}</span><span>→</span></button></sc-if>
+        <sc-if value="{{ cantGo }}" hint-placeholder-val="{{ true }}"><button type="button" disabled="" style="width:100%;min-height:72px;padding:0 32px;border-radius:12px;border:0;background:rgba(193,229,251,.14);color:rgba(193,229,251,.6);font-size:22px;font-weight:600;letter-spacing:-0.03em;cursor:not-allowed;display:flex;align-items:center;justify-content:space-between;gap:12px"><span>{{ ctaLabel }}</span><span>→</span></button></sc-if>
       </div>
     </form>
 
-    <div class="tool__out">
-      <div class="bar">
-        <span><span class="dot"></span><span id="status">Idle · waiting for a target</span></span>
-        <span class="bar__act" id="acts" hidden>
-          <button type="button" class="ghost" id="aiBtn" title="Simulated lookalike leads from Claude">✦ AI leads</button>
-          <button type="button" class="ghost" id="copyAll">Copy all</button>
-          <button type="button" class="solid" id="openTop">Open top 3 ↗</button>
-        </span>
+    <div id="results" style="position:sticky;top:96px;display:flex;flex-direction:column;border-radius:28px;background:#052D8F;color:#F7F9FC;overflow:hidden;min-height:min(640px,calc(100vh - 120px))">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid rgba(193,229,251,.16);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em">
+        <span style="display:flex;align-items:center;gap:10px;color:#E9F958;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="width:8px;height:8px;flex:none;border-radius:50%;background:#E9F958;animation:mkpulse 1.6s ease-in-out infinite"></span>{{ statusLabel }}</span>
+        <span style="color:#C1E5FB;white-space:nowrap">{{ metaLabel }}</span>
       </div>
-      <div class="stage" id="stage"><canvas id="cv" aria-hidden="true"></canvas><span id="hint">Type a target on the left to start the scan</span></div>
-      <div id="outWrap" hidden>
-        <div class="res" id="out" aria-live="polite"></div>
-        <div class="ai" id="ai" hidden aria-live="polite"></div>
+
+      <sc-if value="{{ showRadar }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(24px,4vh,40px) clamp(20px,3vw,32px)">
+          <div style="position:relative;width:min(100%,420px);aspect-ratio:1;align-self:center">{{ radar }}</div>
+          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.4;color:#C1E5FB">{{ note }}</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;display:flex;flex-direction:column;padding:8px clamp(16px,2.4vw,24px) 24px">
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="8">
+            <a href="{{ l.url }}" target="_blank" style="display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 4px;border-bottom:1px solid rgba(193,229,251,.16);animation:tarise 500ms cubic-bezier(.2,0,0,1) both;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(193,229,251,.06)">
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#E9F958">{{ l.n }}</span>
+              <span style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:18px;font-weight:600;letter-spacing:-0.03em">{{ l.label }}</span><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#C1E5FB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.q }}</span></span>
+              <span style="min-height:36px;padding:0 14px;border-radius:999px;background:#E9F958;color:#052D8F;display:flex;align-items:center;font-size:13px;font-weight:600;white-space:nowrap">Open ↗</span>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="connect" data-mk-light="" data-screen-label="Connect" style="background:#E9F958;color:#052D8F;box-sizing:border-box;padding:clamp(64px,10vh,112px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2)) clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:clamp(48px,8vh,96px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,56px);align-items:flex-end">
+      <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em">02 — CONNECT</span>
+        <h2 style="margin:0;font-size:clamp(40px,5.6vw,88px);font-weight:600;letter-spacing:-0.07em;line-height:.92;text-wrap:balance">Want a research tool <span style="color:#4990E8">built for your team?</span></h2>
+      </div>
+      <div style="flex:0 1 auto;min-width:0;display:flex;flex-direction:column;gap:20px">
+        <p style="margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.45;width:max-content;max-width:100%">Tell me how your team prospects, and I’ll scope a tool built on public search.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="https://wa.me/6285155343042" target="_blank" style="background:#052D8F;color:#F7F9FC;border-radius:999px;padding:0 24px;min-height:52px;display:flex;align-items:center;font-size:16px;font-weight:600;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:#081433;color:#F7F9FC">Let’s talk on WhatsApp</a>
+          <a href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" style="border:1.5px solid #052D8F;border-radius:999px;padding:0 24px;min-height:52px;display:flex;align-items:center;font-size:16px;font-weight:600;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(5,45,143,.08)">Book 15 min</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 32px;padding-top:20px;border-top:1.5px solid #052D8F">
+      <div style="display:flex;gap:10px"><a href="https://linkedin.com/in/marwahkha" target="_blank" aria-label="LinkedIn" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a><a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="M3 6.5l9 6.5 9-6.5"></path></svg></a><a href="https://wa.me/6285155343042" target="_blank" aria-label="WhatsApp" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:21px;height:21px" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zm8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41z"></path></svg></a></div>
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;white-space:nowrap">© 2026 MARWAH K · JAKARTA <span data-mk-clock="">--:--:--</span></span>
+    </div>
+  </section>
 
-<footer class="foot"><div class="wrap"><span>© 2026 Marwah Khairunnisa · Personal toolkit</span><a href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk →</a></div></footer>
 
-<script src="/assets/mk/ai.js"></script>
-<script>
-(() => {
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SEA = '(Singapore OR Malaysia OR Thailand OR Vietnam OR Philippines)';
-const geo = v => v === 'SE Asia' ? SEA : v === 'Global' ? '' : v;
-const SITES = { Shopee: 'shopee.co.id', Tokopedia: 'tokopedia.com', Instagram: 'instagram.com', TikTok: 'tiktok.com' };
-const f = { mode: 'bd', brand: '', role: '', market: 'Indonesia', platform: 'All', work: 'Remote', loc: 'Indonesia' };
-const GROUPS = {
-  bd: [['market', 'Market', ['Indonesia', 'SE Asia', 'Global']], ['platform', 'Platform', ['All', 'Shopee', 'Tokopedia', 'Instagram', 'TikTok']]],
-  job: [['work', 'Work type', ['Remote', 'Hybrid', 'WFO', 'All']], ['loc', 'Location', ['Indonesia', 'Jakarta', 'SE Asia', 'Global']]]
-};
-const FEED = ['site:linkedin.com/in', 'site:shopee.co.id', 'official website', '"kerjasama"', 'site:linkedin.com/jobs', '"hiring"', 'site:glints.com', 'competitors', 'site:tokopedia.com', '"brand manager"'];
-let busy = false, out = [], timer;
-
-function build() {
-  const q = [];
-  if (f.mode === 'bd') {
-    const b = '"' + f.brand.trim() + '"', g = geo(f.market);
-    q.push(['Decision makers', 'site:linkedin.com/in ' + b + ' (marketing OR ecommerce OR partnership OR "brand manager") ' + g]);
-    q.push(['Official website', b + ' official website ' + g]);
-    q.push(['Partnership contact', b + ' email (partnership OR business OR collaboration OR kerjasama)']);
-    q.push(['Company page', 'site:linkedin.com/company ' + b]);
-    (f.platform === 'All' ? Object.keys(SITES) : [f.platform]).forEach(p => q.push([p + ' store', 'site:' + SITES[p] + ' ' + b]));
-    q.push(['Recent news', b + ' (launch OR expansion OR funding OR campaign) 2026']);
-    q.push(['Competitors', b + ' competitors OR alternatives ' + g]);
-  } else {
-    const r = '"' + f.role.trim() + '"', g = geo(f.loc), w = f.work === 'All' ? '' : f.work;
-    q.push(['LinkedIn jobs', 'site:linkedin.com/jobs ' + r + ' ' + w + ' ' + g]);
-    q.push(['Hiring posts', 'site:linkedin.com/posts "hiring" ' + r + ' ' + g]);
-    q.push(['Recruiters', 'site:linkedin.com/in recruiter ' + r + ' ' + g]);
-    if (f.loc === 'Indonesia' || f.loc === 'Jakarta') { q.push(['JobStreet', 'site:jobstreet.co.id ' + r + ' ' + f.loc]); q.push(['Glints', 'site:glints.com ' + r + ' ' + f.loc]); q.push(['Kalibrr', 'site:kalibrr.com ' + r]); }
-    if (f.work === 'Remote' || f.loc === 'Global') q.push(['Remote boards', r + ' remote (site:weworkremotely.com OR site:remoteok.com OR site:wellfound.com)']);
-    q.push(['Careers pages', r + ' (careers OR "join our team") ' + w + ' ' + g]);
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+const E = React.createElement;
+const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+const SWEEP = 1.1, SWEEPS = 3;
+const BD = [
+  ['Decision makers', b => 'site:linkedin.com/in "' + b + '" (founder OR CEO OR director OR "head of")'],
+  ['Partnership & marketing', b => 'site:linkedin.com/in "' + b + '" (partnership OR "brand manager" OR marketing)'],
+  ['Official stores', b => '"' + b + '" official store (site:shopee.co.id OR site:tokopedia.com OR site:tiktok.com)'],
+  ['Contacts', (b, c) => '"' + b + '" (email OR "contact us" OR whatsapp)' + (c ? ' ' + c : '')],
+  ['Company profile', b => '"' + b + '" ("PT" OR "company profile" OR "about us")'],
+  ['Campaigns & collabs', b => '"' + b + '" (campaign OR collaboration OR launch) 2026'],
+  ['Instagram', b => 'site:instagram.com "' + b + '"'],
+  ['Openings', b => '"' + b + '" (hiring OR lowongan OR careers)']
+];
+const ROLE_Q = { Any: '', Founder: '(founder OR owner)', Marketing: '(marketing OR "brand manager")', Ecommerce: '(ecommerce OR "e-commerce" OR marketplace)', Partnership: '(partnership OR "business development")' };
+const JOB = [
+  ['LinkedIn jobs', (r, c) => 'site:linkedin.com/jobs "' + r + '"' + (c ? ' ' + c : '')],
+  ['Job boards', (r, c) => '"' + r + '" (site:jobstreet.co.id OR site:glints.com OR site:kalibrr.com)' + (c ? ' ' + c : '')],
+  ['Hiring posts', r => 'site:linkedin.com/posts "' + r + '" (hiring OR "we\'re hiring")'],
+  ['Recruiters', r => 'site:linkedin.com/in ("talent acquisition" OR recruiter) "' + r + '"'],
+  ['Careers pages', (r, c) => '"' + r + '" (careers OR "join our team")' + (c ? ' ' + c : '')],
+  ['Hiring managers', r => 'site:linkedin.com/in ("head of" OR director) "' + r.split(' ').slice(-1)[0] + '"'],
+  ['Salary check', (r, c) => '"' + r + '" (salary OR gaji)' + (c ? ' ' + c : '')]
+];
+const BLIPS = [[.3, .2], [.72, .26], [.84, .58], [.62, .82], [.28, .76], [.14, .48], [.5, .36], [.4, .6]];
+function Radar({ n, filled, loading }) {
+  const [t, setT] = React.useState(0);
+  React.useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches && !loading) return;
+    let raf, st = performance.now();
+    const f = now => { setT((now - st) / 1000); raf = requestAnimationFrame(f); };
+    raf = requestAnimationFrame(f); return () => cancelAnimationFrame(raf);
+  }, [loading]);
+  const ang = loading ? Math.min(SWEEPS, t / SWEEP) * 360 : (t * 40) % 360;
+  const rings = [1, .72, .44, .16];
+  return E('div', { style: { position: 'absolute', inset: 0 } },
+    rings.map((r, i) => E('span', { key: i, style: { position: 'absolute', left: (1 - r) * 50 + '%', top: (1 - r) * 50 + '%', width: r * 100 + '%', height: r * 100 + '%', boxSizing: 'border-box', borderRadius: '50%', border: '1.5px solid rgba(193,229,251,' + (i ? .22 : .35) + ')' } })),
+    E('span', { style: { position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: 'rgba(193,229,251,.14)' } }),
+    E('span', { style: { position: 'absolute', top: '50%', left: 0, right: 0, height: 1, background: 'rgba(193,229,251,.14)' } }),
+    E('span', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: 'conic-gradient(from ' + ang + 'deg, rgba(233,249,88,' + (loading ? .45 : filled ? .28 : .12) + '), rgba(233,249,88,0) 70deg, rgba(233,249,88,0))', transform: 'scaleX(-1)' } }),
+    BLIPS.slice(0, n).map(([x, y], i) => {
+      const a = (Math.atan2(y - .5, x - .5) * 180 / Math.PI + 450) % 360, d = ((ang % 360) - a + 360) % 360, glow = filled ? Math.max(.35, 1 - d / 240) : .25;
+      return E('span', { key: i, style: { position: 'absolute', left: x * 100 + '%', top: y * 100 + '%', width: 14, height: 14, margin: '-7px 0 0 -7px', borderRadius: '50%', background: filled ? '#E9F958' : 'rgba(193,229,251,.5)', opacity: glow, boxShadow: filled ? '0 0 0 ' + (6 * glow) + 'px rgba(233,249,88,.18)' : 'none', transition: 'background 300ms' } });
+    }),
+    E('span', { style: { position: 'absolute', left: '50%', top: '50%', width: 44, height: 44, margin: '-22px 0 0 -22px', borderRadius: '50%', background: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, E('span', { style: { width: 16, height: 16, borderRadius: '50%', background: '#E9F958', border: '2px solid #052D8F' } })));
+}
+const DEMO = ['site:linkedin.com/in "BRAND" (founder OR "head of")', '"BRAND" official store site:shopee.co.id', '"BRAND" ("contact us" OR whatsapp)', 'site:linkedin.com/jobs "BD Manager" Jakarta', '"BRAND" (campaign OR collaboration) 2026'];
+function Demo() {
+  const [t, setT] = React.useState(0);
+  React.useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setT(6); return; }
+    let raf, st = performance.now();
+    const f = now => { setT(((now - st) / 1000) % 8); raf = requestAnimationFrame(f); };
+    raf = requestAnimationFrame(f); return () => cancelAnimationFrame(raf);
+  }, []);
+  const word = 'Your target', typed = word.slice(0, Math.floor(Math.min(1, t / 1) * word.length)), fade = t > 7.4 ? 1 - (t - 7.4) / .6 : 1;
+  const mono = { fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '.08em' };
+  return E('div', { style: { display: 'flex', flexDirection: 'column', gap: 16, opacity: fade } },
+    E('div', { style: { display: 'flex', alignItems: 'center', gap: 12, paddingBottom: 12, borderBottom: '1px solid rgba(193,229,251,.28)' } },
+      E('span', { style: { fontSize: 'clamp(26px,2.6vw,36px)', fontWeight: 600, letterSpacing: '-0.05em', color: '#F7F9FC' } }, typed),
+      t < 1.3 ? E('span', { style: { width: 3, height: 30, background: '#E9F958', animation: 'mkpulse 800ms ease-in-out infinite' } }) : E('span', { style: { marginLeft: 'auto', ...mono, color: '#E9F958' } }, 'SCANNING')),
+    E('div', { style: { display: 'flex', flexDirection: 'column', gap: 8 } },
+      DEMO.map((q, i) => { const e = ease((t - 1.5 - i * .45) / .4); return E('div', { key: i, style: { display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) auto', gap: 10, alignItems: 'center', padding: '9px 12px', borderRadius: 12, background: 'rgba(193,229,251,.06)', opacity: e, transform: 'translateX(' + (1 - e) * 30 + 'px)' } },
+        E('span', { style: { ...mono, color: '#E9F958' } }, '0' + (i + 1)),
+        E('span', { style: { ...mono, letterSpacing: 0, fontSize: 12, color: '#C1E5FB', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, q),
+        E('span', { style: { fontSize: 13, fontWeight: 600, color: '#E9F958' } }, '↗')); })));
+}
+class Component extends DCLogic {
+  state = { mode: 'bd', brand: '', roleT: 'Any', role: '', level: 'Any', work: 'Any', city: '', status: 'idle', out: [] };
+  demoEl = E(Demo);
+  chips(list, key) { return list.map(v => ({ label: v, on: this.state[key] === v, off: this.state[key] !== v, pick: () => this.setState({ [key]: v }) })); }
+  target() { return (this.state.mode === 'bd' ? this.state.brand : this.state.role).trim(); }
+  build() {
+    const s = this.state, c = s.city.trim(), tg = this.target();
+    if (s.mode === 'bd') return BD.map(([label, f], i) => { let q = f(tg, c); if (i < 2 && s.roleT !== 'Any') q = 'site:linkedin.com/in "' + tg + '" ' + ROLE_Q[s.roleT]; return { label, q }; });
+    const lv = s.level === 'Any' ? '' : ' ' + s.level.toLowerCase(), wm = s.work === 'Any' ? '' : ' ' + s.work.toLowerCase();
+    return JOB.map(([label, f]) => ({ label, q: f(tg, c) + (label.includes('job') || label === 'Job boards' ? lv + wm : '') }));
   }
-  return q.map(([label, s]) => { const text = s.replace(/\s+/g, ' ').trim(); return { label, text, href: 'https://www.google.com/search?q=' + encodeURIComponent(text) }; });
-}
-
-const target = () => (f.mode === 'bd' ? f.brand : f.role).trim();
-function drawGroups() {
-  $('#groups').innerHTML = GROUPS[f.mode].map(([k, label, opts]) => `<div class="blk"><span class="k">${label}</span><div class="seg" data-k="${k}">${opts.map(o => `<button type="button" aria-pressed="${f[k] === o}">${esc(o)}</button>`).join('')}</div></div>`).join('');
-}
-$('#groups').addEventListener('click', e => {
-  const b = e.target.closest('button'), box = b && b.closest('[data-k]'); if (!box) return;
-  f[box.dataset.k] = b.textContent; box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); sync();
-});
-$('#modes').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b || f.mode === b.dataset.m) return;
-  f.mode = b.dataset.m; out = []; $('#err').textContent = '';
-  $('#modes').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
-  const bd = f.mode === 'bd';
-  $('#targetLabel').textContent = bd ? 'Brand name *' : 'Target role *';
-  $('#target').placeholder = bd ? 'e.g. Erigo' : 'e.g. Business Development';
-  $('#target').value = bd ? f.brand : f.role;
-  drawGroups(); sync();
-});
-$('#target').addEventListener('input', e => { f[f.mode === 'bd' ? 'brand' : 'role'] = e.target.value; $('#err').textContent = ''; sync(); });
-
-function sync() {
-  const t = target(), has = out.length > 0 && !busy;
-  $('#preview').textContent = t ? build().length + ' searches will be generated' : 'Fill the target to preview';
-  $('#go').dataset.ready = String(!!t);
-  $('#goLabel').textContent = busy ? 'Scanning…' : 'Generate search links';
-  $('#status').textContent = busy ? 'Scanning · ' + t : has ? String(out.length).padStart(2, '0') + ' searches · ' + t : 'Idle · waiting for a target';
-  $('#hint').textContent = busy ? 'Building targeted searches…' : 'Type a target on the left to start the scan';
-  $('#stage').hidden = has; $('#outWrap').hidden = !has; $('#acts').hidden = !has;
-  if (!has) $('#ai').hidden = true;
-}
-drawGroups(); sync();
-
-$('#form').addEventListener('submit', e => {
-  e.preventDefault();
-  if (busy) return;
-  if (!target()) { $('#err').textContent = f.mode === 'bd' ? 'Add a brand name first.' : 'Add a target role first.'; $('#target').focus(); return; }
-  busy = true; out = []; $('#err').textContent = ''; sync();
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    out = build(); busy = false;
-    $('#out').innerHTML = out.map((m, i) => `<a href="${m.href}" target="_blank" rel="noopener" class="anim-in" style="animation-delay:${i * 60}ms"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="tx"><b>${esc(m.label)}</b><span>${esc(m.text)}</span></span><span class="ar">↗</span></a>`).join('');
-    sync();
-  }, reduce ? 0 : 1100);
-});
-
-$('#copyAll').addEventListener('click', e => {
-  navigator.clipboard && navigator.clipboard.writeText(out.map(o => o.label + ': ' + o.href).join('\n')).catch(() => {});
-  const b = e.currentTarget; b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy all'; }, 1500);
-});
-$('#openTop').addEventListener('click', () => out.slice(0, 3).forEach(o => window.open(o.href, '_blank', 'noopener')));
-
-// AI lookalike leads via /api/leads (Claude, owner-gated). Data is simulated for demo purposes.
-$('#aiBtn').addEventListener('click', async () => {
-  const btn = $('#aiBtn'), box = $('#ai');
-  const body = f.mode === 'bd'
-    ? { mode: 'sales', brand: f.brand.trim(), platform: f.platform === 'All' ? '' : f.platform, location: f.market }
-    : { mode: 'job', role: f.role.trim(), work_type: f.work === 'All' ? '' : f.work, location: f.loc };
-  btn.disabled = true; btn.textContent = '✦ Generating…'; box.hidden = false;
-  box.innerHTML = '<div class="ai__note">Asking Claude for lookalike leads — about 10–20 seconds.</div>';
-  try {
-    const data = await mkApi('/api/leads', body);
-    const sales = body.mode === 'sales';
-    box.innerHTML = `<div class="ai__note">✦ ${esc(data.search_summary)} · Simulated demo data, not real contacts.</div>` + (data.leads || []).map(l => sales
-      ? `<div class="lead"><b>${esc(l.brand)}</b><span class="sc">${esc(l.match_score)}</span><span class="meta">${esc(l.category)} · ${esc(l.platform)} · ${esc(l.followers)} · ${esc(l.size_signal)} · ${esc(l.decision_maker)}</span><span class="why">${esc(l.match_reason)}</span></div>`
-      : `<div class="lead"><b>${esc(l.company)} — ${esc(l.open_role)}</b><span class="sc">${esc(l.match_score)}</span><span class="meta">${esc(l.industry)} · ${esc(l.company_size)} · ${esc(l.work_type)} · ${esc(l.location)} · ${esc(l.recruiter_title)}</span><span class="why">${esc(l.match_reason)}</span></div>`).join('');
-  } catch (err) {
-    box.innerHTML = `<div class="ai__err">${esc(err.message)}</div>`;
-  } finally { btn.disabled = false; btn.textContent = '✦ AI leads'; }
-});
-
-// Motion: radar sweep that pings targets and logs queries in a live feed
-const cv = $('#cv'), t0 = performance.now();
-let seen = true; new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(cv);
-function paint(now) {
-  const W = seen ? cv.clientWidth : 0, H = seen ? cv.clientHeight : 0;
-  if (W && H && !$('#stage').hidden) {
-    const d = Math.min(window.devicePixelRatio || 1, 2); if (cv.width !== Math.round(W * d)) { cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
-    const x = cv.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
-    const t = (now - t0) / 1000, T = reduce ? 1 : t * (busy ? 3 : 1), wide = W > 560, cx = wide ? W * 0.38 : W / 2, cy = H / 2 - 30, R = Math.min(wide ? W * 0.3 : W * 0.4, H * 0.36);
-    x.strokeStyle = '#0B1D4D'; for (let k = 1; k <= 4; k++) { x.beginPath(); x.arc(cx, cy, R * k / 4, 0, Math.PI * 2); x.stroke(); }
-    x.beginPath(); x.moveTo(cx - R, cy); x.lineTo(cx + R, cy); x.moveTo(cx, cy - R); x.lineTo(cx, cy + R); x.stroke();
-    const ang = T * 0.9;
-    for (let s = 0; s < 30; s++) { const a = ang - s * 0.025; x.strokeStyle = 'rgba(233,249,88,' + (0.55 * (1 - s / 30)) + ')'; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); x.stroke(); }
-    for (let i = 0; i < 18; i++) {
-      const a = (i * 2.399) % (Math.PI * 2), r = R * (0.22 + ((i * 0.618) % 1) * 0.74), px = cx + Math.cos(a) * r, py = cy + Math.sin(a) * r;
-      const dd = ((ang - a) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2), glow = Math.max(0, 1 - dd / 2.6), hot = i % 3 === 0;
-      x.fillStyle = hot ? 'rgba(233,249,88,' + (0.2 + glow * 0.8) + ')' : 'rgba(73,144,232,' + (0.15 + glow * 0.6) + ')';
-      const z = hot ? 6 + glow * 4 : 4; x.fillRect(px - z / 2, py - z / 2, z, z);
-      if (hot && glow > 0.85) { const k = 1 - glow; x.strokeStyle = 'rgba(233,249,88,' + (1 - k * 6) + ')'; x.strokeRect(px - 8 - k * 40, py - 8 - k * 40, 16 + k * 80, 16 + k * 80); }
-    }
-    x.fillStyle = '#F7F9FC'; x.fillRect(cx - 6, cy - 6, 12, 12);
-    const tgt = target() || (f.mode === 'bd' ? 'brand' : 'role');
-    x.font = '500 11px "Geist Mono", monospace'; x.fillStyle = '#F7F9FC'; x.textAlign = 'center'; x.textBaseline = 'top'; x.fillText(tgt.length > 22 ? tgt.slice(0, 21) + '…' : tgt, cx, cy + 12);
-    if (wide) {
-      const fx = W * 0.72, fy = cy - R, rows = 9, step = Math.floor(T * 1.4);
-      x.textAlign = 'left'; x.fillStyle = '#4990E8'; x.fillText('query feed', fx, fy - 4);
-      for (let k = 0; k < rows; k++) { const idx = step - k; if (idx < 0) continue; const al = 1 - k / rows; x.fillStyle = k === 0 ? 'rgba(233,249,88,1)' : 'rgba(169,176,166,' + al * 0.8 + ')'; x.fillText((k === 0 ? '› ' : '  ') + FEED[idx % FEED.length], fx, fy + 18 + k * 20); }
-    }
+  generate = e => {
+    e && e.preventDefault();
+    if (!this.target() || this.state.status === 'loading') return;
+    const out = this.build();
+    this.setState({ status: 'loading', out });
+    clearTimeout(this.tm); this.tm = setTimeout(() => this.setState({ status: 'done' }), SWEEP * SWEEPS * 1000 + 150);
+  };
+  componentWillUnmount() { clearTimeout(this.tm); }
+  renderVals() {
+    const s = this.state, set = k => e => this.setState({ [k]: e.target.value, status: s.status === 'done' ? 'idle' : s.status });
+    const tg = this.target(), ok = !!tg && s.status !== 'loading', n = s.mode === 'bd' ? BD.length : JOB.length;
+    return {
+      demo: this.demoEl,
+      modes: [['bd', '01', 'BD / Sales', 'Find people and channels behind a brand'], ['job', '02', 'Job hunt', 'Find openings, recruiters and hiring posts']].map(([v, n, label, desc]) => ({ n, label, desc, on: s.mode === v, off: s.mode !== v, pick: () => this.setState({ mode: v, status: 'idle' }) })),
+      isBD: s.mode === 'bd', isJob: s.mode === 'job',
+      brand: s.brand, setBrand: set('brand'), role: s.role, setRole: set('role'), city: s.city, setCity: set('city'),
+      roles: this.chips(['Any', 'Founder', 'Marketing', 'Ecommerce', 'Partnership'], 'roleT'),
+      levels: this.chips(['Any', 'Entry', 'Mid', 'Senior'], 'level'),
+      workModes: this.chips(['Any', 'Remote', 'Hybrid', 'On-site'], 'work'),
+      generate: this.generate, canGo: ok, cantGo: !ok,
+      ctaLabel: s.status === 'loading' ? 'Scanning…' : s.status === 'done' ? 'Regenerate search links' : 'Generate search links',
+      statusLabel: { idle: tg ? 'READY · ' + tg.toUpperCase() : 'IDLE · WAITING FOR A TARGET', loading: 'SCANNING · ' + tg.toUpperCase(), done: n + ' SEARCHES · ' + tg.toUpperCase() }[s.status],
+      metaLabel: (s.mode === 'bd' ? 'BD / SALES' : 'JOB HUNT') + (s.city.trim() ? ' · ' + s.city.trim().toUpperCase() : ''),
+      showRadar: s.status !== 'done',
+      radar: E(Radar, { n, filled: !!tg, loading: s.status === 'loading', key: s.status === 'loading' ? 'l' : 'i' }),
+      note: s.status === 'loading' ? 'Scanning every angle for ' + tg + '…' : tg ? n + ' searches ready. Hit generate.' : 'Type a target on the left to start the scan.',
+      isDone: s.status === 'done',
+      links: s.out.map((l, i) => ({ n: String(i + 1).padStart(2, '0'), label: l.label, q: l.q, url: 'https://www.google.com/search?q=' + encodeURIComponent(l.q) }))
+    };
   }
-  requestAnimationFrame(paint);
 }
-requestAnimationFrame(paint);
-})();
 </script>
-</body>
-</html>
+
+
+</body></html>

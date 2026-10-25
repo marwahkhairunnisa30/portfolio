@@ -195,7 +195,10 @@ ${p.outcomes ? `
 }
 
 const out = path.join(__dirname, '..', 'projects');
+// speaker-govokasi.html is now its own hand-designed Voice page; keep it in prev/next but don't overwrite it.
+const KEEP = new Set(['speaker-govokasi']);
 PROJECTS.forEach((p, i) => {
+  if (KEEP.has(p.id)) return;
   fs.writeFileSync(path.join(out, p.id + '.html'), page(p, i));
   console.log('wrote projects/' + p.id + '.html');
 });

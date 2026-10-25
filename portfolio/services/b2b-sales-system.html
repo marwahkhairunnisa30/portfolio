@@ -1,543 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>B2B Sales System — Marwah K</title>
-<meta name="description" content="I design and build the process, pipeline and tools that turn scattered sales activity into something your team can actually run." />
-<meta name="theme-color" content="#081433" />
+<meta name="description" content="Sales that run on a system, not on memory. Process, pipeline and tools your team can actually run.">
+<meta name="theme-color" content="#081433">
 <link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#081433;--deep:#0B110E;--moss:#0B1D4D;--moss2:#0F2660;--seam:#1C2E63;--fern:#2A4A9A;--lichen:#4990E8;--sage:#C1E5FB;--bone:#D5DDEA;--cream:#F7F9FC;--gold:#E9F958;--ease:cubic-bezier(.2,.7,.2,1);--mono:'Geist Mono',monospace;--pad:clamp(20px,5vw,64px)}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--cream);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--cream);text-decoration:none}
-a:hover{color:var(--gold)}
-button{font:inherit}
-:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-@keyframes mkRiseIn{from{transform:translateY(105%)}to{transform:translateY(0)}}
-@keyframes mkFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.page{min-height:100vh;overflow-x:clip}
-.wrap{max-width:1280px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
-.sec{padding-top:clamp(80px,10vw,128px);padding-bottom:clamp(80px,10vw,128px)}
-.idx{font-family:var(--mono);font-size:13px;color:var(--gold)}
-.h2{margin:0;font-weight:500;font-size:clamp(34px,4.4vw,56px);line-height:1.02;letter-spacing:-.04em;text-wrap:pretty}
-.lede{margin:0;font-size:17px;line-height:1.6;color:var(--sage);max-width:460px}
-.head{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px;align-items:end}
-.head>div{display:flex;flex-direction:column;gap:16px}
-.cap{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
-.btn{padding:16px 22px;font-size:15px;font-weight:600;border-radius:999px;transition:background .2s,color .2s}
 
-/* Nav */
-.nav{position:sticky;top:0;z-index:10;background:rgba(8,20,51,.97);border-bottom:1px solid var(--seam)}
-.nav .wrap{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.nav__brand{display:flex;align-items:center;gap:12px}
-.nav__brand b{font-size:15px;font-weight:500;letter-spacing:-.01em}
-.nav__right{display:flex;gap:20px;align-items:center;font-size:14px}
-.nav__right a:not(.nav__cta){color:var(--sage)}
-.nav__right a:not(.nav__cta):hover{color:var(--cream)}
-.nav__cta{background:var(--gold);color:var(--bg)!important;padding:9px 14px;font-weight:600;transition:background .2s}
-.nav__cta:hover{background:var(--cream)}
-
-/* Hero */
-.hero{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(40px,5vw,72px);align-items:center}
-.hero__copy{display:flex;flex-direction:column;gap:28px;min-width:0}
-.hero__copy>.cap{color:var(--gold);opacity:0;animation:mkFadeIn 600ms var(--ease) 100ms forwards}
-.hero h1{margin:0;font-weight:500;font-size:clamp(44px,6.2vw,88px);line-height:.96;letter-spacing:-.05em;display:flex;flex-direction:column}
-.hero h1>span{overflow:hidden;display:block;padding-bottom:.06em}
-.hero h1>span>span{display:block;transform:translateY(105%);animation:mkRiseIn 900ms var(--ease) forwards}
-.hero__copy p{margin:0;font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:var(--sage);max-width:460px;text-wrap:pretty;opacity:0;animation:mkFadeIn 600ms var(--ease) 620ms forwards}
-.hero__ctas{display:flex;gap:2px;flex-wrap:wrap;opacity:0;animation:mkFadeIn 600ms var(--ease) 720ms forwards}
-.b-gold{background:var(--gold);color:var(--bg)}.b-gold:hover{background:var(--cream);color:var(--bg)}
-.b-moss{background:var(--moss);color:var(--cream);font-weight:500}.b-moss:hover{background:var(--seam);color:var(--cream)}
-.sim{display:flex;flex-direction:column;gap:2px;min-width:0;opacity:0;animation:mkFadeIn 900ms var(--ease) 300ms forwards}
-.sim__bar{background:var(--moss);padding:14px 18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px}
-.sim__stage{background:var(--moss);aspect-ratio:1/1;min-height:360px;position:relative;cursor:crosshair}
-.sim__stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.sim__btns{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.sim__btns button{border:0;cursor:pointer;padding:14px 18px;font-family:var(--mono);font-size:12px;text-align:left;background:var(--moss);color:var(--sage)}
-.sim__btns button[data-p=memory][aria-pressed=true]{background:var(--cream);color:var(--bg)}
-.sim__btns button[data-p=system][aria-pressed=true]{background:var(--gold);color:var(--bg)}
-
-/* Problem */
-.problem{border-top:1px solid var(--seam)}
-.problem .wrap{display:flex;flex-direction:column;gap:48px}
-.leaks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:2px;background:var(--seam);border:2px solid var(--seam)}
-.leak{background:var(--bg);padding:28px 26px;display:flex;flex-direction:column;gap:32px;min-height:320px;transition:background .3s}
-.leak:hover{background:var(--moss)}
-.leak__top{display:flex;justify-content:space-between;align-items:center}
-.leak__top span:first-child{font-family:var(--mono);font-size:12px;color:var(--sage)}
-.leak__top span:last-child{width:10px;height:10px;background:var(--gold)}
-.leak__a{display:flex;flex-direction:column;gap:10px}
-.leak__a .cap{color:var(--lichen)}
-.leak__a>span:last-child{display:flex;flex-direction:column;align-items:flex-start;font-size:17px;line-height:1.45;color:var(--sage);white-space:nowrap}
-.strike{background-image:linear-gradient(var(--lichen),var(--lichen));background-repeat:no-repeat;background-position:0 58%;background-size:0% 2px}
-.leak__b{margin-top:auto;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--seam);padding-top:20px}
-.leak__b .cap{color:var(--gold)}
-.leak__b>span:last-child{display:flex;flex-direction:column;font-size:clamp(22px,1.9vw,26px);font-weight:500;letter-spacing:-.02em;line-height:1.2;white-space:nowrap}
-
-/* What I build */
-.build{background:var(--cream);color:var(--bg)}
-.build .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5vw,80px);align-items:center}
-.build__copy{display:flex;flex-direction:column;gap:32px;min-width:0}
-.build__copy .idx{color:var(--fern)}
-.layers{display:flex;flex-direction:column;border-top:1px solid var(--bg)}
-.layers button{border:0;border-bottom:1px solid var(--bone);background:transparent;cursor:pointer;text-align:left;padding:16px 0;display:grid;grid-template-columns:40px minmax(0,1fr) 12px;gap:4px 12px;align-items:baseline;color:var(--lichen);transition:color .3s}
-.layers button>span:nth-child(1){font-family:var(--mono);font-size:12px}
-.layers button>span:nth-child(2){font-size:clamp(18px,1.8vw,22px);font-weight:600;letter-spacing:-.015em}
-.layers button>span:nth-child(3){width:10px;height:10px;background:transparent;align-self:center;transition:background .3s}
-.layers button>span:nth-child(5){font-size:14px;line-height:1.5;color:var(--fern);overflow:hidden;max-height:0;transition:max-height 500ms var(--ease)}
-.layers button.on{color:var(--bg)}
-.layers button.on>span:nth-child(3){background:var(--gold)}
-.layers button.on>span:nth-child(5){max-height:48px}
-.stack{height:clamp(500px,52vw,640px);display:flex;align-items:center;justify-content:center;overflow:hidden;min-width:0}
-.stack__base{width:230px;height:230px;margin-top:340px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-45deg)}
-.slab{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1000ms cubic-bezier(.2,.9,.2,1);cursor:pointer}
-.slab>div{position:absolute;inset:0}
-.slab>div:nth-child(1){background:var(--deep)}
-.slab>div:nth-child(2){transform:translateZ(5px);background:#0B1D4D}
-.slab>div:nth-child(3){transform:translateZ(10px);outline:1px solid var(--seam);padding:16px;display:flex;flex-direction:column;justify-content:space-between;transition:background .4s}
-.slab>div:nth-child(3) span:first-child{font-family:var(--mono);font-size:12px;color:var(--sage)}
-.slab>div:nth-child(3) span:last-child{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--cream)}
-.slab.on>div:nth-child(3){background:var(--gold)!important;outline-color:var(--gold)}
-.slab.on>div:nth-child(3) span{color:var(--bg)!important}
-
-/* Method */
-.method{background:var(--moss)}
-.method .wrap{display:flex;flex-direction:column;gap:48px}
-.roll{display:flex;gap:clamp(20px,3vw,48px);align-items:flex-end;min-width:0}
-.roll__n{height:clamp(120px,15vw,200px);overflow:hidden;flex:none}
-.roll__n>div,.roll__t>div{transition:transform 900ms cubic-bezier(.7,0,.2,1)}
-.roll__t>div{transition-delay:80ms}
-.roll__n>div>div{height:clamp(120px,15vw,200px);font-size:clamp(120px,15vw,200px);line-height:.82;font-weight:500;letter-spacing:-.06em;display:flex;align-items:flex-end}
-.roll__t{height:96px;overflow:hidden;min-width:0;flex:1}
-.roll__t>div>div{height:96px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
-.roll__t b{font-size:clamp(26px,2.8vw,36px);font-weight:500;letter-spacing:-.03em;line-height:1}
-.roll__t span{font-size:15px;line-height:1.5;color:var(--sage)}
-.prog{height:2px;background:var(--seam);position:relative}
-.prog i{position:absolute;left:0;top:0;height:2px;background:var(--gold);transition:width 900ms cubic-bezier(.7,0,.2,1)}
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
-.steps button{border:0;cursor:pointer;background:transparent;text-align:left;padding:16px 8px 0 0;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--lichen);transition:color .4s}
-.steps button i{width:10px;height:10px;flex:none;background:var(--seam);transition:background .4s}
-.steps button.done i{background:var(--cream)}
-.steps button.on{color:var(--cream)}
-.steps button.on i{background:var(--gold)}
-
-/* Packages */
-.packages{border-top:1px solid var(--seam)}
-.packages .wrap{display:flex;flex-direction:column;gap:56px}
-.pkgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px;background:var(--seam);border:2px solid var(--seam)}
-.pkg{grid-row:span 6;display:grid;grid-template-rows:subgrid;row-gap:28px;background:var(--bg);padding:32px 28px;transition:background .3s}
-.pkg:hover{background:var(--moss)}
-.pkg__stage{font-family:var(--mono);font-size:12px;color:var(--sage)}
-.pkg__name{display:flex;flex-direction:column;gap:8px}
-.pkg__name h3{margin:0;font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
-.pkg__name span{font-size:16px;line-height:1.45;color:var(--sage)}
-.pkg__price{display:flex;flex-direction:column;gap:12px;padding:20px 0;border-top:1px solid var(--seam);border-bottom:1px solid var(--seam)}
-.pkg__price .cap{color:var(--sage)}
-.pkg__price>div:nth-child(2){display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.pkg__price b{font-size:40px;font-weight:500;letter-spacing:-.04em;line-height:1}
-.pkg__price small{font-family:var(--mono);font-size:12px;color:var(--sage)}
-.pkg__tags{display:flex;gap:2px;flex-wrap:wrap;font-family:var(--mono);font-size:12px}
-.pkg__tags span{background:var(--seam);padding:6px 10px}
-.pkg__items{display:flex;flex-direction:column}
-.pkg__items span{display:flex;gap:12px;align-items:baseline;font-size:15px;padding:10px 0;border-bottom:1px solid var(--seam)}
-.pkg__items i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--lichen)}
-.pkg__best{font-size:14px;line-height:1.5;color:var(--sage)}
-.pkg__best b{font-weight:400;color:var(--cream)}
-.pkg__cta{align-self:end;display:flex;justify-content:space-between;align-items:center;background:var(--moss);color:var(--cream);padding:15px 18px;font-size:15px;font-weight:600}
-.pkg__cta.hi{background:var(--gold);color:var(--bg)}
-.note{font-family:var(--mono);font-size:12px;color:var(--lichen)}
-
-/* Contact */
-.contact{background:var(--cream);color:var(--bg)}
-.contact .wrap{padding-top:clamp(80px,10vw,128px);padding-bottom:clamp(48px,6vw,72px);display:flex;flex-direction:column;gap:56px}
-.contact__hd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:end}
-.contact h2{margin:0;font-weight:500;font-size:clamp(44px,6.4vw,88px);line-height:.96;letter-spacing:-.05em}
-.contact__hd>div{display:flex;flex-direction:column;gap:24px;align-items:flex-start}
-.contact p{margin:0;font-size:17px;line-height:1.6;color:var(--fern);max-width:420px}
-.contact__btns{display:flex;gap:2px;flex-wrap:wrap}
-.b-ink{background:var(--bg);color:var(--cream)}.b-ink:hover{background:var(--seam);color:var(--cream)}
-.b-bone{background:var(--bone);color:var(--bg);font-weight:500}.b-bone:hover{background:var(--gold);color:var(--bg)}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--bone);font-family:var(--mono);font-size:12px;color:var(--fern)}
-.foot div{display:flex;align-items:center;gap:10px}
-.foot__ico{gap:8px!important}
-.foot__ico a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--cream)!important;transition:background .2s}
-.foot__ico a:hover{background:var(--gold);color:var(--bg)!important}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important}}
-</style>
+<script>window.__resources = {};</script>
+<script src="/assets/dc/support.js"></script>
 </head>
 <body>
-<div class="page">
 
-<nav class="nav">
-  <div class="wrap">
-    <a href="/" class="nav__brand">
-      <svg viewBox="0 0 120 120" width="32" aria-hidden="true"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"/></svg>
-      <b>Marwah K</b>
+<x-dc>
+<helmet><script src="/assets/mk/mk-cursor.js"></script><script src="/assets/dc/mk-chrome.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&amp;family=Geist+Mono:wght@400..600&amp;display=swap"><style>html{scroll-behavior:smooth}body{margin:0;background:#081433}a{color:inherit;text-decoration:none}a:hover{color:inherit}@keyframes mkpulse{0%,100%{opacity:1}50%{opacity:.35}}@keyframes mkalign{0%,12%{transform:translate(var(--x),var(--y)) rotate(var(--r))}42%,82%{transform:none}100%{transform:translate(var(--x),var(--y)) rotate(var(--r))}}@keyframes mkspin{to{transform:rotate(360deg)}}@keyframes mkscan{0%,100%{left:0%}50%{left:100%}}@keyframes mkblink{0%,100%{opacity:1}50%{opacity:.15}}@keyframes mkdraw{0%{stroke-dashoffset:700}60%,100%{stroke-dashoffset:0}}@keyframes mkpop{0%,8%{transform:scale(0)}20%,100%{transform:scale(1)}}@keyframes mkdrop{0%{transform:translateY(-120%);opacity:0}12%,85%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:0}}</style></helmet>
+<div style="background:#081433;color:#F7F9FC;font-family:'Geist',sans-serif;overflow-x:clip">
+
+  <header data-mk-header="" style="position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px clamp(20px,4vw,48px);color:#F7F9FC;border:1px solid transparent;border-radius:0;transition:color 250ms cubic-bezier(.2,0,0,1),top 400ms cubic-bezier(.2,0,0,1),left 400ms cubic-bezier(.2,0,0,1),right 400ms cubic-bezier(.2,0,0,1),padding 400ms cubic-bezier(.2,0,0,1),border-radius 400ms cubic-bezier(.2,0,0,1),background 300ms cubic-bezier(.2,0,0,1),border-color 300ms cubic-bezier(.2,0,0,1),box-shadow 300ms cubic-bezier(.2,0,0,1);pointer-events:none">
+    <a href="/" style="display:flex;align-items:center;gap:10px;pointer-events:auto;flex:none">
+      <svg sc-camel-view-box="0 0 120 120" style="width:40px;height:40px;flex:none"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"></line><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"></circle></svg>
+      <span style="font-size:22px;font-weight:600;letter-spacing:-0.05em;white-space:nowrap">Marwah K</span>
     </a>
-    <div class="nav__right">
-      <a href="/">← Back to portfolio</a>
-      <a class="nav__cta" href="https://wa.me/6285155343042" target="_blank" rel="noopener">Let's talk</a>
-    </div>
-  </div>
-</nav>
+    <nav style="display:flex;gap:clamp(14px,2vw,28px);font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;margin-right:190px;overflow-x:auto;scrollbar-width:none;pointer-events:auto;max-width:calc(100vw - 420px)">
+      <a href="#problem" style="white-space:nowrap">01 PROBLEM</a>
+      <a href="#build" style="white-space:nowrap">02 HOW I BUILD</a>
+      <a href="#packages" style="white-space:nowrap">03 PACKAGES</a>
+      <a href="#connect" style="white-space:nowrap">04 CONNECT</a>
+    </nav>
+  </header>
+  <a data-mk-book="" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" style="position:fixed;top:14px;right:clamp(20px,4vw,48px);z-index:41;background:#E9F958;color:#052D8F;border-radius:999px;padding:12px 18px;min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;white-space:nowrap;transition:top 400ms cubic-bezier(.2,0,0,1),right 400ms cubic-bezier(.2,0,0,1),background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:#F7F9FC;color:#052D8F"><span style="width:7px;height:7px;border-radius:50%;background:#052D8F;animation:mkblink 1.2s steps(1) infinite"></span>Book 15 min</a>
 
-<!-- HERO -->
-<header class="wrap hero">
-  <div class="hero__copy">
-    <span class="cap">Service 01 · B2B Sales System</span>
-    <h1>
-      <span><span style="animation-delay:200ms">Sales that run</span></span>
-      <span><span style="animation-delay:280ms">on a system,</span></span>
-      <span><span style="animation-delay:360ms;color:var(--sage)">not on memory.</span></span>
-    </h1>
-    <p>I design and build the process, pipeline and tools that turn scattered sales activity into something your team can actually run.</p>
-    <div class="hero__ctas">
-      <a class="btn b-gold" href="#contact">Build my sales system</a>
-      <a class="btn b-moss" href="#packages">Explore the packages</a>
-    </div>
-  </div>
-  <div class="sim">
-    <div class="sim__bar"><span id="modeLabel">MODE · MEMORY</span><span id="modeNote" style="color:var(--cream)"></span></div>
-    <div class="sim__stage" id="simWrap"><canvas id="sim" role="img" aria-label="Animated pipeline: scattered leads without a system, then sorted into Lead, Qualified, Proposal, Negotiate and Won with owners and next steps"></canvas></div>
-    <div class="sim__btns">
-      <button type="button" data-p="memory" aria-pressed="true">○ Without a system</button>
-      <button type="button" data-p="system" aria-pressed="false">■ With a system</button>
-    </div>
-  </div>
-</header>
-
-<!-- PROBLEM -->
-<section class="problem">
-  <div class="wrap sec">
-    <div class="head" data-reveal="up">
-      <div><span class="idx">01 — The problem</span><h2 class="h2">More leads won’t fix a broken process.</h2></div>
-      <p class="lede">Most B2B teams don’t have a lead problem. They have a system problem.</p>
-    </div>
-    <div class="leaks" id="leaks"></div>
-  </div>
-</section>
-
-<!-- WHAT I BUILD -->
-<section class="build">
-  <div class="wrap sec">
-    <div class="build__copy">
-      <div data-reveal="up" style="display:flex;flex-direction:column;gap:16px">
-        <span class="idx">02 — What I build</span>
-        <h2 class="h2">Five layers. One operating system.</h2>
+  <section data-screen-label="Hero" style="min-height:min(92vh,900px);box-sizing:border-box;padding:clamp(120px,16vh,170px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2)) clamp(48px,8vh,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,72px);align-items:center;background:#052D8F">
+    <div style="display:flex;flex-direction:column;gap:clamp(18px,3vh,28px);min-width:0">
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#E9F958;white-space:nowrap">SERVICE 01 · B2B SALES SYSTEM</span>
+      <h1 style="margin:0;font-size:clamp(44px,min(6.4vw,11vh),112px);font-weight:600;letter-spacing:-0.075em;line-height:.92;text-wrap:balance">Sales that run on a <span style="color:#E9F958">system,</span> not on <span style="position:relative;display:inline-block;color:#4990E8">memory.<span style="position:absolute;left:-2%;right:-2%;top:54%;height:.07em;background:#E9F958"></span></span></h1>
+      <p style="margin:0;max-width:440px;font-size:clamp(16px,1.3vw,19px);line-height:1.45;color:#C1E5FB;text-wrap:pretty">Process, pipeline and tools your team can actually run.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a href="#connect" style="background:#E9F958;color:#052D8F;border-radius:999px;padding:0 22px;min-height:48px;display:flex;align-items:center;font-size:15px;font-weight:600;white-space:nowrap">Build my sales system</a>
+        <a href="#packages" style="border:1px solid rgba(193,229,251,.4);border-radius:999px;padding:0 22px;min-height:48px;display:flex;align-items:center;font-size:15px;font-weight:500;white-space:nowrap">Explore the packages</a>
       </div>
-      <div class="layers" id="layers"></div>
     </div>
-    <div class="stack" id="stack"><div class="stack__base" id="slabs"></div></div>
-  </div>
-</section>
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#C1E5FB;white-space:nowrap">MODE · <span style="color:#E9F958">{{ bd.label }}</span></span>
+        <div style="display:flex;padding:4px;border-radius:999px;background:rgba(8,20,51,.5);border:1px solid rgba(193,229,251,.2)">
+          <button sc-camel-on-click="{{ bd.mem }}" style="border:0;cursor:pointer;border-radius:999px;padding:0 14px;min-height:36px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;white-space:nowrap;background:{{ bd.mb }};color:{{ bd.mf }};transition:background 300ms">○ WITHOUT</button>
+          <button sc-camel-on-click="{{ bd.sys }}" style="border:0;cursor:pointer;border-radius:999px;padding:0 14px;min-height:36px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;white-space:nowrap;background:{{ bd.sb }};color:{{ bd.sf }};transition:background 300ms">■ WITH SYSTEM</button>
+        </div>
+      </div>
+      <div style="position:relative;height:clamp(300px,46vh,440px);border-radius:20px;background:#F7F9FC;overflow:hidden">
+        <div style="position:absolute;inset:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;opacity:{{ bd.colOp }};transition:opacity 500ms">
+          <sc-for list="{{ bd.cols }}" as="c" hint-placeholder-count="4"><div style="border-radius:12px;background:#EAF3FC;padding:10px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;color:#052D8F">{{ c }}</div></sc-for>
+        </div>
+        <sc-for list="{{ bd.cards }}" as="k" hint-placeholder-count="8">
+          <div style="position:absolute;left:{{ k.x }};top:{{ k.y }};width:calc((100% - 52px) / 4 - 12px);transform:rotate({{ k.r }});transition:left 700ms cubic-bezier(.2,0,0,1),top 700ms cubic-bezier(.2,0,0,1),transform 700ms cubic-bezier(.2,0,0,1),background 400ms;box-sizing:border-box;padding:9px 10px;border-radius:10px;background:{{ k.bg }};color:#052D8F;box-shadow:0 6px 14px rgba(5,45,143,.14);display:flex;flex-direction:column;gap:3px">
+            <span style="font-size:clamp(11px,.95vw,13px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ k.t }}</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.06em;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ k.s }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
 
-<!-- METHOD -->
-<section class="method">
-  <div class="wrap sec">
-    <div data-reveal="up" style="display:flex;flex-direction:column;gap:16px"><span class="idx">03 — The method</span><h2 class="h2">Five moves, one system.</h2></div>
-    <div class="roll" aria-live="polite">
-      <div class="roll__n"><div id="rollN"></div></div>
-      <div class="roll__t"><div id="rollT"></div></div>
+  <section id="problem" ref="{{ probRef }}" data-screen-label="Problem" style="box-sizing:border-box;padding:clamp(80px,12vh,140px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2));display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);background:#F7F9FC;color:#052D8F">
+    <div style="display:flex;flex-direction:column;gap:20px;align-self:start">
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#4990E8">01 — THE PROBLEM</span>
+      <h2 style="margin:0;font-size:clamp(40px,5vw,80px);font-weight:600;letter-spacing:-0.07em;line-height:.95;text-wrap:balance">More leads won’t fix a <span style="color:#4990E8">broken process.</span></h2>
+      <p style="margin:0;max-width:360px;font-size:17px;line-height:1.5">Most teams don’t need more leads. They need to stop losing the ones they have.</p>
     </div>
-    <div>
-      <div class="prog"><i id="prog"></i></div>
-      <div class="steps" id="steps"></div>
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ probRows }}" as="p" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:clamp(22px,3.4vh,32px) 0;border-top:1px solid rgba(5,45,143,.18)">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#4990E8;padding-top:6px">{{ p.n }}</span>
+          <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+            <span style="position:relative;align-self:flex-start;font-size:clamp(18px,1.6vw,22px);font-weight:500;letter-spacing:-0.03em;line-height:1.2;color:rgba(5,45,143,.5)">{{ p.t }}<span style="position:absolute;left:0;top:55%;height:1.5px;background:#052D8F;width:{{ p.w }};transition:width 700ms cubic-bezier(.2,0,0,1) {{ p.dl }}"></span></span>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+              <span style="font-size:clamp(26px,2.6vw,38px);font-weight:600;letter-spacing:-0.05em;line-height:1.05;opacity:{{ p.o }};transform:translateY({{ p.y }});transition:opacity 500ms {{ p.dl2 }},transform 600ms cubic-bezier(.2,0,0,1) {{ p.dl2 }}">{{ p.fix }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(5,45,143,.18)"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PACKAGES -->
-<section class="packages" id="packages">
-  <div class="wrap sec">
-    <div class="head" data-reveal="up">
-      <div><span class="idx">04 — Packages</span><h2 class="h2">Start where you are.</h2></div>
-      <p class="lede">Three stages, each with a fixed scope and a clear definition of done.</p>
+  <section id="build" data-screen-label="How I build" style="box-sizing:border-box;padding:clamp(80px,12vh,140px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2));display:flex;flex-direction:column;gap:clamp(32px,6vh,64px);background:#081433">
+    <div style="flex:none;display:flex;flex-direction:column;gap:14px">
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#E9F958">02 — HOW I BUILD</span>
+      <h2 style="margin:0;font-size:clamp(30px,min(4.6vw,8vh),88px);font-weight:600;letter-spacing:-0.07em;line-height:1;white-space:nowrap">Five moves. <span style="color:#4990E8">One system.</span></h2>
     </div>
-    <div class="pkgs" id="pkgs"></div>
-    <span class="note">Final pricing follows scope: users, modules and integrations are agreed before work starts.</span>
-  </div>
-</section>
+    <div style="height:clamp(460px,64vh,620px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,64px)">
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <sc-for list="{{ rows }}" as="w" hint-placeholder-count="5">
+          <button sc-camel-on-click="{{ w.go }}" style="all:unset;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:baseline;gap:12px;padding:clamp(8px,1.6vh,16px) 0;border-top:1px solid rgba(193,229,251,.16)">
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:{{ w.nc }};transition:color 300ms">{{ w.n }}</span>
+            <span style="display:flex;flex-direction:column;gap:6px;min-width:0"><span style="font-size:{{ w.fs }};font-weight:600;letter-spacing:-0.06em;line-height:1;color:{{ w.c }};transition:font-size 500ms cubic-bezier(.2,0,0,1),color 300ms">{{ w.t }}</span><span style="display:{{ w.dd }};font-size:15px;line-height:1.35;color:#C1E5FB">{{ w.d }}</span></span>
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;color:{{ w.nc }};white-space:nowrap">{{ w.wk }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;border-radius:24px;background:#E9F958;color:#052D8F;overflow:hidden;min-height:0">
+        <div style="display:flex;justify-content:space-between;padding:18px 22px 0;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em"><span style="white-space:nowrap">MOVE {{ vis.n }} / 05</span><span style="white-space:nowrap">{{ vis.t }}</span></div>
+            <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vh,32px)">
+              <sc-if value="{{ vis.v1 }}" hint-placeholder-val="{{ false }}"><div style="position:relative;width:min(100%,440px);height:min(100%,180px);display:flex;align-items:flex-end;gap:8px">
+                <span style="flex:1;height:70%;border-radius:4px;background:#052D8F"></span><span style="flex:1;height:55%;border-radius:4px;background:#052D8F"></span><span style="flex:1;height:85%;border-radius:4px;background:#052D8F"></span><span style="flex:1;height:40%;border-radius:4px;border:2px dashed #052D8F;box-sizing:border-box;animation:mkblink 1.2s ease-in-out infinite"></span><span style="flex:1;height:65%;border-radius:4px;background:#052D8F"></span><span style="flex:1;height:30%;border-radius:4px;border:2px dashed #052D8F;box-sizing:border-box;animation:mkblink 1.2s ease-in-out .6s infinite"></span><span style="flex:1;height:75%;border-radius:4px;background:#052D8F"></span>
+                <span style="position:absolute;top:-6%;bottom:0;width:3px;margin-left:-1.5px;background:#052D8F;box-shadow:0 0 0 6px rgba(5,45,143,.12);animation:mkscan 3s ease-in-out infinite"></span>
+              </div></sc-if>
+              <sc-if value="{{ vis.v2 }}" hint-placeholder-val="{{ false }}"><svg sc-camel-view-box="0 0 400 160" style="width:min(100%,460px);height:min(100%,190px);overflow:visible"><path d="M30 120 L140 40 L260 110 L370 40" fill="none" stroke="#052D8F" stroke-width="4" stroke-linecap="round" stroke-dasharray="700" style="animation:mkdraw 3s cubic-bezier(.2,0,0,1) infinite"></path><circle cx="30" cy="120" r="16" fill="#052D8F" style="transform-box:fill-box;transform-origin:center;animation:mkpop 3s infinite"></circle><circle cx="140" cy="40" r="16" fill="#052D8F" style="transform-box:fill-box;transform-origin:center;animation:mkpop 3s .45s infinite"></circle><circle cx="260" cy="110" r="16" fill="#052D8F" style="transform-box:fill-box;transform-origin:center;animation:mkpop 3s .9s infinite"></circle><circle cx="370" cy="40" r="16" fill="#E9F958" stroke="#052D8F" stroke-width="4" style="transform-box:fill-box;transform-origin:center;animation:mkpop 3s 1.35s infinite"></circle></svg></sc-if>
+              <sc-if value="{{ vis.v3 }}" hint-placeholder-val="{{ false }}"><div style="width:min(100%,300px);height:min(100%,190px);display:flex;flex-direction:column-reverse;align-items:center;gap:6px">
+                <span style="width:100%;flex:1;max-height:30px;border-radius:6px;background:#052D8F;animation:mkdrop 3.6s cubic-bezier(.2,0,0,1) infinite"></span><span style="width:88%;flex:1;max-height:30px;border-radius:6px;background:#052D8F;animation:mkdrop 3.6s cubic-bezier(.2,0,0,1) .25s infinite"></span><span style="width:76%;flex:1;max-height:30px;border-radius:6px;background:#052D8F;animation:mkdrop 3.6s cubic-bezier(.2,0,0,1) .5s infinite"></span><span style="width:64%;flex:1;max-height:30px;border-radius:6px;background:#052D8F;animation:mkdrop 3.6s cubic-bezier(.2,0,0,1) .75s infinite"></span><span style="width:52%;flex:1;max-height:30px;border-radius:6px;border:3px solid #052D8F;box-sizing:border-box;animation:mkdrop 3.6s cubic-bezier(.2,0,0,1) 1s infinite"></span>
+              </div></sc-if>
+              <sc-if value="{{ vis.v4 }}" hint-placeholder-val="{{ false }}"><div style="position:relative;height:min(100%,190px);aspect-ratio:1;border-radius:50%;border:2px dashed #052D8F;display:flex;align-items:center;justify-content:center">
+                <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;color:#052D8F">REPEAT</span>
+                <div style="position:absolute;inset:-9px;animation:mkspin 4s linear infinite"><span style="position:absolute;left:50%;top:0;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#052D8F"></span><span style="position:absolute;left:6%;bottom:22%;width:18px;height:18px;border-radius:50%;background:#052D8F"></span><span style="position:absolute;right:6%;bottom:22%;width:18px;height:18px;border-radius:50%;background:#052D8F"></span></div>
+              </div></sc-if>
+              <sc-if value="{{ vis.v5 }}" hint-placeholder-val="{{ false }}"><svg sc-camel-view-box="0 0 400 160" style="width:min(100%,460px);height:min(100%,190px);overflow:visible"><line x1="0" y1="150" x2="400" y2="150" stroke="#052D8F" stroke-width="2" opacity=".3"></line><path d="M10 130 L80 112 L140 122 L210 82 L270 92 L330 44 L390 16" fill="none" stroke="#052D8F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="700" style="animation:mkdraw 3.2s cubic-bezier(.2,0,0,1) infinite"></path><circle cx="390" cy="16" r="11" fill="#052D8F" style="transform-box:fill-box;transform-origin:center;animation:mkpop 3.2s 1.6s infinite"></circle></svg></sc-if>
+            </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 22px;background:#052D8F;color:#E9F958;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em"><span style="white-space:nowrap">BUILDS →</span><span style="font-family:'Geist',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:600;letter-spacing:-0.05em">{{ vis.L }}</span></div>
+      </div>
+    </div>
+  </section>
 
-<!-- CTA -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact__hd" data-reveal="up">
-      <h2>From scattered<br>to system.</h2>
-      <div>
-        <p>Tell me how your team sells today. I’ll tell you where the system breaks.</p>
-        <div class="contact__btns">
-          <a class="btn b-ink" href="mailto:marwahkhairunnisa30@gmail.com">Book a discovery call</a>
-          <a class="btn b-bone" href="#packages">Compare packages</a>
+  <section id="packages" data-screen-label="Packages" style="box-sizing:border-box;padding:clamp(80px,12vh,140px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2));display:flex;flex-direction:column;gap:clamp(40px,6vh,64px);background:#052D8F">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#E9F958">03 — PACKAGES</span>
+        <h2 style="margin:0;font-size:clamp(38px,min(5.4vw,9vh),96px);font-weight:600;letter-spacing:-0.07em;line-height:.9">Start where <span style="color:#E9F958">you are.</span></h2>
+      </div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px;align-items:stretch;padding-top:14px">
+      <sc-for list="{{ packs }}" as="k" hint-placeholder-count="3">
+        <div style="position:relative;display:flex;flex-direction:column;border-radius:20px;background:{{ k.bg }};color:{{ k.fg }}">
+          <div style="display:{{ k.badge }};position:absolute;top:-13px;left:50%;transform:translateX(-50%);z-index:2;padding:6px 12px;border-radius:999px;background:#081433;color:#E9F958;font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;white-space:nowrap">CORE OFFER</div>
+          <div style="display:flex;flex-direction:column;gap:clamp(6px,1vh,10px);padding:clamp(16px,min(2vw,2.6vh),26px) clamp(18px,2vw,26px) clamp(12px,1.6vh,18px)">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;white-space:nowrap">{{ k.st }}</span>
+            <span style="font-size:clamp(28px,min(3vw,5.4vh),46px);font-weight:600;letter-spacing:-0.07em;line-height:.95">{{ k.t }}</span>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+              <span style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.12em">STARTING FROM</span>
+              <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="font-size:clamp(30px,min(3.2vw,6vh),48px);font-weight:600;letter-spacing:-0.06em;line-height:.9;white-space:nowrap">{{ k.price }}</span><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;white-space:nowrap">/ {{ k.per }}</span></div>
+            </div>
+          </div>
+          <div style="margin:0 14px;border-top:2px dashed {{ k.ln }}"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:clamp(4px,.7vh,7px);padding:clamp(10px,1.6vh,18px) clamp(18px,2vw,26px)">
+            <sc-for list="{{ k.items }}" as="i" hint-placeholder-count="5"><span style="display:flex;gap:10px;align-items:baseline;font-size:14px;line-height:1.35"><span style="font-family:'Geist Mono',monospace;font-size:10px;flex:none;opacity:.7">{{ i.n }}</span>{{ i.t }}</span></sc-for>
+            <span style="margin-top:auto;padding-top:12px;font-size:13px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><b style="font-weight:600">Best for:</b> {{ k.best }}</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:clamp(10px,1.6vh,14px) 12px clamp(10px,1.6vh,14px) clamp(18px,2vw,26px);border-radius:0 0 20px 20px;background:{{ k.foot }};color:{{ k.ff }}">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 0">
+              <span style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em">DONE WHEN</span>
+              <span style="font-size:15px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ k.done }}</span>
+            </div>
+            <a href="#connect" style="flex:none;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;background:{{ k.cb }};color:{{ k.cf }};font-size:14px;font-weight:600;white-space:nowrap"><span>{{ k.cta }}</span><span>→</span></a>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="connect" data-mk-light="" data-screen-label="Connect" style="background:#E9F958;color:#052D8F;box-sizing:border-box;padding:clamp(64px,10vh,112px) max(clamp(20px,4vw,48px),calc((100% - 1280px) / 2)) clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:clamp(48px,8vh,96px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,5vw,72px);align-items:end">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em">04 — CONNECT</span>
+        <h2 style="margin:0;font-size:clamp(40px,5.6vw,88px);font-weight:600;letter-spacing:-0.07em;line-height:.92;text-wrap:balance">From scattered <span style="color:#4990E8">to system.</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <p style="margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.45">Tell me how you sell. I’ll show where it breaks.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" style="background:#052D8F;color:#F7F9FC;border-radius:999px;padding:0 24px;min-height:52px;display:flex;align-items:center;font-size:16px;font-weight:600;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:#081433;color:#F7F9FC">Book a discovery call</a>
+          <a href="https://wa.me/6285155343042" target="_blank" style="border:1.5px solid #052D8F;border-radius:999px;padding:0 24px;min-height:52px;display:flex;align-items:center;font-size:16px;font-weight:600;white-space:nowrap;transition:background 200ms cubic-bezier(.2,0,0,1)" style-hover="background:rgba(5,45,143,.08)">WhatsApp</a>
         </div>
       </div>
     </div>
-    <footer class="foot">
-      <div><svg viewBox="0 0 120 120" width="32" aria-hidden="true"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"/></svg><span>© 2026 Marwah Khairunnisa</span></div>
-      <div class="foot__ico">
-        <a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="20" style="fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter"><path d="M3 5 H21 V19 H3 Z M3 6 L12 13 L21 6"/></svg></a>
-        <a href="https://linkedin.com/in/marwahkha" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="20" style="fill:currentColor"><path d="M4 9 H8 V20 H4 Z M6 3.5 C7.3 3.5 8.2 4.4 8.2 5.6 C8.2 6.8 7.3 7.7 6 7.7 C4.7 7.7 3.8 6.8 3.8 5.6 C3.8 4.4 4.7 3.5 6 3.5 Z M10 9 H13.8 V10.7 C14.4 9.7 15.7 8.8 17.5 8.8 C20.3 8.8 21 10.6 21 13.3 V20 H17 V14.1 C17 12.8 16.7 11.9 15.4 11.9 C14.1 11.9 14 13 14 14.1 V20 H10 Z"/></svg></a>
-      </div>
-      <span>Jakarta · GMT+7 · open to remote</span>
-    </footer>
-  </div>
-</section>
-
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 32px;padding-top:20px;border-top:1.5px solid #052D8F">
+      <div style="display:flex;gap:10px"><a href="https://linkedin.com/in/marwahkha" target="_blank" aria-label="LinkedIn" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg></a><a href="mailto:marwahkhairunnisa30@gmail.com" aria-label="Email" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="M3 6.5l9 6.5 9-6.5"></path></svg></a><a href="https://wa.me/6285155343042" target="_blank" aria-label="WhatsApp" style="width:48px;height:48px;border-radius:50%;background:#052D8F;color:#E9F958;display:flex;align-items:center;justify-content:center;transition:transform 200ms cubic-bezier(.2,0,0,1)" style-hover="transform:translateY(-3px)"><svg sc-camel-view-box="0 0 24 24" style="width:21px;height:21px" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zm8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41z"></path></svg></a></div>
+      <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;white-space:nowrap">© 2026 MARWAH K · JAKARTA <span data-mk-clock="">--:--:--</span></span>
+    </div>
+  </section>
 </div>
-<script>
-(() => {
-const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ── Content ── */
-const LEAKS = [
-  { a1: 'Leads get lost in', a2: 'chats and inboxes.', b1: 'Every lead', b2: 'has a stage.' },
-  { a1: 'Follow-ups depend', a2: 'on memory.', b1: 'Every deal', b2: 'has an owner.' },
-  { a1: 'Everyone sells', a2: 'their own way.', b1: 'One standard', b2: 'for the team.' },
-  { a1: 'No one sees where', a2: 'deals stall.', b1: 'A pipeline', b2: 'you can read.' }
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+const BELT = [
+  ['Lead from WA', 'NO OWNER', 'OWNER · ASSIGNED'], ['Excel_v3_FINAL', 'WHO EDITED?', 'SYNCED · CRM'], ['Follow up?', 'FORGOT', 'AUTO-REMINDER'],
+  ['Intro call', 'NOTES IN HEAD', 'NOTES LOGGED'], ['Proposal', 'WHICH VERSION', 'V2 · SENT'], ['Pricing ???', 'ASK BOSS', 'APPROVED'],
+  ['Deal closed', 'NOT LOGGED', 'WON · LOGGED'], ['Renewal', 'MISSED', 'DUE IN 30D'], ['Hot lead', 'GONE COLD', 'SCORE · 92'],
+  ['Weekly report', 'MANUAL', 'LIVE DASHBOARD'], ['Referral', 'LOST IN DM', 'TRACKED'], ['Demo', 'NO SHOW', 'CONFIRMED'],
 ];
 const LAYERS = [
-  { n: '01', t: 'Process architecture', p: 'Stages, qualification, ownership and next-step rules.' },
-  { n: '02', t: 'Playbooks & SOPs', p: 'Shared standards, without scripted conversations.' },
-  { n: '03', t: 'Sales dashboard', p: 'One workspace for leads, owners and next steps.' },
-  { n: '04', t: 'Workflow automation', p: 'Due dates, reminders and rules. Less manual tracking.' },
-  { n: '05', t: 'Pipeline intelligence', p: 'Reporting and reviews that show where deals stall.' }
+  { n: '01', t: 'Process', d: 'Clear stages and exit criteria, from first touch to renewal.', k: 'STAGES · EXIT CRITERIA · OWNERSHIP' },
+  { n: '02', t: 'Pipeline', d: 'One CRM view of every deal, owner and next step.', k: 'CRM SETUP · FIELDS · VIEWS' },
+  { n: '03', t: 'Playbook', d: 'Scripts, templates and objection notes the team can reuse.', k: 'SCRIPTS · TEMPLATES · OBJECTIONS' },
+  { n: '04', t: 'Automation', d: 'AI and workflow tools that handle reminders and busywork.', k: 'REMINDERS · AI ASSIST · HANDOFFS' },
+  { n: '05', t: 'Dashboard', d: 'The numbers that matter, updated without anyone asking.', k: 'KPI · FORECAST · WEEKLY VIEW' },
 ];
-const STEPS = [
-  { t: 'Diagnose', p: 'Find the bottlenecks.' },
-  { t: 'Design', p: 'Map the workflow and the rules.' },
-  { t: 'Build', p: 'Implement the process and tools.' },
-  { t: 'Validate', p: 'Test with real scenarios.' },
-  { t: 'Hand over', p: 'Document, onboard, improve.' }
+const SLAB = [['#F7F9FC', '#052D8F'], ['#C1E5FB', '#052D8F'], ['#4990E8', '#081433'], ['#052D8F', '#E9F958'], ['#E9F958', '#052D8F']];
+const MOVES = [
+  { t: 'Audit', w: 'WEEK 1', d: 'Find where deals leak.' },
+  { t: 'Design', w: 'WEEK 2', d: 'Define stages and roles.' },
+  { t: 'Build', w: 'WEEK 3–4', d: 'Set up CRM and tools.' },
+  { t: 'Train', w: 'WEEK 5', d: 'Make it a team habit.' },
+  { t: 'Refine', w: 'ONGOING', d: 'Tune it with real data.' },
 ];
-const PKGS = [
-  { stage: '01 / Diagnose', name: 'Blueprint', promise: 'Find the gaps. Design the foundation.', price: 'IDR X M', unit: '/ project', time: '1–2 weeks', tag: 'Fixed scope',
-    items: ['Sales process audit', 'Process mapping', 'Playbook foundation', 'System blueprint', 'Prototype & roadmap'], best: 'Teams without a structured process or a clear root cause.', cta: 'Explore Blueprint' },
-  { stage: '02 / Build', name: 'Implementation', promise: 'Turn your process into a working system.', price: 'IDR XX M', unit: '/ project', time: '3–6 weeks', tag: 'Core offer',
-    items: ['Pipeline & stage rules', 'Custom sales dashboard', 'Follow-up management', 'Playbook & KPI reporting', 'Training & handover'], best: 'Teams that need one standard and a system to run it.', cta: 'Build my system' },
-  { stage: '03 / Optimize', name: 'Optimization', promise: 'Improve what you’ve already built.', price: 'IDR XX M', unit: '/ month', time: 'Monthly retainer', tag: 'Ongoing',
-    items: ['Performance reviews', 'Bottleneck analysis', 'Workflow optimization', 'Dashboard enhancements', 'Feature sprints'], best: 'Teams with a system in place, facing stalled conversion.', cta: 'Explore Optimization' }
+const PROBS = [
+  ['Leads live in chats.', 'Every lead in one pipeline.', 'PIPELINE'],
+  ['Follow-ups run on memory.', 'Follow-ups run themselves.', 'AUTOMATION'],
+  ['Every rep sells differently.', 'One playbook for the team.', 'PLAYBOOK'],
+  ['No one sees the numbers.', 'Numbers live on a dashboard.', 'DASHBOARD'],
 ];
+const BCARDS = [
+  ['Lead from WA chat', 'NO OWNER', 'OWNER · ANDI', 6, 10, -8, 0, 0], ['Excel_v3_FINAL', 'WHO UPDATED?', 'SYNCED · CRM', 52, 6, 6, 0, 1],
+  ['Follow up?', 'LAST WEEK', 'DUE · TODAY', 30, 34, -4, 1, 0], ['Intro call', 'NOTES IN HEAD', 'LOGGED', 70, 30, 10, 1, 1],
+  ['Proposal draft', 'WHICH VERSION', 'V2 · SENT', 10, 58, 5, 2, 0], ['Pricing ???', 'ASK BOSS', 'APPROVED', 48, 62, -9, 2, 1],
+  ['Deal closed', 'NOT LOGGED', 'WON · LOGGED', 72, 70, 4, 3, 0], ['Renewal', 'FORGOTTEN', 'AUTO-REMIND', 26, 80, -6, 3, 1],
+];
+const L1 = 'From scattered', L2 = 'to system.';
+const rnd = (i, s) => { const x = Math.sin(i * 12.9898 + s * 78.233) * 43758.5453; return x - Math.floor(x); };
 
-/* ── Problem ── */
-$('#leaks').innerHTML = LEAKS.map((c, i) => `<div class="leak" data-reveal="up" data-d="${i * 100}">
-  <div class="leak__top"><span>0${i + 1}</span><span></span></div>
-  <div class="leak__a"><span class="cap">Today</span><span><span class="strike" data-reveal="strike" data-d="${i * 100 + 500}">${esc(c.a1)}</span><span class="strike" data-reveal="strike" data-d="${i * 100 + 800}">${esc(c.a2)}</span></span></div>
-  <div class="leak__b"><span class="cap">With a system</span><span><span>${esc(c.b1)}</span><span>${esc(c.b2)}</span></span></div>
-</div>`).join('');
-
-/* ── What I build: layer list + isometric stack ── */
-let layer = 0, layerManual = false, exploded = false;
-$('#layers').innerHTML = LAYERS.map((l, i) => `<button type="button" data-i="${i}"><span>${l.n}</span><span>${esc(l.t)}</span><span></span><span></span><span>${esc(l.p)}</span></button>`).join('');
-$('#slabs').innerHTML = LAYERS.map((l, i) => `<div class="slab" data-i="${i}"><div></div><div></div><div style="background:${i % 2 ? '#0F2660' : '#081433'}"><span>${l.n}</span><span>${esc(l.t)}</span></div></div>`).join('');
-const pickLayer = i => { layerManual = true; layer = i; drawLayers(); };
-['#layers', '#slabs'].forEach(sel => {
-  $(sel).addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) pickLayer(+b.dataset.i); });
-});
-$('#layers').addEventListener('mouseover', e => { const b = e.target.closest('button'); if (b && +b.dataset.i !== layer) pickLayer(+b.dataset.i); });
-function drawLayers() {
-  document.querySelectorAll('#layers button').forEach((b, i) => { b.classList.toggle('on', i === layer); b.setAttribute('aria-pressed', i === layer); });
-  document.querySelectorAll('.slab').forEach((s, i) => {
-    s.classList.toggle('on', i === layer);
-    s.style.transform = `translateZ(${(exploded ? i * 50 : i * 14) + (i === layer && exploded ? 26 : 0)}px)`;
-    s.style.transitionDelay = (exploded ? i * 90 : 0) + 'ms';
-  });
-}
-drawLayers();
-const sio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { exploded = true; drawLayers(); sio.disconnect(); } }), { threshold: .35 });
-sio.observe($('#stack'));
-setInterval(() => { if (!layerManual) { layer = (layer + 1) % 5; drawLayers(); } }, 2400);
-
-/* ── Method ── */
-let step = 0;
-$('#rollN').innerHTML = STEPS.map((s, i) => `<div>0${i + 1}</div>`).join('');
-$('#rollT').innerHTML = STEPS.map(s => `<div><b>${esc(s.t)}</b><span>${esc(s.p)}</span></div>`).join('');
-$('#steps').innerHTML = STEPS.map((s, i) => `<button type="button" data-i="${i}"><i></i>${esc(s.t)}</button>`).join('');
-$('#steps').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { step = +b.dataset.i; drawSteps(); } });
-function drawSteps() {
-  $('#rollN').style.transform = $('#rollT').style.transform = `translateY(-${step * 20}%)`;
-  $('#prog').style.width = (step + 1) * 20 + '%';
-  document.querySelectorAll('#steps button').forEach((b, i) => { b.classList.toggle('on', i === step); b.classList.toggle('done', i < step); });
-}
-drawSteps();
-setInterval(() => { step = (step + 1) % 5; drawSteps(); }, 2600);
-
-/* ── Packages ── */
-$('#pkgs').innerHTML = PKGS.map((p, i) => `<div class="pkg">
-  <div><span class="pkg__stage">${esc(p.stage)}</span></div>
-  <div class="pkg__name"><h3>${esc(p.name)}</h3><span>${esc(p.promise)}</span></div>
-  <div class="pkg__price"><span class="cap">Starting from</span><div><b>${esc(p.price)}</b><small>${esc(p.unit)}</small></div><div class="pkg__tags"><span>${esc(p.time)}</span><span style="color:${i === 1 ? 'var(--gold)' : 'var(--sage)'}">${esc(p.tag)}</span></div></div>
-  <div class="pkg__items">${p.items.map((t, j) => `<span><i>0${j + 1}</i>${esc(t)}</span>`).join('')}</div>
-  <span class="pkg__best"><b>Best for:</b> ${esc(p.best)}</span>
-  <a class="pkg__cta${i === 1 ? ' hi' : ''}" href="#contact"><span>${esc(p.cta)}</span><span>→</span></a>
-</div>`).join('');
-
-/* ── Reveal (fade-up + strike-through) ── */
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return; const el = e.target;
-  if (el.dataset.reveal === 'strike') el.style.backgroundSize = '100% 2px'; else { el.style.opacity = '1'; el.style.transform = 'none'; }
-  io.unobserve(el);
-}), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('[data-reveal]').forEach(el => {
-  const d = el.dataset.d || 0;
-  if (el.dataset.reveal === 'strike') { el.style.transition = `background-size 900ms cubic-bezier(.2,.7,.2,1) ${d}ms`; io.observe(el); return; }
-  if (el.getBoundingClientRect().top < window.innerHeight) return;
-  el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
-  el.style.transition = `opacity 700ms cubic-bezier(.2,.7,.2,1) ${d}ms, transform 700ms cubic-bezier(.2,.7,.2,1) ${d}ms, background 300ms`;
-  io.observe(el);
-});
-
-/* ── Hero: leads drift without a system, then snap into a pipeline ── */
-const wrap = $('#simWrap'), cv = $('#sim');
-let ctx, W = 0, H = 0, t = 0, phaseT = 0, m = 0, mx = -999, my = -999, phase = 'memory', manual = false, advT = 0, seq = 0, L;
-const names = ['Arunika','Sinar Tani','Kopi Lima','Baja Raya','Nusa Logistik','Teras Living','Mitra Kargo','Lumbung','Sagara Foods','Kirana Tech','Bumi Pack','Rantai Dagang','Senja Studio','Tirta Abadi','Padi Mas','Rimba Wood','Cahaya Print','Garda Fleet','Laut Biru','Sentosa Med','Karya Steel','Bintang Ritel','Halo Clinic','Mega Tekstil','Sumber Agro','Jaya Motor'];
-const owners = ['AR','DS','FN','RW','TM'], nexts = ['Call · Tue','Demo · Thu','Send deck','Proposal · Fri','Follow up · Mon','Contract · Wed','Visit · Wed'];
-const pool = [0,0,0,0,1,1,1,2,2,3,3,4];
-const C = names.map((n, i) => ({ id: i, name: n, owner: owners[i % 5], next: nexts[i % nexts.length], stage: pool[i % pool.length], seq: seq++,
-  x: Math.random() * 400, y: Math.random() * 400, vx: 0, vy: 0, rot: (Math.random() - .5) * .8, rt: (Math.random() - .5) * .8, w: 118, h: 40,
-  cold: Math.random() < .3, flash: 0, delay: i * 45 }));
-const notes = [[1, 'follow up?'], [7, 'who owns this?'], [13, 'last contact: ?'], [20, 'in someone’s inbox']];
-
-function resize() {
-  const r = wrap.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
-  cv.width = r.width * dpr; cv.height = r.height * dpr;
-  ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  W = r.width; H = r.height;
-}
-resize(); new ResizeObserver(resize).observe(wrap);
-wrap.addEventListener('pointermove', e => { const r = wrap.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
-wrap.addEventListener('pointerleave', () => { mx = -999; my = -999; });
-
-function setPhase(p) {
-  if (p === phase) return;
-  phase = p; phaseT = 0;
-  if (p === 'memory') C.forEach(c => { const a = Math.random() * Math.PI * 2; c.vx += Math.cos(a) * 5; c.vy += Math.sin(a) * 5; c.rt = (Math.random() - .5) * .8; });
-  const sys = p === 'system';
-  $('#modeLabel').textContent = sys ? 'MODE · SYSTEM' : 'MODE · MEMORY';
-  $('#modeLabel').style.color = sys ? 'var(--gold)' : 'var(--sage)';
-  $('#modeNote').textContent = sys ? 'Every lead has a stage, an owner and a next step.' : `${C.length} leads · 0 owners · no next step`;
-  document.querySelectorAll('.sim__btns button').forEach(b => b.setAttribute('aria-pressed', b.dataset.p === p));
-}
-$('#modeNote').textContent = `${C.length} leads · 0 owners · no next step`;
-$('#modeLabel').style.color = 'var(--sage)';
-document.querySelectorAll('.sim__btns button').forEach(b => b.addEventListener('click', () => { manual = true; setPhase(b.dataset.p); }));
-
-function layout() {
-  const pad = 18, base = H - pad - 30, colW = (W - 2 * pad) / 5;
-  const counts = [0, 0, 0, 0, 0]; C.forEach(c => counts[c.stage]++);
-  const rows = Math.max(6, ...counts), gap = 4;
-  const ch = Math.max(18, Math.min(40, (base - pad - 8) / rows - gap));
-  return { pad, base, colW, cw: colW - 8, ch, gap, counts };
-}
-function advance() {
-  const by = s => C.filter(l => l.stage === s).sort((a, b) => a.seq - b.seq);
-  const opts = [0, 0, 1, 1, 2, 3].filter(s => by(s).length); if (!opts.length) return;
-  const l = by(opts[Math.floor(Math.random() * opts.length)])[0];
-  l.stage++; l.seq = seq++; l.flash = 1;
-  const won = by(4);
-  if (won.length > 6) { const o = won[0]; o.stage = 0; o.seq = seq++; o.y = -50; o.x = 20; }
-}
-function update(dt) {
-  if (!W) return;
-  t += dt; phaseT += dt;
-  if (!manual) {
-    if (phase === 'memory' && phaseT > 5000) setPhase('system');
-    else if (phase === 'system' && phaseT > 9000) setPhase('memory');
+class Component extends DCLogic {
+  state = { bsys: false, bman: false, pi: 0, ph: 0, layer: 0, move: 0, prob: false, ct: false, lockL: 0, lockM: 0 };
+  clkRef = React.createRef(); beltRef = React.createRef(); probRef = React.createRef(); pipeRef = React.createRef(); colsRef = React.createRef(); rateRef = React.createRef(); ctRef = React.createRef();
+  componentDidMount() {
+    const t0 = performance.now();
+    const tick = (now) => {
+      const el = this.beltRef.current;
+      if (el) {
+        const W = el.clientWidth, H = el.clientHeight, gate = W / 2, n = BELT.length;
+        const sp = Math.max(170, (W + 200) / n * 1.0), L = sp * n, t = (now - t0) * 0.06;
+        const lanes = [H * 0.22, H * 0.48, H * 0.74];
+        [...el.children].slice(4).forEach((c, i) => {
+          const x = ((t + i * sp) % L) - 170, lane = i % 3;
+          const p = Math.min(1, Math.max(0, (x + 75 - gate + 40) / 80));
+          const cy = lanes[lane] - 24 + (rnd(i, 1) - .5) * 60 + Math.sin(now * 0.002 + i) * 8;
+          const y = cy + (lanes[lane] - 24 - cy) * p, r = (rnd(i, 2) - .5) * 30 * (1 - p);
+          c.style.transform = `translate(${x}px,${y}px) rotate(${r}deg)`;
+          c.style.background = p > .5 ? (lane === 1 ? '#E9F958' : '#F7F9FC') : '#C1E5FB';
+          c.style.opacity = p > .5 ? 1 : .78;
+          if (c.children[1]) { c.children[1].style.opacity = 1 - p; c.children[2].style.opacity = p; }
+        });
+      }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    const clk = () => { if (this.clkRef.current) this.clkRef.current.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour12: false }); };
+    clk(); this.civ = setInterval(clk, 1000);
+    this.biv = setInterval(() => { if (!this.state.bman) this.setState(s => ({ bsys: !s.bsys })); }, 3200);
+    const PD = [1800, 5000, 500];
+    const step = () => { const np = (this.ph = ((this.ph || 0) + 1) % 3); this.setState(s => np ? { ph: np } : { ph: 0, pi: (s.pi + 1) % 4 }); this.pt = setTimeout(step, PD[np]); };
+    this.iv = setInterval(() => {
+      const now = Date.now();
+      this.setState(s => ({ layer: now - s.lockL > 6000 ? (s.layer + 1) % 5 : s.layer, move: now - s.lockM > 6000 ? (s.move + 1) % 5 : s.move }));
+    }, 2400);
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.target === this.probRef.current) this.setState({ prob: e.isIntersecting });
+      if (e.target === this.ctRef.current) this.setState({ ct: e.isIntersecting });
+    }), { threshold: .25 });
+    [this.probRef, this.ctRef].forEach(r => r.current && this.io.observe(r.current));
   }
-  m += ((phase === 'system' ? 1 : 0) - m) * Math.min(1, dt * .003);
-  L = layout();
-  const cols = [[], [], [], [], []]; C.forEach(c => cols[c.stage].push(c));
-  cols.forEach((arr, k) => { arr.sort((a, b) => a.seq - b.seq); arr.forEach((c, j) => { c.px = L.pad + k * L.colW + 4; c.py = L.base - (j + 1) * (L.ch + L.gap); }); });
-  if (phase === 'system' && phaseT > 1600) { advT += dt; if (advT > 900) { advT = 0; advance(); } }
-  const fr = dt / 16;
-  C.forEach(c => {
-    if (phase === 'memory') {
-      const ang = Math.sin(c.x * .006 + t * .0004) * 2 + Math.cos(c.y * .007 - t * .0003) * 2;
-      c.vx += Math.cos(ang) * .035 * fr; c.vy += Math.sin(ang) * .035 * fr;
-      const dx = c.x + c.w / 2 - mx, dy = c.y + c.h / 2 - my, d = Math.hypot(dx, dy);
-      if (d < 130 && d > .1) { const f = (130 - d) / 130 * 1.6; c.vx += dx / d * f; c.vy += dy / d * f; }
-      c.vx *= Math.pow(.95, fr); c.vy *= Math.pow(.95, fr);
-      if (c.x < -c.w) c.x = W; if (c.x > W) c.x = -c.w; if (c.y < -c.h) c.y = H; if (c.y > H) c.y = -c.h;
-      c.rt += Math.sin(t * .001 + c.id) * .0015 * fr;
-      c.rot += (c.rt - c.rot) * .04 * fr;
-      c.w += (118 - c.w) * .1 * fr; c.h += (40 - c.h) * .1 * fr;
-    } else {
-      if (phaseT > c.delay) {
-        c.vx = (c.vx + (c.px - c.x) * .07 * fr) * Math.pow(.74, fr);
-        c.vy = (c.vy + (c.py - c.y) * .07 * fr) * Math.pow(.74, fr);
-        c.rot += (0 - c.rot) * .14 * fr;
-        c.w += (L.cw - c.w) * .14 * fr; c.h += (L.ch - c.h) * .14 * fr;
-      } else { c.vx *= .9; c.vy *= .9; }
-    }
-    c.x += c.vx * fr; c.y += c.vy * fr;
-    c.flash = Math.max(0, c.flash - dt / 900);
-  });
+  componentWillUnmount() { clearInterval(this.biv); clearInterval(this.civ); cancelAnimationFrame(this.raf); clearTimeout(this.pt); clearInterval(this.iv); this.io && this.io.disconnect(); }
+  chars(str, off) {
+    const ct = this.state.ct;
+    return [...str].map((ch, i) => ({ ch, o: ct ? 1 : 0, dl: `${(i + off) * 35}ms`,
+      tf: ct ? 'none' : `translate(${(rnd(i + off, 3) - .5) * 600}px,${(rnd(i + off, 4) - .5) * 400}px) rotate(${(rnd(i + off, 5) - .5) * 180}deg)` }));
+  }
+  renderVals() {
+    const { layer, move, prob } = this.state;
+    const goL = i => () => this.setState({ layer: i, lockL: Date.now() });
+    const goM = i => () => this.setState({ move: i, lockM: Date.now() });
+    return {
+      clkRef: this.clkRef, beltRef: this.beltRef, probRef: this.probRef, ctRef: this.ctRef, 
+      belt: BELT.map(b => ({ t: b[0], a: b[1], b: b[2] })),
+      bd: (() => { const sy = this.state.bsys, on = v => v ? ['#E9F958', '#052D8F'] : ['transparent', '#C1E5FB'], [mb, mf] = on(!sy), [sb, sf] = on(sy); return {
+        label: sy ? 'SYSTEM' : 'MEMORY', colOp: sy ? 1 : 0, cols: ['LEAD', 'QUALIFIED', 'PROPOSAL', 'CLOSED'], mb, mf, sb, sf,
+        mem: () => this.setState({ bsys: false, bman: true }), sys: () => this.setState({ bsys: true, bman: true }),
+        cards: BCARDS.map((c, i) => sy
+          ? { t: c[0], s: c[2], x: `calc(20px + ${c[6]} * ((100% - 52px) / 4 + 8px))`, y: `${56 + c[7] * 66}px`, r: '0deg', bg: c[6] === 3 ? '#E9F958' : '#FFFFFF' }
+          : { t: c[0], s: c[1], x: c[3] + '%', y: c[4] + '%', r: c[5] + 'deg', bg: ['#FFFFFF', '#C1E5FB', '#E9F958'][i % 3] }) }; })(),
+      heroDots: Array.from({ length: 12 }, (_, i) => ({ x: `${Math.round((rnd(i, 7) - .5) * 160)}px`, y: `${Math.round((rnd(i, 8) - .5) * 120)}px`, r: `${Math.round((rnd(i, 9) - .5) * 90)}deg`, dl: `${(i % 4) * 60}ms`,
+        bg: i % 4 === 3 ? '#E9F958' : 'transparent', bd: i % 4 === 3 ? '#E9F958' : 'rgba(193,229,251,.55)' })),
+      probRows: PROBS.map((p, i) => ({ n: String(i + 1).padStart(2, '0'), t: p[0], fix: p[1], k: p[2], w: this.state.prob ? '100%' : '0%', o: this.state.prob ? 1 : 0, y: this.state.prob ? '0px' : '10px', dl: `${150 + i * 180}ms`, dl2: `${450 + i * 180}ms` })),
+      pb: (() => { const p = PROBS[this.state.pi], ph = this.state.ph; return { n: String(this.state.pi + 1).padStart(2, '0'), t: p[0], fix: p[1],
+        w: ph >= 1 ? '102%' : '0%', c: ph >= 1 ? 'rgba(5,45,143,.35)' : '#052D8F', fo: ph >= 1 && ph < 2 ? 1 : 0, fy: ph >= 1 ? '0px' : '14px', o: ph === 2 ? 0 : 1 }; })(),
+      pbars: PROBS.map((p, i) => { const pi = this.state.pi; return { n: String(i + 1).padStart(2, '0'), k: p[2], o: i === pi ? 1 : .45,
+        w: i < pi ? '100%' : i === pi ? (this.state.ph === 0 ? '40%' : '100%') : '0%', d: i === pi ? '1.6s' : '0s',
+        go: () => { clearTimeout(this.pt); this.setState({ pi: i, ph: 0 }); const PD = [1800, 5000, 500]; const step = () => { const np = (this.ph = ((this.ph || 0) + 1) % 3); this.setState(s => np ? { ph: np } : { ph: 0, pi: (s.pi + 1) % 4 }); this.pt = setTimeout(step, PD[np]); }; this.pt = setTimeout(step, PD[0]); } }; }),
+      rows: MOVES.map((m, i) => { const a = i === layer; return { n: String(i + 1).padStart(2, '0'), t: m.t, d: m.d, wk: m.w, go: goL(i), dd: a ? 'block' : 'none',
+        fs: a ? 'clamp(36px,min(4.4vw,7vh),72px)' : 'clamp(20px,min(2vw,3.6vh),30px)', c: a ? '#F7F9FC' : 'rgba(193,229,251,.45)', nc: a ? '#E9F958' : 'rgba(193,229,251,.45)' }; }),
+      vis: { n: String(layer + 1).padStart(2, '0'), t: MOVES[layer].t.toUpperCase(), L: LAYERS[layer].t, v1: layer === 0, v2: layer === 1, v3: layer === 2, v4: layer === 3, v5: layer === 4 },
+      builtLabel: `LAYERS BUILT ${layer + 1}/5`,
+      panels: MOVES.map((m, i) => { const act = i === layer, done = i < layer; return {
+        n: String(i + 1).padStart(2, '0'), t: m.t, T: m.t.toUpperCase(), d: m.d, w: m.w, L: LAYERS[i].t.toUpperCase(), go: goL(i),
+        flex: act ? '6 1 0' : '1 1 0', v1: act && i === 0, v2: act && i === 1, v3: act && i === 2, v4: act && i === 3, v5: act && i === 4, ao: act ? 1 : 0, ad: act ? '250ms' : '0ms', vo: act ? 0 : 1, mark: done ? '■' : '○',
+        bg: act ? '#E9F958' : done ? '#052D8F' : 'transparent', fg: act ? '#052D8F' : done ? '#C1E5FB' : '#4990E8',
+        bd: act ? '#E9F958' : done ? '#052D8F' : 'rgba(193,229,251,.2)',
+        stack: [0, 1, 2, 3, 4].map(j => ({ c: j <= i ? '#052D8F' : 'rgba(5,45,143,.18)' })) }; }),
+      packs: [
+        { st: '01 / DIAGNOSE', t: 'Blueprint', tag: 'Find the gaps. Design the foundation.', price: 'IDR X M', per: 'project', chips: ['1–2 WEEKS', 'FIXED SCOPE'], r: '-1.2deg', badge: 'none',
+          items: ['Sales process audit', 'Process mapping', 'Playbook foundation', 'System blueprint', 'Prototype & roadmap'],
+          best: 'Teams with no clear process.', cta: 'Explore', cb: '#052D8F', cf: '#F7F9FC',
+          done: 'You know what to fix.', bg: '#F7F9FC', fg: '#052D8F', ln: 'rgba(5,45,143,.25)', foot: '#C1E5FB', ff: '#052D8F' },
+        { st: '02 / BUILD', t: 'Implementation', tag: 'Turn your process into a working system.', price: 'IDR XX M', per: 'project', chips: ['3–6 WEEKS', 'CORE OFFER'], r: '0deg', badge: 'flex',
+          items: ['Pipeline & stage rules', 'Custom sales dashboard', 'Follow-up management', 'Playbook & KPI reporting', 'Training & handover'],
+          best: 'Teams needing one standard.', cta: 'Build', cb: '#052D8F', cf: '#E9F958',
+          done: 'One system, one team.', bg: '#E9F958', fg: '#052D8F', ln: 'rgba(5,45,143,.3)', foot: '#F7F9FC', ff: '#052D8F' },
+        { st: '03 / OPTIMIZE', t: 'Optimization', tag: 'Improve what you’ve already built.', price: 'IDR XX M', per: 'month', chips: ['MONTHLY RETAINER', 'ONGOING'], r: '1.2deg', badge: 'none',
+          items: ['Performance reviews', 'Bottleneck analysis', 'Workflow optimization', 'Dashboard enhancements', 'Feature sprints'],
+          best: 'Teams with stalled conversion.', cta: 'Optimize', cb: '#E9F958', cf: '#052D8F',
+          done: 'Pipeline seen live.', bg: '#081433', fg: '#F7F9FC', ln: 'rgba(193,229,251,.3)', foot: '#4990E8', ff: '#081433' },
+      ].map(k => ({ ...k, items: k.items.map((t, i) => ({ n: String(i + 1).padStart(2, '0'), t })) })),
+      l1: this.chars(L1, 0), l2: this.chars(L2, L1.length),
+    };
+  }
 }
-const fit = (s, w) => { if (ctx.measureText(s).width <= w) return s; while (s.length > 1 && ctx.measureText(s + '…').width > w) s = s.slice(0, -1); return s + '…'; };
-function draw() {
-  if (!ctx || !L) return;
-  ctx.clearRect(0, 0, W, H);
-  if (m < .98) {
-    ctx.lineWidth = 1; ctx.strokeStyle = '#C1E5FB'; const R = 170;
-    for (let i = 0; i < C.length; i++) for (let j = i + 1; j < C.length; j++) {
-      const ax = C[i].x + C[i].w / 2, ay = C[i].y + C[i].h / 2, bx = C[j].x + C[j].w / 2, by = C[j].y + C[j].h / 2, d = Math.hypot(ax - bx, ay - by);
-      if (d < R) { ctx.globalAlpha = (1 - d / R) * .22 * (1 - m); ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); }
-    }
-    ctx.setLineDash([]);
-  }
-  if (m > .02) {
-    ctx.globalAlpha = m; ctx.fillStyle = '#1C2E63';
-    for (let k = 1; k < 5; k++) ctx.fillRect(Math.round(L.pad + k * L.colW) - 1, L.pad, 1, L.base - L.pad + 4);
-    ctx.fillStyle = '#F7F9FC'; ctx.fillRect(L.pad, L.base + 2, W - 2 * L.pad, 1);
-    const stageNames = ['Lead', 'Qualified', 'Proposal', 'Negotiate', 'Won'];
-    ctx.font = `500 ${L.colW < 84 ? 9 : 11}px "Geist Mono", monospace`; ctx.textBaseline = 'alphabetic';
-    stageNames.forEach((n, k) => {
-      ctx.fillStyle = k === 4 ? '#E9F958' : '#C1E5FB'; ctx.textAlign = 'left'; ctx.fillText(n.toUpperCase(), L.pad + k * L.colW + 4, L.base + 20);
-      ctx.fillStyle = '#F7F9FC'; ctx.textAlign = 'right'; ctx.fillText(String(L.counts[k]).padStart(2, '0'), L.pad + (k + 1) * L.colW - 6, L.base + 20);
-    });
-    ctx.textAlign = 'left';
-  }
-  C.forEach(c => {
-    ctx.save(); ctx.translate(c.x + c.w / 2, c.y + c.h / 2); ctx.rotate(c.rot);
-    const w = c.w, h = c.h, x0 = -w / 2, y0 = -h / 2, won = c.stage === 4;
-    const a0 = (1 - m) * (c.cold ? .5 : 1);
-    if (a0 > .01) {
-      ctx.globalAlpha = a0; ctx.fillStyle = '#1C2E63'; ctx.fillRect(x0, y0, w, h);
-      ctx.strokeStyle = '#2A4A9A'; ctx.lineWidth = 1; ctx.strokeRect(x0 + .5, y0 + .5, w - 1, h - 1);
-    }
-    if (m > .01) { ctx.globalAlpha = m; ctx.fillStyle = won ? '#E9F958' : '#F7F9FC'; ctx.fillRect(x0, y0, w, h); }
-    const sys = m > .5, ink = sys ? '#081433' : '#F7F9FC', sub = sys ? '#2A4A9A' : '#C1E5FB';
-    ctx.globalAlpha = sys ? 1 : (c.cold ? .55 : 1);
-    const av = Math.min(16, h - 8);
-    ctx.fillStyle = sys ? (won ? '#081433' : '#0B1D4D') : '#2A4A9A'; ctx.fillRect(x0 + w - av - 5, y0 + 5, av, av);
-    ctx.fillStyle = sys ? (won ? '#E9F958' : '#F7F9FC') : '#C1E5FB'; ctx.font = '500 8px "Geist Mono", monospace'; ctx.textAlign = 'center';
-    if (av >= 12) ctx.fillText(sys ? c.owner : '?', x0 + w - av / 2 - 5, y0 + 5 + av / 2 + 3);
-    ctx.textAlign = 'left';
-    const tw = w - av - 16;
-    ctx.fillStyle = ink; ctx.font = `600 ${h < 26 ? 10 : 11}px Geist, sans-serif`;
-    ctx.fillText(fit('PT ' + c.name, tw), x0 + 7, h < 30 ? 3.5 : y0 + 16);
-    if (h >= 30) { ctx.fillStyle = sub; ctx.font = '400 9px "Geist Mono", monospace'; ctx.fillText(fit(sys ? '→ ' + c.next : 'next: ?', tw), x0 + 7, y0 + 30); }
-    if (c.flash > 0 && sys) { ctx.globalAlpha = c.flash; ctx.strokeStyle = '#E9F958'; ctx.lineWidth = 2; ctx.strokeRect(x0 - 3, y0 - 3, w + 6, h + 6); }
-    ctx.restore();
-  });
-  if (m < .9) {
-    ctx.globalAlpha = 1 - m; ctx.font = '500 11px "Geist Mono", monospace';
-    notes.forEach(([i, n]) => { const c = C[i]; if (!c) return; const tx = c.x + c.w * .6, ty = c.y - 10, tw = ctx.measureText(n).width + 12;
-      ctx.fillStyle = '#E9F958'; ctx.fillRect(tx, ty - 14, tw, 18); ctx.fillStyle = '#081433'; ctx.fillText(n, tx + 6, ty - 1); });
-  }
-  ctx.globalAlpha = 1;
-}
-let last = performance.now(), seen = true;
-new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { rootMargin: '100px' }).observe(wrap);
-const tick = now => { const dt = Math.min(40, now - last); last = now; if (seen) { update(dt); draw(); } requestAnimationFrame(tick); };
-requestAnimationFrame(tick);
-})();
 </script>
-</body>
-</html>
+
+
+</body></html>
