@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — Marwah K</title>
+<meta name="description" content="Full-time BD leadership at AHA Commerce, freelance engagements, speaking, and tools built with AI — by Marwah Khairunnisa.">
+<meta name="theme-color" content="#081433">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
+<style>
+:root{--blue:#052D8F;--navy:#081433;--yellow:#E9F958;--sky:#C1E5FB;--mid:#4990E8;--off:#F7F9FC;--ez:cubic-bezier(.2,0,0,1);--pad:clamp(20px,4vw,48px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--navy);color:var(--off);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+@keyframes mkfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes mkblink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.mono{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+.hdr{position:fixed;top:10px;left:clamp(12px,2.5vw,32px);right:clamp(12px,2.5vw,32px);z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:9px 10px 9px clamp(14px,2vw,22px);border-radius:999px;background:rgba(8,20,51,.82);border:1px solid rgba(193,229,251,.16);box-shadow:0 10px 40px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:36px;height:36px;flex:none}
+.brand span{font-size:20px;font-weight:600;letter-spacing:-0.05em;white-space:nowrap}
+.hdr nav{display:flex;align-items:center;gap:clamp(12px,2vw,24px)}
+.hdr nav a.mono{white-space:nowrap;transition:color 200ms var(--ez)}
+.hdr nav a.mono:hover{color:var(--mid)}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--yellow);color:var(--blue);font-size:14px;font-weight:600;white-space:nowrap;transition:background 200ms var(--ez)}
+.pill:hover{background:var(--off)}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:mkblink 1.2s steps(1) infinite}
+@media (max-width:640px){.hdr nav a.mono{display:none}}
+
+.hero{padding:clamp(140px,20vh,200px) var(--pad) clamp(48px,8vh,88px);display:flex;flex-direction:column;gap:24px;animation:mkfade 600ms var(--ez) both}
+.hero .mono{color:var(--mid)}
+.hero h1{margin:0;font-size:clamp(56px,11vw,180px);font-weight:600;letter-spacing:-0.07em;line-height:.86}
+.hero h1 span{color:var(--mid)}
+.jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.jump a{min-height:44px;display:inline-flex;align-items:center;gap:10px;padding:0 18px;border-radius:999px;border:1.5px solid rgba(193,229,251,.3);font-size:15px;font-weight:500;transition:background 200ms var(--ez),border-color 200ms var(--ez),color 200ms var(--ez)}
+.jump a:hover{background:var(--mid);border-color:var(--mid);color:var(--navy)}
+.jump a b{font-family:'Geist Mono',monospace;font-size:12px;font-weight:400;letter-spacing:.1em;opacity:.7}
+
+.grp{padding:clamp(56px,9vh,96px) var(--pad);display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,64px);border-top:1px solid rgba(193,229,251,.14)}
+.grp__head{display:flex;flex-direction:column;gap:16px;align-self:start;position:sticky;top:110px}
+.grp__head h2{margin:0;font-size:clamp(44px,5.6vw,88px);font-weight:600;letter-spacing:-0.065em;line-height:.9}
+.grp__head p{margin:0;max-width:40ch;font-size:16px;line-height:1.55;color:var(--sky);text-wrap:pretty}
+.grp__head .mono{color:var(--mid)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+.card{position:relative;min-height:260px;border-radius:28px;padding:clamp(22px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:var(--blue);transition:transform 300ms var(--ez),background 200ms var(--ez)}
+a.card:hover{transform:translateY(-6px)}
+.card__top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card__top .mono{color:var(--sky)}
+.card__top .arr{font-size:22px;line-height:1;color:var(--yellow);transition:transform 300ms var(--ez)}
+a.card:hover .arr{transform:translate(3px,-3px)}
+.card h3{margin:0 0 10px;font-size:clamp(26px,2.4vw,36px);font-weight:600;letter-spacing:-0.05em;line-height:1}
+.card p{margin:0;font-size:15px;line-height:1.5;color:var(--sky);text-wrap:pretty}
+.card--wide{grid-column:1/-1}
+.card--sky{background:var(--sky);color:var(--blue)}
+.card--sky .card__top .mono,.card--sky p{color:var(--blue)}
+.card--sky .arr{color:var(--blue)!important}
+.card--mid{background:var(--mid);color:var(--navy)}
+.card--mid .card__top .mono,.card--mid p{color:var(--navy)}
+.card--mid .arr{color:var(--navy)!important}
+.card--yellow{background:var(--yellow);color:var(--blue)}
+.card--yellow .card__top .mono,.card--yellow p{color:var(--blue)}
+.card--yellow .arr{color:var(--blue)!important}
+a.card--yellow:hover{background:var(--off)}
+.stat{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--yellow);margin-top:14px;display:block}
+.card--sky .stat,.card--yellow .stat{color:var(--blue)}
+.card--mid .stat{color:var(--navy)}
+@media (max-width:900px){.grp{grid-template-columns:1fr}.grp__head{position:static}}
+@media (max-width:600px){.cards{grid-template-columns:1fr}.card{min-height:220px}}
+
+.foot{background:var(--yellow);color:var(--blue);padding:clamp(56px,10vh,96px) var(--pad) clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:48px}
+.foot h2{margin:0;font-size:clamp(64px,13vw,220px);font-weight:600;letter-spacing:-0.075em;line-height:.82}
+.foot__row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px 32px;padding-top:20px;border-top:1.5px solid var(--blue)}
+.foot__row .acts{display:flex;flex-wrap:wrap;gap:10px}
+.btn-b{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;background:var(--blue);color:var(--off);font-size:14px;font-weight:600;white-space:nowrap;transition:background 200ms var(--ez)}
+.btn-b:hover{background:var(--navy)}
+.btn-o{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--blue);font-size:14px;font-weight:600;white-space:nowrap;transition:background 200ms var(--ez),color 200ms var(--ez)}
+.btn-o:hover{background:var(--blue);color:var(--yellow)}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <a class="brand" href="/" aria-label="Marwah K — home">
+    <svg viewBox="0 0 120 120" aria-hidden="true"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"/><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"/></svg>
+    <span>Marwah K</span>
+  </a>
+  <nav aria-label="Site">
+    <a class="mono" href="/">← Home</a>
+    <a class="mono" href="/#services">Services</a>
+    <a class="pill" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener"><i></i>Book 15 min</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <span class="mono">01 — Experience · All work</span>
+  <h1>Work that<br><span>compounds.</span></h1>
+  <div class="jump">
+    <a href="#full-time"><b>01</b>Full-time</a>
+    <a href="#freelance"><b>02</b>Freelance</a>
+    <a href="#voice"><b>03</b>Voice</a>
+    <a href="#built-with-ai"><b>04</b>Built with AI</a>
+  </div>
+</section>
+
+<section class="grp" id="full-time">
+  <div class="grp__head">
+    <span class="mono">01 — Full-time</span>
+    <h2>AHA Commerce</h2>
+    <p>BD Lead. Sourcing and closing brand partners across Shopee, TikTok Shop and Tokopedia, then building the team and the system that does it at scale.</p>
+  </div>
+  <div class="cards">
+    <a class="card" href="/projects/personal-brand-acquisitions.html">
+      <div class="card__top"><span class="mono">Personal · 2023 – 2025</span><span class="arr">↗</span></div>
+      <div><h3>Brand Acquisitions</h3><p>Brands personally sourced, pitched and closed across Shopee, TikTok Shop and Tokopedia.</p><span class="stat">55+ BRANDS CLOSED</span></div>
+    </a>
+    <a class="card card--sky" href="/projects/bd-funnel-overhaul.html">
+      <div class="card__top"><span class="mono">Team · 2026</span><span class="arr">↗</span></div>
+      <div><h3>BD Team Leadership</h3><p>Built and led a BD team of 8: funnel designed end to end, KPIs set, weekly 1-on-1s.</p><span class="stat">47 PARTNERSHIPS · +30% CONVERSION</span></div>
+    </a>
+    <a class="card card--mid" href="/projects/shopee-super-summit.html">
+      <div class="card__top"><span class="mono">Company project · 2024 &amp; 2025</span><span class="arr">↗</span></div>
+      <div><h3>Shopee Super Summit</h3><p>Led AHA’s exhibitor booth, from concept to on-floor lead capture.</p><span class="stat">270+ LEADS · &gt;50% TO FIRST MEETING</span></div>
+    </a>
+    <a class="card" href="/projects/aha-birthday.html">
+      <div class="card__top"><span class="mono">Company project · 2024</span><span class="arr">↗</span></div>
+      <div><h3>Company Anniversary</h3><p>Project Lead for the 13th anniversary outing, concept to on-day execution.</p><span class="stat">110+ ATTENDEES · 9.46/10</span></div>
+    </a>
+    <a class="card" href="/projects/aha-thailand.html">
+      <div class="card__top"><span class="mono">Company project · 2026</span><span class="arr">↗</span></div>
+      <div><h3>Abroad Culture Building</h3><p>Onboarded the Thailand BD team to AHA’s operating framework.</p><span class="stat">9 MEMBERS · 3 SESSIONS</span></div>
+    </a>
+    <a class="card card--sky" href="/projects/company-project.html">
+      <div class="card__top"><span class="mono">Overview</span><span class="arr">↗</span></div>
+      <div><h3>All company projects</h3><p>Cross-functional project leadership at AHA Commerce, in one place.</p></div>
+    </a>
+  </div>
+</section>
+
+<section class="grp" id="freelance">
+  <div class="grp__head">
+    <span class="mono">02 — Freelance</span>
+    <h2>Freelance</h2>
+    <p>Remote and async, 10–14 hours a week: B2B sales systems, branding and marketplace consulting, data analysis, AI training and virtual assistance.</p>
+  </div>
+  <div class="cards">
+    <a class="card card--yellow card--wide" href="/services/b2b-sales-system.html">
+      <div class="card__top"><span class="mono">Service · 01</span><span class="arr">↗</span></div>
+      <div><h3>B2B Sales System</h3><p>ICP-first research, personalised outreach and a pipeline you can actually see. Diagnose, Build or Optimize.</p></div>
+    </a>
+    <a class="card card--sky" href="/services/branding-strategist.html">
+      <div class="card__top"><span class="mono">Consulting</span><span class="arr">↗</span></div>
+      <div><h3>Branding Strategist</h3><p>A thinking partner for brand decisions. You decide, your team executes.</p></div>
+    </a>
+    <a class="card card--mid" href="/services/marketplace-consulting.html">
+      <div class="card__top"><span class="mono">Consulting</span><span class="arr">↗</span></div>
+      <div><h3>Marketplace Consulting</h3><p>A thinking partner for brands on four marketplaces. Find the leak, fix that first.</p></div>
+    </a>
+  </div>
+</section>
+
+<section class="grp" id="voice">
+  <div class="grp__head">
+    <span class="mono">03 — Voice</span>
+    <h2>Voice</h2>
+    <p>Talks and sessions on careers, sales and building with AI.</p>
+  </div>
+  <div class="cards">
+    <a class="card card--mid card--wide" href="/projects/speaker-govokasi.html">
+      <div class="card__top"><span class="mono">Speaker · GoVokasi × Maxwell Leadership · Sep 2026</span><span class="arr">↗</span></div>
+      <div><h3>Beyond Your Degree</h3><p>#LetsGoPRO Community Talks: building a career outside your background.</p></div>
+    </a>
+  </div>
+</section>
+
+<section class="grp" id="built-with-ai">
+  <div class="grp__head">
+    <span class="mono">04 — Built with AI</span>
+    <h2>Built with AI</h2>
+    <p>Small, useful tools for sales and content work, designed and shipped end to end.</p>
+  </div>
+  <div class="cards">
+    <a class="card card--yellow" href="https://bdtailored-ai.vercel.app" target="_blank" rel="noopener">
+      <div class="card__top"><span class="mono">Outreach · 2026</span><span class="arr">↗</span></div>
+      <div><h3>TailoredAI</h3><p>Personalised BD outreach drafts, tuned to each brand.</p></div>
+    </a>
+    <a class="card" href="https://shopee-thread-generator.vercel.app/" target="_blank" rel="noopener">
+      <div class="card__top"><span class="mono">Content · 2026</span><span class="arr">↗</span></div>
+      <div><h3>Affiliate Threads</h3><p>Turns a product into ready-to-post affiliate threads.</p></div>
+    </a>
+    <a class="card card--sky" href="/leads-generator.html">
+      <div class="card__top"><span class="mono">Research · 2026</span><span class="arr">↗</span></div>
+      <div><h3>Leads Generator</h3><p>Type a brand or a role, get targeted searches for decision makers, stores and contacts.</p></div>
+    </a>
+    <a class="card card--mid" href="/constellation.html">
+      <div class="card__top"><span class="mono">Interactive · 2026</span><span class="arr">↗</span></div>
+      <div><h3>Skills Constellation</h3><p>The skill clusters behind every service, mapped.</p></div>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <span class="mono">Replies within 1 day</span>
+  <h2>Let's talk.</h2>
+  <div class="foot__row">
+    <div class="acts">
+      <a class="btn-b" href="https://calendar.app.google/3UR6RuZJCrFbpQkV8" target="_blank" rel="noopener">Book 15 min ↗</a>
+      <a class="btn-o" href="https://wa.me/6285155343042" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn-o" href="mailto:marwahkhairunnisa30@gmail.com">Email</a>
+      <a class="btn-o" href="https://linkedin.com/in/marwahkha" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="mono">© 2026 Marwah K · Jakarta</span>
+  </div>
+</footer>
+<script src="/assets/mk/mk-cursor.js" defer></script>
+</body>
+</html>
