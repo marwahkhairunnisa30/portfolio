@@ -483,19 +483,22 @@ function tuneFrame(now) {
 
 /* Services: scroll-driven accordion on large screens, tap-to-open elsewhere */
 const svcs = [...document.querySelectorAll('.svc')];
-let sk = 0, scrolledAt = 0;
+let sk = 0, scrolledAt = 0, hold = false;
 const free = () => innerWidth < 760 || innerHeight < 760;
 const setSk = k => { if (k === sk) return; sk = k; svcs.forEach((el, i) => el.classList.toggle('on', i === k)); };
-const sGo = k => { const top = E.serv.getBoundingClientRect().top + scrollY, span = E.serv.offsetHeight - innerHeight; scrollTo({ top: top + span * k / 5 + (k ? 4 : 0), behavior: 'smooth' }); };
+const sGo = (k, instant) => { const top = E.serv.getBoundingClientRect().top + scrollY, span = E.serv.offsetHeight - innerHeight; scrollTo({ top: top + span * k / 5 + (k ? 4 : 0), behavior: instant ? 'instant' : 'smooth' }); };
 svcs.forEach((el, k) => el.addEventListener('click', e => { if (k === sk || (e.target.closest && e.target.closest('a'))) return; free() ? setSk(k) : sGo(k); }));
 addEventListener('scroll', () => { scrolledAt = performance.now(); }, { passive: true });
 // Deep link from service pages: /#consulting opens that panel.
 function svcFromHash() {
   const k = svcs.findIndex(el => '#' + el.id === location.hash);
   if (k < 0) return;
-  if (free()) { setSk(k); svcs[k].scrollIntoView(); } else { scrolledAt = performance.now(); sGo(k); }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  setSk(k); scrolledAt = performance.now(); hold = true;
+  if (free()) svcs[k].scrollIntoView(); else sGo(k, true);
 }
 addEventListener('hashchange', svcFromHash);
+['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, () => { hold = false; }, { passive: true }));
 addEventListener('load', svcFromHash);
 function servFrame(now) {
   if (free()) return;
@@ -503,7 +506,7 @@ function servFrame(now) {
   const fp = Math.min(1, Math.max(0, -r.top / span));
   setSk(Math.min(4, Math.floor(fp * 5)));
   const pinned = r.top <= 1 && r.bottom >= innerHeight - 1;
-  if (pinned && sk < 4 && now - scrolledAt > 4500) { scrolledAt = now; sGo(sk + 1); }
+  if (pinned && !hold && sk < 4 && now - scrolledAt > 4500) { scrolledAt = now; sGo(sk + 1); }
 }
 
 /* Header: transparent at top, floating pill after scroll; colors follow the section under it */
