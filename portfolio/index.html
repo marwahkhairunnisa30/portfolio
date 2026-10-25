@@ -107,7 +107,7 @@ body.ready .hero-l1{transform:none}
 
 <div id="band" style="position:fixed;top:0;left:0;right:0;height:104px;z-index:39;pointer-events:none;opacity:0;background:#081433;-webkit-mask-image:linear-gradient(#000 72%,transparent);mask-image:linear-gradient(#000 72%,transparent);transition:opacity 300ms cubic-bezier(.2,0,0,1),background-color 300ms cubic-bezier(.2,0,0,1)"></div>
 <header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px clamp(20px,4vw,48px);color:#052D8F;border:1px solid transparent;border-radius:0;transition:color 250ms cubic-bezier(.2,0,0,1),top 400ms cubic-bezier(.2,0,0,1),left 400ms cubic-bezier(.2,0,0,1),right 400ms cubic-bezier(.2,0,0,1),padding 400ms cubic-bezier(.2,0,0,1),border-radius 400ms cubic-bezier(.2,0,0,1),background 300ms cubic-bezier(.2,0,0,1),border-color 300ms cubic-bezier(.2,0,0,1),box-shadow 300ms cubic-bezier(.2,0,0,1);pointer-events:none">
-  <a href="#top" aria-label="Marwah K — home" style="display:flex;align-items:center;gap:10px;pointer-events:auto;flex:none">
+  <a id="homeLink" href="/" aria-label="Marwah K — home" style="display:flex;align-items:center;gap:10px;pointer-events:auto;flex:none">
     <svg viewBox="0 0 120 120" style="width:40px;height:40px;flex:none" aria-hidden="true"><polyline points="16,96 16,24 40,64 64,24 64,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><line x1="82" y1="24" x2="82" y2="96" stroke="currentColor" stroke-width="9" stroke-linecap="square"></line><polyline points="104,24 82,64 104,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="square"></polyline><circle cx="104" cy="24" r="8" fill="#E9F958" stroke="#052D8F" stroke-width="2.5"></circle></svg>
     <span style="font-size:22px;font-weight:600;letter-spacing:-0.05em;white-space:nowrap">Marwah K</span>
   </a>
@@ -298,6 +298,10 @@ addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
 addEventListener('touchmove', e => { const t = e.touches[0]; if (t) { m.x = t.clientX; m.y = t.clientY; } }, { passive: true });
 addEventListener('touchend', () => { m.x = m.y = -9999; });
 document.addEventListener('mouseleave', () => { m.x = m.y = -9999; });
+
+/* Logo: back to the top without leaving #top in the address bar */
+$('homeLink').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); if (location.hash) history.replaceState(null, '', location.pathname + location.search); });
+if (location.hash === '#top') history.replaceState(null, '', location.pathname + location.search);
 
 /* Hero: rotating word + reveal */
 const words = $('words');
